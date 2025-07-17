@@ -1,0 +1,21 @@
+#ignore the pycache folder
+__pycache__/
+# ignore the files that end with .pyc,.pyo, and .pyd
+*.py[cod]
+
+
+# OS-specific metadata files (macOS Finder)
+.DS_Store
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Log files
+*.log
+
+# Coverage reports from testing
+htmlcov/
+
+# Build and distribution folders
+dist/
+build/
