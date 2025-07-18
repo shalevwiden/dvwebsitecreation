@@ -3,6 +3,9 @@ __pycache__/
 # ignore the files that end with .pyc,.pyo, and .pyd
 *.py[cod]
 
+.vscode/
+
+logo_design/
 
 # OS-specific metadata files (macOS Finder)
 .DS_Store
