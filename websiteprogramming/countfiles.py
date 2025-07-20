@@ -1,3 +1,4 @@
+import subprocess
 import os
 from google.cloud import storage
 
@@ -56,6 +57,23 @@ def delete_bucketitems(filetype):
     for blob in blobfiles:
         print(f"Deleting: {blob.name}")
         blob.delete()
+
+def deletebasedon_subfolder(subfoldername):
+
+    bucket = "your-bucket"
+    
+
+    command = [
+        "gsutil",
+        "rm",
+        f"gs://{bucket}/{subfoldername}**"
+    ]
+
+    try:
+        subprocess.run(command, check=True)
+        print("Delete successful.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error deleting objects: {e}")
 
 
 def getserviceemail():
