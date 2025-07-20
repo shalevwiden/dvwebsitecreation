@@ -3,17 +3,157 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="../cssfiles/schoolpage.css" />
+    <title>Architecture-Architectural Engineering (BArch-BSArchE) Page</title>
+
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="cssfiles/schoolpage.css" />
+
+    <!-- animation stylesheet -->
+    <link rel="stylesheet" href="cssfiles/animations.css" />
+    <!-- Barlow Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Roboto Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons ( download icon from here is used) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
   <body>
-    <h1 id="schoolnametitle">School Name title</h1>
-    <!-- 
-    
-    -->
-    <p class="schoolparagraph">School info</p>
-    <ul>
-      <li class="degreelink"><a href="">Degreename Page</a></li>
-    </ul>
+    <!-- this div basically has the entire site in it. Flex direction column -->
+    <div class="sitecontainer">
+      <!-- 
+      
+      -->
+      <div class="abovemainsite">
+        <div class="topnav">
+          <nav class="breadcrumbs">
+            <ul>
+              <li><a href="\">DegreeView UT</a></li>
+              <i class="fa fa-chevron-right"></i>
+
+              <li id="current">School of Architecture</li>
+            </ul>
+          </nav>
+          <nav class="homeandabout">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="">About</a></li>
+              <li><a href="">Stats</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="schoolnamebox">
+          <h1 id="schoolnametitle">School of Architecture</h1>
+        </div>
+      </div>
+      <!-- mainsite
+        contains right and left sections
+      -->
+      <div class="mainsite">
+        <div class="leftcontent">
+          <div class="filescontainer" id="csvcontainer">
+            <h3>CSV Files</h3>
+            <ul>
+              <li>
+                <div class="linkbox">
+                  <p>Degrees CSV</p>
+
+                  <p>
+                    <!-- download attribute means they will download it -->
+                    Download:&nbsp;&nbsp;<a
+                      href="/Users/shalevwiden/Downloads/Projects/degreeview/School of Architecture/Architecture-Architectural Engineering (BArch-BSArchE)/architecture-architecturalengineering-barch-bsarche-courses.csv"
+                      download
+                      ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                    ></a>
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!--  -->
+
+        <div class="rightcontent">
+          <!-- in this we have breadcrumbs and visuals -->
+          <div class="degreelistheaderbox">
+            <h3 id="degreelistheader">School Name degrees</h3>
+          </div>
+          <div class="degreelistbox">
+            <ul>
+              <li class="degreelink">
+                <p>DegreOne</p>
+                <img class="linksvg" src="testingassets/Link-17.svg" alt="" />
+              </li>
+              <li>
+                <div class="linkbox">
+                  <p>Degreetwo</p>
+                  <p>
+                    <!-- download attribute means they will download it -->
+                    Download:&nbsp;&nbsp;<a
+                      href="../../../assets/webassetfolders6-10/assetstorage10/markdowntablefile10.md"
+                      download
+                      ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                    ></a>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div class="linkbox">
+                  <p>Degreethree</p>
+                  <p>
+                    <!-- download attribute means they will download it -->
+                    just put link icon:&nbsp;&nbsp;<a
+                      href="../../../assets/webassetfolders6-10/assetstorage10/markdowntablefile10.md"
+                      download
+                      ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                    ></a>
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- this goes under main site( no way) -->
+      <div class="undermainsite">
+        <!-- this can be empty and like 20 px tall just to take up space, and be used for something in the future
+          -->
+        <div class="visuals">
+          <h3 id="displayeditemname">CSV Visuals here</h3>
+        </div>
+      </div>
+      <!-- footer now -->
+      <footer>
+        <div class="footerleft">
+          <div class="links">
+            <a href="about">About</a>
+
+            <a href="Home">Home</a>
+          </div>
+          <p id="statement">DegreeView 2025</p>
+        </div>
+
+        <div class="footerright">
+          <img
+            id="smalllogo"
+            src="testingassets/minilogo.png"
+            alt="smalldegreeviewlogo"
+          />
+        </div>
+        <!--  -->
+      </footer>
+    </div>
   </body>
 </html>

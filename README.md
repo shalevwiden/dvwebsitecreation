@@ -5,3 +5,6 @@ Build out each schoolpage and then also each degree page. Put the assets on each
 This folder also has a virtual environment, which google cloud is installed on, needed for uploading files to the bucket.
 
 DV_Website_Virtual is the virtual environment being used essentially.
+It has the google cloud python library to upload files with functions.
+
+Here I use a class with init, then a createschoolpages() function, upload files to cloud function, and a create degree pagaes function.

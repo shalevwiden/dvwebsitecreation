@@ -90,57 +90,122 @@ class createWebsite:
 
 
 
-        ul_element_content=''''''
 
         # degreename list is already cleaned
-        for name, cleanedname in zip(degreenamelist,cleaneddegreenamelist):
+        for degreename, cleaneddegreename in zip(degreenamelist,cleaneddegreenamelist):
+            
 
-            degreenamepage=f'{cleanedname}.html\n'
-
-            degreenamepath=os.path.join(cleanedname,degreenamepage)
-            ul_element_content+=f'<li class="degreelink"><a href="{degreenamepath}">{name}</a></li>'
-
-        ul_element=f'''
-        <ul>{ul_element_content}
-    </ul>'''
+            
             
             # --------------------------
-        schoolinfo=f'Every degree page has 2 csvs, 2 excel files, and a sample semester diagram.\n\
-        More files coming in the future.' 
+            schoolinfo=f'Every degree page has 2 csvs, 2 excel files, and a sample semester diagram.\n\
+            More files coming in the future.' 
 
-        bodyhtmlcode=f'''
-<h1 id="schoolnametitle">{self.schoolname}</h1>
-    <!-- 
-    
-    -->
-    <p class="schoolparagraph">{schoolinfo}</p>
-    {ul_element}
+            headhtmlcode=f'''
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{self.schoolname}</title>
+
+        <!-- main stylesheet -->
+        <link rel="stylesheet" href="../cssfiles/schoolpage.css" />
+
+        <!-- animation stylesheet -->
+        <link rel="stylesheet" href="../cssfiles/animations.css" />
+        <!-- Barlow Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+        />
+        <!-- Roboto Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+        />
+        <!-- Icons ( download icon and many file icons from here is used) -->
+        <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        />
+    </head>
+    '''
+            def make_abovemainsitecode():
+
+                abovemainsitecode=f'''
+ <div class="abovemainsite">
+        <div class="topnav">
+          <nav class="breadcrumbs">
+            <ul>
+              <li><a href="\\">DegreeView UT</a></li>
+              <i class="fa fa-chevron-right"></i>
+
+              <li id="current">{self.schoolname}</li>
+            </ul>
+          </nav>
+          <nav class="homeandabout">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="">About</a></li>
+              <li><a href="">Stats</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="schoolnamebox">
+          <h1 id="schoolnametitle">{self.schoolname}</h1>
+        </div>
+      </div>
 '''
+                return abovemainsitecode
+            def make_mainsitecode():
+
+                displaydegreename=degreename.replace("-","/").strip().split('(')
+                displaydegreename=displaydegreename[0]+'<br>'+f'({displaydegreename[-1]}'
+
+                degreenamepage=f'{cleaneddegreename}.html\n'
+
+                
+                ul_element_content+=f'<li class="degreelink"><a href="{degreenamepage}">{displaydegreename}</a><img class="linksvg" src="testingassets/Link-17.svg" alt="" /></li>'
+
+            ul_element=f'''
+                <ul>{ul_element_content}
+                </ul>'''
+                mainsitecode=f''''''
+                return mainsitecode
         
+            def makebodyhtmlcode():
+                abovemainsitecode=make_abovemainsitecode()
 
+                bodyhtmlcode=f'''
+                <div class="sitecontainer">
+                {abovemainsitecode}
+                </div>
+    '''
+            
+            def makefullhtmlcode():
 
-        fullhtmlcode=f'''
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{self.schoolname} Page</title>
-    <link rel="stylesheet" href="../cssfiles/schoolpage.css" />
-  </head>
-  <body>
-   {bodyhtmlcode}\n
-   {self.footer}
-  </body>
-</html>'''
-        
-        if not os.path.exists(self.websiteschoolfolder):
-            os.mkdir(self.websiteschoolfolder)
+                fullhtmlcode=f'''
+        <!DOCTYPE html>
+        <html lang="en">
+        {headhtmlcode}
+        <body>
+        {bodyhtmlcode}\n
+        {self.footer}
+        </body>
+        </html>'''
+                
+                if not os.path.exists(self.websiteschoolfolder):
+                    os.mkdir(self.websiteschoolfolder)
 
-        print(f'Full school page: {self.fullschoolpage}\n')
+                print(f'Full school page: {self.fullschoolpage}\n')
 
-        with open(self.fullschoolpage,'w') as htmlschoolpage:
-             htmlschoolpage.write(fullhtmlcode)
+                with open(self.fullschoolpage,'w') as htmlschoolpage:
+                    htmlschoolpage.write(fullhtmlcode)
 
 
 # --------------------------------Degree pages now ----------------------------------
@@ -151,6 +216,7 @@ class createWebsite:
         Like other functions, this does it by school.
         '''
          
+        #  if you want to only upload one legree, just change it so its i range 1 to range 2
         for i in range(1,len(self.schooldata)):
             '''
             Dont need to clean the degreename, since the degreename files(csv, excel,etc) already have clean names.
@@ -204,7 +270,7 @@ class createWebsite:
 
                 # this should return the email used for google cloud. Its a service email tho
 
-                # yeah the project is the same as the bucket name
+                # yeah the project is the same as the bucket name. In the future change this, as the bucketname is what user sees
                 bucket = client.bucket('degreeview-ut')
                 # bucket list
 
@@ -215,6 +281,7 @@ class createWebsite:
 
 
                 # make it so each file has the type. 
+                # define upload blob here
                 if os.path.splitext(source_file_name)[1]=='.csv':
                     uploadblob =f'csvs/{bucket.blob(cleaned_object_name)}'
                 elif os.path.splitext(source_file_name)[1]=='.xlsx':
@@ -246,7 +313,9 @@ class createWebsite:
                 for csv, excelfile,pdf,mmd in zip(get_assetlists(degreenameassetfolder=degreenameassetfolder)):
                     # comment these out depending on which ones I want
                     upload_to_googlecloud(csv)
-                    upload_to_googlecloud(excelfile)
+                    # pass a tuple
+                    if not excelfile.startswith(("~$", "$")):
+                        upload_to_googlecloud(excelfile)
                     upload_to_googlecloud(pdf)
                     upload_to_googlecloud(mmd)
 
@@ -353,19 +422,16 @@ class createWebsite:
             # then I'll do upload to cloud, excel list, csv list, mermaid list, etc
             
             
-            def make_websitedegreefolder():
-                websitedegreefolder=os.path.join(self.websiteschoolfolder,degreenamecleaned)
-
-                    
-                if not os.path.exists(websitedegreefolder):
-                    os.mkdir(websitedegreefolder)
-                    print(f'Made {websitedegreefolder}')
-
-            make_websitedegreefolder()
 
             def make_degreewebsite_page():
+
+                displaydegreename=degreename.replace("-","/").strip().split('(')
+                displaydegreename=displaydegreename[0]+'<br>'+f'({displaydegreename[-1]}'
+
+                titlename=displaydegreename.replace("<br>","")
+
                 bodyhtmlcode=f'''
-                <h1 id="degreenametitle">{degreename}</h1>\n
+                <h1 id="degreenametitle">{displaydegreename}</h1>\n
     '''
 
                 
@@ -375,15 +441,15 @@ class createWebsite:
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{degreename} Page</title>
+        <title>{titlename} Page</title>
     </head>
     <body>{bodyhtmlcode}  \n
     {self.footer}
     </body>
     </html>
-    '''
-                websitedegreefolder=os.path.join(self.websiteschoolfolder,degreenamecleaned)
-                fulldegreepage=os.path.join(websitedegreefolder,f'{degreenamecleaned}.html')
+    '''         
+                # have to run createschoolpages() first so self.websiteschool folder works
+                fulldegreepage=os.path.join(self.websiteschoolfolder,f'{degreenamecleaned}.html')
                 with open(fulldegreepage,'w') as htmldegreepage:
                     htmldegreepage.write(fullhtmlcode)
         
@@ -409,7 +475,7 @@ def architecure_testing():
 
      print(f'Full school page: \n{archobject.fullschoolpage}')
      print('\nCreating degree pages now\n\n')
-    #  archobject.createschoolpages()
+     archobject.createschoolpages()
      archobject.create_degree_pages()
 
 architecure_testing()
