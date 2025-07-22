@@ -76,7 +76,7 @@ class createWebsite:
             <div class="footerright">
             <img
                 id="smalllogo"
-                src="testingassets/minilogo.png"
+                src="../metaassets/minilogo.png"
                 alt="smalldegreeviewlogo"
             />
             </div>
@@ -92,6 +92,7 @@ class createWebsite:
          
         #  if you want to only upload one legree, just change it so its i range 1 to range 
 
+        print(f'\n\nBeginning Cloud Upload for {self.schoolname} school specific files\n\n') 
 
         def get_school_assetlists():
             
@@ -125,7 +126,7 @@ class createWebsite:
             return [csvlist,excellist,pdflist,mmdlist]
 
 
-            def upload_to_googlecloud(source_file_name):
+        def upload_to_googlecloud(source_file_name):
 
                 # how to manually change credentials...
 
@@ -151,17 +152,26 @@ class createWebsite:
                 # define upload blob here
                
                 if os.path.splitext(source_file_name)[1]=='.csv':
-                    uploadblob =f'{self.cleanedschoolname}/csvs/{bucket.blob(cleaned_object_name)}'
+                    uploadblob =f'{self.cleanedschoolname}/csvs/{cleaned_object_name}'
+                    uploadblob=bucket.blob(uploadblob)
                 elif os.path.splitext(source_file_name)[1]=='.xlsx':
-                    uploadblob =f'{self.cleanedschoolname}/excel-files/{bucket.blob(cleaned_object_name)}'
+                    uploadblob =f'{self.cleanedschoolname}/excel-files/{cleaned_object_name}'
+                    uploadblob=bucket.blob(uploadblob)
+
 
                 elif os.path.splitext(source_file_name)[1]=='.pdf':
-                    uploadblob =f'{self.cleanedschoolname}/pdfs/{bucket.blob(cleaned_object_name)}'
+                    uploadblob =f'{self.cleanedschoolname}/pdfs/{cleaned_object_name}'
+                    uploadblob=bucket.blob(uploadblob)
+
                 elif os.path.splitext(source_file_name)[1]=='.mmd':
-                    uploadblob =f'{self.cleanedschoolname}/mmds/{bucket.blob(cleaned_object_name)}'
+                    uploadblob =f'{self.cleanedschoolname}/mmds/{cleaned_object_name}'
+                    uploadblob=bucket.blob(uploadblob)
+
 
                 else:
-                    uploadblob = bucket.blob(cleaned_object_name)
+                    uploadblob = cleaned_object_name
+                    uploadblob=bucket.blob(uploadblob)
+
 
                 # add a check to not do it many times
                 if not uploadblob.exists():
@@ -177,13 +187,23 @@ class createWebsite:
                 # use this link on the website to serve the file.
                 return uploadblob.public_url
 
-            def loop_through_assets_to_upload():
-                csvlist=get_school_assetlists()[0]
-                for csv in csvlist:
-                    # comment these out depending on which ones I want
-                    upload_to_googlecloud(csv)
-                    # pass a tuple
-                    
+        # this one right here uploads the school specific assets
+
+        def loop_through_assets_to_upload():
+            csvlist=get_school_assetlists()[0]
+            for csvfile in csvlist:
+                # comment these out depending on which ones I want
+                upload_to_googlecloud(csvfile)
+                print(f'Uploaded {csvfile} to cloud\n')
+                # pass a tuple
+        loop_through_assets_to_upload()
+
+        print(f'\n\nEnding Cloud Upload for {self.schoolname} school specific files\n\n') 
+
+        return 0  
+    
+
+                      
     def get_school_assetcloudpaths_lists(self):
         '''
         Reconstruct the asset names manually like this:
@@ -278,7 +298,7 @@ class createWebsite:
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{self.schoolname}</title>
+    <title>{self.schoolname} Page</title>
 
     <!-- main stylesheet -->
     <link rel="stylesheet" href="../cssfiles/schoolpage.css" />
@@ -288,10 +308,8 @@ class createWebsite:
     <!-- Barlow Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
     <!-- Roboto Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -321,9 +339,10 @@ class createWebsite:
         </nav>
         <nav class="homeandabout">
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="">Stats</a></li>
+            
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="../aboutpage.html">About</a></li>
+              <li><a href="../ut-stats.html">Stats</a></li>
         </ul>
         </nav>
     </div>
@@ -346,7 +365,7 @@ class createWebsite:
                 displaydegreename=displaydegreename[0]+f'({displaydegreename[-1]}'
 
                 degreelist_ul_element_content+=f'''<li class="degreelink"><a href="{degreenamepage}">{displaydegreename}</a>
-                <a href="{degreenamepage}"><img class="linksvg" src="../testingassets/Link-17.svg" alt="" /></a>
+                <a href="{degreenamepage}"><img class="linksvg" src="../metaassets/Link-17.svg" alt="" /></a>
                 </li>'''
 
             
@@ -394,7 +413,7 @@ class createWebsite:
 
             rightcontentcode=f'''        <div class="rightcontent">
 <div class="degreelistheaderbox">
-        <h3 id="degreelistheader">School Name degrees</h3>
+        <h3 id="degreelistheader">{self.schoolname} Degrees</h3>
         </div>
         <!-- Contains links to every degreepage -->
         <div class="degreelistbox">{degreelist_ul_element}</div>
@@ -416,7 +435,7 @@ class createWebsite:
             abovemainsitecode=make_abovemainsitecode()
             mainsitecode=make_mainsitecode()
 
-            undermainsite=f'''
+            undermainsitecode=f'''
             <div class="undermainsite">
             <!-- this can be empty and like 20 px tall just to take up space, and be used for something in the future
                 -->
@@ -426,16 +445,19 @@ class createWebsite:
             </div>
 '''
             bodyhtmlcode=f'''
+            <body>
+
             <div class="sitecontainer">
             {abovemainsitecode}
             {mainsitecode}
-            {undermainsite}
+            {undermainsitecode}
             {self.footer}
             <!-- Hover Script -->
             <script src="../javascript_files/headingcolorchange.js"></script>
 
 
             </div>
+            </body>
 
             '''
             return bodyhtmlcode
@@ -448,9 +470,8 @@ class createWebsite:
                 <!DOCTYPE html>
                 <html lang="en">
                 {headhtmlcode}
-                <body>
                 {bodyhtmlcode}\n
-                </body>
+              
                 </html>'''
             
             if not os.path.exists(self.websiteschoolfolder):
@@ -462,6 +483,7 @@ class createWebsite:
                 htmlschoolpage.write(fullhtmlcode)
         
         makefullhtmlcode()
+        return 0
 
 
 # --------------------------------Degree pages now ----------------------------------
@@ -470,8 +492,11 @@ class createWebsite:
 
         '''
         Like other functions, this does it by school.
+
+
         '''
-         
+
+        print(f'\n\nBeginning Cloud Upload for {self.schoolname} degreefiles\n\n') 
         #  if you want to only upload one legree, just change it so its i range 1 to range 2
         for i in range(1,len(self.schooldata)):
             '''
@@ -531,7 +556,7 @@ class createWebsite:
                 # bucket list
 
 
-            #THis is what will be in the url and what the name of the object will be in google cloud storage
+                #This is what will be in the url and what the name of the object will be in google cloud storage
 
                 cleaned_object_name=source_file_name.split('/')[-1]        
 
@@ -540,17 +565,25 @@ class createWebsite:
                 # define upload blob here
                
                 if os.path.splitext(source_file_name)[1]=='.csv':
-                    uploadblob =f'{self.cleanedschoolname}/csvs/{bucket.blob(cleaned_object_name)}'
+                    uploadblob =f'{self.cleanedschoolname}/csvs/{cleaned_object_name}'
+                    uploadblob=bucket.blob(uploadblob)
                 elif os.path.splitext(source_file_name)[1]=='.xlsx':
-                    uploadblob =f'{self.cleanedschoolname}/excel-files/{bucket.blob(cleaned_object_name)}'
+                    uploadblob =f'{self.cleanedschoolname}/excel-files/{cleaned_object_name}'
+                    uploadblob=bucket.blob(uploadblob)
+
 
                 elif os.path.splitext(source_file_name)[1]=='.pdf':
-                    uploadblob =f'{self.cleanedschoolname}/pdfs/{bucket.blob(cleaned_object_name)}'
+                    uploadblob =f'{self.cleanedschoolname}/pdfs/{cleaned_object_name}'
+                    uploadblob=bucket.blob(uploadblob)
+
                 elif os.path.splitext(source_file_name)[1]=='.mmd':
-                    uploadblob =f'{self.cleanedschoolname}/mmds/{bucket.blob(cleaned_object_name)}'
+                    uploadblob =f'{self.cleanedschoolname}/mmds/{cleaned_object_name}'
+                    uploadblob=bucket.blob(uploadblob)
+
 
                 else:
-                    uploadblob = bucket.blob(cleaned_object_name)
+                    uploadblob = cleaned_object_name
+                    uploadblob=bucket.blob(uploadblob)
 
                 # add a check to not do it many times
                 if not uploadblob.exists():
@@ -567,14 +600,35 @@ class createWebsite:
                 return uploadblob.public_url
 
             def loop_through_assets_to_upload():
-                for csv, excelfile,pdf,mmd in zip(get_assetlists(degreenameassetfolder=degreenameassetfolder)):
+                '''
+                This function uses the get_assetlists functions above to get all the paths to the asset files, in each degree folder.
+                Then it uses upload_degree_files() to upload each one one by one. 
+                '''
+                csvlist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[0]
+                excellist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[1]
+                pdflist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[2]
+
+                # mmds currently not needing to be uplaoded.
+                for csvfile in csvlist:
                     # comment these out depending on which ones I want
-                    upload_to_googlecloud(csv)
+                    upload_to_googlecloud(csvfile)
+                    print(f'Uploaded {csvfile} to cloud\n')
                     # pass a tuple
+                for excelfile in excellist:
                     if not excelfile.startswith(("~$", "$")):
                         upload_to_googlecloud(excelfile)
-                    upload_to_googlecloud(pdf)
-                    upload_to_googlecloud(mmd)
+                        print(f'Uploaded {excelfile} to cloud\n')
+
+                for pdffile in pdflist:
+                    upload_to_googlecloud(pdffile)
+                    print(f'Uploaded {pdffile} to cloud\n')
+            
+            loop_through_assets_to_upload()
+
+        print(f'\n\nEnding Cloud Upload for {self.schoolname} degreefiles \n\n\n\n')
+        return 0
+                    
+                   
 
 
 
@@ -685,27 +739,25 @@ class createWebsite:
             displaydegreename=degreename.replace("-","/").strip().split('(')
             displaydegreename=displaydegreename[0]+'<br>'+f'({displaydegreename[-1]}'
 
-            titlename=displaydegreename.replace("<br>","")
+            displaydegreename_nobr=displaydegreename.replace("<br>","")
             
             headhtmlcode=f'''
 <head>
 
     <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Architecture-Architectural Engineering (BArch-BSArchE) Page</title>
+        <title>{displaydegreename_nobr} Page</title>
 
         <!-- main stylesheet -->
         <link rel="stylesheet" href="../cssfiles/degreepage2.css" />
 
         <!-- animation stylesheet -->
-        <link rel="stylesheet" href="cssfiles/animations.css" />
+        <link rel="stylesheet" href="../cssfiles/animations.css" />
         <!-- Barlow Font -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,600;1,100;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
         <!-- Roboto Font -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -722,14 +774,270 @@ class createWebsite:
 
 '''
             def make_abovemainsitecode():
-                pass
+                abovemainsitecode=f'''
 
+      <div class="abovemainsite">
+        <div class="topnav">
+          <nav class="breadcrumbs">
+            <ul>
+              <li><a href="">DegreeView UT</a></li>
+              <i class="fa fa-chevron-right"></i>
+
+              <li><a href="{self.schoolpage}">{self.schoolname}</a></li>
+              <i class="fa fa-chevron-right"></i>
+
+              <li id="current">
+                {displaydegreename_nobr}
+              </li>
+            </ul>
+          </nav>
+          <nav class="homeandabout">
+            <ul>
+              
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="../aboutpage.html">About</a></li>
+              <li><a href="../ut-stats.html">Stats</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="degreenamebox">
+          <h1 id="degreenametitle">
+           {displaydegreename}
+          </h1>
+        </div>
+      </div>
+'''
+                return abovemainsitecode
+
+            
             def make_mainsitecode():
-                pass
+                '''
+                This is simply a function that generates leftcontentcode and rightcontentcode, then puts it together in main content code. 
+                '''
+                
+                # get csv links
+                csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
+
+                majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
+                semesterlayoutcsv=[csv for csv in csvlist if "semester" in csv][0]
+
+                # get excel links
+                excellist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[1]
+
+                lighttheme_excel=[file for file in excellist if "dark" not in file][0]
+                darktheme_excel=[file for file in excellist if "semesterfile" in file and "dark" not in file][0]
+
+                # get pdf links
+                pdflist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[2]
+
+
+                semesterlayoutpdf=[pdffile for pdffile in pdflist if "semesterlayout" in pdffile and "emptynodes" not in pdffile][0]
+                emptynodespdf=[pdffile for pdffile in pdflist if "emptynodes" in pdffile][0]
+
+                
+                # I  dont put mmds in the website, for now...
+                mmdlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[3]
+
+
+                def makeleftcontentcode():
+                    '''Using the links just received above, now link them in the left content code in the website'''
+
+                    
+
+                    leftcontentcode=f'''
+                    <div class="leftcontent">
+
+                    <div class="filescontainer" id="excelcontainer">
+                        <div class="filesname">
+                            <h3>Excel (.xlsx) Files</h3>
+                            <i class="fa-regular fa-file-excel"></i>
+                        </div>
+
+                        <ul>
+                            <li>
+                            <div class="linkbox">
+                                <p>Sample Semester Layout Light Theme</p>
+                                <p>
+                                <!-- download attribute means they will download it -->
+                                Download:&nbsp;&nbsp;<a
+                                    href="{lighttheme_excel}"
+                                    download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                                ></a>
+                                </p>
+                            </div>
+                            </li>
+                            <!--  -->
+                            <li>
+                            <div class="linkbox">
+                                <p>Sample Semester Layout Dark Theme</p>
+                                <p>
+                                <!-- download attribute means they will download it -->
+                                Download:&nbsp;&nbsp;<a
+                                    href="{darktheme_excel}"
+                                    download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                                ></a>
+                                </p>
+                            </div>
+                            </li>
+                            
+                        </ul>
+                        </div>
+                        <!-- files container is per file type. linkbox is per individiual link -->
+                        <div class="filescontainer" id="pdfcontainer">
+                        <div class="filesname">
+                            <h3>PDF Files</h3>
+                            <i class="fa-regular fa-file-pdf"></i>
+                        </div>
+
+                        <ul>
+                            <!-- put the linkboxes in li tags for organization and readability -->
+                            <li>
+                            <div class="linkbox">
+                                <p>Sample Semester PDF</p>
+
+                                <p>
+                                View:&nbsp;&nbsp;
+                                <a href="{semesterlayoutpdf}" target="_blank"
+                                    ><i class="fa-regular fa-eye"></i
+                                ></a>
+                                </p>
+                                <p>
+                                <!-- download attribute means they will download it -->
+                                Download:&nbsp;&nbsp;<a
+                                    href="{semesterlayoutpdf}"
+                                    download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                                ></a>
+                                </p>
+                            </div>
+                            </li>
+
+                            <li>
+                            <div class="linkbox">
+                                <p>Sample Semester PDF Empty Nodes</p>
+                                <p>
+                                View:&nbsp;&nbsp;
+                                <a href="{emptynodespdf}" target="_blank"
+                                    ><i class="fa-regular fa-eye"></i
+                                ></a>
+                                </p>
+                                <p>
+                                <!-- download attribute means they will download it -->
+                                Download:&nbsp;&nbsp;<a
+                                    href="{emptynodespdf}"
+                                    download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                                ></a>
+                                </p>
+                            </div>
+                            </li>
+                        </ul>
+                        </div>
+
+                        <div class="filescontainer" id="csvcontainer">
+                        <div class="filesname">
+                            <h3>CSV Files</h3>
+                            <i class="fa-regular fa-file"></i>
+                        </div>
+
+                        <ul>
+                            <li>
+                            <div class="linkbox">
+                                <p>Major Courses CSV</p>
+
+                                <p>
+                                <!-- download attribute means they will download it -->
+                                Download:&nbsp;&nbsp;<a
+                                    href="{majorcoursescsv}"
+                                    download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                                ></a>
+                                </p>
+                            </div>
+                            </li>
+
+                            <li>
+                            <div class="linkbox">
+                                <p>Sample Semester Layout CSV</p>
+                                <p>
+                                <!-- download attribute means they will download it -->
+                                Download:&nbsp;&nbsp;<a href="{semesterlayoutcsv}" download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                                ></a>
+                                </p>
+                            </div>
+                            </li>
+                        </ul>
+                        </div>
+                        </div>
+'''
+                    return leftcontentcode
+                    
+                def makerightcontentcode():
+                    '''
+                    The right content displays a pdf, is the "displayedpdf" iframe. THis can be used to showcase a weekly pdf or so. 
+                    '''
+
+                    rightcontentcode=f'''
+                    <div class="rightcontent">
+                     <div class="displayedpdfnamebox">
+            <h3 id="displayedpdfname">Sample Semester Layout PDF</h3>
+          </div>
+          <div class="visuals">
+            <iframe
+              class="displayedpdf"
+              src="{semesterlayoutpdf}"
+              frameborder="0"
+              width="90%"
+              height="1000px"
+            ></iframe>
+          </div></div>
+'''
+                    return rightcontentcode
+                # end makerightcontentcodefunction()
+                
+                leftcontentcode=makeleftcontentcode()
+                rightcontentcode=makerightcontentcode()
+
+                mainsitecode=f'''<div class="mainsite">
+                {leftcontentcode}
+                {rightcontentcode}
+                </div>'''
+                return mainsitecode 
             
             def makebodyhtmlcode():
-            
-                return ''
+                abovemainsitecode=make_abovemainsitecode()
+                mainsitecode=make_mainsitecode()
+
+                undermainsitecode=f'''
+ <div class="undermainsite">
+        <!-- this can be empty and like 20 px tall just to take up space, and be used for something in the future
+          -->
+      </div>
+
+'''
+
+                bodyhtmlcode=f'''                    
+                <body>       
+                <div class="sitecontainer">
+                {abovemainsitecode}
+                {mainsitecode}
+                {undermainsitecode}
+                {self.footer}
+
+                            
+                <!-- Hover Script -->
+
+                <script src="../javascript_files/headingcolorchange.js"></script>
+
+                </div>
+
+                </body>
+
+'''
+                return bodyhtmlcode
 
 
             def makefullhtmlcode():
@@ -739,10 +1047,9 @@ class createWebsite:
                 fullhtmlcode=f'''
                     <!DOCTYPE html>
                     <html lang="en">
-                    {headhtmlcode}
-                    <body>
+                    {headhtmlcode}\n
                     {bodyhtmlcode}\n
-                    </body>
+                    
                     </html>'''
 
     
@@ -750,8 +1057,12 @@ class createWebsite:
                 fulldegreepage=os.path.join(self.websiteschoolfolder,f'{degreenamecleaned}.html')
                 with open(fulldegreepage,'w') as htmldegreepage:
                     htmldegreepage.write(fullhtmlcode)
-    
+                print(f'\n Made {fulldegreepage} as part of making degreepages\n')
 
+            makefullhtmlcode()
+            return 0
+    
+        
 # ---------------------END of make degree pages
 
 
@@ -765,107 +1076,44 @@ class createWebsite:
 
 
 def architecure_testing():
-     '''Only test here for the first stage'''
-     archdata=theasset[0]
+    '''Only test here for the first stage'''
+    archdata=theasset[0]
 
-     archobject=createWebsite(schooldata=archdata)
-
-     print(f'Full school page: \n{archobject.fullschoolpage}')
-     print('\nCreating degree pages now\n\n')
-     print(f'Cleaned school name:\n{archobject.cleanedschoolname}\n')
-     archobject.createschoolpages()
-     csvlist=archobject.get_school_assetcloudpaths_lists()[0]
-     print(f'School CSV list is {csvlist}')
-     archobject.create_degree_pages()
-
-architecure_testing()
+    archobject=createWebsite(schooldata=archdata)
 
 
-# storage testing
+    print(f'Archobject testing\n\n')
+    print(f'Full school page: \n{archobject.fullschoolpage}')
+    print('\nCreating degree pages now\n\n')
+    print(f'Cleaned school name:\n{archobject.cleanedschoolname}\n')
 
-# with architecture teseting
-def get_archfiles_lists():
-    archpath='/Users/shalevwiden/Downloads/Projects/degreeview/School of Architecture'
-
-    csvlist=[]
-    excellist=[]
-    pdflist=[]
-    mmdlist=[]
-    # os.walk recursively travels everything
-    for root, dirs, files in os.walk(archpath):
-        for file in files:
-            
-            # we neewd the fullpath in the list since thats the way it can be uploaded to google cloud.
-
-            full_path = os.path.join(root, file)
-
-            if os.path.splitext(file)[1]=='.csv':
-                csvlist.append(file)
-                # removes those dollar sign excel files. 
-            elif os.path.splitext(file)[1]=='.xlsx' and not file.startswith(("~$", "$")):
-                excellist.append(full_path)
-            elif os.path.splitext(file)[1]=='.pdf':
-                pdflist.append(file)
-            elif os.path.splitext(file)[1]=='.mmd':
-                mmdlist.append(file)
-
-    return excellist
-
-def upload_to_googlecloudtesting(source_file_name):
-
-    # how to manually change credentials...
+    csvlist=archobject.get_school_assetcloudpaths_lists()[0]
+    print(f'School CSV list is {csvlist}')
 
 
-    # just change project name here to change where they go.
-    # In code, for multiple schools. Dope.
-    client = storage.Client(project='degreeview-ut')
+    print(f'Done with archobject testing\n\n')
 
 
-    # this should return the email used for google cloud. Its a service email tho
-
-    # yeah the project is the same as the bucket name
-    bucket = client.bucket('degreeview-ut')
-    # bucket list
+    archobject.createschoolpages()
+    csvlist=archobject.get_school_assetcloudpaths_lists()[0]
+    archobject.create_degree_pages()
 
 
-#THis is what will be in the url and what the name of the object will be in google cloud storage
 
-    cleaned_object_name=source_file_name.split('/')[-1]        
+# architecure_testing()
 
+def get_all_schools(theasset):
+    # finish this after dinner
+    schoolist=[]
+    for schooldict in theasset:
+        schoolname=schooldict[list(schooldict)[0]]
+        schoolist.append(schoolname)
+    return schoolist
+schoolist=get_all_schools(theasset=theasset)
+for school in schoolist:
+    print(school)
 
-    # make it so each file has the type. 
-    if os.path.splitext(source_file_name)[1]=='.csv':
-        uploadblob =f'csvs/{bucket.blob(cleaned_object_name)}'
-    elif os.path.splitext(source_file_name)[1]=='.xlsx':
-        uploadblob =f'excel-files/{bucket.blob(cleaned_object_name)}'
-
-    elif os.path.splitext(source_file_name)[1]=='.pdf':
-        uploadblob =f'pdfs/{bucket.blob(cleaned_object_name)}'
-    elif os.path.splitext(source_file_name)[1]=='.mmd':
-        uploadblob =f'mmds/{bucket.blob(cleaned_object_name)}'
-
-    else:
-        uploadblob = bucket.blob(cleaned_object_name)
-
-    # add a check to not do it many times
-    if not uploadblob.exists():
-
-        uploadblob.upload_from_filename(source_file_name)
-
-        uploadblob.make_public()  # Makes it publicly accessible
-        # can also use blob.make_private()
-    else:
-         print(f'{uploadblob.name} already exits, didnt upload\n')
-
-
-    # use this link on the website to serve the file.
-    return uploadblob.public_url
-
-excellist=get_archfiles_lists()
-print(f'Printing excel stuff now\n\n')
-for excelfile in excellist:
-     print(excelfile+'\n')
-    #  upload_to_googlecloudtesting(source_file_name=excelfile)
+# storage te
      
 
 
