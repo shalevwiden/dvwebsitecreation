@@ -1064,6 +1064,50 @@ class createWebsite:
     
         
 # ---------------------END of make degree pages
+    def make_alldegrees_list(self):
+        '''
+        This function returns two lists, of degreepages, and degreedata. Its later called in make_alldegreesfile()
+        '''
+         
+        def get_degreename_lists():
+            degreenamelist=[]
+            cleaneddegreenamelist=[]
+            for i in range(1,len(self.schooldata)):
+                        
+                key=list(self.schooldata)[i]
+                degreename=key
+                degreename=degreename.replace('/','-').strip()
+                degreenamelist.append(degreename)
+
+                # clean it for website links
+
+
+                degreenamecleaned=degreename.replace(' ','').lower().split('(')
+                degreenamecleaned=degreenamecleaned[0]+"-"+degreenamecleaned[-1]
+                degreenamecleaned=degreenamecleaned.replace(')','')
+
+                cleaneddegreenamelist.append(degreenamecleaned)
+            return degreenamelist,cleaneddegreenamelist
+        
+        degreenamelist, cleaneddegreenamelist=get_degreename_lists()
+
+        # now that we got a list of cleaned degreenames, loop through that list
+
+        degreepage_list=[]
+        degreename_data=[]
+        for degreename,degreenamecleaned in zip(degreenamelist, cleaneddegreenamelist):
+            fulldegreepage=os.path.join(self.cleanedschoolname,f'{degreenamecleaned}.html')
+            degreepage_list.append(fulldegreepage)
+            
+            displaydegreename=degreename.replace("-","/").strip().split('(')
+
+            displaydegreename=displaydegreename[0]+f'({displaydegreename[-1]}'
+
+            # using this we can figure out longest and shortest degreename. 
+            degreename_data.append(displaydegreename)
+        return degreepage_list, degreename_data
+
+
 
 
     def createstatspage(self):
@@ -1073,7 +1117,32 @@ class createWebsite:
 # -------------END of class -----------------------
 
 
+def make_alldegreesfile():
 
+    entireschool_degreepagelist=[]
+
+    for schooldict in theasset:
+        alldegreesobject=createWebsite(schooldata=schooldict)
+        alldegreesobject_degreepagelist=alldegreesobject.make_alldegrees_list()[0]
+
+        print(f'\n{alldegreesobject.schoolname} degreepage_list:\n{alldegreesobject_degreepagelist} \n\n')
+        
+        for eachpage in alldegreesobject_degreepagelist:
+            # do this to avoid making a list of lists. This way its just a nice, giant, list
+            entireschool_degreepagelist.append(eachpage)
+
+    with open(f"{os.path.abspath("alldegrees.txt")}",'w') as alldegreesfile:
+        alldegreesfile.write(f'[')
+
+        for degreepage in range(len(entireschool_degreepagelist)):
+            if degreepage==len(entireschool_degreepagelist)-1:
+                alldegreesfile.write(f'"{entireschool_degreepagelist[degreepage]}"')
+            else:
+                alldegreesfile.write(f'"{entireschool_degreepagelist[degreepage]}",')
+
+        alldegreesfile.write(f']')
+
+make_alldegreesfile()
 
 def architecure_testing():
     '''Only test here for the first stage'''
@@ -1110,6 +1179,7 @@ def get_all_schools(theasset):
         schoolist.append(schoolname)
     return schoolist
 schoolist=get_all_schools(theasset=theasset)
+print('School list:')
 for school in schoolist:
     print(school)
 
