@@ -376,7 +376,7 @@ class createWebsite:
         def make_mainsitecode():
 
             
-
+            '''This gets the asset cloud list. Since theres only 1 csv currently, we good.'''
 
             csv_incloudlist=self.get_school_assetcloudpaths_lists()[0]
             # get first, and only, item from the list
@@ -439,9 +439,7 @@ class createWebsite:
             <div class="undermainsite">
             <!-- this can be empty and like 20 px tall just to take up space, and be used for something in the future
                 -->
-            <div class="visuals">
-                <h3 id="displayeditemname">CSV Visuals here</h3>
-            </div>
+            s
             </div>
 '''
             bodyhtmlcode=f'''
@@ -1134,15 +1132,14 @@ def make_alldegreesfile():
     with open(f"{os.path.abspath("alldegrees.txt")}",'w') as alldegreesfile:
         alldegreesfile.write(f'[')
 
-        for degreepage in range(len(entireschool_degreepagelist)):
-            if degreepage==len(entireschool_degreepagelist)-1:
-                alldegreesfile.write(f'"{entireschool_degreepagelist[degreepage]}"')
+        for degreepageindex in range(len(entireschool_degreepagelist)):
+            if degreepageindex==len(entireschool_degreepagelist)-1:
+                alldegreesfile.write(f'"{entireschool_degreepagelist[degreepageindex]}"')
             else:
-                alldegreesfile.write(f'"{entireschool_degreepagelist[degreepage]}",')
+                alldegreesfile.write(f'"{entireschool_degreepagelist[degreepageindex]}",')
 
         alldegreesfile.write(f']')
 
-make_alldegreesfile()
 
 def architecure_testing():
     '''Only test here for the first stage'''
@@ -1173,15 +1170,26 @@ def architecure_testing():
 
 def get_all_schools(theasset):
     # finish this after dinner
+    '''
+    This generates a schoolist based on the asset. Then will generate a list of li's to go in an index.html
+    '''
     schoolist=[]
     for schooldict in theasset:
         schoolname=schooldict[list(schooldict)[0]]
         schoolist.append(schoolname)
-    return schoolist
-schoolist=get_all_schools(theasset=theasset)
-print('School list:')
-for school in schoolist:
-    print(school)
+    print('School list:')
+    for schoolindex in range(len(schoolist)):
+        
+
+        schoolnamecleaned=schoolist[schoolindex].replace(' ','').lower()
+        schoolpage=f'{schoolnamecleaned}.html'
+
+        websiteschoolpagelink=os.path.join(schoolnamecleaned,schoolpage)
+        
+        print(f' <li class="schoolist-column"> <a href="{websiteschoolpagelink}"><div class="schoolnamediv">{schoolist[schoolindex]}</div></a></li>')
+       
+            
+        
 
 # storage te
      
@@ -1191,6 +1199,14 @@ for school in schoolist:
 
 
 
-# def unpacktheasset_into_createSchoolpages(theasset):
-#     for schooldict in theasset:
-#         websiteobject=createWebsite(schooldata=schooldict)
+def unpacktheasset_into_createSchoolpages(theasset):
+    for schooldict in theasset[1:]:
+        
+        websiteobject=createWebsite(schooldata=schooldict)
+        print(f'starting for {websiteobject.schoolname}\n\n\n')
+        websiteobject.createschoolpages()
+        # websiteobject.upload_schoolfiles()
+        # websiteobject.create_degree_pages()
+        # websiteobject.upload_degree_files()
+
+unpacktheasset_into_createSchoolpages(theasset=theasset)
