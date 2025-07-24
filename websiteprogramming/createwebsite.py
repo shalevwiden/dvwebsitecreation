@@ -63,25 +63,25 @@ class createWebsite:
         # footer so I dont have to redefine it multiple times. 
 
         self.footer=f'''
-        <footer>
-            <div class="footerleft">
-            <div class="links">
-                <a href="about">About</a>
+         <footer>
+        <div class="footerleft">
+          <div class="links">
+            <a href="../index.html">About</a>
 
-                <a href="Home">Home</a>
-            </div>
-            <p id="statement">DegreeView 2025</p>
-            </div>
+            <a href="../index.html">Home</a>
+          </div>
+          <p id="statement">DegreeView 2025</p>
+        </div>
 
-            <div class="footerright">
-            <img
-                id="smalllogo"
-                src="../metaassets/minilogo.png"
-                alt="smalldegreeviewlogo"
-            />
-            </div>
-            <!--  -->
-        </footer>
+        <div class="footerright">
+          <img
+            id="smalllogo"
+            src="../metaassets/minilogo.png"
+            alt="smalldegreeviewlogo"
+          />
+        </div>
+      </footer>
+
 '''
     def upload_schoolfiles(self):
 
@@ -1205,7 +1205,7 @@ def unpacktheasset_into_createSchoolpages(theasset):
         websiteobject=createWebsite(schooldata=schooldict)
         print(f'starting for {websiteobject.schoolname}\n\n\n')
         
-        # websiteobject.createschoolpages()
+        websiteobject.createschoolpages()
         # websiteobject.upload_schoolfiles()
         websiteobject.create_degree_pages()
         # websiteobject.upload_degree_files()
