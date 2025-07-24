@@ -1058,7 +1058,7 @@ class createWebsite:
                 print(f'\n Made {fulldegreepage} as part of making degreepages\n')
 
             makefullhtmlcode()
-            return 0
+        return 0
     
         
 # ---------------------END of make degree pages
@@ -1201,12 +1201,13 @@ def get_all_schools(theasset):
 
 def unpacktheasset_into_createSchoolpages(theasset):
     for schooldict in theasset[1:]:
-        
+        print(schooldict[list(schooldict)[0]])
         websiteobject=createWebsite(schooldata=schooldict)
         print(f'starting for {websiteobject.schoolname}\n\n\n')
-        websiteobject.createschoolpages()
+        
+        # websiteobject.createschoolpages()
         # websiteobject.upload_schoolfiles()
-        # websiteobject.create_degree_pages()
+        websiteobject.create_degree_pages()
         # websiteobject.upload_degree_files()
 
 unpacktheasset_into_createSchoolpages(theasset=theasset)
