@@ -296,9 +296,24 @@ class createWebsite:
 
         headhtmlcode=f'''
 <head>
+
+    <meta
+        name="description"
+        content="{self.schoolname} Degrees and Data"
+        />
+
+     <meta
+      name="keywords"
+      content="degree, major, UT Austin, degreeview, course diagrams, course excel files, degree stats, {self.schoolname}"
+    />
+
+    <meta name="author" content="DegreeView" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{self.schoolname} Page</title>
+
+     <!-- favicon icon -->
+    <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
+    <title>{self.schoolname} Page - DegreeView</title>
 
     <!-- main stylesheet -->
     <link rel="stylesheet" href="../cssfiles/schoolpage.css" />
@@ -331,7 +346,7 @@ class createWebsite:
     <div class="topnav">
         <nav class="breadcrumbs">
         <ul>
-            <li><a href="\\">DegreeView UT</a></li>
+            <li><a href="../index.html">DegreeView UT</a></li>
             <i class="fa fa-chevron-right"></i>
 
             <li id="current">{self.schoolname}</li>
@@ -741,10 +756,23 @@ class createWebsite:
             
             headhtmlcode=f'''
 <head>
+ <meta
+      name="description"
+      content="Visualize {displaydegreename_nobr} at UT Austin through diagrams and tabular data."
+    />
+
+     <meta
+      name="keywords"
+      content="degree, major, UT Austin, degreeview, course diagrams, course excel files, degree stats, {displaydegreename_nobr}"
+    />
+
+    <meta name="author" content="DegreeView" />
 
     <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{displaydegreename_nobr} Page</title>
+         <!-- favicon icon -->
+         <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
+        <title>{displaydegreename_nobr} Page - DegreeView</title>
 
         <!-- main stylesheet -->
         <link rel="stylesheet" href="../cssfiles/degreepage2.css" />
@@ -778,7 +806,7 @@ class createWebsite:
         <div class="topnav">
           <nav class="breadcrumbs">
             <ul>
-              <li><a href="">DegreeView UT</a></li>
+              <li><a href="../index.html">DegreeView UT</a></li>
               <i class="fa fa-chevron-right"></i>
 
               <li><a href="{self.schoolpage}">{self.schoolname}</a></li>
