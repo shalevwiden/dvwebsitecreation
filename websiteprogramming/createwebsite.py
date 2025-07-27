@@ -313,6 +313,16 @@ class createWebsite:
 
      <!-- favicon icon -->
     <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+
+  gtag('config', 'G-S06MYR1FV6');
+</script>
+
     <title>{self.schoolname} Page - DegreeView</title>
 
     <!-- main stylesheet -->
@@ -770,8 +780,18 @@ class createWebsite:
 
     <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
          <!-- favicon icon -->
          <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
+         <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+
+  gtag('config', 'G-S06MYR1FV6');
+</script>
         <title>{displaydegreename_nobr} Page - DegreeView</title>
 
         <!-- main stylesheet -->
@@ -1053,13 +1073,10 @@ class createWebsite:
                 {undermainsitecode}
                 {self.footer}
 
-                            
                 <!-- Hover Script -->
 
                 <script src="../javascript_files/headingcolorchange.js"></script>
-
                 </div>
-
                 </body>
 
 '''
