@@ -18,6 +18,7 @@ import importlib.util
 
 file_path = '/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/college_course_scraping/theassetcontainment.py'
 
+# but be something else besides config for the name
 spec = importlib.util.spec_from_file_location("config", file_path)
 config = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(config)
@@ -992,7 +993,15 @@ class createWebsite:
                             <li>
                             <div class="linkbox">
                                 <p>Major Courses CSV</p>
-
+                                
+                                <p>
+                    View:&nbsp;&nbsp;
+                    <a
+                      href="#csvtablecontainer"
+                      target="_blank"
+                      ><i class="fa-regular fa-eye"></i
+                    ></a>
+                  </p>
                                 <p>
                                 <!-- download attribute means they will download it -->
                                 Download:&nbsp;&nbsp;<a
@@ -1000,6 +1009,478 @@ class createWebsite:
                                     download
                                     ><i class="fa-solid fa-arrow-up-from-bracket"></i
                                 ></a>
+                                </p>
+
+                            </div>
+                            </li>
+
+                            <li>
+                            <div class="linkbox">
+                                <p>Sample Semester Layout CSV</p>
+
+                                 <p>
+                    View:&nbsp;&nbsp;
+                    <a
+                      href="renderedcsv.html"
+                      target="_blank"
+                      ><i class="fa-regular fa-eye"></i
+                    ></a>
+                  </p>
+                                <p>
+                                <!-- download attribute means they will download it -->
+                                Download:&nbsp;&nbsp;<a href="{semesterlayoutcsv}" download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                                ></a>
+                                </p>
+                            </div>
+                            </li>
+                        </ul>
+                        </div>
+                        </div>
+'''
+                    return leftcontentcode
+                    
+                def makerightcontentcode():
+                    '''
+                    The right content displays a pdf, is the "displayedpdf" iframe. THis can be used to showcase a weekly pdf or so. 
+                    '''
+
+                    rightcontentcode=f'''
+                    <div class="rightcontent">
+                     <div class="displayedpdfnamebox">
+            <h3 id="displayedpdfname">Sample Semester Layout PDF</h3>
+          </div>
+          <div class="visuals">
+            <iframe
+              class="displayedpdf"
+              src="{semesterlayoutpdf}"
+              frameborder="0"
+              width="90%"
+              height="1000px"
+            ></iframe>
+          </div></div>
+'''
+                    return rightcontentcode
+                # end makerightcontentcodefunction()
+                
+                leftcontentcode=makeleftcontentcode()
+                rightcontentcode=makerightcontentcode()
+
+                mainsitecode=f'''<div class="mainsite">
+                {leftcontentcode}
+                {rightcontentcode}
+                </div>'''
+                return mainsitecode 
+            
+            def makebodyhtmlcode():
+                abovemainsitecode=make_abovemainsitecode()
+                mainsitecode=make_mainsitecode()
+
+                undermainsitecode=f'''
+ <div class="undermainsite">
+        < <!-- contains rendered csv -->
+        <div class="renderedcsvdiv">
+          <h3 id="csvheading">Degreename Courses CSV</h3>
+          <div id="csvtablecontainer"></div>
+        </div>
+      </div>
+
+'''
+
+                bodyhtmlcode=f'''                    
+                <body>       
+                <div class="sitecontainer">
+                {abovemainsitecode}
+                {mainsitecode}
+                {undermainsitecode}
+                {self.footer}
+
+                <!-- Hover Script -->
+
+                <script src="../javascript_files/headingcolorchange.js"></script>
+                <!-- degreecsvrenderedscript in same html file-->
+                 <script src="../javascript_files/degreecsvrendered_samefile.js"></script>
+                </div>
+                </body>
+
+'''
+                return bodyhtmlcode
+
+
+            def makefullhtmlcode():
+
+                bodyhtmlcode=makebodyhtmlcode()
+
+                fullhtmlcode=f'''
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    {headhtmlcode}\n
+                    {bodyhtmlcode}\n
+                    
+                    </html>'''
+
+    
+                # have to run createschoolpages() first so self.websiteschool folder works
+                fulldegreepage=os.path.join(self.websiteschoolfolder,f'{degreenamecleaned}.html')
+                with open(fulldegreepage,'w') as htmldegreepage:
+                    htmldegreepage.write(fullhtmlcode)
+                print(f'\n Made {fulldegreepage} as part of making degreepages\n')
+
+            makefullhtmlcode()
+        return 0
+    def create_renderedcsv_pages(self):
+        '''
+        These are the rendered csvs in a diferent HTML page
+        '''
+        def get_degreename_lists():
+            degreenamelist=[]
+            cleaneddegreenamelist=[]
+            for i in range(1,len(self.schooldata)):
+                        
+                key=list(self.schooldata)[i]
+                degreename=key
+                degreename=degreename.replace('/','-').strip()
+                degreenamelist.append(degreename)
+
+                # clean it for website links
+
+
+                degreenamecleaned=degreename.replace(' ','').lower().split('(')
+                degreenamecleaned=degreenamecleaned[0]+"-"+degreenamecleaned[-1]
+                degreenamecleaned=degreenamecleaned.replace(')','')
+
+                cleaneddegreenamelist.append(degreenamecleaned)
+            return degreenamelist,cleaneddegreenamelist
+        
+        degreenamelist, cleaneddegreenamelist=get_degreename_lists()
+            
+        # big for loop--------------------------------------------------------------------
+        for degreename, degreenamecleaned in zip(degreenamelist,cleaneddegreenamelist):
+            
+
+            # this is the folder for it in degreeview
+
+            degreenameassetfolder=os.path.join(self.schoolnameassetfolder,degreename)
+            
+
+            # get file types
+
+           
+            # finish the rest of them when its time to upload.
+            def get_degree_assetcloudpaths_lists(degreenameassetfolder):
+                
+                '''
+                Reconstruct the asset names manually like this:
+
+                https://storage.googleapis.com/[BUCKET_NAME]/[OBJECT_NAME]
+
+                Unlike other functions, this is by degree not school.
+                As such this will not contain any school specific csv or excel files. 
+                Those have to be obtained with another function. 
+                This function returns the links that will be added to the website. That way I can get the links without a class A operation
+
+                '''
+                csv_path_list=[]
+                excel_path_list=[]
+                pdf_path_list=[]
+                mmd_path_list=[]
+                # os.walk recursively travels everything
+                for root, dirs, files in os.walk(degreenameassetfolder):
+                    for file in files:
+                        
+                        # we neewd the fullpath in the list since thats the way it can be uploaded to google cloud.
+
+                        googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/'
+
+                        if os.path.splitext(file)[1]=='.csv':
+                            objectname_incloud=f'{self.cleanedschoolname}/csvs/{file}'
+                            googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
+
+                            csv_path_list.append(googlecloudpath)
+                            # removes those dollar sign excel files. 
+                        elif os.path.splitext(file)[1]=='.xlsx' and not file.startswith(("~$", "$")):
+
+                            objectname_incloud=f'{self.cleanedschoolname}/excel-files/{file}'
+                            googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
+                        
+                            excel_path_list.append(googlecloudpath)
+                        elif os.path.splitext(file)[1]=='.pdf':
+                        
+                            objectname_incloud=f'{self.cleanedschoolname}/pdfs/{file}'
+                            googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
+                        
+                            pdf_path_list.append(googlecloudpath)
+                        elif os.path.splitext(file)[1]=='.mmd':
+                        
+                            objectname_incloud=f'{self.cleanedschoolname}/mmds/{file}'
+                            googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
+                            mmd_path_list.append(googlecloudpath)
+
+                return [csv_path_list,excel_path_list,pdf_path_list,mmd_path_list]
+            
+            csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
+            # now use these lists in the website creation. 
+            # well this sample link stuff is working. Now I just have to upload them is the thing...
+            print(f'\n {degreename} cloud links for csvs is\n: {csvlist}\n')
+
+                    
+            
+                              
+                         
+            
+            # then I'll do upload to cloud, excel list, csv list, mermaid list, etc
+            
+
+            displaydegreename=degreename.replace("-","/").strip().split('(')
+            displaydegreename=displaydegreename[0]+'<br>'+f'({displaydegreename[-1]}'
+
+            displaydegreename_nobr=displaydegreename.replace("<br>","")
+            
+            headhtmlcode=f'''
+<head>
+ <meta
+      name="description"
+      content="Visualize {displaydegreename_nobr} at UT Austin through diagrams and tabular data."
+    />
+
+     <meta
+      name="keywords"
+      content="degree, major, UT Austin, degreeview, course diagrams, course excel files, degree stats, {displaydegreename_nobr}"
+    />
+
+    <meta name="author" content="DegreeView" />
+
+    <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+         <!-- favicon icon -->
+         <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
+         <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+
+  gtag('config', 'G-S06MYR1FV6');
+</script>
+        <title>{displaydegreename_nobr} Page - DegreeView</title>
+
+        <!-- main stylesheet -->
+        <link rel="stylesheet" href="../cssfiles/degreepage2.css" />
+
+        <!-- animation stylesheet -->
+        <link rel="stylesheet" href="../cssfiles/animations.css" />
+        <!-- Barlow Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+        <!-- Roboto Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+        />
+        <!-- Icons ( download icon and file icons from here is used) -->
+        <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        />
+        </head>
+
+'''
+            def make_abovemainsitecode():
+                abovemainsitecode=f'''
+
+      <div class="abovemainsite">
+        <div class="topnav">
+          <nav class="breadcrumbs">
+            <ul>
+              <li><a href="../index.html">DegreeView UT</a></li>
+              <i class="fa fa-chevron-right"></i>
+
+              <li><a href="{self.schoolpage}">{self.schoolname}</a></li>
+              <i class="fa fa-chevron-right"></i>
+
+              <li id="current">
+                {displaydegreename_nobr}
+              </li>
+            </ul>
+          </nav>
+          <nav class="homeandabout">
+            <ul>
+              
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="../aboutpage.html">About</a></li>
+              <li><a href="../ut-stats.html">Stats</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="degreenamebox">
+          <h1 id="degreenametitle">
+           {displaydegreename}
+          </h1>
+        </div>
+      </div>
+'''
+                return abovemainsitecode
+
+            
+            def make_mainsitecode():
+                '''
+                This is simply a function that generates leftcontentcode and rightcontentcode, then puts it together in main content code. 
+                '''
+                
+                # get csv links
+                csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
+
+                majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
+                semesterlayoutcsv=[csv for csv in csvlist if "semester" in csv][0]
+
+                # get excel links
+                excellist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[1]
+
+                lighttheme_excel=[file for file in excellist if "dark" not in file][0]
+                darktheme_excel=[file for file in excellist if "semesterfile" in file and "dark" not in file][0]
+
+                # get pdf links
+                pdflist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[2]
+
+
+                semesterlayoutpdf=[pdffile for pdffile in pdflist if "semesterlayout" in pdffile and "emptynodes" not in pdffile][0]
+                emptynodespdf=[pdffile for pdffile in pdflist if "emptynodes" in pdffile][0]
+
+                
+                # I  dont put mmds in the website, for now...
+                mmdlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[3]
+
+
+                def makeleftcontentcode():
+                    '''Using the links just received above, now link them in the left content code in the website'''
+
+                    
+
+                    leftcontentcode=f'''
+                    <div class="leftcontent">
+
+                    <div class="filescontainer" id="excelcontainer">
+                        <div class="filesname">
+                            <h3>Excel (.xlsx) Files</h3>
+                            <i class="fa-regular fa-file-excel"></i>
+                        </div>
+
+                        <ul>
+                            <li>
+                            <div class="linkbox">
+                                <p>Sample Semester Layout Light Theme</p>
+                                <p>
+                                <!-- download attribute means they will download it -->
+                                Download:&nbsp;&nbsp;<a
+                                    href="{lighttheme_excel}"
+                                    download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                                ></a>
+                                </p>
+                            </div>
+                            </li>
+                            <!--  -->
+                            <li>
+                            <div class="linkbox">
+                                <p>Sample Semester Layout Dark Theme</p>
+                                <p>
+                                <!-- download attribute means they will download it -->
+                                Download:&nbsp;&nbsp;<a
+                                    href="{darktheme_excel}"
+                                    download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                                ></a>
+                                </p>
+                            </div>
+                            </li>
+                            
+                        </ul>
+                        </div>
+                        <!-- files container is per file type. linkbox is per individiual link -->
+                        <div class="filescontainer" id="pdfcontainer">
+                        <div class="filesname">
+                            <h3>PDF Files</h3>
+                            <i class="fa-regular fa-file-pdf"></i>
+                        </div>
+
+                        <ul>
+                            <!-- put the linkboxes in li tags for organization and readability -->
+                            <li>
+                            <div class="linkbox">
+                                <p>Sample Semester PDF</p>
+
+                                <p>
+                                View:&nbsp;&nbsp;
+                                <a href="{semesterlayoutpdf}" target="_blank"
+                                    ><i class="fa-regular fa-eye"></i
+                                ></a>
+                                </p>
+                                <p>
+                                <!-- download attribute means they will download it -->
+                                Download:&nbsp;&nbsp;<a
+                                    href="{semesterlayoutpdf}"
+                                    download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                                ></a>
+                                </p>
+                            </div>
+                            </li>
+
+                            <li>
+                            <div class="linkbox">
+                                <p>Sample Semester PDF Empty Nodes</p>
+                                <p>
+                                View:&nbsp;&nbsp;
+                                <a href="{emptynodespdf}" target="_blank"
+                                    ><i class="fa-regular fa-eye"></i
+                                ></a>
+                                </p>
+                                <p>
+                                <!-- download attribute means they will download it -->
+                                Download:&nbsp;&nbsp;<a
+                                    href="{emptynodespdf}"
+                                    download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                                ></a>
+                                </p>
+                            </div>
+                            </li>
+                        </ul>
+                        </div>
+
+                        <div class="filescontainer" id="csvcontainer">
+                        <div class="filesname">
+                            <h3>CSV Files</h3>
+                            <i class="fa-regular fa-file"></i>
+                        </div>
+
+                        <ul>
+                            <li>
+                            <div class="linkbox">
+                                <p>Major Courses CSV</p>
+                    <p>
+                    View:&nbsp;&nbsp;
+                    <a
+                      href="#tablecontainer"
+                      target="_blank"
+                      ><i class="fa-regular fa-eye"></i
+                    ></a>
+                  </p>
+                                <p>
+                                <!-- download attribute means they will download it -->
+                                Download:&nbsp;&nbsp;<a
+                                    href="{majorcoursescsv}"
+                                    download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i>
+                                    id="majorcoursesdownload"
+                                
+                                </a>
                                 </p>
                             </div>
                             </li>
@@ -1104,8 +1585,6 @@ class createWebsite:
 
             makefullhtmlcode()
         return 0
-    
-        
 # ---------------------END of make degree pages
     def make_alldegrees_list(self):
         '''
