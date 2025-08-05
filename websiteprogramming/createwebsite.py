@@ -759,6 +759,7 @@ class createWebsite:
             
             # then I'll do upload to cloud, excel list, csv list, mermaid list, etc
             
+            renderedcsvurl=f'{degreenamecleaned}-rendered-csv.html'
 
             displaydegreename=degreename.replace("-","/").strip().split('(')
             displaydegreename=displaydegreename[0]+'<br>'+f'({displaydegreename[-1]}'
@@ -800,6 +801,10 @@ class createWebsite:
 
         <!-- animation stylesheet -->
         <link rel="stylesheet" href="../cssfiles/animations.css" />
+
+        <!-- table styling -->
+        <link rel="stylesheet" href="../cssfiles/tablestyling.css" />
+
         <!-- Barlow Font -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -998,7 +1003,7 @@ class createWebsite:
                     View:&nbsp;&nbsp;
                     <a
                       href="#csvtablecontainer"
-                      target="_blank"
+                      target="_self"
                       ><i class="fa-regular fa-eye"></i
                     ></a>
                   </p>
@@ -1006,6 +1011,7 @@ class createWebsite:
                                 <!-- download attribute means they will download it -->
                                 Download:&nbsp;&nbsp;<a
                                     href="{majorcoursescsv}"
+                                    id="majorcoursesdownload"
                                     download
                                     ><i class="fa-solid fa-arrow-up-from-bracket"></i
                                 ></a>
@@ -1021,10 +1027,10 @@ class createWebsite:
                                  <p>
                     View:&nbsp;&nbsp;
                     <a
-                      href="renderedcsv.html"
-                      target="_blank"
-                      ><i class="fa-regular fa-eye"></i
-                    ></a>
+                      href="{renderedcsvurl}"
+                      target="_self"
+                      ><i class="fa-regular fa-eye"></i>
+                    </a>
                   </p>
                                 <p>
                                 <!-- download attribute means they will download it -->
@@ -1076,11 +1082,29 @@ class createWebsite:
                 abovemainsitecode=make_abovemainsitecode()
                 mainsitecode=make_mainsitecode()
 
+
+                csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
+
+                majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
+
                 undermainsitecode=f'''
  <div class="undermainsite">
-        < <!-- contains rendered csv -->
+        <!-- contains rendered csv -->
         <div class="renderedcsvdiv">
-          <h3 id="csvheading">Degreename Courses CSV</h3>
+        <h3 id="csvheading">{displaydegreename_nobr} Courses Table</h3>
+
+        <div class="copyanddownload">
+            <i class="fa-regular fa-copy" id="copyicon"></i>
+            <!-- contains the rendered csv -->
+            <a
+              href="{majorcoursescsv}"
+              id="downloadcsv"
+            >
+              <!-- use this id to get the href to place into the javascript script to render with sheet js  -->
+
+              <i class="fa-solid fa-arrow-up-from-bracket"></i
+            ></a>
+          </div>
           <div id="csvtablecontainer"></div>
         </div>
       </div>
@@ -1099,7 +1123,14 @@ class createWebsite:
 
                 <script src="../javascript_files/headingcolorchange.js"></script>
                 <!-- degreecsvrenderedscript in same html file-->
+
+                 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
                  <script src="../javascript_files/degreecsvrendered_samefile.js"></script>
+
+
+                <!-- copy script -->
+                <script src="../javascript_files/copytable.js"></script>
                 </div>
                 </body>
 
@@ -1128,6 +1159,9 @@ class createWebsite:
 
             makefullhtmlcode()
         return 0
+
+# ---------------------END of make rendered degree pages
+
     def create_renderedcsv_pages(self):
         '''
         These are the rendered csvs in a diferent HTML page
@@ -1264,13 +1298,22 @@ class createWebsite:
 
   gtag('config', 'G-S06MYR1FV6');
 </script>
-        <title>{displaydegreename_nobr} Page - DegreeView</title>
+        <title>{displaydegreename_nobr} Rendered CSV Page - DegreeView</title>
 
         <!-- main stylesheet -->
         <link rel="stylesheet" href="../cssfiles/degreepage2.css" />
 
         <!-- animation stylesheet -->
         <link rel="stylesheet" href="../cssfiles/animations.css" />
+
+
+        <!-- table styling -->
+        <link rel="stylesheet" href="../cssfiles/tablestyling.css" />
+
+        <!-- Rendered CSV css -->
+
+        <link rel="stylesheet" href="../cssfiles/renderedcsv.css">
+
         <!-- Barlow Font -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1304,9 +1347,13 @@ class createWebsite:
               <li><a href="{self.schoolpage}">{self.schoolname}</a></li>
               <i class="fa fa-chevron-right"></i>
 
-              <li id="current">
-                {displaydegreename_nobr}
+              <li>
+                <a href="{degreenamecleaned}.html">{displaydegreename_nobr}</a>
               </li>
+
+              <i class="fa fa-chevron-right"></i>
+
+              <li id="current">Semester Table</li>
             </ul>
           </nav>
           <nav class="homeandabout">
@@ -1320,7 +1367,7 @@ class createWebsite:
         </div>
         <div class="degreenamebox">
           <h1 id="degreenametitle">
-           {displaydegreename}
+           {displaydegreename_nobr} Semester Table
           </h1>
         </div>
       </div>
@@ -1328,235 +1375,64 @@ class createWebsite:
                 return abovemainsitecode
 
             
-            def make_mainsitecode():
+              
+            def makebodyhtmlcode():
                 '''
-                This is simply a function that generates leftcontentcode and rightcontentcode, then puts it together in main content code. 
+                This is a little different from the makedegreepages one. Here I get the asset cloud lists and then refer to them.
                 '''
-                
-                # get csv links
+                abovemainsitecode=make_abovemainsitecode()
+
                 csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
 
                 majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
                 semesterlayoutcsv=[csv for csv in csvlist if "semester" in csv][0]
 
-                # get excel links
-                excellist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[1]
-
-                lighttheme_excel=[file for file in excellist if "dark" not in file][0]
-                darktheme_excel=[file for file in excellist if "semesterfile" in file and "dark" not in file][0]
-
-                # get pdf links
-                pdflist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[2]
-
-
-                semesterlayoutpdf=[pdffile for pdffile in pdflist if "semesterlayout" in pdffile and "emptynodes" not in pdffile][0]
-                emptynodespdf=[pdffile for pdffile in pdflist if "emptynodes" in pdffile][0]
-
-                
-                # I  dont put mmds in the website, for now...
-                mmdlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[3]
-
-
-                def makeleftcontentcode():
-                    '''Using the links just received above, now link them in the left content code in the website'''
-
-                    
-
-                    leftcontentcode=f'''
-                    <div class="leftcontent">
-
-                    <div class="filescontainer" id="excelcontainer">
-                        <div class="filesname">
-                            <h3>Excel (.xlsx) Files</h3>
-                            <i class="fa-regular fa-file-excel"></i>
-                        </div>
-
-                        <ul>
-                            <li>
-                            <div class="linkbox">
-                                <p>Sample Semester Layout Light Theme</p>
-                                <p>
-                                <!-- download attribute means they will download it -->
-                                Download:&nbsp;&nbsp;<a
-                                    href="{lighttheme_excel}"
-                                    download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                ></a>
-                                </p>
-                            </div>
-                            </li>
-                            <!--  -->
-                            <li>
-                            <div class="linkbox">
-                                <p>Sample Semester Layout Dark Theme</p>
-                                <p>
-                                <!-- download attribute means they will download it -->
-                                Download:&nbsp;&nbsp;<a
-                                    href="{darktheme_excel}"
-                                    download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                ></a>
-                                </p>
-                            </div>
-                            </li>
-                            
-                        </ul>
-                        </div>
-                        <!-- files container is per file type. linkbox is per individiual link -->
-                        <div class="filescontainer" id="pdfcontainer">
-                        <div class="filesname">
-                            <h3>PDF Files</h3>
-                            <i class="fa-regular fa-file-pdf"></i>
-                        </div>
-
-                        <ul>
-                            <!-- put the linkboxes in li tags for organization and readability -->
-                            <li>
-                            <div class="linkbox">
-                                <p>Sample Semester PDF</p>
-
-                                <p>
-                                View:&nbsp;&nbsp;
-                                <a href="{semesterlayoutpdf}" target="_blank"
-                                    ><i class="fa-regular fa-eye"></i
-                                ></a>
-                                </p>
-                                <p>
-                                <!-- download attribute means they will download it -->
-                                Download:&nbsp;&nbsp;<a
-                                    href="{semesterlayoutpdf}"
-                                    download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                ></a>
-                                </p>
-                            </div>
-                            </li>
-
-                            <li>
-                            <div class="linkbox">
-                                <p>Sample Semester PDF Empty Nodes</p>
-                                <p>
-                                View:&nbsp;&nbsp;
-                                <a href="{emptynodespdf}" target="_blank"
-                                    ><i class="fa-regular fa-eye"></i
-                                ></a>
-                                </p>
-                                <p>
-                                <!-- download attribute means they will download it -->
-                                Download:&nbsp;&nbsp;<a
-                                    href="{emptynodespdf}"
-                                    download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                ></a>
-                                </p>
-                            </div>
-                            </li>
-                        </ul>
-                        </div>
-
-                        <div class="filescontainer" id="csvcontainer">
-                        <div class="filesname">
-                            <h3>CSV Files</h3>
-                            <i class="fa-regular fa-file"></i>
-                        </div>
-
-                        <ul>
-                            <li>
-                            <div class="linkbox">
-                                <p>Major Courses CSV</p>
-                    <p>
-                    View:&nbsp;&nbsp;
-                    <a
-                      href="#tablecontainer"
-                      target="_blank"
-                      ><i class="fa-regular fa-eye"></i
-                    ></a>
-                  </p>
-                                <p>
-                                <!-- download attribute means they will download it -->
-                                Download:&nbsp;&nbsp;<a
-                                    href="{majorcoursescsv}"
-                                    download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i>
-                                    id="majorcoursesdownload"
-                                
-                                </a>
-                                </p>
-                            </div>
-                            </li>
-
-                            <li>
-                            <div class="linkbox">
-                                <p>Sample Semester Layout CSV</p>
-                                <p>
-                                <!-- download attribute means they will download it -->
-                                Download:&nbsp;&nbsp;<a href="{semesterlayoutcsv}" download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                ></a>
-                                </p>
-                            </div>
-                            </li>
-                        </ul>
-                        </div>
-                        </div>
-'''
-                    return leftcontentcode
-                    
-                def makerightcontentcode():
-                    '''
-                    The right content displays a pdf, is the "displayedpdf" iframe. THis can be used to showcase a weekly pdf or so. 
-                    '''
-
-                    rightcontentcode=f'''
-                    <div class="rightcontent">
-                     <div class="displayedpdfnamebox">
-            <h3 id="displayedpdfname">Sample Semester Layout PDF</h3>
-          </div>
-          <div class="visuals">
-            <iframe
-              class="displayedpdf"
-              src="{semesterlayoutpdf}"
-              frameborder="0"
-              width="90%"
-              height="1000px"
-            ></iframe>
-          </div></div>
-'''
-                    return rightcontentcode
-                # end makerightcontentcodefunction()
-                
-                leftcontentcode=makeleftcontentcode()
-                rightcontentcode=makerightcontentcode()
-
-                mainsitecode=f'''<div class="mainsite">
-                {leftcontentcode}
-                {rightcontentcode}
-                </div>'''
-                return mainsitecode 
-            
-            def makebodyhtmlcode():
-                abovemainsitecode=make_abovemainsitecode()
-                mainsitecode=make_mainsitecode()
-
                 undermainsitecode=f'''
- <div class="undermainsite">
-        <!-- this can be empty and like 20 px tall just to take up space, and be used for something in the future
-          -->
-      </div>
+ 
+      <div class="undermainsite">
+        <!-- contains the rendered csv -->
+        <div class="renderedcsvdiv">
 
-'''
+          <div class="copyanddownload">
+            <i class="fa-regular fa-copy" id="copyicon"></i>
+                    <!-- contains the rendered csv -->
+                <a href="{semesterlayoutcsv}"
+                id="downloadcsv"
+
+            >
+                        <!-- use this id to get the href to place into the javascript script to render with sheet js  -->
+
+            <i class="fa-solid fa-arrow-up-from-bracket"></i
+            ></a>
+          </div>
+
+          <div id="semester-csvtablecontainer"></div>
+        </div>
+    </div>
+
+
+            '''
 
                 bodyhtmlcode=f'''                    
                 <body>       
                 <div class="sitecontainer">
                 {abovemainsitecode}
-                {mainsitecode}
                 {undermainsitecode}
                 {self.footer}
 
                 <!-- Hover Script -->
 
                 <script src="../javascript_files/headingcolorchange.js"></script>
+
+                <!-- Sheet JS Script -->
+
+                 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+                <script src="../javascript_files/degreecsvrendered.js"></script>
+
+                <!-- copy script -->
+                <script src="../javascript_files/copytable.js"></script>
+
                 </div>
                 </body>
 
@@ -1564,7 +1440,7 @@ class createWebsite:
                 return bodyhtmlcode
 
 
-            def makefullhtmlcode():
+            def makefullrenderedcsvpage():
 
                 bodyhtmlcode=makebodyhtmlcode()
 
@@ -1578,17 +1454,19 @@ class createWebsite:
 
     
                 # have to run createschoolpages() first so self.websiteschool folder works
-                fulldegreepage=os.path.join(self.websiteschoolfolder,f'{degreenamecleaned}.html')
-                with open(fulldegreepage,'w') as htmldegreepage:
-                    htmldegreepage.write(fullhtmlcode)
-                print(f'\n Made {fulldegreepage} as part of making degreepages\n')
+                renderedcsvpage=os.path.join(self.websiteschoolfolder,f'{degreenamecleaned}-rendered-csv.html')
+                with open(renderedcsvpage,'w') as htmlcsvpage:
+                    htmlcsvpage.write(fullhtmlcode)
+                print(f'\n Made {renderedcsvpage} as part of making degreepages\n')
 
-            makefullhtmlcode()
+            makefullrenderedcsvpage()
+
         return 0
-# ---------------------END of make degree pages
+# ---------------------END of make rendered CSV pages
     def make_alldegrees_list(self):
         '''
-        This function returns two lists, of degreepages, and degreedata. Its later called in make_alldegreesfile()
+        This function returns two lists, of degreepages, and degreedata. Its later called in make_alldegreesfile().
+        This is to make alldegrees.txt. 
         '''
          
         def get_degreename_lists():
@@ -1619,11 +1497,17 @@ class createWebsite:
         degreename_data=[]
         for degreename,degreenamecleaned in zip(degreenamelist, cleaneddegreenamelist):
             fulldegreepage=os.path.join(self.cleanedschoolname,f'{degreenamecleaned}.html')
+
+            makerendered=True
+            if makerendered:
+                fulldegreepage=os.path.join(self.cleanedschoolname,f'{degreenamecleaned}-rendered-csv.html')
+
             degreepage_list.append(fulldegreepage)
             
             displaydegreename=degreename.replace("-","/").strip().split('(')
 
             displaydegreename=displaydegreename[0]+f'({displaydegreename[-1]}'
+            
 
             # using this we can figure out longest and shortest degreename. 
             degreename_data.append(displaydegreename)
@@ -1664,6 +1548,7 @@ def make_alldegreesfile():
 
         alldegreesfile.write(f']')
 
+make_alldegreesfile()
 
 def architecure_testing():
     '''Only test here for the first stage'''
@@ -1724,7 +1609,7 @@ def get_all_schools(theasset):
 
 
 def unpacktheasset_into_createSchoolpages(theasset):
-    for schooldict in theasset[1:]:
+    for schooldict in theasset[0:]:
         print(schooldict[list(schooldict)[0]])
         websiteobject=createWebsite(schooldata=schooldict)
         print(f'starting for {websiteobject.schoolname}\n\n\n')
@@ -1732,6 +1617,7 @@ def unpacktheasset_into_createSchoolpages(theasset):
         websiteobject.createschoolpages()
         # websiteobject.upload_schoolfiles()
         websiteobject.create_degree_pages()
+        websiteobject.create_renderedcsv_pages()
         # websiteobject.upload_degree_files()
 
 unpacktheasset_into_createSchoolpages(theasset=theasset)
