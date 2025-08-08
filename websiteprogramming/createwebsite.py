@@ -610,7 +610,8 @@ class createWebsite:
                     uploadblob=bucket.blob(uploadblob)
 
                 # add a check to not do it many times
-                if not uploadblob.exists():
+                verify=False
+                if verify and not uploadblob.exists():
 
                     uploadblob.upload_from_filename(source_file_name)
 
@@ -627,25 +628,35 @@ class createWebsite:
                 '''
                 This function uses the get_assetlists functions above to get all the paths to the asset files, in each degree folder.
                 Then it uses upload_degree_files() to upload each one one by one. 
+
+                IMPORTANT: Here is where you can change if replacing csv files, excel files, or more pdfs. 
+
                 '''
                 csvlist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[0]
                 excellist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[1]
                 pdflist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[2]
 
-                # mmds currently not needing to be uplaoded.
-                for csvfile in csvlist:
-                    # comment these out depending on which ones I want
-                    upload_to_googlecloud(csvfile)
-                    print(f'Uploaded {csvfile} to cloud\n')
-                    # pass a tuple
-                for excelfile in excellist:
-                    if not excelfile.startswith(("~$", "$")):
-                        upload_to_googlecloud(excelfile)
-                        print(f'Uploaded {excelfile} to cloud\n')
+                majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
+                upload_to_googlecloud(majorcoursescsv)
 
-                for pdffile in pdflist:
-                    upload_to_googlecloud(pdffile)
-                    print(f'Uploaded {pdffile} to cloud\n')
+                # mmds currently not needing to be uplaoded.
+                
+                
+                others=False
+                if others:
+                    for csvfile in csvlist:
+                        # comment these out depending on which ones I want
+                        upload_to_googlecloud(csvfile)
+                        print(f'Uploaded {csvfile} to cloud\n')
+
+                    for excelfile in excellist:
+                        if not excelfile.startswith(("~$", "$")):
+                            upload_to_googlecloud(excelfile)
+                            print(f'Uploaded {excelfile} to cloud\n')
+
+                    for pdffile in pdflist:
+                        upload_to_googlecloud(pdffile)
+                        print(f'Uploaded {pdffile} to cloud\n')
             
             loop_through_assets_to_upload()
 
@@ -871,13 +882,13 @@ class createWebsite:
                 csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
 
                 majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
-                semesterlayoutcsv=[csv for csv in csvlist if "semester" in csv][0]
+                semesterlayoutcsv=[csv for csv in csvlist if "semestercsvfile" in csv][0]
 
                 # get excel links
                 excellist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[1]
 
                 lighttheme_excel=[file for file in excellist if "dark" not in file][0]
-                darktheme_excel=[file for file in excellist if "semesterfile" in file and "dark" not in file][0]
+                darktheme_excel=[file for file in excellist if "semesterfile" in file and "dark" in file][0]
 
                 # get pdf links
                 pdflist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[2]
@@ -1094,7 +1105,7 @@ class createWebsite:
         <h3 id="csvheading">{displaydegreename_nobr} Courses Table</h3>
 
         <div class="copyanddownload">
-            <i class="fa-regular fa-copy" id="copyicon"></i>
+            <i class="fa-regular fa-copy" id="copyicon" title="Copy Table"></i>
             <!-- contains the rendered csv -->
             <a
               href="{majorcoursescsv}"
@@ -1102,7 +1113,7 @@ class createWebsite:
             >
               <!-- use this id to get the href to place into the javascript script to render with sheet js  -->
 
-              <i class="fa-solid fa-arrow-up-from-bracket"></i
+              <i class="fa-solid fa-arrow-up-from-bracket" title="downloadcsv"></i
             ></a>
           </div>
           <div id="csvtablecontainer"></div>
@@ -1394,7 +1405,7 @@ class createWebsite:
         <div class="renderedcsvdiv">
 
           <div class="copyanddownload">
-            <i class="fa-regular fa-copy" id="copyicon"></i>
+            <i class="fa-regular fa-copy" id="copyicon" title="Copy Table"></i>
                     <!-- contains the rendered csv -->
                 <a href="{semesterlayoutcsv}"
                 id="downloadcsv"
@@ -1402,7 +1413,7 @@ class createWebsite:
             >
                         <!-- use this id to get the href to place into the javascript script to render with sheet js  -->
 
-            <i class="fa-solid fa-arrow-up-from-bracket"></i
+            <i class="fa-solid fa-arrow-up-from-bracket" title="downloadcsv"></i
             ></a>
           </div>
 
