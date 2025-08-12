@@ -175,7 +175,8 @@ class createWebsite:
 
 
                 # add a check to not do it many times
-                if not uploadblob.exists():
+                avoidreplace=False
+                if not avoidreplace:
 
                     uploadblob.upload_from_filename(source_file_name)
 
@@ -610,15 +611,15 @@ class createWebsite:
                     uploadblob=bucket.blob(uploadblob)
 
                 # add a check to not do it many times
-                verify=False
-                if verify and not uploadblob.exists():
+                
+                
 
-                    uploadblob.upload_from_filename(source_file_name)
+                uploadblob.upload_from_filename(source_file_name)
 
-                    uploadblob.make_public()  # Makes it publicly accessible
+                uploadblob.make_public()  # Makes it publicly accessible
                     # can also use blob.make_private()
-                else:
-                    print(f'{uploadblob.name} already exits, didnt upload\n')
+                # else:
+                    # print(f'{uploadblob.name} already exits, didnt upload\n')
 
 
                 # use this link on the website to serve the file.
@@ -627,7 +628,7 @@ class createWebsite:
             def loop_through_assets_to_upload():
                 '''
                 This function uses the get_assetlists functions above to get all the paths to the asset files, in each degree folder.
-                Then it uses upload_degree_files() to upload each one one by one. 
+                Then it uses upload_degree_files() to upload each one one by one.
 
                 IMPORTANT: Here is where you can change if replacing csv files, excel files, or more pdfs. 
 
@@ -641,6 +642,11 @@ class createWebsite:
 
                 # mmds currently not needing to be uplaoded.
                 
+
+                for pdffile in pdflist:
+                    upload_to_googlecloud(pdffile)
+                    print(f'Uploaded {pdffile} to cloud\n')
+        
                 
                 others=False
                 if others:
@@ -654,10 +660,6 @@ class createWebsite:
                             upload_to_googlecloud(excelfile)
                             print(f'Uploaded {excelfile} to cloud\n')
 
-                    for pdffile in pdflist:
-                        upload_to_googlecloud(pdffile)
-                        print(f'Uploaded {pdffile} to cloud\n')
-            
             loop_through_assets_to_upload()
 
         print(f'\n\nEnding Cloud Upload for {self.schoolname} degreefiles \n\n\n\n')
@@ -1040,8 +1042,10 @@ class createWebsite:
                     <a
                       href="{renderedcsvurl}"
                       target="_self"
-                      ><i class="fa-regular fa-eye"></i>
+                      ><img class="linksvg" src="../metaassets/Link-17.svg" alt="" />
                     </a>
+                                          <!-- link icon above--> 
+
                   </p>
                                 <p>
                                 <!-- download attribute means they will download it -->
@@ -1105,6 +1109,8 @@ class createWebsite:
         <h3 id="csvheading">{displaydegreename_nobr} Courses Table</h3>
 
         <div class="copyanddownload">
+            <div class="animatetable"> <button id="animatebutton">Animate</button></div>
+
             <i class="fa-regular fa-copy" id="copyicon" title="Copy Table"></i>
             <!-- contains the rendered csv -->
             <a
@@ -1142,6 +1148,9 @@ class createWebsite:
 
                 <!-- copy script -->
                 <script src="../javascript_files/copytable.js"></script>
+
+                <!-- animate table script -->
+                <script src="../javascript_files/animatetable.js"></script>
                 </div>
                 </body>
 
@@ -1405,6 +1414,8 @@ class createWebsite:
         <div class="renderedcsvdiv">
 
           <div class="copyanddownload">
+            <div class="animatetable"> <button id="animatebutton">Animate</button></div>
+
             <i class="fa-regular fa-copy" id="copyicon" title="Copy Table"></i>
                     <!-- contains the rendered csv -->
                 <a href="{semesterlayoutcsv}"
@@ -1443,6 +1454,10 @@ class createWebsite:
 
                 <!-- copy script -->
                 <script src="../javascript_files/copytable.js"></script>
+
+
+                <!-- animate table script -->
+                <script src="../javascript_files/animatetable.js"></script>
 
                 </div>
                 </body>
@@ -1559,7 +1574,7 @@ def make_alldegreesfile():
 
         alldegreesfile.write(f']')
 
-make_alldegreesfile()
+# make_alldegreesfile()
 
 def architecure_testing():
     '''Only test here for the first stage'''
@@ -1629,6 +1644,5 @@ def unpacktheasset_into_createSchoolpages(theasset):
         # websiteobject.upload_schoolfiles()
         websiteobject.create_degree_pages()
         websiteobject.create_renderedcsv_pages()
-        # websiteobject.upload_degree_files()
 
 unpacktheasset_into_createSchoolpages(theasset=theasset)
