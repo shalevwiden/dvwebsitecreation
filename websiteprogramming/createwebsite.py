@@ -638,14 +638,18 @@ class createWebsite:
                 pdflist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[2]
 
                 majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
-                upload_to_googlecloud(majorcoursescsv)
 
                 # mmds currently not needing to be uplaoded.
                 
 
                 for pdffile in pdflist:
-                    upload_to_googlecloud(pdffile)
-                    print(f'Uploaded {pdffile} to cloud\n')
+                    if 'dolphinocean' in pdffile:
+                        upload_to_googlecloud(pdffile)
+                        print(f'Uploaded {pdffile} to cloud\n')
+                    elif 'stare' in pdffile:
+                        upload_to_googlecloud(pdffile)
+                        print(f'Uploaded {pdffile} to cloud\n')
+
         
                 
                 others=False
@@ -660,6 +664,7 @@ class createWebsite:
                             upload_to_googlecloud(excelfile)
                             print(f'Uploaded {excelfile} to cloud\n')
 
+            # this one actually uploads everything
             loop_through_assets_to_upload()
 
         print(f'\n\nEnding Cloud Upload for {self.schoolname} degreefiles \n\n\n\n')
@@ -899,6 +904,9 @@ class createWebsite:
                 semesterlayoutpdf=[pdffile for pdffile in pdflist if "semesterlayout" in pdffile and "emptynodes" not in pdffile][0]
                 emptynodespdf=[pdffile for pdffile in pdflist if "emptynodes" in pdffile][0]
 
+                dolphinpdf=[pdffile for pdffile in pdflist if "dolphinocean" in pdffile][0]
+                starepdf=[pdffile for pdffile in pdflist if "stare" in pdffile][0]
+
                 
                 # I  dont put mmds in the website, for now...
                 mmdlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[3]
@@ -998,6 +1006,46 @@ class createWebsite:
                                 </p>
                             </div>
                             </li>
+                            <!-- dolphin pdf -->
+              <li>
+                <div class="linkbox">
+                  <p>Sunny Dolphin Ocean PDF</p>
+                  <p>
+                    View:&nbsp;&nbsp;
+                    <a
+                      href="{dolphinpdf}"
+                      target="_blank"
+                      ><i class="fa-regular fa-eye"></i
+                    ></a>
+                  </p>
+                  <p>
+                    <!-- download attribute means they will download it -->
+                    Download:&nbsp;&nbsp;<a
+                      href="{dolphinpdf}"
+                      download
+                      ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                    ></a>
+                  </p>
+                </div>
+              </li>
+              <!-- stare pdf -->
+              <li>
+                <div class="linkbox">
+                  <p>Thousand Yard Stare PDF</p>
+                  <p>
+                    View:&nbsp;&nbsp;
+                    <a href="{starepdf}" target="_blank"
+                      ><i class="fa-regular fa-eye"></i
+                    ></a>
+                  </p>
+                  <p>
+                    <!-- download attribute means they will download it -->
+                    Download:&nbsp;&nbsp;<a href="{starepdf}" download
+                      ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                    ></a>
+                  </p>
+                </div>
+              </li>
                         </ul>
                         </div>
 
@@ -1640,9 +1688,9 @@ def unpacktheasset_into_createSchoolpages(theasset):
         websiteobject=createWebsite(schooldata=schooldict)
         print(f'starting for {websiteobject.schoolname}\n\n\n')
         
-        websiteobject.createschoolpages()
-        # websiteobject.upload_schoolfiles()
+        # websiteobject.createschoolpages()
+        websiteobject.upload_degree_files()
         websiteobject.create_degree_pages()
-        websiteobject.create_renderedcsv_pages()
+        
 
 unpacktheasset_into_createSchoolpages(theasset=theasset)
