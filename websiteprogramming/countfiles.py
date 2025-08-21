@@ -7,7 +7,6 @@ July 17th
 
 In the future, use this to count asset files in diferent schools folders. Ie for UT Austin, Harvard, etc. 
 '''
-degreeviewfolderpath='/Users/shalevwiden/Downloads/Projects/degreeview'
 
 def count_files(folderpath):
 
@@ -31,54 +30,19 @@ def count_files(folderpath):
     print(f'Excel file count {excelcount}')
     print(f'pdf file count {pdfcount}')
     print(f'mmd file count {mmdcount}')
-    print(f'\nTotal file count {mmdcount+excelcount+pdfcount+csvcount}')
+    totalfilecount=pdfcount+excelcount+csvcount
+    print(f'\nTotal file count in {folderpath},nonmmd {excelcount+pdfcount+csvcount}\n')
+    return totalfilecount
 
-count_files(degreeviewfolderpath)
+pathdict={"utassetspath":'/Users/shalevwiden/Downloads/Projects/originaldegreeview',"utcoursespath":'/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses',
+"utdcoursespath":'/Users/shalevwiden/Downloads/Projects/dvassets/texas/UTD_courses',
+"utsacoursespath":'/Users/shalevwiden/Downloads/Projects/dvassets/texas/UTSA',
+"utdassetspath":'/Users/shalevwiden/Downloads/Projects/dvassets/texas/UTD2'}
 
-def list_bucket_files():
-    '''
-    This uses a class A operation. Cheap, but worth knowing.
-
-    '''
-    client = storage.Client(project='degreeview-ut')
-
-    bucket='ut-degreeview'
-    filesinbucket = bucket.list_blobs()
-
-def delete_bucketitems(filetype):
-    '''
-    File type is like the subfolder. 'excel-files' for example. 
-    '''
-    client = storage.Client(project='degreeview-ut')
-
-    bucket='ut-degreeview'
-    blobfiles= bucket.list_blobs(prefix=filetype)
-
-    for blob in blobfiles:
-        print(f"Deleting: {blob.name}")
-        blob.delete()
-
-def deletebasedon_subfolder(subfoldername):
-
-    bucket = "your-bucket"
+megatotal=0
+for i in pathdict:
     
+    totalcount=count_files(pathdict[i])
+    megatotal+=totalcount
+print(megatotal)
 
-    command = [
-        "gsutil",
-        "rm",
-        f"gs://{bucket}/{subfoldername}**"
-    ]
-
-    try:
-        subprocess.run(command, check=True)
-        print("Delete successful.")
-    except subprocess.CalledProcessError as e:
-        print(f"Error deleting objects: {e}")
-
-
-def getserviceemail():
-    client = storage.Client(project='degreeview-ut')
-
-
-    # this should return the email used for google cloud. Its a service email tho
-    print(client.get_service_account_email())
