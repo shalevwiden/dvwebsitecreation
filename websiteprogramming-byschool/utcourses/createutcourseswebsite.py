@@ -83,7 +83,7 @@ class createWebsite:
           <div class="links">
             <a href="../index.html">About</a>
 
-            <a href="../index.html">Home</a>
+            <a href="../../utcoursesindex.html">Home</a>
           </div>
           <p id="statement">DegreeView 2025</p>
         </div>
@@ -91,7 +91,7 @@ class createWebsite:
         <div class="footerright">
           <img
             id="smalllogo"
-            src="../metaassets/minilogo.png"
+            src="../../static/images/minilogo.png"
             alt="smalldegreeviewlogo"
           />
         </div>
@@ -347,13 +347,14 @@ class createWebsite:
 </head>
 '''
             def make_abovemainsitecode():
+                # for the "home" box that needs to go direct to DegreeView home
 
                 abovemainsitecode=f'''
     <div class="abovemainsite">
         <div class="topnav">
             <nav class="breadcrumbs">
             <ul>
-                <li><a href="../index.html">DegreeView UTD</a></li>
+                <li><a href="../../utcoursesindex.html">DegreeView UT</a></li>
                 <i class="fa fa-chevron-right"></i>
 
                 <li id="current">{startingletter} Departments</li>
@@ -362,7 +363,7 @@ class createWebsite:
             <nav class="homeandabout">
             <ul>
                 
-                <li><a href="../index.html">Home</a></li>
+                <li><a href="../../utcoursesindex.html">Home</a></li>
                 <li><a href="../aboutpage.html">About</a></li>
                 <li><a href="../ut-stats.html">Stats</a></li>
             </ul>
@@ -409,7 +410,11 @@ class createWebsite:
                     displaydepartmentname=f'({code}) - {departmentnamehalf}'
 
                     departmentlist_ul_element_content+=f'''<li class="departmentlink"><a href="{departmentnamepage}">{displaydepartmentname}</a>
-                    <a href="{departmentnamepage}"><img class="linksvg" src="../metaassets/Link-17.svg" alt="" /></a>
+                    <a href="{departmentnamepage}">
+                    
+                    <img class="linksvg" src="../../static/images/Link-17.svg" alt="" />
+                    
+                    </a>
                     </li>'''
 
                 
@@ -921,7 +926,7 @@ class createWebsite:
             <nav class="homeandabout">
                 <ul>
                 
-                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../utcoursesindex.html">Home</a></li>
                 <li><a href="../aboutpage.html">About</a></li>
                 <li><a href="../ut-stats.html">Stats</a></li>
                 </ul>
@@ -981,7 +986,7 @@ class createWebsite:
                             <ul>
                                 <li>
                                 <div class="linkbox">
-                                    <p>Sample Semester Layout Light Theme</p>
+                                    <p>Department Courses Light Theme</p>
                                     <p>
                                     <!-- download attribute means they will download it -->
                                     Download:&nbsp;&nbsp;<a
@@ -995,7 +1000,7 @@ class createWebsite:
                                 <!--  -->
                                 <li>
                                 <div class="linkbox">
-                                    <p>Sample Semester Layout Dark Theme</p>
+                                    <p>Department Courses Dark Theme</p>
                                     <p>
                                     <!-- download attribute means they will download it -->
                                     Download:&nbsp;&nbsp;<a
@@ -1575,7 +1580,107 @@ class createWebsite:
         return degreepage_list, degreename_data
 
 
+    def create_homepage_ul(self):
+        '''
+        This returns the ul that will go on the homepage.
+        '''
 
+        lis=f'''
+
+            '''
+        for startingletter in self.alphabetizeddict:
+            startingletter=startingletter.lower()
+            
+            letterwebsitepage=f'{startingletter}-departments.html'
+
+            
+            fullpagepath=os.path.join("departments",startingletter,letterwebsitepage)
+
+          
+            li=f'''
+            <li class="homepage-column">
+            <a href="{fullpagepath}"
+              ><div class="contentdiv">{startingletter.upper()} Course Departments</div></a
+            >
+          </li>
+'''
+            lis+=li
+            
+            
+        homepageul=f'''
+        <ul class="homepage-ul">
+        {lis}
+        </ul>
+        '''
+        print(homepageul)
+
+    def create_randompage_js(self):
+        '''
+        This file should essentially simply build all the departmentlinks, then build the full functional file
+        '''
+
+        randompagejspath="/Users/shalevwiden/Downloads/Projects/dvschoolsites/texas/utcoursessite/static/js/randompage.js"
+
+        departmentpagelinks=[]
+
+
+        
+        for startingletter in self.alphabetizeddict:
+
+            letterfolder=os.path.join(self.assetspath,startingletter)
+            
+            letterdict=self.alphabetizeddict[startingletter]
+            for departmentname in letterdict:
+                departmenturl=letterdict[departmentname]
+
+                departmentname=departmentname.replace('/','_')
+                departmentfolderpath=os.path.join(letterfolder,departmentname)
+
+
+            
+            
+                departmentnamecleaned=departmentname.replace(' ','').lower()
+                departmentnamecleaned=departmentnamecleaned.replace('/','-')
+        
+            
+                print(f'Starting for {departmentname}')
+            
+                departmentname=departmentname.replace('/','-').strip()
+
+                departmentnamecleaned=departmentname.replace(',',"-")
+                departmentnamecleaned=departmentnamecleaned.replace(" ", "").lower()
+
+
+                startingletter=startingletter.lower()
+
+                fulldepartmentpage=os.path.join('departments',startingletter,f'{departmentnamecleaned}.html')
+
+                departmentpagelinks.append(fulldepartmentpage)
+            
+        fulljscode=f'''
+            const pages={departmentpagelinks}
+                    
+            randombutton = document.getElementById("randompagebutton");
+
+            function gotorandompage(e) {{
+            e.preventDefault(); // Prevent default link behavior
+
+            // math.floor gets floor. Math.random returns float between 0 and 1.
+            const randomIndex = Math.floor(Math.random() * pages.length);
+            const randomPage = pages[randomIndex];
+
+            // need to use window change to make the entire button clickable
+            window.location.href = randomPage;
+            }}
+
+            // e means event handling
+            randombutton.addEventListener("click", gotorandompage);
+
+                '''
+        
+        with open(randompagejspath,'w') as randompagejs:
+            randompagejs.write(fulljscode)
+        
 
     def createstatspage(self):
         '''This will create the University Wide stats html page'''
@@ -1644,6 +1749,6 @@ def get_all_schools(theasset):
 
 def runcreateWebsite():
     websiteobject=createWebsite()
-    websiteobject.createletterpages()
-    websiteobject.create_degree_pages()
+    websiteobject.create_randompage_js()
+    
 runcreateWebsite()
