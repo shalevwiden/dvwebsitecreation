@@ -69,35 +69,28 @@ class createWebsite:
 
         # can I have spaces is the question
 
-        self.websitepath='/Users/shalevwiden/Downloads/Projects/dvschoolsites/texas/utcoursessite/departments'
+        self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewwebsite/texas/utcoursessite/departments'
 
+        self.images={
+            
+            "linkicon":"https://storage.googleapis.com/degreeview/degreeviewimages/linkicon.svg",
+            "logo5":"https://storage.googleapis.com/degreeview/degreeviewimages/logo5.png",
 
+            "minilogo":"https://storage.googleapis.com/degreeview/degreeviewimages/minilogo.png",
+            "site_favicon":"https://storage.googleapis.com/degreeview/degreeviewimages/site_favicon.png"
+        }
+        
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/degreeviewfooter.html','r') as footerfile:
+            self.footer=footerfile.read()
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/departmentpage.html','r') as headfile:
+            self.headlinks=headfile.read()
 
 
 
         # footer so I dont have to redefine it multiple times. 
 
-        self.footer=f'''
-         <footer>
-        <div class="footerleft">
-          <div class="links">
-            <a href="../index.html">About</a>
+        
 
-            <a href="../../utcoursesindex.html">Home</a>
-          </div>
-          <p id="statement">DegreeView 2025</p>
-        </div>
-
-        <div class="footerright">
-          <img
-            id="smalllogo"
-            src="../../static/images/minilogo.png"
-            alt="smalldegreeviewlogo"
-          />
-        </div>
-      </footer>
-
-'''
     def upload_schoolfiles(self):
 
 
@@ -363,8 +356,8 @@ class createWebsite:
             <nav class="homeandabout">
             <ul>
                 
-                <li><a href="../../utcoursesindex.html">Home</a></li>
-                <li><a href="../aboutpage.html">About</a></li>
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../about.html">About</a></li>
                 <li><a href="../ut-stats.html">Stats</a></li>
             </ul>
             </nav>
@@ -390,6 +383,8 @@ class createWebsite:
                 
                 
                     departmentnamecleaned=departmentname.replace(' ','').lower()
+                    departmentnamecleaned=departmentnamecleaned.replace(',','-').lower()
+
                     departmentnamecleaned=departmentnamecleaned.replace('/','_')
 
             
@@ -412,13 +407,13 @@ class createWebsite:
                     departmentlist_ul_element_content+=f'''<li class="departmentlink"><a href="{departmentnamepage}">{displaydepartmentname}</a>
                     <a href="{departmentnamepage}">
                     
-                    <img class="linksvg" src="../../static/images/Link-17.svg" alt="" />
                     
                     </a>
                     </li>'''
 
                 
                 departmentlist_ul_element=f'''
+
                 <ul>{departmentlist_ul_element_content}
                 </ul>'''
                 return departmentlist_ul_element
@@ -435,26 +430,10 @@ class createWebsite:
 
                 leftcontentcode=f'''
             <div class="leftcontent">
-            <div class="filescontainer" id="csvcontainer">
-            <h3>CSV Files</h3>
-            <ul>
-                <li>
-                <div class="linkbox">
-                    <p>departments CSV</p>
-
-                    <p>
-                    <!-- download attribute means they will download it -->
-                    Download:&nbsp;&nbsp;<a
-                        href="{test}"
-                        download
-                        ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                    ></a>
-                    </p>
-                </div>
-                </li>
-            </ul>
+            <p id="futuremessage">
+            There will be stuff here in a future update, coming soon.
+          </p>
             </div>
-        </div>
             '''
                 
 
@@ -463,7 +442,8 @@ class createWebsite:
 
                 rightcontentcode=f'''        <div class="rightcontent">
     <div class="departmentlistheaderbox">
-            <h3 id="departmentlistheader">{startingletter} departments</h3>
+            <h3 id="departmentlistheader">{startingletter} Departments       <img class="linksvg" src="{self.images.get("linkicon","not found")}" alt=""
+                /></h3>
             </div>
             <!-- Contains links to every departmentpage -->
             <div class="departmentlistbox">{departmentlist_ul_element}</div>
@@ -489,7 +469,7 @@ class createWebsite:
                 <div class="undermainsite">
                 <!-- this can be empty and like 20 px tall just to take up space, and be used for something in the future
                     -->
-                s
+                
                 </div>
     '''
                 bodyhtmlcode=f'''
@@ -706,7 +686,7 @@ class createWebsite:
 
 
 
-    def create_degree_pages(self):
+    def create_department_pages(self):
         '''
      this is hard af
         '''
@@ -758,6 +738,14 @@ class createWebsite:
                         statsdict=json.load(statsfile)
 
                     return statsdict
+                
+                def readhtmltable():
+                    htmltablepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-htmltable.html')
+
+                    with open(htmltablepath) as htmltable:
+                        tablecode=htmltable.read()
+
+                    return tablecode
 
 
                 
@@ -857,7 +845,7 @@ class createWebsite:
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
             <!-- favicon icon -->
-            <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
+            <link rel="icon" href="{self.images.get('site_favicon')}" type="image/png" />
             <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
         <script>
@@ -873,27 +861,9 @@ class createWebsite:
         <!-- main stylesheet -->
         <link rel="stylesheet" href="../../static/css/coursepage.css" />
 
-        <!-- animation stylesheet -->
-        <link rel="stylesheet" href="../../static/css/animations.css" />
 
+        {self.headlinks}
 
-            <!-- Barlow Font -->
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-            <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-
-            <!-- Roboto Font -->
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-            <link
-            href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-            rel="stylesheet"
-            />
-            <!-- Icons ( download icon and file icons from here is used) -->
-            <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-            />
             </head>
 
     '''
@@ -912,7 +882,7 @@ class createWebsite:
             <div class="topnav">
             <nav class="breadcrumbs">
                 <ul>
-                <li><a href="../../index.html">DegreeView UT</a></li>
+                <li><a href="../../utcoursesindex.html">DegreeView UT</a></li>
                 <i class="fa fa-chevron-right"></i>
 
                 <li><a href="{letterpagereferencepath}">{startingletter.upper()} Departments</a></li>
@@ -926,8 +896,8 @@ class createWebsite:
             <nav class="homeandabout">
                 <ul>
                 
-                <li><a href="../../utcoursesindex.html">Home</a></li>
-                <li><a href="../aboutpage.html">About</a></li>
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../about.html">About</a></li>
                 <li><a href="../ut-stats.html">Stats</a></li>
                 </ul>
             </nav>
@@ -980,7 +950,9 @@ class createWebsite:
                         <div class="filescontainer" id="excelcontainer">
                             <div class="filesname">
                                 <h3>Excel (.xlsx) Files</h3>
-                                <i class="fa-regular fa-file-excel"></i>
+                                   <span class="material-symbols-outlined">
+view_module
+</span>
                             </div>
 
                             <ul>
@@ -1020,8 +992,7 @@ class createWebsite:
                             <div class="filescontainer" id="csvcontainer">
                             <div class="filesname">
                                 <h3>CSV Files</h3>
-                                <i class="fa-regular fa-file"></i>
-                            </div>
+                            <i class="fa-regular fa-file-lines"></i>                            </div>
 
                             <ul>
                                 
@@ -1030,16 +1001,7 @@ class createWebsite:
                                 <div class="linkbox">
                                     <p>Department Courses CSV</p>
 
-                                    <p>
-                        View:&nbsp;&nbsp;
-                        <a
-                        href="{renderedcsvurl}"
-                        target="_self"
-                        ><img class="linksvg" src="../metaassets/Link-17.svg" alt="" />
-                        </a>
-                                            <!-- link icon above--> 
-
-                    </p>
+                                   
                                     <p>
                                     <!-- download attribute means they will download it -->
                                     Download:&nbsp;&nbsp;<a href="{coursescsv}" download
@@ -1050,6 +1012,48 @@ class createWebsite:
                                 </li>
                             </ul>
                             </div>
+                              <!-- table container filescontainer -->
+          <div class="filescontainer" id="tablecontainer">
+            <div class="filesname">
+              <h3>Tables</h3>
+                <span class="material-symbols-outlined">
+table
+</span>           </div>
+
+            <ul>
+              <li>
+                <div class="linkbox">
+                  <p>Department Courses Table</p>
+
+                  <p>
+                    View:&nbsp;&nbsp;
+                    <a href="#departmenttableheading" target="_self"
+                      ><i class="fa-regular fa-eye"></i
+                    >
+                    </a>
+                    <!-- link icon above-->
+                  </p>
+                 
+                </div>
+              </li>
+
+              <li>
+                <div class="linkbox">
+                  <p>{departmentnamehalf} Courses with "{departmentnamehalf}" in their name Table</p>
+
+                  <p>
+                    View:&nbsp;&nbsp;
+                    <a href="dan-danish-rendered-csv.html" target="_self"
+                      ><i class="fa-regular fa-eye"></i
+                    >
+                    </a>
+                    <!-- link icon above-->
+                  </p>
+                  
+                </div>
+              </li>
+            </ul>
+          </div>
                             </div>
     '''
                         return leftcontentcode
@@ -1063,15 +1067,12 @@ class createWebsite:
                        
 
 
-                        if statsdict['grad_count']>=1:
-                            gradcountsection=f'''
-                            <section class="statsline" id="gradcount">
-                            <div class="statsname">Graduate Courses Count</div>
-                            <div class="statscontent">{statsdict['grad_count']}, {statsdict['grad_percent']}</div>
-                            </section>
-                                '''
-                        else:
-                            gradcountsection=f''
+                        gradcountsection=f'''
+                        <section class="statsline" id="gradcount">
+                        <div class="statsname">Graduate Courses Count</div>
+                        <div class="statscontent">{statsdict['grad_count']}, {statsdict['grad_percent']}</div>
+                        </section>
+                            '''
                         departmentstats=f'''
 <div class="departmentstats">
             <section class="statsline" id="coursecount">
@@ -1105,7 +1106,10 @@ class createWebsite:
                         rightcontentcode=f'''
                         <div class="rightcontent">
                         <div class="displaynamebox">
-                <h3 id="displayname">{displaydepartmentname} Statistics</h3>
+                <h3 id="displayname">{displaydepartmentname} Statistics &nbsp; &nbsp; </h3>
+                <span class="material-symbols-outlined" id="charticon">
+                bar_chart_4_bars
+                </span>
             </div>
             {departmentstats}
                     </div>
@@ -1129,20 +1133,46 @@ class createWebsite:
                     '''
                     return mainsitecode 
                 
+                def make_undermainsite_code():
+
+
+                    htmltable=readhtmltable()
+
+
+                    displaydepartmentname=departmentname.replace('_','/')
+                    displaydepartmentname=departmentname.strip().split('-')
+                    code=displaydepartmentname[0].strip()
+                    departmentnamehalf=displaydepartmentname[-1].strip()
+                    displaydepartmentname=f'({code}) - {departmentnamehalf}'
+                    
+                    undermainsitecode=f'''
+                <div class="undermainsite">
+                <h3 id="departmenttableheading"> {departmentnamehalf} Department Courses Table</h3>
+
+                <div class="copyanddownload">
+                    <div class="animatetable">
+                    <button id="animatebutton">Animate</button>
+                    </div>
+
+                    <i class="fa-regular fa-copy" id="copyicon" title="Copy Table"></i>
+                    <!-- contains the rendered csv -->
+                
+                </div>
+
+                {htmltable}
+                </div>
+
+                '''
+                    return undermainsitecode
                 def makebodyhtmlcode():
                     abovemainsitecode=make_abovemainsitecode(startingletter=startingletter)
                     mainsitecode=make_mainsitecode()
+                    undermainsitecode=make_undermainsite_code()
 
 
                     csvlist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[0]
 
 
-                    undermainsitecode=f'''
-    <div class="undermainsite">
-            
-        </div>
-
-    '''
                     scripts=f'''
 
                     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -1600,7 +1630,7 @@ class createWebsite:
             li=f'''
             <li class="homepage-column">
             <a href="{fullpagepath}"
-              ><div class="contentdiv">{startingletter.upper()} Course Departments</div></a
+              ><div class="contentdiv">{startingletter.upper()} Departments</div></a
             >
           </li>
 '''
@@ -1749,6 +1779,9 @@ def get_all_schools(theasset):
 
 def runcreateWebsite():
     websiteobject=createWebsite()
-    websiteobject.create_randompage_js()
+    websiteobject.createletterpages()
+
+    websiteobject.create_department_pages()
+    
     
 runcreateWebsite()
