@@ -1,7 +1,12 @@
+
+
 from pathlib import Path
 import os
 
 import sys
+if __name__=='__main__':
+    print(f'\nthe python version being used is:{sys.executable}\n')
+
 
 import subprocess
 import random
@@ -41,6 +46,8 @@ class createWebsite:
         self.assetspath='/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses'
 
         self.jsondatapath ='/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/ut_courses/utjson.json'
+
+        self.universityname='The University of Texas at Austin'
 
 
         with open(self.jsondatapath,'r') as universityjson:
@@ -90,6 +97,7 @@ class createWebsite:
             self.headlinks=headfile.read()
 
 
+        self.outputspath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/outputs'
 
         # footer so I dont have to redefine it multiple times. 
 
@@ -684,12 +692,12 @@ class createWebsite:
 
         print(f'\n\nEnding Cloud Upload for {startingletter} degreefiles \n\n\n\n')
         return 0
-                    
+    
                    
 
 
 
-
+    
     def create_department_pages(self):
         '''
      this is hard af
@@ -1718,7 +1726,24 @@ table
 
     def createstatspage(self):
         '''This will create the University Wide stats html page'''
-        pass
+
+
+        env = Environment(loader=FileSystemLoader("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/templates"))
+        
+
+        # Pick template
+        template = env.get_template("statstemplate.html")
+
+        variables={
+            "universityname":self.universityname
+        }
+
+        rendered_html = template.render(variables)
+
+        statspageoutput=os.path.join(self.outputspath,'statspageout.html')
+
+        with open(statspageoutput,'w') as statspage:
+            statspage.write(rendered_html)
 
 # -------------END of class -----------------------
 
@@ -1737,9 +1762,11 @@ table
 
 def runcreateWebsite():
     websiteobject=createWebsite()
-    websiteobject.createletterpages()
+    websiteobject.createstatspage()
 
-    websiteobject.create_department_pages()
     
+
     
+print(f'\nthe python version being used is:{sys.executable}\n')
+
 runcreateWebsite()
