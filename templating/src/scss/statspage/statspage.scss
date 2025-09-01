@@ -1,0 +1,880 @@
+/*  */
+@use "sectioncontainer";
+@use "statscontainer";
+@use "../../utils/mixins";
+:root {
+  --secondarynavy: #153f66;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100vw;
+
+  /* crazy filters to apply */
+
+  /* filter: invert(100%); */
+
+  /* filter: grayscale(50%); */
+
+  filter: contrast(110%);
+
+  /* filter: blur(3px); */
+
+  filter: saturate(110%);
+}
+
+/* 
+
+This is all nav bar stuff:*/
+
+/* end nav bar stuff */
+
+.sitecontainer {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* 
+Above mainsite and its children
+*/
+
+.abovemainsite {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: 250px;
+}
+/* topnav beginning */
+.topnav {
+  /* change this color to see it and make changes */
+
+  background-color: #eee;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* keep this */
+  filter: drop-shadow(4px 0px 2px rgb(67, 66, 66));
+}
+
+.biglogobox {
+  height: 100%;
+  overflow: hidden; /* optional: clips the image if it's too big */
+}
+.biglogo {
+  /* height the same as topnav here, 100px */
+  height: 100%;
+  width: auto;
+}
+.breadcrumbs {
+  background-color: #eee;
+  width: 70%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.breadcrumbs ul {
+  display: flex;
+  flex-direction: row;
+  padding-left: 30px;
+
+  column-gap: 19px;
+  list-style-type: none;
+  color: #081a75;
+}
+
+.breadcrumbs ul li a {
+  text-decoration: none;
+  color: #081a75;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.breadcrumbs ul li a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 3px;
+}
+
+.breadcrumbs li#current {
+  /* this is the current page the user is on */
+  text-decoration: none;
+
+  color: rgb(200, 74, 12);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* this is for the icon in the breadcrumbs */
+.fa-chevron-right {
+  vertical-align: middle; /* or baseline, or -2px tweak */
+  font-size: 12px; /* adjust size */
+  margin: 5px 0 0px 0; /* spacing */
+  color: #081a75;
+}
+/* 
+
+still in top nav, but now the homeandabout section
+
+*/
+.homeandabout {
+  background-color: #153f66;
+  width: 25%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  /* this jsut centers the ul */
+  align-items: center;
+  justify-content: center;
+}
+
+.homeandabout ul {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.homeandabout ul li {
+  /* make them big so you can hover */
+  /* each one takes up 1/3 width */
+  flex: 1;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.homeandabout li:hover {
+  background-color: #284dbc;
+}
+.homeandabout ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  /* nice font when bolded */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  /* make the whole li box clickable */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* now outside of top nav */
+
+.headingbox {
+  /* border: 4px solid black; */
+  width: 100%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#headingtitle {
+  font-size: 45px;
+  color: #060212;
+}
+
+/* now done with above main site... */
+
+/* mainsite will be the name, plus some of the files, plus some images. But there can be stuff below it in, Since sitecontainer is flex column  */
+
+.mainsite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 40px 30px;
+
+  flex: 1 1 500px;
+  border-top: 10px solid #153f66;
+  border-bottom: 10px solid #153f66;
+  row-gap: 35px;
+}
+
+/* end general stats styling, now specific for certain boxes */
+
+.footnotes {
+  display: flex;
+  width: 100%;
+  /* border: 3px solid black; */
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: -32px;
+  margin-bottom: -23px;
+}
+.rightfootnotes {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}
+/*
+Begin left content stuff
+*/
+
+.minimainsite {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex: 1 1 350px;
+  border-top: 10px solid #740d40;
+  border-bottom: 10px solid #740d40;
+}
+
+.leftcontent {
+  /* this affects the width */
+  flex: 40%;
+  background-color: #ffffff;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  row-gap: 25px;
+}
+.filescontainer {
+  border: 4px dashed rgb(16, 11, 82);
+  border-radius: 26px;
+  width: 92%;
+  padding: 20px 29px;
+}
+
+/* this controls this h3 elements in files container */
+
+.linkbox {
+  display: flex;
+  flex-direction: row;
+  /* make the download text all even */
+  justify-content: space-between;
+
+  align-items: center;
+  column-gap: 40px;
+}
+
+/* this changes the styling on the names of the file like "Sample Semester PDF */
+
+/* add animations to these mf's */
+
+/* end left content stuff */
+/* 
+
+
+
+
+
+*/
+/* Right content stuff */
+.rightcontent {
+  flex: 60%;
+  background-color: rgb(232, 80, 56);
+  padding: 30px 20px 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  color: white;
+  /* just put some stats in this mf */
+}
+
+#degreecountpng {
+  width: 90%;
+  height: auto;
+  border-radius: 26px;
+  min-width: 300px;
+}
+/* 
+
+
+
+
+*/
+.morestats {
+  width: 100%;
+  background-color: rgb(67, 153, 67);
+  height: 550px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: 70px;
+  border-radius: 26px;
+  padding: 50px 10px;
+}
+.morestats img {
+  width: 40%;
+  height: auto;
+  border-radius: 26px;
+  min-width: 300px;
+}
+/* begin .sheetjs div */
+.renderedcsvdiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#csvtablecontainer {
+  width: 90%;
+  border-radius: 26px;
+  /* border: 5px solid #081a75; */
+  min-height: 100px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smoother scroll on mobile */
+}
+
+#csvheading {
+  margin: 30px;
+  color: #284dbc;
+  font-size: 23px;
+}
+
+#csvtablecontainer table {
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+#csvtablecontainer table td,
+#csvtablecontainer table th {
+  border: 1px solid #ccc;
+  padding: 15px 9px;
+  min-height: 40px;
+}
+/* style first row bold */
+#csvtablecontainer table tr:first-child td {
+  font-weight: bold;
+  background-color: var(--secondarynavy);
+  color: white;
+  border: none;
+  text-align: left;
+  font-size: 20px;
+  padding: 18px;
+}
+/* add border radius to the whole table */
+#csvtablecontainer table tr:first-child td:nth-of-type(1) {
+  border-top-left-radius: 10px;
+  padding-left: 15px;
+}
+#csvtablecontainer table tr:first-child td:nth-of-type(6) {
+  border-top-right-radius: 10px;
+  padding-right: 10px;
+  /* color: #ff731f; */
+}
+
+#csvtablecontainer table tr:last-child td:nth-of-type(1) {
+  border-bottom-left-radius: 10px;
+}
+#csvtablecontainer table tr:last-child td:nth-of-type(4) {
+  border: none;
+  border-bottom-right-radius: 10px;
+  border: 1px solid #ccc;
+
+  border-collapse: separate;
+}
+#csvtablecontainer table tr:nth-of-type(3) td {
+  font-weight: bold;
+}
+/* change alignment */
+td:nth-child(1),
+th:nth-child(1) {
+  text-align: left;
+}
+td:nth-child(2),
+td:nth-child(3),
+td:nth-child(4),
+td:nth-child(5),
+td:nth-child(6) {
+  text-align: center;
+}
+
+/* alternating bcg for lines */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* style Degreeview Logo */
+
+#csvtablecontainer table tr:last-child td:first-child {
+  font-weight: bold;
+  color: #0c48a5;
+  font-family: "Barlow";
+  font-weight: 600;
+  font-size: 30px;
+}
+
+/* select the 2nd to last child */
+#csvtablecontainer table tr:nth-last-of-type(2) {
+  display: none;
+}
+
+#csvtablecontainer table tr:nth-of-type(2) {
+  display: none;
+}
+
+#csvtablecontainer td.schooltd {
+  border-bottom: #eb7d46 solid 3px;
+  font-weight: bold;
+}
+
+.undermainsite {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  /* this is for now essentially footer top margin */
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#returnbutton {
+  width: 20%;
+  height: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: #153f66;
+
+  border-radius: 35px;
+  padding: 20px;
+  color: white;
+}
+#returnbutton a {
+  text-decoration: none;
+  color: white;
+  font-size: 19px;
+  font-weight: bold;
+  /* nice font when bolded */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  /* make the whole li box clickable */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transition: color 0.3s;
+}
+#returnbutton:hover {
+  cursor: pointer;
+  background-color: #284dbc;
+}
+
+.visuals {
+  height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.visuals #displayeditemname {
+  color: blue;
+}
+
+.visuals .displayedpdf {
+  border-radius: 26px;
+}
+/* end under main site */
+
+footer {
+  height: 120px;
+  width: 100%;
+  background-color: #00184b74;
+  color: White;
+
+  padding: 20px;
+  font-size: 16px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  column-gap: 30px;
+
+  font-family: Helvetica, sans-serif;
+}
+footer .links {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  column-gap: 35px;
+  font-size: 19px;
+}
+.footerleft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 15px;
+}
+.footerleft #statement {
+  font-family: "Barlow", sans-serif;
+
+  font-size: 25px;
+  margin: 0;
+  font-weight: 700;
+}
+footer #smalllogo {
+  /* animation has been added in animations.css  */
+  width: 55px;
+  height: 55px;
+  border-radius: 10px;
+  border: 3px solid #081a75;
+}
+.barlowtest {
+  font-family: "Barlow", sans-serif;
+
+  font-size: 25px;
+  margin: 0;
+  font-weight: 600;
+  color: black;
+}
+
+footer a {
+  color: white;
+  font-family: Helvetica, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 3px;
+  font-weight: bold;
+}
+
+/* beginning of all the media quieries */
+
+@media screen and (min-width: 700px) and (max-width: 1272px) {
+  #headingtitle {
+    font-size: 45px;
+    color: #060212;
+  }
+}
+
+@media screen and (max-width: 1135px) {
+  .abovemainsite {
+    display: flex;
+    flex-direction: column;
+    /* more height to allow both title and breadcrumbs to be seen */
+    height: 250px;
+  }
+
+  .headingbox {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    height: 150px;
+    width: 100%;
+    padding-left: 20px;
+  }
+  .topnav {
+    background-color: #eee;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    /* top nav currently 250px */
+  }
+
+  .homeandabout {
+    width: 30%;
+  }
+  .minimainsite {
+    flex-direction: column;
+  }
+  .morestats {
+    flex-direction: column;
+    gap: 70px;
+    height: auto;
+  }
+  .morestats img {
+    width: 87%;
+    height: auto;
+    border-radius: 26px;
+    min-width: 300px;
+  }
+  #returnbutton {
+    width: 40%;
+  }
+}
+/* 
+
+Mobile Screens
+
+*/
+@media screen and (max-width: 700px) {
+  .abovemainsite {
+    display: flex;
+    flex-direction: column;
+    /* more height to allow both title and breadcrumbs to be seen */
+
+    /* bigger height as well for the bigger topnav */
+    height: calc(175px + 177px);
+  }
+
+  .headingbox {
+    height: 185px;
+    width: 100%;
+    flex: none;
+    padding-bottom: 25px;
+    padding-left: 10px;
+  }
+  #headingtitle {
+    font-size: 45px;
+    color: #060212;
+  }
+  .topnav {
+    display: flex;
+    flex-direction: column;
+    /* height larger to have both on top of each other */
+    height: 177px;
+    /* removed the fixed navbar */
+    position: static;
+    filter: none;
+  }
+
+  .homeandabout {
+    /* bring it to the top */
+    order: 1;
+    height: 65px;
+    width: 100%;
+
+    filter: drop-shadow(4px 1px 3px rgb(67, 66, 66));
+  }
+  .biglogobox {
+    background-color: #eee;
+    width: 100%;
+    flex: none;
+
+    height: 110px;
+    order: 2;
+    border-bottom: 2px solid #eee;
+
+    /*  */
+  }
+
+  .biglogo {
+    height: 100%;
+    width: auto;
+  }
+  /* 
+  
+
+  
+   this one here is pretty important */
+  .mainsite {
+    flex-direction: column;
+  }
+
+  .linkbox {
+    display: flex;
+    flex-direction: column;
+    /* make the download text all even */
+    justify-content: center;
+
+    align-items: flex-start;
+    row-gap: 20px;
+  }
+
+  .linkbox p {
+    margin: 0;
+  }
+
+  .linkbox p:first-of-type {
+    margin-top: 26px;
+    font-weight: bold;
+  }
+
+  .sheetjs {
+    /* make it not visible on small screens to avoid headache */
+
+    display: none;
+  }
+}
+
+/* even smaller screensizes here */
+@media screen and (max-width: 550px) {
+  .abovemainsite {
+    display: flex;
+    flex-direction: column;
+    /* more height to allow both title and breadcrumbs to be seen */
+
+    /* bigger height as well for the bigger topnav */
+    height: calc(185px + 175px);
+  }
+
+  .headingbox {
+    height: 185px;
+    width: 100%;
+    flex: none;
+    padding-bottom: 25px;
+    padding-left: 10px;
+  }
+  #headingtitle {
+    font-size: 45px;
+    color: #060212;
+  }
+  .topnav {
+    display: flex;
+    flex-direction: column;
+    /* height larger to have both on top of each other */
+    height: 185px;
+    /* removed the fixed navbar */
+    filter: none;
+  }
+  .homeandabout {
+    /* bring it to the top */
+    /* order: 1; */
+    height: 65px;
+    width: 100%;
+    /* instead make this be the new fixed one */
+    /* ok this wont work as long as I had the filter on topnav. For now I will keep the filter over the fixed positoin */
+    /* position: fixed;
+    top: 0;
+    z-index: 999;*/
+    filter: drop-shadow(4px 1px 3px rgb(67, 66, 66));
+  }
+  .biglogobox {
+    background-color: #eee;
+    width: 100%;
+    flex: none;
+
+    height: 110px;
+    order: 2;
+    border-bottom: 2px solid #eee;
+
+    /*  */
+  }
+
+  .biglogo {
+    height: 100%;
+    width: auto;
+  }
+
+  .topstats {
+    /* this is the top one */
+
+    padding: 30px 15px;
+    font-size: 18px;
+
+    row-gap: 35px;
+
+    min-height: 300px;
+  }
+
+  .statscontent {
+    font-size: 30px;
+  }
+  .statstitle {
+    font-size: 18px;
+  }
+  #csvtablecontainer {
+    width: 95%;
+  }
+
+  #csvtablecontainer table td {
+    width: 95%;
+    padding: 15px 4px;
+  }
+  #csvtablecontainer table td {
+    font-size: 14px;
+  }
+
+  #csvtablecontainer table tr:last-child td:first-child {
+    font-weight: bold;
+    color: #0c48a5;
+    font-family: "Barlow";
+    font-weight: 600;
+    font-size: 20px !important;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .abovemainsite {
+    display: flex;
+    flex-direction: column;
+    /* more height to allow both title and breadcrumbs to be seen */
+
+    /* bigger height as well for the bigger topnav */
+    height: calc(185px + 175px);
+  }
+
+  .headingbox {
+    height: 185px;
+    width: 100%;
+    flex: none;
+    padding-bottom: 25px;
+    padding-left: 10px;
+  }
+  #headingtitle {
+    font-size: 45px;
+    color: #060212;
+  }
+  .topnav {
+    display: flex;
+    flex-direction: column;
+    /* height larger to have both on top of each other */
+    height: 175px;
+    /* big logo box is 110 plus homeandabout is 175 */
+    /* removed the fixed navbar */
+    filter: none;
+  }
+  .homeandabout {
+    /* bring it to the top */
+    /* order: 1; */
+    height: 65px;
+    width: 100%;
+    /* instead make this be the new fixed one */
+    /* ok this wont work as long as I had the filter on topnav. For now I will keep the filter over the fixed positoin */
+    /* position: fixed;
+    top: 0;
+    z-index: 999;*/
+    filter: drop-shadow(4px 1px 3px rgb(67, 66, 66));
+  }
+}

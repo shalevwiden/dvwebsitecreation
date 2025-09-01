@@ -1,0 +1,144 @@
+// this one will be a flex wrap box containing all the info for the stats container.
+// Use this in school stats pages and on the degreeviewhome
+
+@mixin flexrow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+@mixin flexcol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+@mixin blackborder {
+  border: 3px solid black;
+  border-radius: 15px;
+}
+
+.statscontainer {
+  /* this is the top one */
+  width: 100%;
+  background-color: #ff7731;
+  border-radius: 26px;
+  padding: 30px 35px;
+  font-family: Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 35px;
+  height: auto;
+  min-height: 300px;
+
+  & .statsbox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 250px;
+    height: 200px;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    color: white;
+    border: 4px solid white;
+    border-radius: 26px;
+
+    & .statscontent {
+      font-size: 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 40%;
+      padding-top: 10px;
+    }
+    & .statstitle {
+      font-size: 20px;
+
+      width: 100%;
+      padding: 22px 10px 22px 22px;
+    }
+  }
+
+  & sup {
+    font-size: 11px;
+  }
+}
+
+// now exceptions::
+#longestnamebox {
+  width: 350px;
+  height: 200px;
+
+  & .statscontent {
+    font-size: 22px;
+    padding: 20px;
+    padding-top: 35px;
+  }
+  & .statstitle {
+    margin-top: 5px;
+    font-size: 20px;
+  }
+}
+
+#shortestnamebox {
+  width: 300px;
+  .statscontent {
+    font-size: 24px;
+    padding: 20px;
+    align-items: flex-start;
+  }
+  .statstitle {
+    font-size: 20px;
+    padding: 20px;
+    align-items: flex-start;
+  }
+}
+
+/* now the longest and shortest courses */
+
+#longestcoursebox {
+  width: 350px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .statscontent {
+    font-size: 20px;
+    padding: 20px;
+    padding-top: 35px;
+  }
+  .statstitle {
+    margin-top: 5px;
+    font-size: 18px;
+
+    width: 100%;
+    padding: 25px 10px 22px 22px;
+  }
+}
+#shortestcoursebox {
+  width: 300px;
+  .statscontent {
+    font-size: 22px;
+    padding: 20px;
+    align-items: flex-start;
+  }
+  .statstitle {
+    font-size: 18px;
+    padding: 20px;
+    align-items: flex-start;
+  }
+}

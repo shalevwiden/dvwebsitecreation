@@ -1,0 +1,97 @@
+// This is a partial which contains all the styling for the statscontainers, which are
+// boxes that can have stats in them
+
+@mixin flexrow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+@mixin flexcol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+@mixin blackborder {
+  border: 3px solid black;
+  border-radius: 15px;
+}
+
+// main stuff here
+.sectioncontainer {
+  @include flexcol;
+  @include blackborder;
+
+  width: 100%;
+  .minimainsite {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: 1 1 350px;
+    border-top: 10px solid #740d40;
+    border-bottom: 10px solid #740d40;
+
+    .leftcontent {
+      /* this affects the width */
+      flex: 40%;
+      background-color: #ffffff;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      row-gap: 25px;
+
+      .filescontainer {
+        border: 4px dashed rgb(16, 11, 82);
+        border-radius: 26px;
+        width: 92%;
+        padding: 20px 29px;
+
+        & h3 {
+          color: #284dbc;
+        }
+        & ul {
+          list-style-type: none; /* Removes bullets */
+          /* indent */
+          padding-left: 30px;
+
+          & .linkbox {
+            display: flex;
+            flex-direction: row;
+            /* make the download text all even */
+            justify-content: space-between;
+
+            align-items: center;
+            column-gap: 40px;
+
+            & p:first-of-type {
+              margin-top: 10px;
+              font-weight: bold;
+              max-width: 137px;
+            }
+            & a i {
+              color: rgb(21, 21, 69);
+            }
+          }
+        }
+      }
+    }
+
+    .rightcontent {
+      flex: 60%;
+      background-color: rgb(232, 80, 56);
+      padding: 30px 20px 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+@mixin flexrow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+@mixin flexcol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+@mixin blackborder {
+  border: 3px solid black;
+  border-radius: 15px;
+}
