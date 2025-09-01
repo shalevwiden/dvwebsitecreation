@@ -10,6 +10,10 @@ import csv
 import time
 import json
 
+# use this to render template
+from jinja2 import Environment, FileSystemLoader
+
+
 
 # use this to upload stuff to google cloud
 from google.cloud import storage
@@ -1719,56 +1723,10 @@ table
 # -------------END of class -----------------------
 
 
-def make_alldegreesfile():
 
-    entireschool_degreepagelist=[]
-
-    for schooldict in theasset:
-        alldegreesobject=createWebsite(startingletter=schooldict)
-        alldegreesobject_degreepagelist=alldegreesobject.make_alldegrees_list()[0]
-
-        print(f'\n{alldegreesobject.schoolname} degreepage_list:\n{alldegreesobject_degreepagelist} \n\n')
-        
-        for eachpage in alldegreesobject_degreepagelist:
-            # do this to avoid making a list of lists. This way its just a nice, giant, list
-            entireschool_degreepagelist.append(eachpage)
-
-    with open(f"{os.path.abspath("alldegrees.txt")}",'w') as alldegreesfile:
-        alldegreesfile.write(f'[')
-
-        for degreepageindex in range(len(entireschool_degreepagelist)):
-            if degreepageindex==len(entireschool_degreepagelist)-1:
-                alldegreesfile.write(f'"{entireschool_degreepagelist[degreepageindex]}"')
-            else:
-                alldegreesfile.write(f'"{entireschool_degreepagelist[degreepageindex]}",')
-
-        alldegreesfile.write(f']')
-
-# make_alldegreesfile()
 
 # architecure_testing()
-
-def get_all_schools(theasset):
-    # finish this after dinner
-    '''
-    This generates a schoolist based on the asset. Then will generate a list of li's to go in an index.html
-    '''
-    schoolist=[]
-    for schooldict in theasset:
-        schoolname=schooldict[list(schooldict)[0]]
-        schoolist.append(schoolname)
-    print('School list:')
-    for schoolindex in range(len(schoolist)):
-        
-
-        schoolnamecleaned=schoolist[schoolindex].replace(' ','').lower()
-        schoolpage=f'{schoolnamecleaned}.html'
-
-        websiteschoolpagelink=os.path.join(schoolnamecleaned,schoolpage)
-        
-        print(f' <li class="schoolist-column"> <a href="{websiteschoolpagelink}"><div class="schoolnamediv">{schoolist[schoolindex]}</div></a></li>')
-       
-            
+  
         
 
 # storage te
