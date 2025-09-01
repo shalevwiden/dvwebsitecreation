@@ -49,6 +49,8 @@ class createWebsite:
 
         self.universityname='The University of Texas at Austin'
 
+        self.randompagehspath='"/Users/shalevwiden/Downloads/Projects/dvschoolsites/texas/utcoursessite/static/js/randompage.js"'
+
 
         with open(self.jsondatapath,'r') as universityjson:
 
@@ -697,7 +699,7 @@ class createWebsite:
 
 
 
-    
+
     def create_department_pages(self):
         '''
      this is hard af
@@ -1571,57 +1573,7 @@ table
 
         return 0
 # ---------------------END of make rendered CSV pages
-    def make_alldegrees_list(self):
-        '''
-        This function returns two lists, of degreepages, and degreedata. Its later called in make_alldegreesfile().
-        This is to make alldegrees.txt. 
-        '''
-         
-        def get_degreename_lists():
-            degreenamelist=[]
-            cleaneddegreenamelist=[]
-            for i in range(1,len(self.startingletter)):
-                        
-                key=list(self.startingletter)[i]
-                degreename=key
-                degreename=degreename.replace('/','-').strip()
-                degreenamelist.append(degreename)
-
-                # clean it for website links
-
-
-                degreenamecleaned=degreename.replace(' ','').lower().split('(')
-                degreenamecleaned=degreenamecleaned[0]+"-"+degreenamecleaned[-1]
-                degreenamecleaned=degreenamecleaned.replace(')','')
-
-                cleaneddegreenamelist.append(degreenamecleaned)
-            return degreenamelist,cleaneddegreenamelist
-        
-        degreenamelist, cleaneddegreenamelist=get_degreename_lists()
-
-        # now that we got a list of cleaned degreenames, loop through that list
-
-        degreepage_list=[]
-        degreename_data=[]
-        for degreename,degreenamecleaned in zip(degreenamelist, cleaneddegreenamelist):
-            fulldegreepage=os.path.join(self.cleanedschoolname,f'{degreenamecleaned}.html')
-
-            makerendered=True
-            if makerendered:
-                fulldegreepage=os.path.join(self.cleanedschoolname,f'{degreenamecleaned}-rendered-csv.html')
-
-            degreepage_list.append(fulldegreepage)
-            
-            displaydegreename=degreename.replace("-","/").strip().split('(')
-
-            displaydegreename=displaydegreename[0]+f'({displaydegreename[-1]}'
-            
-
-            # using this we can figure out longest and shortest degreename. 
-            degreename_data.append(displaydegreename)
-        return degreepage_list, degreename_data
-
-
+ 
     def create_homepage_ul(self):
         '''
         This returns the ul that will go on the homepage.
@@ -1661,7 +1613,7 @@ table
         This file should essentially simply build all the departmentlinks, then build the full functional file
         '''
 
-        randompagejspath="/Users/shalevwiden/Downloads/Projects/dvschoolsites/texas/utcoursessite/static/js/randompage.js"
+        randompagejspath=self.randompagejspath
 
         departmentpagelinks=[]
 
@@ -1763,6 +1715,8 @@ table
 def runcreateWebsite():
     websiteobject=createWebsite()
     websiteobject.createstatspage()
+    websiteobject.createletterpages()
+    websiteobject.create_department_pages()
 
     
 
