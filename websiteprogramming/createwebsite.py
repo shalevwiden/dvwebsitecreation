@@ -36,7 +36,7 @@ class createWebsite:
                 # this is the assets folder
 
 # update this later or make it a relative path. 
-        self.degreeviewfolderpath='/Users/shalevwiden/Downloads/Projects/degreeview'
+        self.degreeviewfolderpath='/Users/shalevwiden/Downloads/Projects/originaldegreeview'
 
         self.schooldata=schooldata
         
@@ -49,7 +49,7 @@ class createWebsite:
         # this should work. If not I need to find a mystery
 
         # -----------New cleaned schoolname and websitefoler stuff --------------
-        self.degreeviewwebsite_path='/Users/shalevwiden/Downloads/Projects/degreeviewwebsite'
+        self.degreeviewwebsite_path='/Users/shalevwiden/Downloads/Projects/degreeviewwebsite/texas/utaustin-site'
 
 
         self.cleanedschoolname=self.schoolname.replace(' ','').lower()
@@ -59,6 +59,12 @@ class createWebsite:
         self.websiteschoolfolder=os.path.join(self.degreeviewwebsite_path,self.cleanedschoolname)
 
         self.fullschoolpage=os.path.join(self.websiteschoolfolder,self.schoolpage)
+
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/departmentpage.html','r') as headfile:
+            self.headlinks=headfile.read()
+            
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/footerwithouttooltip.html','r') as footerfile:
+            self.footer=footerfile.read()
 
 
         # footer so I dont have to redefine it multiple times. 
@@ -312,6 +318,10 @@ class createWebsite:
 
     <!-- animation stylesheet -->
     <link rel="stylesheet" href="../cssfiles/animations.css" />
+    <!-- footer stylesheet -->
+
+        <link rel="stylesheet" href="../static/css/footer.css" />
+
     <!-- Barlow Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -802,6 +812,10 @@ class createWebsite:
 
         <!-- table styling -->
         <link rel="stylesheet" href="../cssfiles/tablestyling.css" />
+
+         <!-- footer stylesheet -->
+
+        <link rel="stylesheet" href="../static/css/footer.css" />
 
         <!-- Barlow Font -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1362,6 +1376,11 @@ class createWebsite:
 
         <link rel="stylesheet" href="../cssfiles/renderedcsv.css">
 
+
+         <!-- footer stylesheet -->
+
+        <link rel="stylesheet" href="../static/css/footer.css" />
+
         <!-- Barlow Font -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1379,6 +1398,7 @@ class createWebsite:
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         />
+        {self.headlinks}
         </head>
 
 '''
@@ -1669,8 +1689,10 @@ def unpacktheasset_into_createSchoolpages(theasset):
         print(f'starting for {websiteobject.schoolname}\n\n\n')
         
         # websiteobject.createschoolpages()
-        websiteobject.upload_degree_files()
+        # websiteobject.upload_degree_files()
         websiteobject.create_degree_pages()
+        websiteobject.createschoolpages()
+        websiteobject.create_renderedcsv_pages()
         
 
 unpacktheasset_into_createSchoolpages(theasset=theasset)

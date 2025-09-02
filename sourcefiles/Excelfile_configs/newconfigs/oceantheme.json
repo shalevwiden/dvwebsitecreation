@@ -1,0 +1,23 @@
+{
+  "schoolnamecolor": "00CED1",
+  "bigbordercolor": "1E90FF",
+  "smallerbordercolor": "00FA9A",
+  "gridlinecolor": "87CEEB",
+  "rowtextcolor": "004B49",
+  "titlecolor": "FF4500",
+  "mainbackgroundcolor": "00BFFF",
+  "paddingbackgroundcolor": "FFD700",
+  "subheadingbordercolor": "FF6347",
+
+  "datafontname": "Verdana",
+  "titlefontname": "Impact",
+  "logofontname": "Pacifico",
+  "logocolor": "FF1493",
+  "subheadingsize": 20,
+  "subheadingcolor": "FFFFFF",
+  "headingsfontname": "Arial Black",
+  "headingsfontcolor": "FFFFFF",
+  "datarowheight": 25,
+  "headingrowheight": 34,
+  "columnscaler": 1.2
+}

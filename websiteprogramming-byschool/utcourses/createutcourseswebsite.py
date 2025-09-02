@@ -1053,11 +1053,18 @@ table
 
               <li>
                 <div class="linkbox">
-                  <p>{departmentnamehalf} Courses with "{departmentnamehalf}" in their name Table</p>
+
+                  <p>
+                <small id="underconstruction">Under construction, coming soon</small> <br>
+
+                  {departmentnamehalf} Courses with "{departmentnamehalf}" in their name Table
+
+                  </p>
+
 
                   <p>
                     View:&nbsp;&nbsp;
-                    <a href="dan-danish-rendered-csv.html" target="_self"
+                    <a href="#" onclick="return false;" target="_self"
                       ><i class="fa-regular fa-eye"></i
                     >
                     </a>
@@ -1120,10 +1127,11 @@ table
                         rightcontentcode=f'''
                         <div class="rightcontent">
                         <div class="displaynamebox">
-                <h3 id="displayname">{displaydepartmentname} Statistics &nbsp; &nbsp; </h3>
-                <span class="material-symbols-outlined" id="charticon">
+                <h3 id="displayname">{displaydepartmentname} Statistics &nbsp; &nbsp;<span class="material-symbols-outlined" id="charticon">
                 bar_chart_4_bars
-                </span>
+              </span> </h3>
+                
+                
             </div>
             {departmentstats}
                     </div>
@@ -1714,7 +1722,6 @@ table
 
 def runcreateWebsite():
     websiteobject=createWebsite()
-    websiteobject.createstatspage()
     websiteobject.createletterpages()
     websiteobject.create_department_pages()
 

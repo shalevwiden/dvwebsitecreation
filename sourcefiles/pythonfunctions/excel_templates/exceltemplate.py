@@ -35,11 +35,14 @@ def make_excelfile(departmentname,universityname,
                    headingsfontname='Calibri',
                    headingsfontcolor='ffffff',
                    datarowheight=23,
-                   headingrowheight=30
+                   headingrowheight=30,
+                   columnscaler=1
                    ):
 
     '''Rows will end up being a list of lists
     Schoolnamecolor must be a hex code without a #either
+
+    column scaler just affects all the columns at once, doesn't change individual ones
     '''
     departmentworkbook=Workbook()
     # gets the default worksheet
@@ -48,11 +51,11 @@ def make_excelfile(departmentname,universityname,
 
 
         
-    titlefont=Font(size=26,bold=True,color=titlecolor,name=titlefontname)
+    titlefont=Font(size=33,bold=True,color=titlecolor,name=titlefontname)
     headingborder=Border(bottom=Side(style='mediumDashDot',color=smallerbordercolor))
 
     # this is for the row that has the department name and the universityname (latter is updated later)
-    headingsfonts=Font(size=18,bold=True,color=headingsfontcolor,name=headingsfontname)
+    headingsfonts=Font(size=21,bold=True,color=headingsfontcolor,name=headingsfontname)
 
     # this is for like Coursename, Courserow, etc.
     subheadingsfont=Font(size=subheadingsize,bold=True,color=subheadingcolor)
@@ -114,7 +117,8 @@ def make_excelfile(departmentname,universityname,
     
     def set_headings_height():
         for row in [3,4,5]:
-            ws.row_dimensions[rowval].height = headingrowheight
+            ws.row_dimensions[row].height = headingrowheight
+    set_headings_height()
 
     # now the meat of the file, the data
     
@@ -157,6 +161,7 @@ def make_excelfile(departmentname,universityname,
         # update it here so it updates by row not column...although
         rowval += 1
         ws.row_dimensions[rowval].height = datarowheight  # sets height of the entire row
+
 
                 # start at column one, and then remember the padding rows are added later. 
         for col_index, value in enumerate(excelobject[rowentry], start=1):
@@ -241,23 +246,23 @@ def make_excelfile(departmentname,universityname,
         # scale the width factor to make the columns wider
         if col_index==7:  
             # make the UT Austin column alot wider
-            ws.column_dimensions[col_letter].width = int(colwidth)*2
+            ws.column_dimensions[col_letter].width = int(colwidth)*2*columnscaler
         elif col_index==6:
-            ws.column_dimensions[col_letter].width = int(colwidth)*1.9
+            ws.column_dimensions[col_letter].width = int(colwidth)*1.9*columnscaler
         elif col_index==5:
-            ws.column_dimensions[col_letter].width=int(colwidth)*1.9
+            ws.column_dimensions[col_letter].width=int(colwidth)*1.9*columnscaler
         elif col_index==4:
-            ws.column_dimensions[col_letter].width=int(colwidth)*1.9
+            ws.column_dimensions[col_letter].width=int(colwidth)*1.9*columnscaler
         elif col_index==3:
-            ws.column_dimensions[col_letter].width=int(colwidth)*1.5
+            ws.column_dimensions[col_letter].width=int(colwidth)*1.5*columnscaler
         
         # the semester column
         elif col_index==2:
-            ws.column_dimensions[col_letter].width=int(colwidth)*1.3
+            ws.column_dimensions[col_letter].width=int(colwidth)*1.3*columnscaler
     
 
         else:
-            ws.column_dimensions[col_letter].width = int(colwidth)*15
+            ws.column_dimensions[col_letter].width = int(colwidth)*1.1*columnscaler
         
 
 

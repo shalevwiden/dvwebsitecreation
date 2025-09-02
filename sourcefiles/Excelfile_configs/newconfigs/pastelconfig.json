@@ -1,0 +1,22 @@
+{
+  "schoolnamecolor": "2F3E46",
+  "bigbordercolor": "FFB5E8",
+  "smallerbordercolor": "A0E7E5",
+  "gridlinecolor": "FFDAC1",
+  "rowtextcolor": "3C3C3C",
+  "titlecolor": "1E1E1E",
+  "mainbackgroundcolor": "FFF1F1",
+  "paddingbackgroundcolor": "C7CEEA",
+  "subheadingbordercolor": "B5EAD7",
+  "datafontname": "Helvetica Neue",
+  "titlefontname": "Playfair Display",
+  "logofontname": "Raleway",
+  "logocolor": "2F3E46",
+  "subheadingsize": 18,
+  "subheadingcolor": "2F3E46",
+  "headingsfontname": "Montserrat",
+  "headingsfontcolor": "2F3E46",
+  "datarowheight": 24,
+  "headingrowheight": 32,
+  "columnscaler": 1.1
+}
