@@ -662,10 +662,10 @@ class createWebsite:
                     # add a check to not do it many times
                     
                     
+                    if not uploadblob.exists():
+                        uploadblob.upload_from_filename(source_file_name)
 
-                    uploadblob.upload_from_filename(source_file_name)
-
-                    uploadblob.make_public()  # Makes it publicly accessible
+                        uploadblob.make_public()  # Makes it publicly accessible
                         # can also use blob.make_private()
                     # else:
                         # print(f'{uploadblob.name} already exits, didnt upload\n')
@@ -692,7 +692,8 @@ class createWebsite:
 
                     # mmds currently not needing to be uplaoded.
                     
-
+                    currentonlyupload='redtheme'
+                    limited_excel_list=[file for file in excellist if currentonlyupload in file]
 
             
                     
@@ -702,7 +703,7 @@ class createWebsite:
                         upload_to_googlecloud(csvfile,departmentnamecleaned)
                         print(f'Uploaded {csvfile} to cloud\n')
 
-                    for excelfile in excellist:
+                    for excelfile in limited_excel_list:
                         if not excelfile.startswith(("~$", "$")):
                             upload_to_googlecloud(excelfile,departmentnamecleaned)
                             print(f'Uploaded {excelfile} to cloud\n')

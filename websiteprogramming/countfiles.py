@@ -8,6 +8,7 @@ July 17th
 In the future, use this to count asset files in diferent schools folders. Ie for UT Austin, Harvard, etc. 
 '''
 
+utcoursespath='/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses'
 def count_files(folderpath):
 
     csvcount=0
@@ -33,16 +34,19 @@ def count_files(folderpath):
     totalfilecount=pdfcount+excelcount+csvcount
     print(f'\nTotal file count in {folderpath},nonmmd {excelcount+pdfcount+csvcount}\n')
     return totalfilecount
+count_files(folderpath=utcoursespath)
 
-pathdict={"utassetspath":'/Users/shalevwiden/Downloads/Projects/originaldegreeview',"utcoursespath":'/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses',
-"utdcoursespath":'/Users/shalevwiden/Downloads/Projects/dvassets/texas/UTD_courses',
-"utsacoursespath":'/Users/shalevwiden/Downloads/Projects/dvassets/texas/UTSA',
-"utdassetspath":'/Users/shalevwiden/Downloads/Projects/dvassets/texas/UTD2'}
 
-megatotal=0
-for i in pathdict:
-    
-    totalcount=count_files(pathdict[i])
-    megatotal+=totalcount
-print(megatotal)
+def calculate_entire_dv_files():
+    pathdict={"utassetspath":'/Users/shalevwiden/Downloads/Projects/originaldegreeview',"utcoursespath":'/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses',
+    "utdcoursespath":'/Users/shalevwiden/Downloads/Projects/dvassets/texas/UTD_courses',
+    "utsacoursespath":'/Users/shalevwiden/Downloads/Projects/dvassets/texas/UTSA',
+    "utdassetspath":'/Users/shalevwiden/Downloads/Projects/dvassets/texas/UTD2'}
+
+    megatotal=0
+    for i in pathdict:
+        
+        totalcount=count_files(pathdict[i])
+        megatotal+=totalcount
+    print(megatotal)
 

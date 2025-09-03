@@ -214,7 +214,7 @@ def make_excelfile(departmentname,universityname,
         if col_index==4:
             # site link cell
             # keep this the same
-            lastcell.font=Font(name='Roboto',size=19, bold=True, color='e7e9eb')
+            lastcell.font=Font(name='Roboto',size=19, bold=True, color='000000')
             lastcell.alignment=Alignment(horizontal='left',vertical='bottom')
 
         else:
