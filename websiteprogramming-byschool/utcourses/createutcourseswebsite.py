@@ -50,7 +50,7 @@ class createWebsite:
         self.universityname='The University of Texas at Austin'
 
         self.randompagehspath="/Users/shalevwiden/Downloads/Projects/dvschoolsites/texas/utcoursessite/static/js/randompage.js"
-        self.cloudbucketpath='https://storage.googleapis.com/utcourses/'
+        self.cloudbucketpath='https://storage.googleapis.com/utcourses'
 
 
 
@@ -548,33 +548,43 @@ class createWebsite:
 
 # --------------------------------Degree pages now ----------------------------------
 
-    def upload_degree_files(self):
-
-        '''
-        Like other functions, this does it by school.
-
+    def upload_department_files(self):
 
         '''
 
-        print(f'\n\nBeginning Cloud Upload for {startingletter} degreefiles\n\n') 
-        #  if you want to only upload one legree, just change it so its i range 1 to range 2
-        for departmentfolder in self.departmentfolders:
-            '''
-            Dont need to clean the degreename, since the degreename files(csv, excel,etc) already have clean names.
-            '''         
 
-            departmentfolderobject=Path(departmentfolder)
+        '''
 
+        for startingletter in self.alphabetizeddict:
 
-            departmentname=departmentfolderobject.name
-            departmentname=departmentname.replace('/','-').strip()
+            letterfolder=os.path.join(self.assetspath,startingletter)
+            
+            letterdict=self.alphabetizeddict[startingletter]
+            for departmentname in letterdict:
+                departmenturl=letterdict[departmentname]
+
+                departmentname=departmentname.replace('/','_')
+                departmentfolderpath=os.path.join(letterfolder,departmentname)
+
 
             
+            
+                departmentnamecleaned=departmentname.replace(' ','').lower()
+                departmentnamecleaned=departmentnamecleaned.replace('/','-')
+        
+            
+                print(f'Starting for {departmentname}')
+            
+                departmentname=departmentname.replace('/','-').strip()
+
+                departmentnamecleaned=departmentname.replace(',',"-")
+                departmentnamecleaned=departmentnamecleaned.replace(" ", "").lower()
+
+                # its already cleaned
+                print(f'Department name cleaned {departmentnamecleaned}')
 
 
-            def get_assetlists(departmentfolder):
-                    
-
+                def get_asset_lists(departmentfolder):
                     csvlist=[]
                     excellist=[]
                     pdflist=[]
@@ -600,112 +610,107 @@ class createWebsite:
                     # these lists have the full paths since they'll be used to upload stuff. 
                     return [csvlist,excellist,pdflist,mmdlist]
 
-
-            def upload_to_googlecloud(source_file_name):
-
-                # how to manually change credentials...
-
-
-                # just change project name here to change where they go.
-                # In code, for multiple schools. Dope.
-                client = storage.Client(project='degreeview-ut')
-
-
-                # this should return the email used for google cloud. Its a service email tho
-
-                # yeah the project is the same as the bucket name. In the future change this, as the bucketname is what user sees
-                bucket = client.bucket('ut-courses')
-                # bucket list
-
-
-                #This is what will be in the url and what the name of the object will be in google cloud storage
-
-                cleaned_object_name=source_file_name.split('/')[-1]        
-
-
-                # make it so each file has the type. 
-                # define upload blob here
-               
-                if os.path.splitext(source_file_name)[1]=='.csv':
-                    uploadblob =f'{self.cleanedschoolname}/csvs/{cleaned_object_name}'
-                    uploadblob=bucket.blob(uploadblob)
-                elif os.path.splitext(source_file_name)[1]=='.xlsx':
-                    uploadblob =f'{self.cleanedschoolname}/excel-files/{cleaned_object_name}'
-                    uploadblob=bucket.blob(uploadblob)
-
-
-                elif os.path.splitext(source_file_name)[1]=='.pdf':
-                    uploadblob =f'{self.cleanedschoolname}/pdfs/{cleaned_object_name}'
-                    uploadblob=bucket.blob(uploadblob)
-
-                elif os.path.splitext(source_file_name)[1]=='.mmd':
-                    uploadblob =f'{self.cleanedschoolname}/mmds/{cleaned_object_name}'
-                    uploadblob=bucket.blob(uploadblob)
-
-
-                else:
-                    uploadblob = cleaned_object_name
-                    uploadblob=bucket.blob(uploadblob)
-
-                # add a check to not do it many times
                 
+                def upload_to_googlecloud(source_file_name,departmentnamecleaned):
+                    print(f'Beginning upload for {source_file_name}')
+
+                    # how to manually change credentials...
+
+
+                    # just change project name here to change where they go.
+                    # In code, for multiple schools. Dope.
+                    # this project stays the same
+                    client = storage.Client(project='degreeview-ut')
+
+
+                    # this should return the email used for google cloud. Its a service email tho
+
+                    # yeah the project is the same as the bucket name. In the future change this, as the bucketname is what user sees
+                    bucket = client.bucket('utcourses')
+                    # bucket list
+
+
+                    #This is what will be in the url and what the name of the object will be in google cloud storage
+
+                    cleaned_object_name=source_file_name.split('/')[-1]        
+
+
+                    # make it so each file has the type. 
+                    # define upload blob here
                 
+                    if os.path.splitext(source_file_name)[1]=='.csv':
+                        uploadblob =f'{departmentnamecleaned}/csvs/{cleaned_object_name}'
+                        uploadblob=bucket.blob(uploadblob)
+                    elif os.path.splitext(source_file_name)[1]=='.xlsx':
+                        uploadblob =f'{departmentnamecleaned}/excel-files/{cleaned_object_name}'
+                        uploadblob=bucket.blob(uploadblob)
 
-                uploadblob.upload_from_filename(source_file_name)
 
-                uploadblob.make_public()  # Makes it publicly accessible
-                    # can also use blob.make_private()
-                # else:
-                    # print(f'{uploadblob.name} already exits, didnt upload\n')
+                    elif os.path.splitext(source_file_name)[1]=='.pdf':
+                        uploadblob =f'{departmentnamecleaned}/pdfs/{cleaned_object_name}'
+                        uploadblob=bucket.blob(uploadblob)
+
+                    elif os.path.splitext(source_file_name)[1]=='.mmd':
+                        uploadblob =f'{departmentnamecleaned}/mmds/{cleaned_object_name}'
+                        uploadblob=bucket.blob(uploadblob)
 
 
-                # use this link on the website to serve the file.
-                return uploadblob.public_url
+                    else:
+                        uploadblob = cleaned_object_name
+                        uploadblob=bucket.blob(uploadblob)
 
-            def loop_through_assets_to_upload():
-                '''
-                This function uses the get_assetlists functions above to get all the paths to the asset files, in each degree folder.
-                Then it uses upload_degree_files() to upload each one one by one.
+                    # add a check to not do it many times
+                    
+                    
 
-                IMPORTANT: Here is where you can change if replacing csv files, excel files, or more pdfs. 
+                    uploadblob.upload_from_filename(source_file_name)
 
-                '''
-                csvlist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[0]
-                excellist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[1]
-                pdflist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[2]
+                    uploadblob.make_public()  # Makes it publicly accessible
+                        # can also use blob.make_private()
+                    # else:
+                        # print(f'{uploadblob.name} already exits, didnt upload\n')
 
-                majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
 
-                # mmds currently not needing to be uplaoded.
-                
+                    # use this link on the website to serve the file.
+                    return uploadblob.public_url
 
-                for pdffile in pdflist:
-                    if 'dolphinocean' in pdffile:
-                        upload_to_googlecloud(pdffile)
-                        print(f'Uploaded {pdffile} to cloud\n')
-                    elif 'stare' in pdffile:
-                        upload_to_googlecloud(pdffile)
-                        print(f'Uploaded {pdffile} to cloud\n')
+                def loop_through_assets_to_upload():
+                    '''
+                    This function uses the get_assetlists functions above to get all the paths to the asset files, in each degree folder.
+                    Then it uses upload_degree_files() to upload each one one by one.
 
-        
-                
-                others=False
-                if others:
+                    IMPORTANT: Here is where you can change if replacing csv files, excel files, or more pdfs. 
+
+                    I never upload the mermaids either, which is fair.
+
+                    '''
+                    csvlist=get_asset_lists(departmentfolder=departmentfolderpath)[0]
+                    excellist=get_asset_lists(departmentfolder=departmentfolderpath)[1]
+                    pdflist=get_asset_lists(departmentfolder=departmentfolderpath)[2]
+
+                    coursescsv=[csv for csv in csvlist if "courses" in csv][0]
+
+                    # mmds currently not needing to be uplaoded.
+                    
+
+
+            
+                    
+                    # only one csv in there rn anyway
                     for csvfile in csvlist:
                         # comment these out depending on which ones I want
-                        upload_to_googlecloud(csvfile)
+                        upload_to_googlecloud(csvfile,departmentnamecleaned)
                         print(f'Uploaded {csvfile} to cloud\n')
 
                     for excelfile in excellist:
                         if not excelfile.startswith(("~$", "$")):
-                            upload_to_googlecloud(excelfile)
+                            upload_to_googlecloud(excelfile,departmentnamecleaned)
                             print(f'Uploaded {excelfile} to cloud\n')
 
-            # this one actually uploads everything
-            loop_through_assets_to_upload()
+                # this one actually uploads everything
+                loop_through_assets_to_upload()
 
-        print(f'\n\nEnding Cloud Upload for {startingletter} degreefiles \n\n\n\n')
-        return 0
+            print(f'\n\nEnding Cloud Upload for {startingletter} degreefiles \n\n\n\n')
     
                    
 
@@ -1653,8 +1658,7 @@ class createWebsite:
 
 def runcreateWebsite():
     websiteobject=createWebsite()
-    websiteobject.createletterpages()
-    websiteobject.create_department_pages()
+    websiteobject.upload_department_files()
 
     
 
