@@ -49,7 +49,9 @@ class createWebsite:
 
         self.universityname='The University of Texas at Austin'
 
-        self.randompagehspath='"/Users/shalevwiden/Downloads/Projects/dvschoolsites/texas/utcoursessite/static/js/randompage.js"'
+        self.randompagehspath="/Users/shalevwiden/Downloads/Projects/dvschoolsites/texas/utcoursessite/static/js/randompage.js"
+        self.cloudbucketpath='https://storage.googleapis.com/utcourses/'
+
 
 
         with open(self.jsondatapath,'r') as universityjson:
@@ -100,6 +102,10 @@ class createWebsite:
 
 
         self.outputspath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/outputs'
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/degreeviewtag/headtag.html','r') as headtag:
+            self.headtag=headtag.read()
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/degreeviewtag/bodytag.html','r') as bodytag:
+            self.bodytag=bodytag.read()
 
         # footer so I dont have to redefine it multiple times. 
 
@@ -299,7 +305,7 @@ class createWebsite:
 
             headhtmlcode=f'''
 <head>
-
+{self.headtag}
     <meta
         name="description"
         content="{startingletter} Degrees and Data"
@@ -325,6 +331,12 @@ class createWebsite:
 
   gtag('config', 'G-S06MYR1FV6');
 </script>
+<!-- to track the new update -->
+    <script>
+      if (window.location.pathname === "/utcoursesindex") {{
+        gtag("event", "courses_index_view");
+      }}
+    </script>
 
     <title>{startingletter} Page - DegreeView</title>
 
@@ -488,7 +500,7 @@ class createWebsite:
     '''
                 bodyhtmlcode=f'''
                 <body>
-
+                {self.bodytag}
                 <div class="sitecontainer">
                 {abovemainsitecode}
                 {mainsitecode}
@@ -790,30 +802,28 @@ class createWebsite:
                         for file in files:
                             # we neewd the fullpath in the list since thats the way it can be uploaded to google cloud.
 
-                            googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/'
 
                             if os.path.splitext(file)[1]=='.csv':
                                 objectname_incloud=f'{prefix}/csvs/{file}'
-                                googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
+                                googlecloudpath=f'{self.cloudbucketpath}/{objectname_incloud}'
 
                                 csv_path_list.append(googlecloudpath)
                                 # removes those dollar sign excel files. 
                             elif os.path.splitext(file)[1]=='.xlsx' and not file.startswith(("~$", "$")):
 
                                 objectname_incloud=f'{prefix}/excel-files/{file}'
-                                googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
-                            
+                                googlecloudpath=f'{self.cloudbucketpath}/{objectname_incloud}'                            
                                 excel_path_list.append(googlecloudpath)
                             elif os.path.splitext(file)[1]=='.pdf':
                             
                                 objectname_incloud=f'{prefix}/pdfs/{file}'
-                                googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
+                                googlecloudpath=f'{self.cloudbucketpath}/{objectname_incloud}'                            
                             
                                 pdf_path_list.append(googlecloudpath)
                             elif os.path.splitext(file)[1]=='.mmd':
                             
                                 objectname_incloud=f'{prefix}/mmds/{file}'
-                                googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
+                                googlecloudpath=f'{self.cloudbucketpath}/{objectname_incloud}'                            
                                 mmd_path_list.append(googlecloudpath)
 
                     return [csv_path_list,excel_path_list,pdf_path_list,mmd_path_list]
@@ -843,6 +853,7 @@ class createWebsite:
             
                 headhtmlcode=f'''
     <head>
+    {self.headtag}
     <meta
         name="description"
         content="Visualize {departmentnamehalf} at UT Austin through diagrams and tabular data."
@@ -869,6 +880,7 @@ class createWebsite:
 
     gtag('config', 'G-S06MYR1FV6');
     </script>
+   
             <title>{departmentnamehalf} UT Page - DegreeView</title>
 
             
@@ -934,151 +946,69 @@ class createWebsite:
                     # get csv links
                     csvlist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[0]
                     print(f'CSV list: {csvlist}')
+                    # this is accurate
                     coursescsv=[csv for csv in csvlist if "coursescsv" in csv][0]
 
                     # get excel links
                     excellist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[1]
 
-                    # lighttheme_excel=[file for file in excellist if "dark" not in file][0]
-                    lighttheme_excel="filler"
-                    # darktheme_excel=[file for file in excellist if "semesterfile" in file and "dark" in file][0]
-                    darktheme_excel="filler"
 
+                    blacktheme_excel=[file for file in excellist if "blacktheme" in file][0]
 
-
-
-
+                    originaltheme_excel=[file for file in excellist if "originaltheme" in file][0]
                     
+                    
+                    
+                    darktheme_excel=[file for file in excellist if "darktheme" in file][0]
+                    
+                    green_excel=[file for file in excellist if "greentheme" in file][0]
+
+                    desert_excel=[file for file in excellist if "deserttheme" in file][0]
+
+                    grey_excel=[file for file in excellist if "grey" in file][0]
+
+                    ocean_excel=[file for file in excellist if "ocean" in file][0]
+                    pastel_excel=[file for file in excellist if "pastel" in file][0]
+
+                    primarycolors_excel=[file for file in excellist if "primarycolors" in file][0]
+                    neon_excel=[file for file in excellist if "neon" in file][0]
 
 
+                
                     def makeleftcontentcode():
                         '''Using the links just received above, now link them in the left content code in the website'''
 
 
+                        env = Environment(loader=FileSystemLoader("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/templates"))
+        
 
-                        
+                        # Pick template
+                        template = env.get_template("leftcontentcode_departments.html")
 
-                        leftcontentcode=f'''
-                        <div class="leftcontent">
+                        # in jinja, reference the keys
+                        variables={
+                            "departmentnamehalf":departmentnamehalf,
 
-                        <div class="filescontainer" id="excelcontainer">
-                            <div class="filesname">
-                                <h3>Excel (.xlsx) Files</h3>
-                                   <span class="material-symbols-outlined">
-view_module
-</span>
-                            </div>
-
-                            <ul>
-                                <li>
-                                <div class="linkbox">
-                                    <p>Department Courses Light Theme</p>
-                                    <p>
-                                    <!-- download attribute means they will download it -->
-                                    Download:&nbsp;&nbsp;<a
-                                        href="{lighttheme_excel}"
-                                        download
-                                        ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                    ></a>
-                                    </p>
-                                </div>
-                                </li>
-                                <!--  -->
-                                <li>
-                                <div class="linkbox">
-                                    <p>Department Courses Dark Theme</p>
-                                    <p>
-                                    <!-- download attribute means they will download it -->
-                                    Download:&nbsp;&nbsp;<a
-                                        href="{darktheme_excel}"
-                                        download
-                                        ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                    ></a>
-                                    </p>
-                                </div>
-                                </li>
-                                
-                            </ul>
-                            </div>
-                            <!-- files container is per file type. linkbox is per individiual link -->
-                            
-
-                            <div class="filescontainer" id="csvcontainer">
-                            <div class="filesname">
-                                <h3>CSV Files</h3>
-                            <i class="fa-regular fa-file-lines"></i>                            </div>
-
-                            <ul>
-                                
-
-                                <li>
-                                <div class="linkbox">
-                                    <p>Department Courses CSV</p>
-
-                                   
-                                    <p>
-                                    <!-- download attribute means they will download it -->
-                                    Download:&nbsp;&nbsp;<a href="{coursescsv}" download
-                                        ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                    ></a>
-                                    </p>
-                                </div>
-                                </li>
-                            </ul>
-                            </div>
-                              <!-- table container filescontainer -->
-          <div class="filescontainer" id="tablecontainer">
-            <div class="filesname">
-              <h3>Tables</h3>
-                <span class="material-symbols-outlined">
-table
-</span>           </div>
-
-            <ul>
-              <li>
-                <div class="linkbox">
-                  <p>Department Courses Table</p>
-
-                  <p>
-                    View:&nbsp;&nbsp;
-                    <a href="#departmenttableheading" target="_self"
-                      ><i class="fa-regular fa-eye"></i
-                    >
-                    </a>
-                    <!-- link icon above-->
-                  </p>
-                 
-                </div>
-              </li>
-
-              <li>
-                <div class="linkbox">
-
-                  <p>
-                <small id="underconstruction">Under construction, coming soon</small> <br>
-
-                  {departmentnamehalf} Courses with "{departmentnamehalf}" in their name Table
-
-                  </p>
+                            "coursescsv":coursescsv,
+                            "blacktheme_excel": blacktheme_excel,
+                            "originaltheme_excel":originaltheme_excel,
+                            "darktheme_excel":darktheme_excel,
+                            "green_excel":green_excel,
+                            "desert_excel":desert_excel,
+                            "grey_excel":grey_excel,
+                            "ocean_excel":ocean_excel,
+                            "pastel_excel":pastel_excel,
+                            "primarycolors_excel":primarycolors_excel,
+                            "neon_excel":neon_excel
 
 
-                  <p>
-                    View:&nbsp;&nbsp;
-                    <a href="#" onclick="return false;" target="_self"
-                      ><i class="fa-regular fa-eye"></i
-                    >
-                    </a>
-                    <!-- link icon above-->
-                  </p>
-                  
-                </div>
-              </li>
-            </ul>
-          </div>
-                            </div>
-    '''
+                        }
+
+                        rendered_html = template.render(variables)
+
+                        leftcontentcode=rendered_html
+
                         return leftcontentcode
-                        
                     def makerightcontentcode():
                         '''
                         For the right content code it has stats in it
@@ -1212,7 +1142,8 @@ table
     '''
 
                     bodyhtmlcode=f'''                    
-                    <body>       
+                    <body>
+                    {self.bodytag}       
                     <div class="sitecontainer">
                     {abovemainsitecode}
                     {mainsitecode}

@@ -22,6 +22,7 @@ from openpyxl.styles import Border, Side, Alignment
 
 import sqlite3
 
+
 def make_excelfile(departmentname,universityname,
                    savepath,rows,schoolnamecolor,bigbordercolor,smallerbordercolor,
                    gridlinecolor,rowtextcolor,titlecolor,
@@ -43,6 +44,8 @@ def make_excelfile(departmentname,universityname,
     Schoolnamecolor must be a hex code without a #either
 
     column scaler just affects all the columns at once, doesn't change individual ones
+
+    Important to note that the white fonts make this function start by default as a dark theme
     '''
     departmentworkbook=Workbook()
     # gets the default worksheet
@@ -313,16 +316,17 @@ def make_excelfile(departmentname,universityname,
     # where border code used to be
     
     # make the entire worksheet a color:
-    backgroundcolor=PatternFill(fill_type="solid", start_color=mainbackgroundcolor) #end_color='0000FF' fill_type="gray125" or linear later
+    # this is padding tho cause we override this later
+    paddingcolor=PatternFill(fill_type="solid", start_color=paddingbackgroundcolor) #end_color='0000FF' fill_type="gray125" or linear later
 
     # have the background be like a padding. 
     for row in ws.iter_rows(min_row=1, max_row=lastrowindex+2, min_col=1, max_col=6):
         for cell in row:
-            cell.fill = backgroundcolor
+            cell.fill = paddingcolor
     
     # reverse the background for cells with content:
 
-    darkfill=PatternFill(fill_type="solid", start_color=paddingbackgroundcolor)
+    darkfill=PatternFill(fill_type="solid", start_color=mainbackgroundcolor)
     # re-add gridline borders:
 
     gridline_border = Border(

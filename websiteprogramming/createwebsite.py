@@ -62,9 +62,14 @@ class createWebsite:
 
         with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/departmentpage.html','r') as headfile:
             self.headlinks=headfile.read()
-            
+
         with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/footerwithouttooltip.html','r') as footerfile:
             self.footer=footerfile.read()
+
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/degreeviewtag/headtag.html','r') as headtag:
+            self.headtag=headtag.read()
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/degreeviewtag/bodytag.html','r') as bodytag:
+            self.bodytag=bodytag.read()
 
 
         # footer so I dont have to redefine it multiple times. 
@@ -284,6 +289,7 @@ class createWebsite:
 
         headhtmlcode=f'''
 <head>
+{self.headtag}
 
     <meta
         name="description"
@@ -461,6 +467,7 @@ class createWebsite:
 '''
             bodyhtmlcode=f'''
             <body>
+            {self.bodytag}
 
             <div class="sitecontainer">
             {abovemainsitecode}
@@ -776,6 +783,8 @@ class createWebsite:
             
             headhtmlcode=f'''
 <head>
+{self.headtag}
+
  <meta
       name="description"
       content="Visualize {displaydegreename_nobr} at UT Austin through diagrams and tabular data."
@@ -802,6 +811,7 @@ class createWebsite:
 
   gtag('config', 'G-S06MYR1FV6');
 </script>
+
         <title>{displaydegreename_nobr} Page - DegreeView</title>
 
         <!-- main stylesheet -->
@@ -1172,6 +1182,7 @@ class createWebsite:
 
                 bodyhtmlcode=f'''                    
                 <body>       
+                {self.bodytag}
                 <div class="sitecontainer">
                 {abovemainsitecode}
                 {mainsitecode}
@@ -1334,6 +1345,8 @@ class createWebsite:
             
             headhtmlcode=f'''
 <head>
+{self.headtag}
+
  <meta
       name="description"
       content="Visualize {displaydegreename_nobr} at UT Austin through diagrams and tabular data."
@@ -1484,7 +1497,8 @@ class createWebsite:
             '''
 
                 bodyhtmlcode=f'''                    
-                <body>       
+                <body>  
+                {self.bodytag}     
                 <div class="sitecontainer">
                 {abovemainsitecode}
                 {undermainsitecode}
