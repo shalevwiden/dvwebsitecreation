@@ -7,7 +7,7 @@ import random
 
 import csv
 import time
-
+import json
 
 # use this to upload stuff to google cloud
 from google.cloud import storage
@@ -18,12 +18,8 @@ import importlib.util
 
 file_path = '/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/college_course_scraping/theassetcontainment.py'
 
-# but be something else besides config for the name
-spec = importlib.util.spec_from_file_location("config", file_path)
-config = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(config)
-
-theasset=config.theasset
+with open('/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/college_course_scraping/theassetcontainment.json') as assetjson:
+    theasset=json.load(assetjson)
 # you can also assign a function
 
 # the asset is important here because it contains the name of every degree in it.
@@ -639,27 +635,20 @@ class createWebsite:
                 # mmds currently not needing to be uplaoded.
                 
 
-                for pdffile in pdflist:
-                    if 'dolphinocean' in pdffile:
-                        upload_to_googlecloud(pdffile)
-                        print(f'Uploaded {pdffile} to cloud\n')
-                    elif 'stare' in pdffile:
-                        upload_to_googlecloud(pdffile)
-                        print(f'Uploaded {pdffile} to cloud\n')
+                # for pdffile in pdflist:
+                #     if 'dolphinocean' in pdffile:
+                #         upload_to_googlecloud(pdffile)
+                #         print(f'Uploaded {pdffile} to cloud\n')
+                #     elif 'stare' in pdffile:
+                #         upload_to_googlecloud(pdffile)
+                #         print(f'Uploaded {pdffile} to cloud\n')
 
-        
+                for excelfile in excellist:
+                    if not excelfile.startswith(("~$", "$")) and "greentheme" in excelfile:
+                        upload_to_googlecloud(excelfile)
+                        print(f'Uploaded {excelfile} to cloud\n')
                 
-                others=False
-                if others:
-                    for csvfile in csvlist:
-                        # comment these out depending on which ones I want
-                        upload_to_googlecloud(csvfile)
-                        print(f'Uploaded {csvfile} to cloud\n')
-
-                    for excelfile in excellist:
-                        if not excelfile.startswith(("~$", "$")):
-                            upload_to_googlecloud(excelfile)
-                            print(f'Uploaded {excelfile} to cloud\n')
+                
 
             # this one actually uploads everything
             loop_through_assets_to_upload()
@@ -900,6 +889,8 @@ class createWebsite:
 
                 lighttheme_excel=[file for file in excellist if "dark" not in file][0]
                 darktheme_excel=[file for file in excellist if "semesterfile" in file and "dark" in file][0]
+                green_excel=[file for file in excellist if "greentheme" in file][0]
+
 
                 # get pdf links
                 pdflist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[2]
@@ -952,6 +943,20 @@ class createWebsite:
                                 <!-- download attribute means they will download it -->
                                 Download:&nbsp;&nbsp;<a
                                     href="{darktheme_excel}"
+                                    download
+                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                                ></a>
+                                </p>
+                            </div>
+                            </li>
+                            <!-- for green li -->
+
+                             <li>
+                            <div class="linkbox">
+                                <p>Sample Semester Layout Green Theme</p>
+                                <p>
+                                Download:&nbsp;&nbsp;<a
+                                    href="{green_excel}"
                                     download
                                     ><i class="fa-solid fa-arrow-up-from-bracket"></i
                                 ></a>
@@ -1707,7 +1712,6 @@ def unpacktheasset_into_createSchoolpages(theasset):
         # websiteobject.create_degree_pages()
         # websiteobject.createschoolpages()
         # websiteobject.create_renderedcsv_pages()
-        websiteobject.make_alldegrees_list()
         
 
 unpacktheasset_into_createSchoolpages(theasset=theasset)
