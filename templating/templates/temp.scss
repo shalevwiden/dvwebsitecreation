@@ -1,0 +1,330 @@
+@use "../../utils/mixins" as *;
+
+$schoolcolor: #bf5700;
+$statslineborderscolor: #1c94e5;
+
+:root {
+  --secondarynavy: #153f66;
+  --lighterblue: #284dbc;
+  --statsnameorder: 1;
+}
+
+.mainsite {
+  display: flex;
+  flex-direction: row;
+  background-color: red;
+  width: 100%;
+  flex: 1 1 350px;
+  border-top: 10px solid var(--secondarynavy);
+  border-bottom: 10px solid var(--secondarynavy);
+
+  .leftcontent {
+    /* this affects the width */
+    flex: 40%;
+    background-color: #ffffff;
+    padding: 15px;
+    padding-top: 120px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    row-gap: 35px;
+
+    .filescontainer {
+      border: 4px dashed rgb(16, 11, 82);
+      border-radius: 26px;
+      width: 92%;
+      padding: 20px 29px;
+
+      h3 {
+        color: #284dbc;
+      }
+      .filesname {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        column-gap: 10px;
+
+        i {
+          font-size: 20px;
+        }
+      }
+      ul {
+        list-style-type: none; /* Removes bullets */
+        /* indent */
+        padding-left: 30px;
+
+        .linkbox {
+          display: flex;
+          flex-direction: row;
+          /* make the download text all even */
+          justify-content: space-between;
+
+          align-items: center;
+          column-gap: 40px;
+          @media screen and (max-width: 700px) {
+            display: flex;
+            flex-direction: column;
+            /* make the download text all even */
+            justify-content: center;
+            align-items: flex-start;
+            row-gap: 20px;
+          }
+
+          p:first-of-type {
+            margin-top: 10px;
+            font-weight: bold;
+            max-width: 137px;
+          }
+          #underconstruction {
+            display: block; /* or block if you want it on its own line */
+            margin-top: 10px;
+            margin-bottom: 3px;
+            color: rgb(209, 76, 14);
+            border-bottom: 2px solid rgb(209, 76, 14);
+          }
+          a i {
+            color: rgb(21, 21, 69);
+          }
+
+          span#original {
+            color: black;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px; /* pushes the underline away from the text */
+            text-decoration-color: #284dbc; /* underline is red, text can be another color */
+          }
+          span#darktheme {
+            color: #041442;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px; /* pushes the underline away from the text */
+            text-decoration-color: #041442; /* underline is red, text can be another color */
+          }
+          span#greentheme {
+            color: #238808;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px; /* pushes the underline away from the text */
+            text-decoration-color: #238808; /* underline is red, text can be another color */
+          }
+          span#deserttheme {
+            color: #603303;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px; /* pushes the underline away from the text */
+            text-decoration-color: #603303; /* underline is red, text can be another color */
+          }
+
+          span#greyscaletheme {
+            color: #5f6470;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px; /* pushes the underline away from the text */
+            text-decoration-color: #2e3138; /* underline is red, text can be another color */
+          }
+          span#oceantheme {
+            color: #033f60;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px; /* pushes the underline away from the text */
+            text-decoration-color: #033f60; /* underline is red, text can be another color */
+          }
+          span#pasteltheme {
+            color: #033f60;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px; /* pushes the underline away from the text */
+            text-decoration-color: #033f60; /* underline is red, text can be another color */
+          }
+
+          span#primarytheme {
+            color: white;
+            -webkit-text-stroke: 2px rgb(249, 55, 55); /* outline around text */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px; /* pushes the underline away from the text */
+            text-decoration-color: #d8024d; /* underline is red, text can be another color */
+          }
+
+          span#blacktheme {
+            color: #000000;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px; /* pushes the underline away from the text */
+            text-decoration-color: #000; /* underline is red, text can be another color */
+          }
+
+          span#neontheme {
+            color: #dd098b;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px; /* pushes the underline away from the text */
+            text-decoration-color: #dd098b; /* underline is red, text can be another color */
+          }
+        }
+      }
+    }
+  }
+  .rightcontent {
+    flex: 60%;
+    background-color: rgb(113, 179, 185);
+    padding: 0px 20px 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    height: auto;
+    @media screen and (max-width: 700px) {
+      padding-top: 40px;
+      .displaynamebox {
+        margin-bottom: 50px;
+
+        #displayname {
+          font-size: 20px;
+          overflow-wrap: anywhere; /* lets words break anywhere if needed */
+          word-break: break-word; /* fallback */
+        }
+      }
+    }
+
+    .displaynamebox {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      /* padding top 30 plus this height 50  equals 80 which is padding top of right content */
+      height: 120px;
+      width: 100%;
+
+      #displayname {
+        color: white;
+        font-size: 25px;
+        margin: 0; /* reset browser h3 margins */
+
+        margin-bottom: 20px;
+      }
+      #charticon {
+        font-size: 30px;
+        color: white;
+        display: inline;
+        margin: 0 0 0 0;
+        margin-left: -40px; /* small space between text and icon */
+        margin-bottom: 20px;
+        vertical-align: middle; /* aligns icon with text baseline */
+      }
+    }
+
+    .departmentstats {
+      @include flexcol;
+      justify-content: flex-start;
+      width: 90%;
+      height: auto;
+      border-right: 10px solid $statslineborderscolor;
+      border-left: 0px solid white;
+
+      @media screen and (max-width: 700px) {
+        section.statsline {
+          font-size: 14px;
+          height: 200px !important;
+        }
+      }
+      section.statsline {
+        @include flexrow;
+        justify-content: center;
+        gap: 0;
+        border-top: 10px solid $statslineborderscolor;
+        border-bottom: 10px solid $statslineborderscolor;
+        width: 100%;
+        height: 100px;
+        font-weight: bold;
+        font-family: Helvetica, sans-serif;
+        align-items: stretch; // <-- makes children fill 100px vertically
+
+        div.statsname {
+          @include flexcol;
+          gap: 0;
+          width: 30%;
+          margin: 0 10px;
+          order: var(--statsnameorder);
+        }
+        div.statscontent {
+          @include flexcol;
+          gap: 0;
+          width: 70%;
+          padding: 0px 10px;
+
+          background-color: white;
+        }
+      }
+      #coursecount {
+        .statsname {
+          width: 60%;
+        }
+        .statscontent {
+          font-size: 25px;
+          width: 40%;
+        }
+      }
+      #longestname {
+        .statscontent {
+          font-size: 15px;
+        }
+        .statsname {
+        }
+      }
+
+      #shortestname {
+        .statsname {
+          width: 60%;
+        }
+        .statscontent {
+          width: 40%;
+        }
+      }
+      #uppercount {
+        .statscontent {
+          font-size: 25px;
+          width: 40%;
+        }
+        .statsname {
+          width: 60%;
+        }
+      }
+      #lowercount {
+        .statscontent {
+          font-size: 25px;
+          width: 40%;
+        }
+        .statsname {
+          width: 60%;
+        }
+      }
+      #gradcount {
+        .statscontent {
+          font-size: 25px;
+          width: 40%;
+        }
+
+        .statsname {
+          width: 60%;
+        }
+      }
+      #samenamecount {
+        .statscontent {
+          font-size: 25px;
+
+          width: 40%;
+        }
+        .statsname {
+          width: 60%;
+        }
+      }
+    }
+  }
+}

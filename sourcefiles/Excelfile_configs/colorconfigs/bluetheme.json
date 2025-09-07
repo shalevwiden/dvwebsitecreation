@@ -1,0 +1,22 @@
+{
+  "schoolnamecolor": "1E90FF",
+  "bigbordercolor": "63B8FF",
+  "smallerbordercolor": "87CEFA",
+  "gridlinecolor": "B0E0E6",
+  "rowtextcolor": "FFFFFF",
+  "titlecolor": "FFFFFF",
+  "mainbackgroundcolor": "003366",
+  "paddingbackgroundcolor": "0055AA",
+  "subheadingbordercolor": "63B8FF",
+  "datafontname": "Helvetica",
+  "titlefontname": "Calibri",
+  "logofontname": "Barlow",
+  "logocolor": "FFD700",
+  "subheadingsize": 17,
+  "subheadingcolor": "FFFFFF",
+  "headingsfontname": "Calibri",
+  "headingsfontcolor": "FFFFFF",
+  "datarowheight": 23,
+  "headingrowheight": 30,
+  "columnscaler": 1
+}

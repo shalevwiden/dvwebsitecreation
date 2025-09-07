@@ -1,4 +1,5 @@
 
+
 import sys
 import os
 import json
@@ -23,21 +24,29 @@ from openpyxl.styles import Border, Side, Alignment
 import sqlite3
 
 
-def make_excelfile(departmentname,universityname,
+def make_checkerboardfile(departmentname,universityname,
                    savepath,rows,schoolnamecolor,bigbordercolor,smallerbordercolor,
                    gridlinecolor,rowtextcolor,titlecolor,
                    mainbackgroundcolor,paddingbackgroundcolor,
                    subheadingbordercolor,
+
+                   checkerboardcolorone,
+
+                   checkerboardcolortwo,
+                   checkerboardtextcolorone,
+                   checkerboardtextcolortwo,
+
                    datafontname="Helvetica",titlefontname='Calibri',
                    logofontname="Barlow",
                    logocolor="ffffff",
-                   subheadingsize=22,
+                   subheadingsize=17,
                    subheadingcolor='ffffff',
                    headingsfontname='Calibri',
                    headingsfontcolor='ffffff',
-                   datarowheight=30,
-                   headingrowheight=40,
-                   columnscaler=1
+                   datarowheight=23,
+                   headingrowheight=30,
+                   columnscaler=1,
+                   
                    ):
 
     '''Rows will end up being a list of lists
@@ -67,7 +76,7 @@ def make_excelfile(departmentname,universityname,
     # update later
 
     # applied to the actual semester data. 
-    datafont=Font(size=15,name=datafontname,color=rowtextcolor)
+    datafont=Font(size=30,name=datafontname,color=rowtextcolor,bold=True)
 
 
     leftalign=Alignment(horizontal='left')
@@ -210,7 +219,7 @@ def make_excelfile(departmentname,universityname,
     
 
 # -----------------------------end data stuff --------------------------------------------------------
-    ws.append(blankrow)
+    # ws.append(blankrow) no blank row for checkerboard
     totalhoursrow=['','',f'Total Hours: {totalhours}','','']
 
     # this lastrow value is actually used for the last TWO rows
@@ -340,12 +349,12 @@ def make_excelfile(departmentname,universityname,
     
     # make the entire worksheet a color:
     # this is padding tho cause we override this later
-    paddingfill=PatternFill(fill_type="solid", start_color=paddingbackgroundcolor) #end_color='0000FF' fill_type="gray125" or linear later
+    paddingcolor=PatternFill(fill_type="solid", start_color=paddingbackgroundcolor) #end_color='0000FF' fill_type="gray125" or linear later
 
     # have the background be like a padding. 
     for row in ws.iter_rows(min_row=1, max_row=lastrowindex+2, min_col=1, max_col=6):
         for cell in row:
-            cell.fill = paddingfill
+            cell.fill = paddingcolor
     
     # reverse the background for cells with content:
 
@@ -366,32 +375,55 @@ def make_excelfile(departmentname,universityname,
             cell.border=gridline_border
 
     rowval+=1
-
     def style_rows_and_cols():       
         '''
         This actually adds the rows with all the courses and stuff.
         Rowval is used later to add the rows on there
         '''
 
+        checkerboardcoloronefill = PatternFill(start_color=checkerboardcolorone, end_color=checkerboardcolortwo, fill_type="solid")
+        checkerboardcolortwofill = PatternFill(start_color=checkerboardcolortwo, end_color=checkerboardcolortwo, fill_type="solid")
+
         allcenteredalignment=Alignment(vertical='center',horizontal='center')
         leftcenter=Alignment(vertical='center',horizontal='left')
+
+
         rowindexes=len(excelobject)+rowval
         for rowentry in range(rowval, rowindexes):
             # update it here so it updates by row not column...although
 
-            if rowentry%2==0:            
-                ws.row_dimensions[rowentry].height = datarowheight  # sets height of the entire row
-            else:
-                ws.row_dimensions[rowentry].height = datarowheight+50  # sets height of the entire row
-
-
-
-
                     # start at column one, and then remember the padding rows are added later. 
             excelobjectrowindex=rowentry-rowval
+            
             for col_index, value in enumerate(excelobject[excelobjectrowindex], start=2):
                 # change alignnment here. 1 indexed not 0
                 datacell = ws.cell(row=rowentry, column=col_index)
+
+                def make_patterns():
+
+                    '''check for even or odd rows, and assign styling that way'''
+                    if rowentry%2==0:       
+        
+                        if (rowentry + col_index) % 2 == 0:  # simple checkerboard logic for text
+                            datacell.font = Font(name=datafont.name, bold=datafont.bold, color=checkerboardtextcolorone)
+                            datacell.fill=checkerboardcoloronefill
+
+
+                        else:
+                            datacell.font = Font(name=datafont.name, bold=datafont.bold,color=checkerboardtextcolortwo)  # white text
+                            datacell.fill=checkerboardcolortwofill
+                    else:
+                        ws.row_dimensions[rowentry].height = datarowheight+50  # sets height of the entire row
+
+                        if (rowentry + col_index) % 2 == 0:  # simple checkerboard logic for text
+                            datacell.font = Font(name=datafont.name, bold=datafont.bold, color=checkerboardtextcolorone)
+                            datacell.fill=checkerboardcoloronefill
+
+
+                        else:
+                            datacell.font = Font(name=datafont.name, bold=datafont.bold,color=checkerboardtextcolortwo)  # white text
+                            datacell.fill=checkerboardcolortwofill
+                make_patterns()
 
                 def col_alignments():
                     if col_index == 2:
@@ -406,8 +438,20 @@ def make_excelfile(departmentname,universityname,
                     elif col_index in [5]:
 
                         datacell.alignment=leftcenter
-                        
                 col_alignments()
+
+                def set_sizes():
+                    '''
+                    This standardizes heights tho tbh
+                    '''
+                    squarerowheight=60/.143
+                    ws.row_dimensions[rowentry].height = squarerowheight  # height for this row
+                    ws.column_dimensions[datacell.column_letter].width = 60  # width for this column
+                
+                set_sizes()
+
+        # checkerboard logic 
+            
 
     style_rows_and_cols()
     

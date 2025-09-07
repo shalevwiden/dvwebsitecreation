@@ -4,7 +4,7 @@ import os
 import json
 
 import csv
-
+import random
 
 from openpyxl import load_workbook
 from openpyxl import Workbook
@@ -23,14 +23,18 @@ from openpyxl.styles import Border, Side, Alignment
 import sqlite3
 
 
-def make_excelfile(departmentname,universityname,
-                   savepath,rows,schoolnamecolor,bigbordercolor,smallerbordercolor,
+def makecustom_excelfile(subject, leftsecondary,rightsecondary,
+                         
+                    firstname,lastname,theme,length,
+
+                   savepath,rows,secondarycolor,bigbordercolor,smallerbordercolor,
                    gridlinecolor,rowtextcolor,titlecolor,
                    mainbackgroundcolor,paddingbackgroundcolor,
                    subheadingbordercolor,
                    datafontname="Helvetica",titlefontname='Calibri',
                    logofontname="Barlow",
                    logocolor="ffffff",
+                   urlcolor='ffffff',
                    subheadingsize=22,
                    subheadingcolor='ffffff',
                    headingsfontname='Calibri',
@@ -63,7 +67,7 @@ def make_excelfile(departmentname,universityname,
     # this is for like Coursename, Courserow, etc.
     subheadingsfont=Font(size=subheadingsize,bold=True,color=subheadingcolor)
     # lighter burnt orange
-    universitynamefont=Font(size=19, color=schoolnamecolor, name='Georgia', bold=True)
+    secondaryfont=Font(size=19, color=secondarycolor, name='Georgia', bold=True)
     # update later
 
     # applied to the actual semester data. 
@@ -81,7 +85,7 @@ def make_excelfile(departmentname,universityname,
 
     # first row after title that is. Start at row 3 since rows 1 and 2 were merged
 
-    firstrow=[f'{departmentname}']
+    firstrow=[f'{leftsecondary}']
    
 
         
@@ -107,7 +111,7 @@ def make_excelfile(departmentname,universityname,
     # appends to the next empty row. Like writer.writerow(['']) for csvs
     ws.append(blankrow)
 
-    subheadingrow=['Course Name','Course Code','Hours','Classification']
+    subheadingrow=['First Name','Last Name','Theme','Number (0-1000):']
     ws.append(subheadingrow)
     # now apply styles
     previousrow = ws[ws.max_row]
@@ -119,15 +123,15 @@ def make_excelfile(departmentname,universityname,
 
     
     def set_headings_height():
-        for row in [3,4,5]:
+        for row in [3,4]:
             ws.row_dimensions[row].height = headingrowheight
     set_headings_height()
+
 
     # now the meat of the file, the data
     
 
 
-    excelobject=[]                        
 
     # for each course
     def writecoursedata():
@@ -135,24 +139,33 @@ def make_excelfile(departmentname,universityname,
         This adds the rows to the excel object which later adds it with all the courses and stuff.
         Rowval is used later to add the rows on there
         '''
+        excelobject=[]                        
+
         totalhours=0
         # this dict is simple
-    
+        lengthofrows=length
+        columns=4
+        rows=[]
+        for i in range(lengthofrows):
+            row=[]
+            data=[f'{firstname}', f'{lastname}', f'{theme}', f'Number {i}: {random.randint(1,1000)}']
+
+            for col in range(columns):
+                row.append(data[col])
+            rows.append(row)
+
         for row in rows:
-            print(f'Row in Excel\n {row}')
-            coursename,coursecode,coursehours,upperlowerstatus=row
-            coursename=coursename.replace('SECOND','').replace('THIRD','')
+            excelobject.append(row)
+        
+        return rows,excelobject
 
-            excelobject.append([coursename,coursecode,coursehours,upperlowerstatus])
-
-            if ',' in coursehours:
-                coursehours=coursehours.split(',')[-1]
-            totalhours+=int(coursehours)
 
         # write an empty line at the end
-        return totalhours
 
-    totalhours=writecoursedata()
+    rows,excelobject=writecoursedata()
+    print(f'Rows: {rows}')    
+    print(f'Excel object :{excelobject}')
+
         
 
     # adding to excel file
@@ -211,20 +224,11 @@ def make_excelfile(departmentname,universityname,
 
 # -----------------------------end data stuff --------------------------------------------------------
     ws.append(blankrow)
-    totalhoursrow=['','',f'Total Hours: {totalhours}','','']
-
-    # this lastrow value is actually used for the last TWO rows
-    lastrowindex=len(excelobject)+6
-    for col_index, value in enumerate(totalhoursrow, start=1):
-        
-        # use.font to assign the font I see
-        cell=ws.cell(row=lastrowindex+1, column=col_index, value=value)
-        # FF=full opacity 
-        cell.font=datafont
+   
 
 
-    lastrow=['DegreeView','','','degreeviewsite.com']
-    lastrowindex+=2 # 6 rows before we start data stuff. Then rowcount is the amount of data. 
+    lastrow=['Custom Excel Themes','','','excelv2.dev']
+    lastrowindex=len(rows)+7
 
     # change the logo colors here
     for col_index, value in enumerate(lastrow, start=1):
@@ -235,12 +239,12 @@ def make_excelfile(departmentname,universityname,
         if col_index==4:
             # site link cell
             # keep this the same
-            lastcell.font=Font(name='Roboto',size=19, bold=True, color='000000')
+            lastcell.font=Font(name='Roboto',size=19, bold=True, color=urlcolor)
             lastcell.alignment=Alignment(horizontal='left',vertical='bottom')
 
         else:
             # logo cell - CHANGE THIS
-            lastcell.font=Font(name=logofontname,size=30, bold=True, color=logocolor)
+            lastcell.font=Font(name=logofontname,size=26, bold=True, color=logocolor)
             lastcell.alignment=Alignment(horizontal='left',vertical='center')
 
         # one more cause now we wrote the actual last row there
@@ -304,7 +308,7 @@ def make_excelfile(departmentname,universityname,
     ws.merge_cells('B2:E3')    
     ws.row_dimensions[2].height = 30
     ws.row_dimensions[3].height = 30
-    mergedrowcontent=f'{departmentname} Courses'
+    mergedrowcontent=f'{subject}'
     
     # refer to top left of merged cells
     titlecell=ws['B2']
@@ -317,11 +321,16 @@ def make_excelfile(departmentname,universityname,
 
     ws.merge_cells('D4:E4')    
 
-    ws['D4'].value = universityname
-    ws['D4'].font = universitynamefont
+    ws['D4'].value = rightsecondary
+    ws['D4'].font = secondaryfont
     ws['D4'].border = headingborder
     # right align
     ws['D4'].alignment = Alignment(horizontal='right')
+    # I inserted a row, thats why +=it
+    logorowindex=lastrowindex+1
+    ws.merge_cells(f'B{logorowindex}:D{logorowindex}')
+    ws[f'B{logorowindex}'].alignment = Alignment(horizontal='left')
+
 
 # ------------------------ CONTINUE FORMATTING STUFF -----------------------------------------------------
     # apply a border around the entire file -----------------------------------------------------------------------------
@@ -340,12 +349,12 @@ def make_excelfile(departmentname,universityname,
     
     # make the entire worksheet a color:
     # this is padding tho cause we override this later
-    paddingfill=PatternFill(fill_type="solid", start_color=paddingbackgroundcolor) #end_color='0000FF' fill_type="gray125" or linear later
+    paddingcolor=PatternFill(fill_type="solid", start_color=paddingbackgroundcolor) #end_color='0000FF' fill_type="gray125" or linear later
 
     # have the background be like a padding. 
     for row in ws.iter_rows(min_row=1, max_row=lastrowindex+2, min_col=1, max_col=6):
         for cell in row:
-            cell.fill = paddingfill
+            cell.fill = paddingcolor
     
     # reverse the background for cells with content:
 
@@ -370,11 +379,14 @@ def make_excelfile(departmentname,universityname,
     def style_rows_and_cols():       
         '''
         This actually adds the rows with all the courses and stuff.
-        Rowval is used later to add the rows on there
+        Rowval is used later to add the rows on there.
+
+        Here you can make rows different heights and do all kinds of crazy stuff
         '''
 
         allcenteredalignment=Alignment(vertical='center',horizontal='center')
         leftcenter=Alignment(vertical='center',horizontal='left')
+
         rowindexes=len(excelobject)+rowval
         for rowentry in range(rowval, rowindexes):
             # update it here so it updates by row not column...although
@@ -382,7 +394,7 @@ def make_excelfile(departmentname,universityname,
             if rowentry%2==0:            
                 ws.row_dimensions[rowentry].height = datarowheight  # sets height of the entire row
             else:
-                ws.row_dimensions[rowentry].height = datarowheight+50  # sets height of the entire row
+                ws.row_dimensions[rowentry].height = datarowheight  # sets height of the entire row
 
 
 
@@ -395,10 +407,10 @@ def make_excelfile(departmentname,universityname,
 
                 def col_alignments():
                     if col_index == 2:
-                        datacell.alignment=leftcenter
+                        datacell.alignment=allcenteredalignment
                     elif col_index == 3:
 
-                        datacell.alignment=leftcenter
+                        datacell.alignment=allcenteredalignment
 
                     elif col_index in [4]: #hourscol
 
@@ -406,7 +418,6 @@ def make_excelfile(departmentname,universityname,
                     elif col_index in [5]:
 
                         datacell.alignment=leftcenter
-                        
                 col_alignments()
 
     style_rows_and_cols()

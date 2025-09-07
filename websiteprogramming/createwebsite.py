@@ -43,13 +43,13 @@ class createWebsite:
         self.schoolnamekey=list(schooldata)[0]
         self.schoolname=schooldata[self.schoolnamekey]        
         self.schoolnameassetfolder=os.path.join(self.degreeviewfolderpath,self.schoolname)
-
+        
 
         # this one is fixed 
         # this should work. If not I need to find a mystery
 
         # -----------New cleaned schoolname and websitefoler stuff --------------
-        self.degreeviewwebsite_path='/Users/shalevwiden/Downloads/Projects/degreeviewwebsite/texas/utaustin-site'
+        self.degreeviewwebsite_path='/Users/shalevwiden/Downloads/Projects/new-ut-site-sep2/utaustin-site'
 
 
         self.cleanedschoolname=self.schoolname.replace(' ','').lower()
@@ -354,7 +354,7 @@ class createWebsite:
     <div class="topnav">
         <nav class="breadcrumbs">
         <ul>
-            <li><a href="../index.html">DegreeView UT</a></li>
+            <li><a href="../../index.html">DegreeView UT</a></li>
             <i class="fa fa-chevron-right"></i>
 
             <li id="current">{self.schoolname}</li>
@@ -363,9 +363,9 @@ class createWebsite:
         <nav class="homeandabout">
         <ul>
             
-              <li><a href="../index.html">Home</a></li>
-              <li><a href="../aboutpage.html">About</a></li>
-              <li><a href="../ut-stats.html">Stats</a></li>
+              <li><a href="../../index.html">Home</a></li>
+              <li><a href="../../aboutpage.html">About</a></li>
+              <li><a href="../../ut-stats.html">Stats</a></li>
         </ul>
         </nav>
     </div>
@@ -854,7 +854,7 @@ class createWebsite:
         <div class="topnav">
           <nav class="breadcrumbs">
             <ul>
-              <li><a href="../index.html">DegreeView UT</a></li>
+              <li><a href="../../index.html">DegreeView UT</a></li>
               <i class="fa fa-chevron-right"></i>
 
               <li><a href="{self.schoolpage}">{self.schoolname}</a></li>
@@ -868,9 +868,9 @@ class createWebsite:
           <nav class="homeandabout">
             <ul>
               
-              <li><a href="../index.html">Home</a></li>
-              <li><a href="../aboutpage.html">About</a></li>
-              <li><a href="../ut-stats.html">Stats</a></li>
+              <li><a href="../../index.html">Home</a></li>
+              <li><a href="../../aboutpage.html">About</a></li>
+              <li><a href="../../ut-stats.html">Stats</a></li>
             </ul>
           </nav>
         </div>
@@ -1422,7 +1422,7 @@ class createWebsite:
         <div class="topnav">
           <nav class="breadcrumbs">
             <ul>
-              <li><a href="../index.html">DegreeView UT</a></li>
+              <li><a href="../../index.html">DegreeView UT</a></li>
               <i class="fa fa-chevron-right"></i>
 
               <li><a href="{self.schoolpage}">{self.schoolname}</a></li>
@@ -1440,9 +1440,9 @@ class createWebsite:
           <nav class="homeandabout">
             <ul>
               
-              <li><a href="../index.html">Home</a></li>
-              <li><a href="../aboutpage.html">About</a></li>
-              <li><a href="../ut-stats.html">Stats</a></li>
+              <li><a href="../../index.html">Home</a></li>
+              <li><a href="../../aboutpage.html">About</a></li>
+              <li><a href="../../ut-stats.html">Stats</a></li>
             </ul>
           </nav>
         </div>
@@ -1704,9 +1704,10 @@ def unpacktheasset_into_createSchoolpages(theasset):
         
         # websiteobject.createschoolpages()
         # websiteobject.upload_degree_files()
-        websiteobject.create_degree_pages()
-        websiteobject.createschoolpages()
-        websiteobject.create_renderedcsv_pages()
+        # websiteobject.create_degree_pages()
+        # websiteobject.createschoolpages()
+        # websiteobject.create_renderedcsv_pages()
+        websiteobject.make_alldegrees_list()
         
 
 unpacktheasset_into_createSchoolpages(theasset=theasset)

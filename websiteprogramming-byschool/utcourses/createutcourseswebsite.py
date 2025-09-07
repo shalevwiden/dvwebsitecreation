@@ -27,14 +27,6 @@ from google.cloud import storage
 # use this to import stuff from other python files
 import importlib.util
 
-file_path = '/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/college_course_scraping/theassetcontainment.py'
-
-# but be something else besides config for the name
-spec = importlib.util.spec_from_file_location("config", file_path)
-config = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(config)
-
-theasset=config.theasset
 # you can also assign a function
 
 # the asset is important here because it contains the name of every degree in it.
@@ -50,6 +42,7 @@ class createWebsite:
         self.universityname='The University of Texas at Austin'
 
         self.randompagehspath="/Users/shalevwiden/Downloads/Projects/dvschoolsites/texas/utcoursessite/static/js/randompage.js"
+
         self.cloudbucketpath='https://storage.googleapis.com/utcourses'
 
 
@@ -84,7 +77,7 @@ class createWebsite:
 
         # can I have spaces is the question
 
-        self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewwebsite/texas/utcoursessite/departments'
+        self.websitepath='/Users/shalevwiden/Downloads/Projects/new-ut-site-sep2/utcoursessite/departments'
 
         self.images={
             
@@ -382,9 +375,9 @@ class createWebsite:
             <nav class="homeandabout">
             <ul>
                 
-                <li><a href="../../../index.html">Home</a></li>
-                <li><a href="../../../about.html">About</a></li>
-                <li><a href="../ut-stats.html">Stats</a></li>
+               <li><a href="../../utcoursesindex.html">Home</a></li>
+              <li><a href="../../../aboutpage.html">About</a></li>
+              <li><a href="../../../ut-stats.html">Stats</a></li>
             </ul>
             </nav>
         </div>
@@ -692,9 +685,11 @@ class createWebsite:
 
                     # mmds currently not needing to be uplaoded.
                     
-                    currentonlyupload='redtheme'
-                    limited_excel_list=[file for file in excellist if currentonlyupload in file]
-
+                    currentonlyupload=['redtheme','cursivetheme']
+                    limited_excel_list = [
+                        file for file in excellist 
+                        if any(substring in file for substring in currentonlyupload)
+                    ]
             
                     
                     # only one csv in there rn anyway
@@ -794,16 +789,15 @@ class createWebsite:
 
                     '''
 
-                    if '-' in departmentnamecleaned:
-                        departmentnamecleaned=departmentnamecleaned.split('-')
-                        departmentnamecleaned='-'.join(departmentnamecleaned[1:])
+                    
+
                     csv_path_list=[]
                     excel_path_list=[]
                     pdf_path_list=[]
                     mmd_path_list=[]
                     # os.walk recursively travels everything
 
-                    prefix=f'{startingletter.lower()}/{departmentnamecleaned}'
+                    prefix=f'{departmentnamecleaned}'
                     for root, dirs, files in os.walk(departmentfolder): 
                         for file in files:
                             # we neewd the fullpath in the list since thats the way it can be uploaded to google cloud.
@@ -835,9 +829,10 @@ class createWebsite:
                     return [csv_path_list,excel_path_list,pdf_path_list,mmd_path_list]
                 
                 csvlist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[0]
+                
                 # now use these lists in the website creation. 
                 # well this sample link stuff is working. Now I just have to upload them is the thing...
-                print(f'\n {departmentname} cloud links for csvs is\n: {csvlist}\n')
+                print(f'\n CSV LIST:{departmentname} cloud links for csvs is\n: {csvlist}\n')
 
                 # then I'll do upload to cloud, excel list, csv list, mermaid list, etc
                 
@@ -928,9 +923,9 @@ class createWebsite:
             <nav class="homeandabout">
                 <ul>
                 
-                <li><a href="../../../index.html">Home</a></li>
-                <li><a href="../../../about.html">About</a></li>
-                <li><a href="../ut-stats.html">Stats</a></li>
+               <li><a href="../../utcoursesindex.html">Home</a></li>
+              <li><a href="../../../aboutpage.html">About</a></li>
+              <li><a href="../../../ut-stats.html">Stats</a></li>
                 </ul>
             </nav>
             </div>
@@ -1053,6 +1048,10 @@ class createWebsite:
               <div class="statscontent">{statsdict.get('upper_count',"Not found")}, {statsdict.get('upper_percent',"Not found")}</div>
             </section>
             {gradcountsection}
+            <section class="statsline" id="averagelength">
+              <div class="statsname">Average Course Name Length (characters) </div>
+              <div class="statscontent">{statsdict['average_course_length']} </div>
+            </section>
 
             <section class="statsline" id="samenamecount">
               <div class="statsname">Number of {departmentnamehalf} Courses with "{departmentnamehalf}" in their name</div>
@@ -1196,328 +1195,6 @@ class createWebsite:
 
 # ---------------------END of make rendered degree pages
 
-    def create_renderedcsv_pages(self):
-        '''
-        These are the rendered csvs in a diferent HTML page
-        '''
-        def get_degreename_lists():
-            degreenamelist=[]
-            cleaneddegreenamelist=[]
-            for i in range(1,len(self.startingletter)):
-                        
-                key=list(self.startingletter)[i]
-                degreename=key
-                degreename=degreename.replace('/','-').strip()
-                degreenamelist.append(degreename)
-
-                # clean it for website links
-
-
-                degreenamecleaned=degreename.replace(' ','').lower().split('(')
-                degreenamecleaned=degreenamecleaned[0]+"-"+degreenamecleaned[-1]
-                degreenamecleaned=degreenamecleaned.replace(')','')
-
-                cleaneddegreenamelist.append(degreenamecleaned)
-            return degreenamelist,cleaneddegreenamelist
-        
-        degreenamelist, cleaneddegreenamelist=get_degreename_lists()
-            
-        # big for loop--------------------------------------------------------------------
-        for degreefolder in self.degreefolders:
-            print(f'Degree folder: \n{degreefolder}\n')
-            degreefolderpath=Path(degreefolder)
-
-
-            degreename=degreefolderpath.name
-
-            
-            # this thing here always happens regardless of the 
-            degreename=degreename.replace('/','-').strip()
-
-            
-            degreenamecleaned=degreename.replace(' ','').lower().split('(')
-            degreenamecleaned=degreenamecleaned[0]+"-"+degreenamecleaned[-1]
-            degreenamecleaned=degreenamecleaned.replace(')','')
-            
-
-            # this is the folder for it in degreeview
-
-            degreenameassetfolder=os.path.join(self.schoolfolderpath,degreename)
-            print(f'degreenameassetfolder:{degreenameassetfolder}')
-            
-
-            # this is the folder for it in degreeview
-
-            degreenameassetfolder=os.path.join(self.schoolfolderpath,degreename)
-            
-
-            # get file types
-
-           
-            # finish the rest of them when its time to upload.
-            def get_degree_assetcloudpaths_lists(degreenameassetfolder):
-                
-                '''
-                Reconstruct the asset names manually like this:
-
-                https://storage.googleapis.com/[BUCKET_NAME]/[OBJECT_NAME]
-
-                Unlike other functions, this is by degree not school.
-                As such this will not contain any school specific csv or excel files. 
-                Those have to be obtained with another function. 
-                This function returns the links that will be added to the website. That way I can get the links without a class A operation
-
-                '''
-                csv_path_list=[]
-                excel_path_list=[]
-                pdf_path_list=[]
-                mmd_path_list=[]
-                # os.walk recursively travels everything
-                for root, dirs, files in os.walk(degreenameassetfolder):
-                    for file in files:
-                        
-                        # we neewd the fullpath in the list since thats the way it can be uploaded to google cloud.
-
-                        googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/'
-
-                        if os.path.splitext(file)[1]=='.csv':
-                            objectname_incloud=f'{self.cleanedschoolname}/csvs/{file}'
-                            googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
-
-                            csv_path_list.append(googlecloudpath)
-                            # removes those dollar sign excel files. 
-                        elif os.path.splitext(file)[1]=='.xlsx' and not file.startswith(("~$", "$")):
-
-                            objectname_incloud=f'{self.cleanedschoolname}/excel-files/{file}'
-                            googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
-                        
-                            excel_path_list.append(googlecloudpath)
-                        elif os.path.splitext(file)[1]=='.pdf':
-                        
-                            objectname_incloud=f'{self.cleanedschoolname}/pdfs/{file}'
-                            googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
-                        
-                            pdf_path_list.append(googlecloudpath)
-                        elif os.path.splitext(file)[1]=='.mmd':
-                        
-                            objectname_incloud=f'{self.cleanedschoolname}/mmds/{file}'
-                            googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
-                            mmd_path_list.append(googlecloudpath)
-
-                return [csv_path_list,excel_path_list,pdf_path_list,mmd_path_list]
-            
-            csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
-            # now use these lists in the website creation. 
-            # well this sample link stuff is working. Now I just have to upload them is the thing...
-            print(f'\n {degreename} cloud links for csvs is\n: {csvlist}\n')
-
-                    
-            
-                              
-                         
-            
-            # then I'll do upload to cloud, excel list, csv list, mermaid list, etc
-            
-
-            displaydegreename=degreename.replace("-","/").strip().split('(')
-            displaydegreename=displaydegreename[0]+'<br>'+f'({displaydegreename[-1]}'
-
-            displaydegreename_nobr=displaydegreename.replace("<br>","")
-            
-            headhtmlcode=f'''
-<head>
- <meta
-      name="description"
-      content="Visualize {displaydegreename_nobr} at UT Austin through diagrams and tabular data."
-    />
-
-     <meta
-      name="keywords"
-      content="degree, major, UT Austin, degreeview, course diagrams, course excel files, degree stats, {displaydegreename_nobr}"
-    />
-
-    <meta name="author" content="DegreeView" />
-
-    <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-         <!-- favicon icon -->
-         <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
-         <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
-    <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
-
-  gtag('config', 'G-S06MYR1FV6');
-</script>
-        <title>{displaydegreename_nobr} Rendered CSV Page - DegreeView</title>
-
-            
-        <!-- main stylesheet -->
-        <link rel="stylesheet" href="../static/css/utddegreepage.css" />
-
-        <!-- animation stylesheet -->
-        <link rel="stylesheet" href="../static/css/animations.css" />
-
-        <!-- table styling -->
-        <link rel="stylesheet" href="../static/css/tablestyling.css" />
-
-        <!-- Rendered CSV css -->
-
-        <link rel="stylesheet" href="../static/css/renderedcsv.css" />
-
-        <!-- Barlow Font -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-
-        <!-- Roboto Font -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet"
-        />
-        <!-- Icons ( download icon and file icons from here is used) -->
-        <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        />
-        </head>
-
-'''
-            def make_abovemainsitecode():
-                abovemainsitecode=f'''
-
-      <div class="abovemainsite">
-        <div class="topnav">
-          <nav class="breadcrumbs">
-            <ul>
-              <li><a href="../index.html">DegreeView UTD</a></li>
-              <i class="fa fa-chevron-right"></i>
-
-              <li><a href="{self.schoolpage}">{startingletter}</a></li>
-              <i class="fa fa-chevron-right"></i>
-
-              <li>
-                <a href="{degreenamecleaned}.html">{displaydegreename_nobr}</a>
-              </li>
-
-              <i class="fa fa-chevron-right"></i>
-
-              <li id="current">Semester Table</li>
-            </ul>
-          </nav>
-          <nav class="homeandabout">
-            <ul>
-              
-              <li><a href="../index.html">Home</a></li>
-              <li><a href="../aboutpage.html">About</a></li>
-              <li><a href="../ut-stats.html">Stats</a></li>
-            </ul>
-          </nav>
-        </div>
-        <div class="degreenamebox">
-          <h1 id="degreenametitle">
-           {displaydegreename_nobr} Semester Table
-          </h1>
-        </div>
-      </div>
-'''
-                return abovemainsitecode
-
-            
-              
-            def makebodyhtmlcode():
-                '''
-                This is a little different from the makedegreepages one. Here I get the asset cloud lists and then refer to them.
-                '''
-                abovemainsitecode=make_abovemainsitecode()
-
-                csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
-
-                semesterlayoutcsv=[csv for csv in csvlist if "semester" in csv][0]
-
-                undermainsitecode=f'''
- 
-      <div class="undermainsite">
-        <!-- contains the rendered csv -->
-        <div class="renderedcsvdiv">
-
-          <div class="copyanddownload">
-            <div class="animatetable"> <button id="animatebutton">Animate</button></div>
-
-            <i class="fa-regular fa-copy" id="copyicon" title="Copy Table"></i>
-                    <!-- contains the rendered csv -->
-                <a href="{semesterlayoutcsv}"
-                id="downloadcsv"
-
-            >
-                        <!-- use this id to get the href to place into the javascript script to render with sheet js  -->
-
-            <i class="fa-solid fa-arrow-up-from-bracket" title="downloadcsv"></i
-            ></a>
-          </div>
-
-          <div id="semester-csvtablecontainer"></div>
-        </div>
-    </div>
-
-
-            '''
-
-                bodyhtmlcode=f'''                    
-                <body>       
-                <div class="sitecontainer">
-                {abovemainsitecode}
-                {undermainsitecode}
-                {self.footer}
-
-                        
-                <!-- new js -->
-                <!-- Sheet JS Script -->
-                <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-
-                <!-- Hover Script -->
-
-                <script src="../static/js/utdheadingcolorchange.js"></script>
-                <!-- copy script -->
-                <script src="../static/js/copytable.js"></script>
-
-                <!-- animate table script -->
-                <script src="../static/js/animatetable.js"></script>
-                </div>
-                </body>
-
-'''
-                return bodyhtmlcode
-
-
-            def makefullrenderedcsvpage():
-
-                bodyhtmlcode=makebodyhtmlcode()
-
-                fullhtmlcode=f'''
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    {headhtmlcode}\n
-                    {bodyhtmlcode}\n
-                    
-                    </html>'''
-
-    
-                # have to run createschoolpages() first so self.websiteschool folder works
-                renderedcsvpage=os.path.join(self.websiteschoolfolder,f'{degreenamecleaned}-rendered-csv.html')
-                with open(renderedcsvpage,'w') as htmlcsvpage:
-                    htmlcsvpage.write(fullhtmlcode)
-                print(f'\n Made {renderedcsvpage} as part of making degreepages\n')
-
-            makefullrenderedcsvpage()
-
-        return 0
-# ---------------------END of make rendered CSV pages
  
     def create_homepage_ul(self):
         '''
@@ -1659,7 +1336,8 @@ class createWebsite:
 
 def runcreateWebsite():
     websiteobject=createWebsite()
-    websiteobject.upload_department_files()
+    websiteobject.create_department_pages()
+    websiteobject.createletterpages()
 
     
 
