@@ -25,7 +25,9 @@ import sqlite3
 
 def makecustom_excelfile(subject, leftsecondary,rightsecondary,
                          
-                    firstname,lastname,theme,length,
+                    firstname,lastname,theme,
+                    length,
+                    columns,
 
                    savepath,rows,secondarycolor,bigbordercolor,smallerbordercolor,
                    gridlinecolor,rowtextcolor,titlecolor,
@@ -55,6 +57,8 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     # gets the default worksheet
     ws=departmentworkbook.active
 
+    # override it lol for now
+    columns=4
 
 
         
@@ -111,7 +115,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     # appends to the next empty row. Like writer.writerow(['']) for csvs
     ws.append(blankrow)
 
-    subheadingrow=['First Name','Last Name','Theme','Number (0-1000):']
+    subheadingrow=[f'{firstname}',f'{lastname}',f'{firstname}',f'{lastname}']
     ws.append(subheadingrow)
     # now apply styles
     previousrow = ws[ws.max_row]
@@ -144,11 +148,13 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
         totalhours=0
         # this dict is simple
         lengthofrows=length
+        # can change this later to expand it
         columns=4
         rows=[]
         for i in range(lengthofrows):
             row=[]
-            data=[f'{firstname}', f'{lastname}', f'{theme}', f'Number {i}: {random.randint(1,1000)}']
+            # data=[f'{firstname}', f'{lastname}', f'{theme}', f'Number {i}: {random.randint(1,1000)}']
+            data=[f'{firstname}', f'{lastname}',f'{firstname}', f'{lastname}']
 
             for col in range(columns):
                 row.append(data[col])
@@ -417,7 +423,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
                         datacell.alignment=allcenteredalignment
                     elif col_index in [5]:
 
-                        datacell.alignment=leftcenter
+                        datacell.alignment=allcenteredalignment
                 col_alignments()
 
     style_rows_and_cols()
