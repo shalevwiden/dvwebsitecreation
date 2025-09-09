@@ -28,13 +28,15 @@ import sqlite3
 def makecustom_excelfile(subject, leftsecondary,rightsecondary,
                          
                     firstname,lastname,theme,
-                    length,                   
-                    columns,
+                    
 
-                   savepath,rows,secondarycolor,bigbordercolor,smallerbordercolor,
+                   savepath,rows,
+                   
+                   secondarycolor,bigbordercolor,smallerbordercolor,
                    gridlinecolor,rowtextcolor,titlecolor,
                    mainbackgroundcolor,paddingbackgroundcolor,
                    subheadingbordercolor,
+                   subheadingrow=[],
                    datafontname="Helvetica",titlefontname='Calibri',
                    logofontname="Barlow",
                    logocolor="ffffff",
@@ -45,7 +47,10 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
                    headingsfontcolor='ffffff',
                    datarowheight=30,
                    headingrowheight=40,
-                   columnscaler=1,                    
+                   columnscaler=1,   
+
+                   length=2,                   
+                    columns=4,                 
 
                    ):
 
@@ -117,7 +122,11 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     # appends to the next empty row. Like writer.writerow(['']) for csvs
     ws.append(blankrow)
 
-    subheadingrow=[f'{firstname}',f'{lastname}',f'{firstname}',f'{lastname}']
+    # quick check
+    if not len(subheadingrow)>1:
+        
+        subheadingrow=[f'{firstname}',f'{lastname}',f'{firstname}',f'{lastname}']
+    
     ws.append(subheadingrow)
     # now apply styles
     previousrow = ws[ws.max_row]
@@ -143,24 +152,17 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     def writecoursedata():
         '''
         This adds the rows to the excel object which later adds it with all the courses and stuff.
-        Rowval is used later to add the rows on there
+        Rowval is used later to add the rows on there.
+
+        This uses rows passed in from creation.py
         '''
         excelobject=[]                        
 
         totalhours=0
         # this dict is simple
-        lengthofrows=length
+        lengthofrows=len(rows)
         # can change this later to expand it
-        columns=4
-        rows=[]
-        for i in range(lengthofrows):
-            row=[]
-            # data=[f'{firstname}', f'{lastname}', f'{theme}', f'Number {i}: {random.randint(1,1000)}']
-            data=[f'{firstname}', f'{lastname}',f'{firstname}', f'{lastname}']
-
-            for col in range(columns):
-                row.append(data[col])
-            rows.append(row)
+        
 
         for row in rows:
             excelobject.append(row)
@@ -277,6 +279,11 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
         # generator must be in ()
         cellwidthgenerator=(len(str(cell.value)) if cell.value else 0 for cell in column_cells)
         colwidth = max(cellwidthgenerator)
+
+
+        mincolwidth=10
+        if colwidth<mincolwidth:
+            colwidth=mincolwidth
 
         firstcell=column_cells[0]
         # every cell has a .column_letter attribute
