@@ -13,6 +13,8 @@ from openpyxl.utils import column_index_from_string
 
 # this assigns cells colors
 from openpyxl.styles import PatternFill
+from openpyxl.utils import get_column_letter
+
 
 import time
 import os

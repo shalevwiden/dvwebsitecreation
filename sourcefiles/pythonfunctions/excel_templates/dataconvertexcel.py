@@ -24,7 +24,9 @@ from openpyxl.styles import Border, Side, Alignment
 
 import sqlite3
 
-
+'''
+This is for converting data from .DTA files, csvs, and more, into workable with excelfiles
+'''
 def makecustom_excelfile(subject, leftsecondary,rightsecondary,
                          
                     firstname,lastname,theme,
