@@ -42,12 +42,13 @@ def make_degreeplan_excel_files(
             logocolor="ffffff",
 
             urlcolor='e7e9eb',
-            subheadingsize=22,
+            subheadingsize=20,
             subheadingcolor='ffffff',
             headingsfontname='Calibri',
             headingsfontcolor='ffffff',
             datarowheight=30,
             headingrowheight=40,
+            # leave it out for now
             columnscaler=1
 ):
 
@@ -89,7 +90,7 @@ def make_degreeplan_excel_files(
     # lighter burnt orange
     utnamefont=Font(size=19, color=schoolnamecolor, name='Georgia', bold=True)
     # update later
-    semesterfont=Font(bold=True,size=18,color='ffffff')
+    semesterfont=Font(bold=True,size=18,color=rowtextcolor)
 
     # applied to the actual semester data. 
     datafont=Font(size=15,name=datafontname,color=rowtextcolor)
