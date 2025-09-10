@@ -1,0 +1,26 @@
+{
+  "secondarycolor": "FF0000",
+  "bigbordercolor": "FF9900",
+  "smallerbordercolor": "FFFF00",
+  "subheadingbordercolor": "00FF00",
+  "gridlinecolor": "00CCFF",
+  "rowtextcolor": "FFFFFF",
+  "titlecolor": "FF00FF",
+  "mainbackgroundcolor": "1A1A1A",
+  "paddingbackgroundcolor": "333333",
+
+  "datafontname": "Courier New",
+  "titlefontname": "Orbitron",
+  "logofontname": "Audiowide",
+  "logocolor": "00FFCC",
+  "urlcolor": "FF66FF",
+
+  "subheadingsize": 18,
+  "subheadingcolor": "00FF99",
+  "headingsfontname": "Verdana",
+  "headingsfontcolor": "FFFFFF",
+
+  "datarowheight": 24,
+  "headingrowheight": 32,
+  "columnscaler": 1.4
+}

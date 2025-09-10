@@ -29,7 +29,10 @@ import sqlite3
 def make_degreeplan_excel_files(
             universityname,
             degreename,schoolname,
-            savepath,semesterdictionary,
+
+            savepath,
+            semesterdictionary,
+
             schoolnamecolor,bigbordercolor,smallerbordercolor,
             gridlinecolor,rowtextcolor,titlecolor,
             mainbackgroundcolor,paddingbackgroundcolor,
@@ -37,6 +40,8 @@ def make_degreeplan_excel_files(
             datafontname="Helvetica",titlefontname='Calibri',
             logofontname="Barlow",
             logocolor="ffffff",
+
+            urlcolor='e7e9eb',
             subheadingsize=22,
             subheadingcolor='ffffff',
             headingsfontname='Calibri',
@@ -45,7 +50,6 @@ def make_degreeplan_excel_files(
             headingrowheight=40,
             columnscaler=1
 ):
-
 
 
 
@@ -58,8 +62,10 @@ def make_degreeplan_excel_files(
 
     totalhours=0
     numberofsemesters=len(semesterdictionary)
-    excelobject=[]                        
-    print(f'Excel object has been reset to {len(excelobject)}\n\n\n')
+
+
+    
+
 
 
 
@@ -78,8 +84,8 @@ def make_degreeplan_excel_files(
 
     headingborder=Border(bottom=Side(style='mediumDashDot',color=smallerbordercolor))
 
-    headingsfonts=Font(size=18,bold=True,color='ffffff')
-    subheadingsfont=Font(size=17,bold=True,color='ffffff')
+    headingsfonts=Font(size=18,bold=True,color=headingsfontcolor,name=headingsfontname)
+    subheadingsfont=Font(size=subheadingsize,bold=True,color=subheadingcolor)
     # lighter burnt orange
     utnamefont=Font(size=19, color=schoolnamecolor, name='Georgia', bold=True)
     # update later
@@ -134,10 +140,17 @@ def make_degreeplan_excel_files(
         cell.font=subheadingsfont
         cell.alignment=leftalign
 
+    def set_headings_height():
+        for row in [3,4,5]:
+            ws.row_dimensions[row].height = headingrowheight
+    set_headings_height()
 
     # now the meat of the file, the data
     
 
+    excelobject=[]
+    print(f'Excel object has been reset to {len(excelobject)}\n\n\n')
+                        
 
 
     # for each semester
@@ -234,7 +247,7 @@ def make_degreeplan_excel_files(
         # FF=full opacity 
         if col_index==6:
             # site link cell
-            lastcell.font=Font(name='Roboto',size=19, bold=True, color='e7e9eb')
+            lastcell.font=Font(name='Roboto',size=19, bold=True, color=urlcolor)
             lastcell.alignment=Alignment(horizontal='left',vertical='bottom')
 
         else:
@@ -243,7 +256,8 @@ def make_degreeplan_excel_files(
             lastcell.alignment=Alignment(horizontal='left',vertical='center')
 
         # one more cause now we wrote the actual last row there
-        ws.row_dimensions[lastrowindex+1].height = 50
+    ws.row_dimensions[lastrowindex+1].height = 50
+    print(lastrowindex+1)
 
 
 
@@ -352,6 +366,54 @@ def make_degreeplan_excel_files(
     
     # this is the border that will go around everything.
     # Use logic to only add border to the cells on the outside.
+
+    def style_rows_and_cols():       
+        '''
+        This actually adds the rows with all the courses and stuff.
+        Rowval is used later to add the rows on there
+
+        This is a way to add row specific styling like stripes or dots or that stuff fr lol.
+
+
+        '''
+
+        allcenteredalignment=Alignment(vertical='center',horizontal='center')
+        leftcenter=Alignment(vertical='center',horizontal='left')
+        rowindexes=len(excelobject)+rowval
+        for rowentry in range(rowval, rowindexes):
+            # update it here so it updates by row not column...although
+
+            if rowentry%2==0:            
+                ws.row_dimensions[rowentry].height = datarowheight  # sets height of the entire row
+            else:
+                ws.row_dimensions[rowentry].height = datarowheight  # sets height of the entire row
+
+
+
+
+                    # start at column one, and then remember the padding rows are added later. 
+            excelobjectrowindex=rowentry-rowval
+            for col_index, value in enumerate(excelobject[excelobjectrowindex], start=2):
+                # change alignnment here. 1 indexed not 0
+                datacell = ws.cell(row=rowentry, column=col_index)
+
+                def col_alignments():
+                    if col_index == 2:
+                        datacell.alignment=leftcenter
+                    elif col_index == 3:
+
+                        datacell.alignment=leftcenter
+
+                    elif col_index in [4]: #hourscol
+
+                        datacell.alignment=allcenteredalignment
+                    elif col_index in [5]:
+
+                        datacell.alignment=leftcenter
+                        
+                # col_alignments()
+
+    style_rows_and_cols()
 
     entire_ws_border=Side(style='thick',color=bigbordercolor)
     

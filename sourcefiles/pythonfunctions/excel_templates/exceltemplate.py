@@ -282,7 +282,7 @@ def make_excelfile(departmentname,universityname,
         
         # the semester column
         elif col_index==2:
-            ws.column_dimensions[col_letter].width=int(colwidth)*1.3*columnscaler
+            ws.column_dimensions[col_letter].width=int(colwidth)*1.5*columnscaler
     
 
         else:
