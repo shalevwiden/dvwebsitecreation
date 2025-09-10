@@ -2,6 +2,7 @@
 import sys
 import os
 import json
+import pandas as pd
 
 import csv
 import random
@@ -24,19 +25,19 @@ from openpyxl.styles import Border, Side, Alignment
 
 import sqlite3
 
-
-def makecustom_excelfile(subject, leftsecondary,rightsecondary,
+'''
+This is for converting data from .DTA files, csvs, and more, into workable with excelfiles
+'''
+def  makecustom_excelfile2(subject, leftsecondary,rightsecondary,
                          
-                    firstname,lastname,theme,
-                    
+                    theme, 
+                    columnheadings,
+                    rows,
 
-                   savepath,rows,
-                   
-                   secondarycolor,bigbordercolor,smallerbordercolor,
+                   savepath,secondarycolor,bigbordercolor,smallerbordercolor,
                    gridlinecolor,rowtextcolor,titlecolor,
                    mainbackgroundcolor,paddingbackgroundcolor,
                    subheadingbordercolor,
-                   subheadingrow=[],
                    datafontname="Helvetica",titlefontname='Calibri',
                    logofontname="Barlow",
                    logocolor="ffffff",
@@ -47,10 +48,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
                    headingsfontcolor='ffffff',
                    datarowheight=30,
                    headingrowheight=40,
-                   columnscaler=1,   
-
-                   length=2,                   
-                    columns=4,                 
+                   columnscaler=1,                    
 
                    ):
 
@@ -87,6 +85,12 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
 
     leftalign=Alignment(horizontal='left')
     centeralign=Alignment(horizontal='center')
+
+    # plus one because of how columns work in excel
+    lastcolumnletter=get_column_letter(len(columnheadings)+1)
+    secondtolastletter=get_column_letter(len(columnheadings))
+
+    lastcolumnindex=len(columnheadings)+1
     
 
 
@@ -122,16 +126,13 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     # appends to the next empty row. Like writer.writerow(['']) for csvs
     ws.append(blankrow)
 
-    # quick check
-    if not len(subheadingrow)>1:
-        
-        subheadingrow=[f'{firstname}',f'{lastname}',f'{firstname}',f'{lastname}']
-    
+    subheadingrow=columnheadings
     ws.append(subheadingrow)
     # now apply styles
     previousrow = ws[ws.max_row]
 
-    print(f"previousrow was {[cell.value for cell in previousrow]}")
+    # print(f"previousrow was {[cell.value for cell in previousrow]}")
+
     for cell in ws[5]:
         cell.font=subheadingsfont
         cell.alignment=leftalign
@@ -149,20 +150,21 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
 
 
     # for each course
-    def writecoursedata():
+    def writecoursedata(subrows):
         '''
         This adds the rows to the excel object which later adds it with all the courses and stuff.
-        Rowval is used later to add the rows on there.
-
-        This uses rows passed in from creation.py
+        Rowval is used later to add the rows on there
         '''
         excelobject=[]                        
 
         totalhours=0
         # this dict is simple
-        lengthofrows=len(rows)
+        lengthofrows=len(subrows)
         # can change this later to expand it
         
+        rows=[]
+        for row in subrows:
+            rows.append(row)
 
         for row in rows:
             excelobject.append(row)
@@ -172,7 +174,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
 
         # write an empty line at the end
 
-    rows,excelobject=writecoursedata()
+    rows,excelobject=writecoursedata(subrows=rows)
 
 
         
@@ -209,19 +211,8 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
                 # change alignnment here. 1 indexed not 0
                 datacell = ws.cell(row=rowentry, column=col_index, value=value)
 
-                if col_index == 1:
-                    datacell.font=datafont
-                    datacell.alignment=leftalign
-                elif col_index == 2:
-                    datacell.font=datafont
-                    datacell.alignment=leftalign
-
-                elif col_index in [3]: #hourscol
-                    datacell.font=datafont
-                    datacell.alignment=centeralign
-                elif col_index in [4]:
-                    datacell.font=datafont
-                    datacell.alignment=leftalign
+                datacell.font=datafont
+                # alignment happens later
     style_rows_and_cols()
                 
     
@@ -239,25 +230,42 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     # normally put like custom excel themes here
     # put a url later
     reddituser='Digital Navigator'
-    lastrow=['Animationize','','','Sep 9']
+    lastrow=['Econometrics']
+    lastrow += [''] * (len(columnheadings)  - 2)
+    lastrow += ['ECO 441K']
+
+    
+
+
     lastrowindex=len(rows)+7
 
     # change the logo colors here
     for col_index, value in enumerate(lastrow, start=1):
         
         # use.font to assign the font I see
-        lastcell=ws.cell(row=lastrowindex, column=col_index, value=value)
+        lastrowcell=ws.cell(row=lastrowindex, column=col_index, value=value)
         # FF=full opacity 
-        if col_index==4:
+        if col_index==lastcolumnindex-1:
             # site link cell
             # keep this the same
-            lastcell.font=Font(name='Roboto',size=19, bold=True, color=urlcolor)
-            lastcell.alignment=Alignment(horizontal='left',vertical='bottom')
+            lastrowcell.value='ECO 441K'
+            lastrowcell.font=Font(name='Roboto',size=19, bold=True, color=urlcolor)
+            lastrowcell.alignment=Alignment(horizontal='left',vertical='bottom')
 
-        else:
-            # logo cell - CHANGE THIS
-            lastcell.font=Font(name=logofontname,size=26, bold=True, color=logocolor)
-            lastcell.alignment=Alignment(horizontal='left',vertical='center')
+            cell = ws.cell(row=lastrowindex, column=lastcolumnindex)
+
+            
+
+
+        elif col_index==1:
+            logocell=lastrowcell
+            logocell.value='Econometrics'
+            logocell.font=Font(name=logofontname,size=26, bold=True, color=logocolor)
+            logocell.alignment=Alignment(horizontal='left',vertical='center')
+
+        # else:
+        #     lastrowcell.value=''
+
 
         # one more cause now we wrote the actual last row there
         ws.row_dimensions[lastrowindex+1].height = 50
@@ -280,10 +288,10 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
         cellwidthgenerator=(len(str(cell.value)) if cell.value else 0 for cell in column_cells)
         colwidth = max(cellwidthgenerator)
 
-
-        mincolwidth=12
+        mincolwidth=10
         if colwidth<mincolwidth:
             colwidth=mincolwidth
+        
 
         firstcell=column_cells[0]
         # every cell has a .column_letter attribute
@@ -319,16 +327,17 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     def standardize_colwidths():
         '''animate this by causing it to shrink and grow.'''
         width=30
-        for index in range(1, columns + 1):
+        for index in range(1, len(columnheadings) + 1):
             col_letter = get_column_letter(index)
 
             ws.column_dimensions[col_letter].width=width
 
-    standardize_colwidths()
+    # standardize_colwidths()
 
+    newcolumnindex=get_column_letter(len(columnheadings)+1)
 
     ws.column_dimensions['A'].width=15
-    ws.column_dimensions['F'].width=15
+    ws.column_dimensions[f'{newcolumnindex}'].width=15
     ws.row_dimensions[1].height=45
     ws.row_dimensions[lastrowindex+2].height=45
 
@@ -336,7 +345,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     # ------------------------------------TITLE STUFF-------------------------------------------
 
     # create a merged 'Degree view and departmentname header can't lie".
-    ws.merge_cells('B2:E3')    
+    ws.merge_cells(f'B2:{lastcolumnletter}3')    
     ws.row_dimensions[2].height = 30
     ws.row_dimensions[3].height = 30
     mergedrowcontent=f'{subject}'
@@ -348,15 +357,16 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     titlecell.font=titlefont
 
     # NOW THE UNIVERSITY CELL STUFF
-    ws.merge_cells('B4:C4')    
+    avoidletterslist=['A','B','C']
+    if secondtolastletter not in avoidletterslist:    
+        ws.merge_cells(f'{secondtolastletter}4:{lastcolumnletter}4')    
 
-    ws.merge_cells('D4:E4')    
-
-    ws['D4'].value = rightsecondary
-    ws['D4'].font = secondaryfont
-    ws['D4'].border = headingborder
-    # right align
-    ws['D4'].alignment = Alignment(horizontal='right')
+        print(f'Second to last letter {secondtolastletter}')
+        ws[f'{secondtolastletter}4'].value = rightsecondary
+        ws[f'{secondtolastletter}4'].font = secondaryfont
+        ws[f'{secondtolastletter}4'].border = headingborder
+        # right align
+        ws[f'{secondtolastletter}4'].alignment = Alignment(horizontal='right')
     # I inserted a row, thats why +=it
     logorowindex=lastrowindex+1
     ws.merge_cells(f'B{logorowindex}:D{logorowindex}')
@@ -368,14 +378,18 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
 
     # make it responsive based on the amount of data
     # remove the +1 here to have no border
-    rows = list(ws['B2':f'E{lastrowindex+1}'])
+    
+    rows = list(ws['B2':f'{lastcolumnletter}{lastrowindex+1}'])
     min_row = 2
     max_row = lastrowindex+1
 
     min_col = column_index_from_string('B')  
-    max_col = column_index_from_string('E') 
+    secondtolastcolindex=column_index_from_string(secondtolastletter)
 
-    
+
+    maxcolindex=column_index_from_string(secondtolastletter)
+    print(f'Max column index : {maxcolindex}')
+
     # where border code used to be
     
     # make the entire worksheet a color:
@@ -383,7 +397,8 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     paddingcolor=PatternFill(fill_type="solid", start_color=paddingbackgroundcolor) #end_color='0000FF' fill_type="gray125" or linear later
 
     # have the background be like a padding. 
-    for row in ws.iter_rows(min_row=1, max_row=lastrowindex+2, min_col=1, max_col=6):
+    # +1 because of the new column added on the right
+    for row in ws.iter_rows(min_row=1, max_row=lastrowindex+2, min_col=1, max_col=lastcolumnindex+1):
         for cell in row:
             cell.fill = paddingcolor
     
@@ -400,7 +415,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
         bottom=Side(border_style="thin", color=gridlinecolor)
     )
 
-    for row in ws.iter_rows(min_row=min_row, max_row=max_row, min_col=min_col, max_col=max_col):
+    for row in ws.iter_rows(min_row=min_row, max_row=max_row, min_col=min_col, max_col=lastcolumnindex):
         for cell in row:
             cell.fill = backgroundfill
             cell.border=gridline_border
@@ -437,20 +452,12 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
                 datacell = ws.cell(row=rowentry, column=col_index)
 
                 def col_alignments():
-                    if col_index == 2:
-                        datacell.alignment=leftcenter
-                    elif col_index == 3:
-
-                        datacell.alignment=leftcenter
-
-                    elif col_index in [4]: #hourscol
-
-                        datacell.alignment=leftcenter
-                    elif col_index in [5]:
-
-                        datacell.alignment=leftcenter
+                     
+                    datacell.alignment=allcenteredalignment
+                    
                 col_alignments()
 
+    # big function call
     style_rows_and_cols()
     
     
@@ -474,14 +481,15 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     top=entire_ws_border if row_index == min_row else current.top,
     bottom=entire_ws_border if row_index == max_row else current.bottom,
     left=entire_ws_border if col_index == min_col else current.left,
-    right=entire_ws_border if col_index == max_col else current.right
+    right=entire_ws_border if col_index == lastcolumnindex else current.right
 )
 
     
 
     # where is this one?
     # this is like the subheading border
-    for row in ws.iter_rows(min_row=6, max_row=6, min_col=2, max_col=5):
+    # keep min and max row 6 to apply the heading border
+    for row in ws.iter_rows(min_row=6, max_row=6, min_col=2, max_col=secondtolastcolindex):
         for cell in row:
             current = cell.border
             cell.border = Border(
@@ -500,7 +508,6 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
 
         )   
     # It was applied the whole time just not visible
-    print(f"Applied border to logocell {logocell.coordinate}, row={logocell.row}, column={logocell.column}")
     
     
     departmentworkbook.save(savepath)
