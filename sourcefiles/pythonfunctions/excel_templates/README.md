@@ -6,3 +6,8 @@
 
 Also we're in the dv website creation repo.
 Which is getting very big and very valuable now lol.
+
+### September 13, 2025
+
+The length of column headings is like the columns argument.
+This is important to note.

@@ -28,9 +28,8 @@ import sqlite3
 '''
 This is for converting data from .DTA files, csvs, and more, into workable with excelfiles
 '''
-def  makecustom_excelfile2(subject, leftsecondary,rightsecondary,
+def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
                          
-                    theme, 
                     columnheadings,
                     rows,
 
@@ -38,6 +37,7 @@ def  makecustom_excelfile2(subject, leftsecondary,rightsecondary,
                    gridlinecolor,rowtextcolor,titlecolor,
                    mainbackgroundcolor,paddingbackgroundcolor,
                    subheadingbordercolor,
+                    
                    datafontname="Helvetica",titlefontname='Calibri',
                    logofontname="Barlow",
                    logocolor="ffffff",
@@ -76,7 +76,8 @@ def  makecustom_excelfile2(subject, leftsecondary,rightsecondary,
     # this is for like Coursename, Courserow, etc.
     subheadingsfont=Font(size=subheadingsize,bold=True,color=subheadingcolor)
     # lighter burnt orange
-    secondaryfont=Font(size=19, color=secondarycolor, name='Georgia', bold=True)
+    # reuse the headingsfontname argument
+    secondaryfont=Font(size=19, color=secondarycolor, name=headingsfontname, bold=True)
     # update later
 
     # applied to the actual semester data. 
@@ -230,9 +231,9 @@ def  makecustom_excelfile2(subject, leftsecondary,rightsecondary,
     # normally put like custom excel themes here
     # put a url later
     reddituser='Digital Navigator'
-    lastrow=['Econometrics']
+    lastrow=['Animotion']
     lastrow += [''] * (len(columnheadings)  - 2)
-    lastrow += ['ECO 441K']
+    lastrow += ['ANM']
 
     
 
@@ -248,7 +249,7 @@ def  makecustom_excelfile2(subject, leftsecondary,rightsecondary,
         if col_index==lastcolumnindex-1:
             # site link cell
             # keep this the same
-            lastrowcell.value='ECO 441K'
+            lastrowcell.value='ANM'
             lastrowcell.font=Font(name='Roboto',size=19, bold=True, color=urlcolor)
             lastrowcell.alignment=Alignment(horizontal='left',vertical='bottom')
 
@@ -259,7 +260,7 @@ def  makecustom_excelfile2(subject, leftsecondary,rightsecondary,
 
         elif col_index==1:
             logocell=lastrowcell
-            logocell.value='Econometrics'
+            logocell.value='Animotion'
             logocell.font=Font(name=logofontname,size=26, bold=True, color=logocolor)
             logocell.alignment=Alignment(horizontal='left',vertical='center')
 
@@ -348,7 +349,7 @@ def  makecustom_excelfile2(subject, leftsecondary,rightsecondary,
     ws.merge_cells(f'B2:{lastcolumnletter}3')    
     ws.row_dimensions[2].height = 30
     ws.row_dimensions[3].height = 30
-    mergedrowcontent=f'{subject}'
+    mergedrowcontent=f'{heading}'
     
     # refer to top left of merged cells
     titlecell=ws['B2']

@@ -61,7 +61,6 @@ def make_degreeplan_excel_files(
 
     '''
 
-    totalhours=0
     numberofsemesters=len(semesterdictionary)
 
 
@@ -156,6 +155,8 @@ def make_degreeplan_excel_files(
 
     # for each semester
     rowcount=0
+    totalhours=0
+
     for semesternum in range(numberofsemesters):
         semester=list(semesterdictionary)[semesternum]
         # semester courses is a dictionary of its own as well
@@ -171,8 +172,10 @@ def make_degreeplan_excel_files(
                 coursecode, coursehours, upperdivstatus, coursecategory=semestercourses[coursename]
                 excelobject.append(["",coursecode,coursename,coursehours,coursecategory,upperdivstatus])
                 rowcount+=1
-                if coursehours!='':
+                if coursehours!='' and "or" not in coursecode[0:2]:
                     totalhours+=int(coursehours)
+                else:
+                    print(f'{coursename} not added' )
             
             else:
                 listofcourses=semestercourses[coursename]
@@ -181,8 +184,12 @@ def make_degreeplan_excel_files(
                     excelobject.append(["",coursecode,coursename,coursehours,coursecategory,upperdivstatus])
                     rowcount+=1
 
-                    if coursehours!='':
+                    if coursehours!='' and "or" not in coursecode[0:2]:
                         totalhours+=int(coursehours)
+                        print(f'{coursename} added' )
+
+                    else:
+                        print(f'{coursename} not added' )
 
 
         # line between semesters
@@ -192,6 +199,8 @@ def make_degreeplan_excel_files(
     # adding to excel file
     # rowval is important for adding rows in order
     rowval=6
+    print(totalhours)
+
 
     for rowentry in range(len(excelobject)):
         # update it here so it updates by row not column...although
@@ -294,7 +303,7 @@ def make_degreeplan_excel_files(
             
         # the semester column
         elif col_index==2:
-            ws.column_dimensions[col_letter].width=int(colwidth)*1.26
+            ws.column_dimensions[col_letter].width=int(colwidth)*1.7
     
 
         else:

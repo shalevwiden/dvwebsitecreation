@@ -12,6 +12,9 @@ from openpyxl import Workbook
 from openpyxl.utils import column_index_from_string
 from openpyxl.utils import get_column_letter
 
+from openpyxl.worksheet.views import Selection
+
+
 
 # this assigns cells colors
 from openpyxl.styles import PatternFill
@@ -78,7 +81,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     # this is for like Coursename, Courserow, etc.
     subheadingsfont=Font(size=subheadingsize,bold=True,color=subheadingcolor)
     # lighter burnt orange
-    secondaryfont=Font(size=19, color=secondarycolor, name='Georgia', bold=True)
+    secondaryfont=Font(size=19, color=secondarycolor, name=headingsfontname, bold=True)
     # update later
 
     # applied to the actual semester data. 
@@ -239,7 +242,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     # normally put like custom excel themes here
     # put a url later
     reddituser='Digital Navigator'
-    lastrow=['Animationize','','','Sep 9']
+    lastrow=['CE Productions','','','']
     lastrowindex=len(rows)+7
 
     # change the logo colors here
@@ -281,7 +284,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
         colwidth = max(cellwidthgenerator)
 
 
-        mincolwidth=12
+        mincolwidth=15
         if colwidth<mincolwidth:
             colwidth=mincolwidth
 
@@ -502,6 +505,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     # It was applied the whole time just not visible
     print(f"Applied border to logocell {logocell.coordinate}, row={logocell.row}, column={logocell.column}")
     
-    
+    ws.sheet_view.selection = [Selection(activeCell="J20", sqref="J20")]
+
     departmentworkbook.save(savepath)
     print(f'Saved workbook at {savepath}')
