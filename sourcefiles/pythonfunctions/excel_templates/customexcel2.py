@@ -12,6 +12,8 @@ from openpyxl import Workbook
 # use this to define the function define_start_column
 from openpyxl.utils import column_index_from_string
 from openpyxl.utils import get_column_letter
+from openpyxl.worksheet.views import Selection
+
 
 
 # this assigns cells colors
@@ -71,13 +73,17 @@ def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
     headingborder=Border(bottom=Side(style='mediumDashDot',color=smallerbordercolor))
 
     # this is for the row that has the department name and the universityname (latter is updated later)
-    headingsfonts=Font(size=21,bold=True,color=headingsfontcolor,name=headingsfontname)
+    headingsfonts=Font(size=21,bold=True,color=titlecolor,name=headingsfontname)
 
     # this is for like Coursename, Courserow, etc.
-    subheadingsfont=Font(size=subheadingsize,bold=True,color=subheadingcolor)
+    subheadingsfont=Font(size=subheadingsize,bold=True,color=titlecolor)
     # lighter burnt orange
     # reuse the headingsfontname argument
-    secondaryfont=Font(size=19, color=secondarycolor, name=headingsfontname, bold=True)
+    try:
+        secondaryfont=Font(size=19, color=secondarycolor, name=headingsfontname, bold=True)
+    except ValueError:
+        print(f'Secondary color was  {secondarycolor}\n\n\n\n\n\n\n')
+
     # update later
 
     # applied to the actual semester data. 
@@ -283,42 +289,43 @@ def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
 
     # ws.columns gets columns. Each column is a tuple of cells
     # this is for dynamic widths. I want standard widths now.
-    for column_cells in ws.columns:
-        # max function gets the max in a list. Same for min
-        # generator must be in ()
-        cellwidthgenerator=(len(str(cell.value)) if cell.value else 0 for cell in column_cells)
-        colwidth = max(cellwidthgenerator)
+    def specific_column_widths():
+        for column_cells in ws.columns:
+            # max function gets the max in a list. Same for min
+            # generator must be in ()
+            cellwidthgenerator=(len(str(cell.value)) if cell.value else 0 for cell in column_cells)
+            colwidth = max(cellwidthgenerator)
 
-        mincolwidth=10
-        if colwidth<mincolwidth:
-            colwidth=mincolwidth
+            mincolwidth=10
+            if colwidth<mincolwidth:
+                colwidth=mincolwidth
+            
+
+            firstcell=column_cells[0]
+            # every cell has a .column_letter attribute
+            col_letter = firstcell.column_letter
+            col_index=column_index_from_string(col_letter)
+            # scale the width factor to make the columns wider
+            if col_index==7:  
+                # make the UT Austin column alot wider
+                ws.column_dimensions[col_letter].width = int(colwidth)*2*columnscaler
+            elif col_index==6:
+                ws.column_dimensions[col_letter].width = int(colwidth)*1.9*columnscaler
+            elif col_index==5:
+                ws.column_dimensions[col_letter].width=int(colwidth)*1.9*columnscaler
+            elif col_index==4:
+                ws.column_dimensions[col_letter].width=int(colwidth)*1.9*columnscaler
+            elif col_index==3:
+                ws.column_dimensions[col_letter].width=int(colwidth)*1.5*columnscaler
+            
+            # the semester column
+            elif col_index==2:
+                ws.column_dimensions[col_letter].width=int(colwidth)*1.3*columnscaler
         
 
-        firstcell=column_cells[0]
-        # every cell has a .column_letter attribute
-        col_letter = firstcell.column_letter
-        col_index=column_index_from_string(col_letter)
-        # scale the width factor to make the columns wider
-        if col_index==7:  
-            # make the UT Austin column alot wider
-            ws.column_dimensions[col_letter].width = int(colwidth)*2*columnscaler
-        elif col_index==6:
-            ws.column_dimensions[col_letter].width = int(colwidth)*1.9*columnscaler
-        elif col_index==5:
-            ws.column_dimensions[col_letter].width=int(colwidth)*1.9*columnscaler
-        elif col_index==4:
-            ws.column_dimensions[col_letter].width=int(colwidth)*1.9*columnscaler
-        elif col_index==3:
-            ws.column_dimensions[col_letter].width=int(colwidth)*1.5*columnscaler
-        
-        # the semester column
-        elif col_index==2:
-            ws.column_dimensions[col_letter].width=int(colwidth)*1.3*columnscaler
-    
-
-        else:
-            ws.column_dimensions[col_letter].width = int(colwidth)*1.1*columnscaler
-        
+            else:
+                ws.column_dimensions[col_letter].width = int(colwidth)*1.1*columnscaler
+            
 
 
 
@@ -327,20 +334,26 @@ def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
 
     def standardize_colwidths():
         '''animate this by causing it to shrink and grow.'''
-        width=30
-        for index in range(1, len(columnheadings) + 1):
+        width=len(columnheadings[0])*1.1*(subheadingsize/11)+4
+        for index in range(2, len(columnheadings) + 2):
             col_letter = get_column_letter(index)
 
             ws.column_dimensions[col_letter].width=width
 
-    # standardize_colwidths()
+    standardize_colwidths()
 
-    newcolumnindex=get_column_letter(len(columnheadings)+1)
+    newcolumnindex=get_column_letter(len(columnheadings)+2)
 
-    ws.column_dimensions['A'].width=15
-    ws.column_dimensions[f'{newcolumnindex}'].width=15
-    ws.row_dimensions[1].height=45
-    ws.row_dimensions[lastrowindex+2].height=45
+    def set_padding_widths():
+        '''
+        Can change this to make the padding grow bigger and smaller as well
+        '''
+        ws.column_dimensions['A'].width=15
+        ws.column_dimensions[f'{newcolumnindex}'].width=15
+        ws.row_dimensions[1].height=45
+        ws.row_dimensions[lastrowindex+2].height=45
+
+    set_padding_widths()
 
 
     # ------------------------------------TITLE STUFF-------------------------------------------
@@ -500,16 +513,10 @@ def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
                 right=current.right
             )
     
-    logocell=ws[f'E{lastrowindex}']
-    logocell.border = Border(
-        left=current.left,
-        right=entire_ws_border,   # only change right
-        top=current.top,
-        bottom=current.bottom  # preserve existing bottom
-
-        )   
+     
     # It was applied the whole time just not visible
     
-    
+    ws.sheet_view.selection = [Selection(activeCell="Z20", sqref="Z20")]
+
     departmentworkbook.save(savepath)
     print(f'Saved workbook at {savepath}')

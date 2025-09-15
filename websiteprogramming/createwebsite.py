@@ -45,7 +45,7 @@ class createWebsite:
         # this should work. If not I need to find a mystery
 
         # -----------New cleaned schoolname and websitefoler stuff --------------
-        self.degreeviewwebsite_path='/Users/shalevwiden/Downloads/Projects/new-ut-site-sep2/utaustin-site'
+        self.degreeviewwebsite_path='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utaustin-site'
 
 
         self.cleanedschoolname=self.schoolname.replace(' ','').lower()
@@ -627,10 +627,13 @@ class createWebsite:
 
                 '''
                 csvlist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[0]
+                # with new excel folder it doesnt need to be updated because it is os.walk
                 excellist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[1]
                 pdflist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[2]
 
                 majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
+                fullsemestercsv=[csv for csv in csvlist if "semestercsvfilefull" in csv][0]
+
 
                 # mmds currently not needing to be uplaoded.
                 
@@ -642,11 +645,11 @@ class createWebsite:
                 #     elif 'stare' in pdffile:
                 #         upload_to_googlecloud(pdffile)
                 #         print(f'Uploaded {pdffile} to cloud\n')
-
-                for excelfile in excellist:
-                    if not excelfile.startswith(("~$", "$")) and "greentheme" in excelfile:
-                        upload_to_googlecloud(excelfile)
-                        print(f'Uploaded {excelfile} to cloud\n')
+                upload_to_googlecloud(fullsemestercsv)
+                # for excelfile in excellist:
+                #     if not excelfile.startswith(("~$", "$")) and "greentheme" in excelfile:
+                #         upload_to_googlecloud(excelfile)
+                #         print(f'Uploaded {excelfile} to cloud\n')
                 
                 
 
@@ -882,7 +885,7 @@ class createWebsite:
                 csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
 
                 majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
-                semesterlayoutcsv=[csv for csv in csvlist if "semestercsvfile" in csv][0]
+                semesterlayoutcsv=[csv for csv in csvlist if "semestercsvfilefull" in csv][0]
 
                 # get excel links
                 excellist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[1]
@@ -1472,6 +1475,8 @@ class createWebsite:
 
                 majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
                 semesterlayoutcsv=[csv for csv in csvlist if "semester" in csv][0]
+                semesterlayoutcsvfull=[csv for csv in csvlist if "semestercsvfilefull" in csv][0]
+
 
                 undermainsitecode=f'''
  
@@ -1484,7 +1489,7 @@ class createWebsite:
 
             <i class="fa-regular fa-copy" id="copyicon" title="Copy Table"></i>
                     <!-- contains the rendered csv -->
-                <a href="{semesterlayoutcsv}"
+                <a href="{semesterlayoutcsvfull}"
                 id="downloadcsv"
 
             >
@@ -1711,7 +1716,7 @@ def unpacktheasset_into_createSchoolpages(theasset):
         # websiteobject.upload_degree_files()
         # websiteobject.create_degree_pages()
         # websiteobject.createschoolpages()
-        # websiteobject.create_renderedcsv_pages()
+        websiteobject.create_renderedcsv_pages()
         
 
 unpacktheasset_into_createSchoolpages(theasset=theasset)

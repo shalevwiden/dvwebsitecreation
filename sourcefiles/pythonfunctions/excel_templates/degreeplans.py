@@ -141,7 +141,7 @@ def make_degreeplan_excel_files(
         cell.alignment=leftalign
 
     def set_headings_height():
-        for row in [3,4,5]:
+        for row in [3,4,6]:
             ws.row_dimensions[row].height = headingrowheight
     set_headings_height()
 
@@ -170,7 +170,7 @@ def make_degreeplan_excel_files(
             # if its NOT a list of lists, ie, a normal course entry
             if len(semestercourses[coursename])==4 and not isinstance(semestercourses[coursename][0],list):
                 coursecode, coursehours, upperdivstatus, coursecategory=semestercourses[coursename]
-                excelobject.append(["",coursecode,coursename,coursehours,coursecategory,upperdivstatus])
+                excelobject.append(["",coursecode,coursename.replace('removemelater',''),coursehours,coursecategory,upperdivstatus])
                 rowcount+=1
                 if coursehours!='' and "or" not in coursecode[0:2]:
                     totalhours+=int(coursehours)
@@ -181,7 +181,7 @@ def make_degreeplan_excel_files(
                 listofcourses=semestercourses[coursename]
                 for i in range(len(listofcourses)):
                     coursecode, coursehours, upperdivstatus, coursecategory=listofcourses[i]
-                    excelobject.append(["",coursecode,coursename,coursehours,coursecategory,upperdivstatus])
+                    excelobject.append(["",coursecode,coursename.replace('removemelater',''),coursehours,coursecategory,upperdivstatus])
                     rowcount+=1
 
                     if coursehours!='' and "or" not in coursecode[0:2]:
@@ -293,21 +293,21 @@ def make_degreeplan_excel_files(
         # scale the width factor to make the columns wider
         if col_index==7:  
             # make the UT Austin column alot wider
-            ws.column_dimensions[col_letter].width = int(colwidth)*2
+            ws.column_dimensions[col_letter].width = int(colwidth)*(subheadingsize/11)*1.2
         elif col_index==6:
-            ws.column_dimensions[col_letter].width = int(colwidth)*1.5
+            ws.column_dimensions[col_letter].width = int(colwidth)*(subheadingsize/11)*1.2
         elif col_index==5:
-            ws.column_dimensions[col_letter].width=int(colwidth)*.7
+            ws.column_dimensions[col_letter].width=int(colwidth)*(subheadingsize/11)*1.2
         elif col_index==3:
-            ws.column_dimensions[col_letter].width=int(colwidth)*2
+            ws.column_dimensions[col_letter].width=int(colwidth)*(subheadingsize/11)*1.2
             
         # the semester column
         elif col_index==2:
-            ws.column_dimensions[col_letter].width=int(colwidth)*1.7
+            ws.column_dimensions[col_letter].width=int(colwidth)*(subheadingsize/11)*1.2
     
 
         else:
-            ws.column_dimensions[col_letter].width = int(colwidth)*1.2
+            ws.column_dimensions[col_letter].width = int(colwidth)*(subheadingsize/11)*1.2
         
 
 
@@ -389,8 +389,8 @@ def make_degreeplan_excel_files(
 
         allcenteredalignment=Alignment(vertical='center',horizontal='center')
         leftcenter=Alignment(vertical='center',horizontal='left')
-        rowindexes=len(excelobject)+rowval
-        for rowentry in range(rowval, rowindexes):
+        rowindexes=len(excelobject)+7
+        for rowentry in range(7, rowindexes):
             # update it here so it updates by row not column...although
 
             if rowentry%2==0:            
@@ -448,15 +448,7 @@ def make_degreeplan_excel_files(
     
     # where is this one?
     # this is like the subheading border
-    for row in ws.iter_rows(min_row=6, max_row=6, min_col=3, max_col=7):
-        for cell in row:
-            current = cell.border
-            cell.border = Border(
-                top=current.top,
-                bottom=Side(style='medium',color=subheadingbordercolor),  # Only change bottom keep thick border around everything
-                left=current.left,
-                right=current.right
-            )
+
 
     
     semesterworkbook.save(savepath)
