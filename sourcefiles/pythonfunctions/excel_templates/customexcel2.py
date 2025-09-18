@@ -76,7 +76,7 @@ def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
     headingsfonts=Font(size=21,bold=True,color=titlecolor,name=headingsfontname)
 
     # this is for like Coursename, Courserow, etc.
-    subheadingsfont=Font(size=subheadingsize,bold=True,color=titlecolor)
+    subheadingsfont=Font(size=subheadingsize,bold=True,color=subheadingcolor)
     # lighter burnt orange
     # reuse the headingsfontname argument
     try:
@@ -237,9 +237,10 @@ def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
     # normally put like custom excel themes here
     # put a url later
     reddituser='Digital Navigator'
-    lastrow=['Animotion']
+    # obsolete actually
+    lastrow=['FramesRendered']
     lastrow += [''] * (len(columnheadings)  - 2)
-    lastrow += ['ANM']
+    lastrow += ['FR']
 
     
 
@@ -255,7 +256,7 @@ def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
         if col_index==lastcolumnindex-1:
             # site link cell
             # keep this the same
-            lastrowcell.value='ANM'
+            lastrowcell.value='CE'
             lastrowcell.font=Font(name='Roboto',size=19, bold=True, color=urlcolor)
             lastrowcell.alignment=Alignment(horizontal='left',vertical='bottom')
 
@@ -266,7 +267,7 @@ def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
 
         elif col_index==1:
             logocell=lastrowcell
-            logocell.value='Animotion'
+            logocell.value='Creatively Explained'
             logocell.font=Font(name=logofontname,size=26, bold=True, color=logocolor)
             logocell.alignment=Alignment(horizontal='left',vertical='center')
 
