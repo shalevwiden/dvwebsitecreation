@@ -72,6 +72,7 @@ def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
     titlefont=Font(size=33,bold=True,color=titlecolor,name=titlefontname)
     headingborder=Border(bottom=Side(style='mediumDashDot',color=smallerbordercolor))
 
+# color=smallerbordercolor
     # this is for the row that has the department name and the universityname (latter is updated later)
     headingsfonts=Font(size=21,bold=True,color=titlecolor,name=headingsfontname)
 
@@ -297,7 +298,7 @@ def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
             cellwidthgenerator=(len(str(cell.value)) if cell.value else 0 for cell in column_cells)
             colwidth = max(cellwidthgenerator)
 
-            mincolwidth=10
+            mincolwidth=14
             if colwidth<mincolwidth:
                 colwidth=mincolwidth
             
@@ -327,7 +328,7 @@ def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
             else:
                 ws.column_dimensions[col_letter].width = int(colwidth)*1.1*columnscaler
             
-
+    specific_column_widths()
 
 
     # set sizes for the padding row and column. Units of default font which is usually Arial it seems
@@ -341,7 +342,7 @@ def makecustom_excelfile2(heading, leftsecondary,rightsecondary,
 
             ws.column_dimensions[col_letter].width=width
 
-    standardize_colwidths()
+    # standardize_colwidths()
 
     newcolumnindex=get_column_letter(len(columnheadings)+2)
 
