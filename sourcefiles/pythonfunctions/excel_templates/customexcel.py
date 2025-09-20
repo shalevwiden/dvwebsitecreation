@@ -128,7 +128,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     # quick check
     if not len(subheadingrow)>1:
         
-        subheadingrow=[f'{firstname}',f'{lastname}',f'{firstname}',f'{lastname}']
+        subheadingrow=[f'Nature Emojis',f'People Emois',f'Object Emojis',f'Symbol Emojis']
     
     ws.append(subheadingrow)
     # now apply styles
@@ -249,18 +249,21 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     for col_index, value in enumerate(lastrow, start=1):
         
         # use.font to assign the font I see
-        lastcell=ws.cell(row=lastrowindex, column=col_index, value=value)
+        lastrowcell=ws.cell(row=lastrowindex, column=col_index, value=value)
         # FF=full opacity 
         if col_index==4:
             # site link cell
             # keep this the same
-            lastcell.font=Font(name='Roboto',size=19, bold=True, color=urlcolor)
-            lastcell.alignment=Alignment(horizontal='left',vertical='bottom')
+            lastrowcell.value='E.F.'
+            lastrowcell.font=Font(name='Roboto',size=19, bold=True, color=urlcolor)
+            lastrowcell.alignment=Alignment(horizontal='left',vertical='bottom')
 
         else:
             # logo cell - CHANGE THIS
-            lastcell.font=Font(name=logofontname,size=26, bold=True, color=logocolor)
-            lastcell.alignment=Alignment(horizontal='left',vertical='center')
+            lastrowcell.value='Custom Excel'
+
+            lastrowcell.font=Font(name=logofontname,size=26, bold=True, color=logocolor)
+            lastrowcell.alignment=Alignment(horizontal='left',vertical='center')
 
         # one more cause now we wrote the actual last row there
         ws.row_dimensions[lastrowindex+1].height = 50
