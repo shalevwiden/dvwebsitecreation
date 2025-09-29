@@ -1730,7 +1730,7 @@ def unpacktheasset_into_createSchoolpages(theasset):
         websiteobject=createWebsite(schooldata=schooldict)
         print(f'starting for {websiteobject.schoolname}\n\n\n')
         
-        # websiteobject.createschoolpages()
+        websiteobject.createschoolpages()
         # websiteobject.upload_degree_files()
         websiteobject.create_degree_pages()
         # websiteobject.createschoolpages()
