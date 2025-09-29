@@ -85,7 +85,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     # update later
 
     # applied to the actual semester data. 
-    datafont=Font(size=15,name=datafontname,color=rowtextcolor)
+    datafont=Font(size=30,name=datafontname,color=rowtextcolor)
 
 
     leftalign=Alignment(horizontal='left')
@@ -129,6 +129,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
     if not len(subheadingrow)>1:
         
         subheadingrow=[f'Nature Emojis',f'People Emois',f'Object Emojis',f'Symbol Emojis']
+        # subheadingrow=['Emojis']*4
     
     ws.append(subheadingrow)
     # now apply styles
@@ -254,7 +255,7 @@ def makecustom_excelfile(subject, leftsecondary,rightsecondary,
         if col_index==4:
             # site link cell
             # keep this the same
-            lastrowcell.value='E.F.'
+            lastrowcell.value='R.S.'
             lastrowcell.font=Font(name='Roboto',size=19, bold=True, color=urlcolor)
             lastrowcell.alignment=Alignment(horizontal='left',vertical='bottom')
 

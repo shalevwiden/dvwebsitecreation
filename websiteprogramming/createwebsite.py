@@ -67,6 +67,16 @@ class createWebsite:
         with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/degreeviewtag/bodytag.html','r') as bodytag:
             self.bodytag=bodytag.read()
 
+        
+        self.images={
+            
+            "linkicon":"https://storage.googleapis.com/degreeview/degreeviewimages/linkicon.svg",
+            "logo5":"https://storage.googleapis.com/degreeview/degreeviewimages/logo5.png",
+
+            "minilogo":"https://storage.googleapis.com/degreeview/degreeviewimages/minilogo.png",
+            "site_favicon":"https://storage.googleapis.com/degreeview/degreeviewimages/site_favicon.png"
+        }
+
 
         # footer so I dont have to redefine it multiple times. 
         
@@ -302,7 +312,7 @@ class createWebsite:
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
      <!-- favicon icon -->
-    <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
+            <link rel="icon" href="{self.images.get('site_favicon')}" type="image/png" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
     <script>
@@ -793,7 +803,7 @@ class createWebsite:
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
          <!-- favicon icon -->
-         <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
+            <link rel="icon" href="{self.images.get('site_favicon')}" type="image/png" />
          <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
     <script>
@@ -884,6 +894,7 @@ class createWebsite:
                 # get csv links
                 csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
 
+
                 majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
                 semesterlayoutcsv=[csv for csv in csvlist if "semestercsvfilefull" in csv][0]
 
@@ -891,8 +902,15 @@ class createWebsite:
                 excellist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[1]
 
                 lighttheme_excel=[file for file in excellist if "dark" not in file][0]
+                # have to do this since it selects the neon one. In the future I will explicitly name it original
+
+                dirname = os.path.dirname(lighttheme_excel)  # everything except the basename
+                lighttheme_excel = os.path.join(dirname, f"{degreenamecleaned}-semesterfile.xlsx")
+
                 darktheme_excel=[file for file in excellist if "semesterfile" in file and "dark" in file][0]
                 green_excel=[file for file in excellist if "greentheme" in file][0]
+                green_excel = green_excel.removesuffix(".xlsx")
+                green_excel = f"{green_excel}semesters.xlsx"
 
 
                 # get pdf links
@@ -927,7 +945,7 @@ class createWebsite:
                         <ul>
                             <li>
                             <div class="linkbox">
-                                <p>Sample Semester Layout Light Theme</p>
+                                <p>Sample Semester Layout Original Theme</p>
                                 <p>
                                 <!-- download attribute means they will download it -->
                                 Download:&nbsp;&nbsp;<a
@@ -1371,7 +1389,7 @@ class createWebsite:
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
          <!-- favicon icon -->
-         <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
+            <link rel="icon" href="{self.images.get('site_favicon')}" type="image/png" />
          <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
     <script>
@@ -1714,7 +1732,7 @@ def unpacktheasset_into_createSchoolpages(theasset):
         
         # websiteobject.createschoolpages()
         # websiteobject.upload_degree_files()
-        # websiteobject.create_degree_pages()
+        websiteobject.create_degree_pages()
         # websiteobject.createschoolpages()
         websiteobject.create_renderedcsv_pages()
         

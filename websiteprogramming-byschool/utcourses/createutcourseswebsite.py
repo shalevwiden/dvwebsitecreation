@@ -77,7 +77,7 @@ class createWebsite:
 
         # can I have spaces is the question
 
-        self.websitepath='/Users/shalevwiden/Downloads/Projects/new-ut-site-sep2/utcoursessite/departments'
+        self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utcoursessite/departments'
 
         self.images={
             
@@ -313,8 +313,8 @@ class createWebsite:
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-     <!-- favicon icon -->
-    <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
+            <!-- favicon icon -->
+            <link rel="icon" href="{self.images.get('site_favicon')}" type="image/png" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
     <script>
