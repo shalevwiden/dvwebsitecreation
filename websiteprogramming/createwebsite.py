@@ -932,7 +932,12 @@ class createWebsite:
 
 
                 def makeleftcontentcode():
+                    '''
 
+                    Put all of the code here into a template
+
+
+                    '''
                     env = Environment(loader=FileSystemLoader("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/templates/degreeplan_templates"))
         
 
@@ -963,7 +968,9 @@ class createWebsite:
 
                         # now all the csvs.
                         "majorcoursescsv":majorcoursescsv,
-                        "semesterlayoutcsv":semesterlayoutcsv
+                        "semesterlayoutcsv":semesterlayoutcsv,
+
+                        "linksvg":self.images.get("linkicon")
 
 
 
@@ -973,216 +980,12 @@ class createWebsite:
 
                     leftcontentcode=rendered_html
 
-                        # return leftcontentcode
+                    return leftcontentcode
                     '''Using the links just received above, now link them in the left content code in the website'''
 
                     
 
-                    leftcontentcode=f'''
-                    <div class="leftcontent">
-
-                    <div class="filescontainer" id="excelcontainer">
-                        <div class="filesname">
-                            <h3>Excel (.xlsx) Files</h3>
-                            <i class="fa-regular fa-file-excel"></i>
-                        </div>
-
-                        <ul>
-                            <li>
-                            <div class="linkbox">
-                                <p>Sample Semester Layout Original Theme</p>
-                                <p>
-                                <!-- download attribute means they will download it -->
-                                Download:&nbsp;&nbsp;<a
-                                    href="{lighttheme_excel}"
-                                    download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                ></a>
-                                </p>
-                            </div>
-                            </li>
-                            <!--  -->
-                            <li>
-                            <div class="linkbox">
-                                <p>Sample Semester Layout Dark Theme</p>
-                                <p>
-                                <!-- download attribute means they will download it -->
-                                Download:&nbsp;&nbsp;<a
-                                    href="{darktheme_excel}"
-                                    download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                ></a>
-                                </p>
-                            </div>
-                            </li>
-                            <!-- for green li -->
-
-                             <li>
-                            <div class="linkbox">
-                                <p>Sample Semester Layout Green Theme</p>
-                                <p>
-                                Download:&nbsp;&nbsp;<a
-                                    href="{green_excel}"
-                                    download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                ></a>
-                                </p>
-                            </div>
-                            </li>
-                            
-                        </ul>
-                        </div>
-                        <!-- files container is per file type. linkbox is per individiual link -->
-                        <div class="filescontainer" id="pdfcontainer">
-                        <div class="filesname">
-                            <h3>PDF Files</h3>
-                            <i class="fa-regular fa-file-pdf"></i>
-                        </div>
-
-                        <ul>
-                            <!-- put the linkboxes in li tags for organization and readability -->
-                            <li>
-                            <div class="linkbox">
-                                <p>Sample Semester PDF</p>
-
-                                <p>
-                                View:&nbsp;&nbsp;
-                                <a href="{semesterlayoutpdf}" target="_blank"
-                                    ><i class="fa-regular fa-eye"></i
-                                ></a>
-                                </p>
-                                <p>
-                                <!-- download attribute means they will download it -->
-                                Download:&nbsp;&nbsp;<a
-                                    href="{semesterlayoutpdf}"
-                                    download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                ></a>
-                                </p>
-                            </div>
-                            </li>
-
-                            <li>
-                            <div class="linkbox">
-                                <p>Sample Semester PDF Empty Nodes</p>
-                                <p>
-                                View:&nbsp;&nbsp;
-                                <a href="{emptynodespdf}" target="_blank"
-                                    ><i class="fa-regular fa-eye"></i
-                                ></a>
-                                </p>
-                                <p>
-                                <!-- download attribute means they will download it -->
-                                Download:&nbsp;&nbsp;<a
-                                    href="{emptynodespdf}"
-                                    download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                ></a>
-                                </p>
-                            </div>
-                            </li>
-                            <!-- dolphin pdf -->
-              <li>
-                <div class="linkbox">
-                  <p>Sunny Dolphin Ocean PDF</p>
-                  <p>
-                    View:&nbsp;&nbsp;
-                    <a
-                      href="{dolphinpdf}"
-                      target="_blank"
-                      ><i class="fa-regular fa-eye"></i
-                    ></a>
-                  </p>
-                  <p>
-                    <!-- download attribute means they will download it -->
-                    Download:&nbsp;&nbsp;<a
-                      href="{dolphinpdf}"
-                      download
-                      ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                    ></a>
-                  </p>
-                </div>
-              </li>
-              <!-- stare pdf -->
-              <li>
-                <div class="linkbox">
-                  <p>Thousand Yard Stare PDF</p>
-                  <p>
-                    View:&nbsp;&nbsp;
-                    <a href="{starepdf}" target="_blank"
-                      ><i class="fa-regular fa-eye"></i
-                    ></a>
-                  </p>
-                  <p>
-                    <!-- download attribute means they will download it -->
-                    Download:&nbsp;&nbsp;<a href="{starepdf}" download
-                      ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                    ></a>
-                  </p>
-                </div>
-              </li>
-                        </ul>
-                        </div>
-
-                        <div class="filescontainer" id="csvcontainer">
-                        <div class="filesname">
-                            <h3>CSV Files</h3>
-                            <i class="fa-regular fa-file"></i>
-                        </div>
-
-                        <ul>
-                            <li>
-                            <div class="linkbox">
-                                <p>Major Courses CSV</p>
-                                
-                                <p>
-                    View:&nbsp;&nbsp;
-                    <a
-                      href="#csvtablecontainer"
-                      target="_self"
-                      ><i class="fa-regular fa-eye"></i
-                    ></a>
-                  </p>
-                                <p>
-                                <!-- download attribute means they will download it -->
-                                Download:&nbsp;&nbsp;<a
-                                    href="{majorcoursescsv}"
-                                    id="majorcoursesdownload"
-                                    download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                ></a>
-                                </p>
-
-                            </div>
-                            </li>
-
-                            <li>
-                            <div class="linkbox">
-                                <p>Sample Semester Layout CSV</p>
-
-                                 <p>
-                    View:&nbsp;&nbsp;
-                    <a
-                      href="{renderedcsvurl}"
-                      target="_self"
-                      ><img class="linksvg" src="../metaassets/Link-17.svg" alt="" />
-                    </a>
-                                          <!-- link icon above--> 
-
-                  </p>
-                                <p>
-                                <!-- download attribute means they will download it -->
-                                Download:&nbsp;&nbsp;<a href="{semesterlayoutcsv}" download
-                                    ><i class="fa-solid fa-arrow-up-from-bracket"></i
-                                ></a>
-                                </p>
-                            </div>
-                            </li>
-                        </ul>
-                        </div>
-                        </div>
-'''
-                    return leftcontentcode
+                    
                     
                 def makerightcontentcode():
                     '''
