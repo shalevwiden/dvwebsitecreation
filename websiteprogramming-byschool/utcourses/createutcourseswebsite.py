@@ -980,7 +980,7 @@ class createWebsite:
                         '''Using the links just received above, now link them in the left content code in the website'''
 
 
-                        env = Environment(loader=FileSystemLoader("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/templates"))
+                        env = Environment(loader=FileSystemLoader("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/templates/department_templates"))
         
 
                         # Pick template

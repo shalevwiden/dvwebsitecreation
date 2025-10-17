@@ -16,6 +16,9 @@ from google.cloud import storage
 # use this to import stuff from other python files
 import importlib.util
 
+from jinja2 import Environment, FileSystemLoader
+
+
 file_path = '/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/college_course_scraping/theassetcontainment.py'
 
 with open('/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/college_course_scraping/theassetcontainment.json') as assetjson:
@@ -929,6 +932,37 @@ class createWebsite:
 
 
                 def makeleftcontentcode():
+
+                    env = Environment(loader=FileSystemLoader("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/templates/degreeplan_templates"))
+        
+
+                        # Pick template
+                    template = env.get_template("leftcontent.html")
+
+                    # in jinja, reference the keys
+                    variables={
+                        "departmentnamehalf":departmentnamehalf,
+
+                        "coursescsv":coursescsv,
+                        "blacktheme_excel": blacktheme_excel,
+                        "originaltheme_excel":originaltheme_excel,
+                        "darktheme_excel":darktheme_excel,
+                        "green_excel":green_excel,
+                        "desert_excel":desert_excel,
+                        "grey_excel":grey_excel,
+                        "ocean_excel":ocean_excel,
+                        "pastel_excel":pastel_excel,
+                        "primarycolors_excel":primarycolors_excel,
+                        "neon_excel":neon_excel
+
+
+                    }
+
+                    rendered_html = template.render(variables)
+
+                    leftcontentcode=rendered_html
+
+                        # return leftcontentcode
                     '''Using the links just received above, now link them in the left content code in the website'''
 
                     
