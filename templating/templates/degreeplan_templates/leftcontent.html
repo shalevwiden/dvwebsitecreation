@@ -8,7 +8,9 @@
     <ul>
       <li>
         <div class="linkbox">
-          <p>Department Courses <span id="original">Original Theme</span></p>
+          <p>
+            Sample Semester Layout <span id="original">Original Theme</span>
+          </p>
           <p>
             <!-- download attribute means they will download it -->
             Download:&nbsp;&nbsp;<a href="{{ originaltheme_excel }}" download
@@ -20,7 +22,7 @@
       <!--  -->
       <li>
         <div class="linkbox">
-          <p>Department Courses <span id="darktheme">Dark Theme</span></p>
+          <p>Sample Semester Layout <span id="darktheme">Dark Theme</span></p>
           <p>
             <!-- download attribute means they will download it -->
             Download:&nbsp;&nbsp;<a href="{{ darktheme_excel }}" download
@@ -31,7 +33,7 @@
       </li>
       <li>
         <div class="linkbox">
-          <p>Department Courses <span id="greentheme">Green Theme</span></p>
+          <p>Sample Semester Layout <span id="greentheme">Green Theme</span></p>
           <p>
             <!-- download attribute means they will download it -->
             Download:&nbsp;&nbsp;<a href="{{ green_excel }}" download
@@ -129,21 +131,81 @@
     </ul>
   </div>
   <!-- files container is per file type. linkbox is per individiual link -->
-
-  <div class="filescontainer" id="csvcontainer">
+  <div class="filescontainer" id="pdfcontainer">
     <div class="filesname">
-      <h3>CSV Files</h3>
-      <i class="fa-regular fa-file-lines"></i>
+      <h3>PDF Files</h3>
+      <i class="fa-regular fa-file-pdf"></i>
     </div>
 
     <ul>
+      <!-- put the linkboxes in li tags for organization and readability -->
       <li>
         <div class="linkbox">
-          <p>Department Courses CSV</p>
+          <p>Sample Semester PDF</p>
 
           <p>
+            View:&nbsp;&nbsp;
+            <a href="{{semesterlayoutpdf}}" target="_blank"
+              ><i class="fa-regular fa-eye"></i
+            ></a>
+          </p>
+          <p>
             <!-- download attribute means they will download it -->
-            Download:&nbsp;&nbsp;<a href="{{ coursescsv }}" download
+            Download:&nbsp;&nbsp;<a href="{{semesterlayoutpdf}}" download
+              ><i class="fa-solid fa-arrow-up-from-bracket"></i
+            ></a>
+          </p>
+        </div>
+      </li>
+
+      <li>
+        <div class="linkbox">
+          <p>Sample Semester PDF Empty Nodes</p>
+          <p>
+            View:&nbsp;&nbsp;
+            <a href="{emptynodespdf}" target="_blank"
+              ><i class="fa-regular fa-eye"></i
+            ></a>
+          </p>
+          <p>
+            <!-- download attribute means they will download it -->
+            Download:&nbsp;&nbsp;<a href="{emptynodespdf}" download
+              ><i class="fa-solid fa-arrow-up-from-bracket"></i
+            ></a>
+          </p>
+        </div>
+      </li>
+      <!-- dolphin pdf -->
+      <li>
+        <div class="linkbox">
+          <p>Sunny Dolphin Ocean PDF</p>
+          <p>
+            View:&nbsp;&nbsp;
+            <a href="{dolphinpdf}" target="_blank"
+              ><i class="fa-regular fa-eye"></i
+            ></a>
+          </p>
+          <p>
+            <!-- download attribute means they will download it -->
+            Download:&nbsp;&nbsp;<a href="{dolphinpdf}" download
+              ><i class="fa-solid fa-arrow-up-from-bracket"></i
+            ></a>
+          </p>
+        </div>
+      </li>
+      <!-- stare pdf -->
+      <li>
+        <div class="linkbox">
+          <p>Thousand Yard Stare PDF</p>
+          <p>
+            View:&nbsp;&nbsp;
+            <a href="{starepdf}" target="_blank"
+              ><i class="fa-regular fa-eye"></i
+            ></a>
+          </p>
+          <p>
+            <!-- download attribute means they will download it -->
+            Download:&nbsp;&nbsp;<a href="{starepdf}" download
               ><i class="fa-solid fa-arrow-up-from-bracket"></i
             ></a>
           </p>
@@ -151,46 +213,51 @@
       </li>
     </ul>
   </div>
-  <!-- table container filescontainer -->
-  <div class="filescontainer" id="tablecontainer">
+  <div class="filescontainer" id="csvcontainer">
     <div class="filesname">
-      <h3>Tables</h3>
-      <span class="material-symbols-outlined"> table </span>
+      <h3>CSV Files</h3>
+      <i class="fa-regular fa-file"></i>
     </div>
 
     <ul>
       <li>
         <div class="linkbox">
-          <p>Department Courses Table</p>
+          <p>Major Courses CSV</p>
 
           <p>
             View:&nbsp;&nbsp;
-            <a href="#departmenttableheading" target="_self"
-              ><i class="fa-regular fa-eye"></i>
-            </a>
-            <!-- link icon above-->
+            <a href="#csvtablecontainer" target="_self"
+              ><i class="fa-regular fa-eye"></i
+            ></a>
+          </p>
+          <p>
+            <!-- download attribute means they will download it -->
+            Download:&nbsp;&nbsp;<a
+              href="{majorcoursescsv}"
+              id="majorcoursesdownload"
+              download
+              ><i class="fa-solid fa-arrow-up-from-bracket"></i
+            ></a>
           </p>
         </div>
       </li>
 
       <li>
         <div class="linkbox">
-          <p>
-            <small id="underconstruction"
-              >Under construction, coming soon</small
-            >
-            <br />
-
-            {{ departmentnamehalf }} Courses with "{{ departmentnamehalf }}" in
-            their name Table
-          </p>
+          <p>Sample Semester Layout CSV</p>
 
           <p>
             View:&nbsp;&nbsp;
-            <a href="#" onclick="return false;" target="_self"
-              ><i class="fa-regular fa-eye"></i>
+            <a href="{renderedcsvurl}" target="_self"
+              ><img class="linksvg" src="../metaassets/Link-17.svg" alt="" />
             </a>
             <!-- link icon above-->
+          </p>
+          <p>
+            <!-- download attribute means they will download it -->
+            Download:&nbsp;&nbsp;<a href="{semesterlayoutcsv}" download
+              ><i class="fa-solid fa-arrow-up-from-bracket"></i
+            ></a>
           </p>
         </div>
       </li>

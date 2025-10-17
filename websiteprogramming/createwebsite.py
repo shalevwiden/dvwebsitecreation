@@ -908,7 +908,7 @@ class createWebsite:
                 # have to do this since it selects the neon one. In the future I will explicitly name it original
 
                 dirname = os.path.dirname(lighttheme_excel)  # everything except the basename
-                lighttheme_excel = os.path.join(dirname, f"{degreenamecleaned}-semesterfile.xlsx")
+                originaltheme_excel = os.path.join(dirname, f"{degreenamecleaned}-semesterfile.xlsx")
 
                 darktheme_excel=[file for file in excellist if "semesterfile" in file and "dark" in file][0]
                 green_excel=[file for file in excellist if "greentheme" in file][0]
@@ -941,19 +941,30 @@ class createWebsite:
 
                     # in jinja, reference the keys
                     variables={
-                        "departmentnamehalf":departmentnamehalf,
 
-                        "coursescsv":coursescsv,
-                        "blacktheme_excel": blacktheme_excel,
                         "originaltheme_excel":originaltheme_excel,
                         "darktheme_excel":darktheme_excel,
                         "green_excel":green_excel,
-                        "desert_excel":desert_excel,
-                        "grey_excel":grey_excel,
-                        "ocean_excel":ocean_excel,
-                        "pastel_excel":pastel_excel,
-                        "primarycolors_excel":primarycolors_excel,
-                        "neon_excel":neon_excel
+
+                        # "desert_excel":desert_excel,
+                        # "grey_excel":grey_excel,
+                        # "ocean_excel":ocean_excel,
+                        # "pastel_excel":pastel_excel,
+                        # "primarycolors_excel":primarycolors_excel,
+                        # "neon_excel":neon_excel,
+                        # "blacktheme_excel": blacktheme_excel,
+
+
+                        # now all the pdfs
+                        "semesterlayoutpdf":semesterlayoutpdf,
+                        "emptynodespdf":emptynodespdf,
+                        "dolphinpdf":dolphinpdf,
+                        "starepdf":starepdf,
+
+                        # now all the csvs.
+                        "majorcoursescsv":majorcoursescsv,
+                        "semesterlayoutcsv":semesterlayoutcsv
+
 
 
                     }
