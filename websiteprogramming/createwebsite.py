@@ -34,7 +34,7 @@ class createWebsite:
 
                 # this is the assets folder
 
-# update this later or make it a relative path. 
+        # update this later or make it a relative path. 
         self.degreeviewfolderpath='/Users/shalevwiden/Downloads/Projects/originaldegreeview'
 
         self.schooldata=schooldata
@@ -730,7 +730,6 @@ class createWebsite:
 
                 '''
                 csv_path_list=[]
-                excel_path_list=[]
                 pdf_path_list=[]
                 mmd_path_list=[]
                 # os.walk recursively travels everything
@@ -747,12 +746,7 @@ class createWebsite:
 
                             csv_path_list.append(googlecloudpath)
                             # removes those dollar sign excel files. 
-                        elif os.path.splitext(file)[1]=='.xlsx' and not file.startswith(("~$", "$")):
-
-                            objectname_incloud=f'{self.cleanedschoolname}/excel-files/{file}'
-                            googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
-                        
-                            excel_path_list.append(googlecloudpath)
+                       
                         elif os.path.splitext(file)[1]=='.pdf':
                         
                             objectname_incloud=f'{self.cleanedschoolname}/pdfs/{file}'
@@ -765,7 +759,41 @@ class createWebsite:
                             googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
                             mmd_path_list.append(googlecloudpath)
 
-                return [csv_path_list,excel_path_list,pdf_path_list,mmd_path_list]
+                return [csv_path_list,pdf_path_list,mmd_path_list]
+            
+            def get_excel_assetcloudpaths_lists(excelfolder):
+                
+                '''
+                Reconstruct the asset names manually like this:
+
+                https://storage.googleapis.com/[BUCKET_NAME]/[OBJECT_NAME]
+
+                Unlike other functions, this is by degree not school.
+                As such this will not contain any school specific csv or excel files. 
+                Those have to be obtained with another function. 
+                This function returns the links that will be added to the website. That way I can get the links without a class A operation
+
+                '''
+                excel_path_list=[]
+                # os.walk recursively travels everything
+                for root, dirs, files in os.walk(excelfolder):
+                    for file in files:
+                        
+                        # we neewd the fullpath in the list since thats the way it can be uploaded to google cloud.
+
+                        googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/'
+
+                        
+                        if os.path.splitext(file)[1]=='.xlsx' and not file.startswith(("~$", "$")):
+
+                            objectname_incloud=f'{self.cleanedschoolname}/excel-files/{file}'
+                            googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
+                        
+                            excel_path_list.append(googlecloudpath)
+                       
+                       
+
+                return [excel_path_list]
             
             csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
             # now use these lists in the website creation. 
@@ -901,14 +929,13 @@ class createWebsite:
                 majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
                 semesterlayoutcsv=[csv for csv in csvlist if "semestercsvfilefull" in csv][0]
 
-                # get excel links
-                excellist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[1]
+                # get excel links 
+                excelfiles_folder=os.path.join(degreenameassetfolder,'excelfiles')
+                excellist=get_excel_assetcloudpaths_lists(excelfolder=excelfiles_folder)[1]
 
-                lighttheme_excel=[file for file in excellist if "dark" not in file][0]
+                originaltheme_excel=[file for file in excellist if "original" in file][0]
                 # have to do this since it selects the neon one. In the future I will explicitly name it original
 
-                dirname = os.path.dirname(lighttheme_excel)  # everything except the basename
-                originaltheme_excel = os.path.join(dirname, f"{degreenamecleaned}-semesterfile.xlsx")
 
                 darktheme_excel=[file for file in excellist if "semesterfile" in file and "dark" in file][0]
                 green_excel=[file for file in excellist if "greentheme" in file][0]
@@ -917,7 +944,7 @@ class createWebsite:
 
 
                 # get pdf links
-                pdflist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[2]
+                pdflist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[1]
 
 
                 semesterlayoutpdf=[pdffile for pdffile in pdflist if "semesterlayout" in pdffile and "emptynodes" not in pdffile][0]
@@ -928,7 +955,7 @@ class createWebsite:
 
                 
                 # I  dont put mmds in the website, for now...
-                mmdlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[3]
+                mmdlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[2]
 
 
                 def makeleftcontentcode():

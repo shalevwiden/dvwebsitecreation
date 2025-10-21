@@ -1010,6 +1010,7 @@ class createWebsite:
                         leftcontentcode=rendered_html
 
                         return leftcontentcode
+                    
                     def makerightcontentcode():
                         '''
                         For the right content code it has stats in it
