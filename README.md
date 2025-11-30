@@ -23,3 +23,7 @@ I also need to create a fully seperate Excel templates page for the UT site.
 Which will host like 260 Excel files.
 
 5 a week for a year.
+
+### Nov 30
+
+Ok lets make the course data pages into templates now.
