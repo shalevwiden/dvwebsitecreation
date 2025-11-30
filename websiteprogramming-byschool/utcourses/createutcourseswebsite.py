@@ -45,6 +45,12 @@ class createWebsite:
 
         self.cloudbucketpath='https://storage.googleapis.com/utcourses'
 
+        env = Environment(loader=FileSystemLoader("templates"))
+
+# 2. Load the template by name
+        self.lettertemplate = env.get_template("letterpage.html")
+        self.departmentpagetemplate=env.get_template("departmentpage.html")
+
 
 
         with open(self.jsondatapath,'r') as universityjson:
@@ -296,100 +302,18 @@ class createWebsite:
             schoolinfo=f'Every degree page has 2 csvs, 2 excel files, and a sample semester diagram.\n\
             More files coming in the future.' 
 
-            headhtmlcode=f'''
-<head>
-{self.headtag}
-    <meta
-        name="description"
-        content="{startingletter} Degrees and Data"
-        />
-
-     <meta
-      name="keywords"
-      content="degree, major, UT Austin, degreeview, course diagrams, course excel files, degree stats, {startingletter}"
-    />
-
-    <meta name="author" content="DegreeView" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-            <!-- favicon icon -->
-            <link rel="icon" href="{self.images.get('site_favicon')}" type="image/png" />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
-    <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
-
-  gtag('config', 'G-S06MYR1FV6');
-</script>
-<!-- to track the new update -->
-    <script>
-      if (window.location.pathname === "/utcoursesindex") {{
-        gtag("event", "courses_index_view");
-      }}
-    </script>
-
-    <title>{startingletter} Page - DegreeView</title>
-
-    <!-- main stylesheet -->
-    <link rel="stylesheet" href="../../static/css/letterpage.css" />
-
-    <!-- animation stylesheet -->
-    <link rel="stylesheet" href="../../static/css/animations.css" />
-
-    <!-- Barlow Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-
-    <!-- Roboto Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet"
-    />
-    <!-- Icons ( download icon and many file icons from here is used) -->
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    />
-</head>
-'''
-            def make_abovemainsitecode():
-                # for the "home" box that needs to go direct to DegreeView home
-
-                abovemainsitecode=f'''
-    <div class="abovemainsite">
-        <div class="topnav">
-            <nav class="breadcrumbs">
-            <ul>
-                <li><a href="../../utcoursesindex.html">DegreeView UT</a></li>
-                <i class="fa fa-chevron-right"></i>
-
-                <li id="current">{startingletter} Departments</li>
-            </ul>
-            </nav>
-            <nav class="homeandabout">
-            <ul>
-                
-               <li><a href="../../utcoursesindex.html">Home</a></li>
-              <li><a href="../../../aboutpage.html">About</a></li>
-              <li><a href="../../../ut-stats.html">Stats</a></li>
-            </ul>
-            </nav>
-        </div>
-        <div class="schoolnamebox">
-            <h1 id="schoolnametitle">{startingletter} Departments</h1>
-        </div>
-        </div>
-    '''
-                return abovemainsitecode
-            
+            letterpagedata = {
+                "headtag": self.headtag,
+                "startingletter": startingletter,
+                "site_favicon": self.images.get("site_favicon"),
+                "departmentlist_ul_element": make_departmentlist_ul(),
+                "linkicon": self.images.get("linkicon"),
+                "bodytag": self.bodytag,
+                "footer": self.footer
+            }
 
             def make_departmentlist_ul():
+                # keep this probs
                 departmentlist_ul_element_content=f''''''
                 letterdict=self.alphabetizeddict[startingletter]
                 for departmentname in letterdict:
@@ -436,90 +360,11 @@ class createWebsite:
                 <ul>{departmentlist_ul_element_content}
                 </ul>'''
                 return departmentlist_ul_element
-            
-            def make_mainsitecode():
-
-                
-                '''This gets the asset cloud list. Since theres only 1 csv currently, we good.'''
-
-                
-                # get first, and only, item from the list
-                test='test'
-                print(f'School departments CSV is {test}\n')
-
-                leftcontentcode=f'''
-            <div class="leftcontent">
-            <p id="futuremessage">
-            There will be stuff here in a future update, coming soon.
-          </p>
-            </div>
-            '''
-                
-
-                departmentlist_ul_element=make_departmentlist_ul()
-
-
-                rightcontentcode=f'''        <div class="rightcontent">
-    <div class="departmentlistheaderbox">
-            <h3 id="departmentlistheader">{startingletter} Departments       <img class="linksvg" src="{self.images.get("linkicon","not found")}" alt=""
-                /></h3>
-            </div>
-            <!-- Contains links to every departmentpage -->
-            <div class="departmentlistbox">{departmentlist_ul_element}</div>
-            </div>
-                
-                '''
-
-
-                mainsitecode=f'''      
-                <div class="mainsite">
-
-                {leftcontentcode}
-                {rightcontentcode}
-    </div>
-    '''
-                return mainsitecode
-        
-            def makebodyhtmlcode():
-                abovemainsitecode=make_abovemainsitecode()
-                mainsitecode=make_mainsitecode()
-
-                undermainsitecode=f'''
-                <div class="undermainsite">
-                <!-- this can be empty and like 20 px tall just to take up space, and be used for something in the future
-                    -->
-                
-                </div>
-    '''
-                bodyhtmlcode=f'''
-                <body>
-                {self.bodytag}
-                <div class="sitecontainer">
-                {abovemainsitecode}
-                {mainsitecode}
-                {undermainsitecode}
-                {self.footer}
-                <!-- Hover Script -->
-                <script src="../../static/js/headingcolorchange.js"></script>
-
-
-                </div>
-                </body>
-
-                '''
-                return bodyhtmlcode
+                      
             
             def makefullhtmlcode(startingletter):
 
-                bodyhtmlcode=makebodyhtmlcode()
-
-                fullhtmlcode=f'''
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    {headhtmlcode}
-                    {bodyhtmlcode}\n
-                
-                    </html>'''
+               
                 startingletter=startingletter.lower()
                 print(f'Starting letter {startingletter}')
                 letterwebsitefolder=os.path.join(self.websitepath,startingletter)
@@ -530,12 +375,13 @@ class createWebsite:
                     os.mkdir(letterwebsitefolder)
                 
                 fullpagepath=os.path.join(letterwebsitefolder,letterwebsitepage)
+                letterpagerendered=self.lettertemplate.render(letterpagedata)
 
                 with open(fullpagepath,'w') as fullpage:
-                    fullpage.write(fullhtmlcode)
+                    fullpage.write(letterpagerendered)
             
             makefullhtmlcode(startingletter=startingletter)
-
+        # now its done
         return 0
 
 
