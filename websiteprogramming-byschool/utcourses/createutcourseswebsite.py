@@ -572,7 +572,14 @@ class createWebsite:
             letterfolder=os.path.join(self.assetspath,startingletter)
             
             letterdict=self.alphabetizeddict[startingletter]
+
             for departmentname in letterdict:
+                '''
+                This is the for loop everything has to be done in
+                '''
+                
+                    
+
                 departmenturl=letterdict[departmentname]
 
                 departmentname=departmentname.replace('/','_')
@@ -595,6 +602,42 @@ class createWebsite:
                 # its already cleaned
                 print(f'Department name cleaned {departmentnamecleaned}')
 
+                startingletter=startingletter.lower()
+                letterwebsitepage=f'{startingletter}-departments.html'
+                letterpagereferencepath=f'../{startingletter}/{letterwebsitepage}'
+
+                htmltable=readhtmltable()
+                scripts=f'''
+
+                    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+
+
+                    <!-- Hover Script -->
+
+                    <script src="../../static/js/headingcolorchange.js"></script>
+                    <!-- copy script -->
+                    <script src="../../static/js/copytable.js"></script>
+
+                    <!-- animate table script -->
+                    <script src="../../static/js/animatetable.js"></script>
+    '''
+
+                departmentpagedata = {
+                    "headlinks": self.headlinks,
+                    "headtag": self.headtag,
+                    "departmentnamehalf": departmentnamehalf,
+                    "sitefavicon": self.images.get("site_favicon"),
+                    "displaydepartmentname": displaydepartmentname,
+                    "startingletter":startingletter,
+                    "letterpagereferencepath":letterpagereferencepath,
+                    "htmltable":htmltable,
+                     "bodytag": self.bodytag,
+                    "footer": self.footer,
+                    "scripts":scripts
+
+
+                }
 
 
             
@@ -698,91 +741,19 @@ class createWebsite:
                 # readd any that had slashes
 
             
-                headhtmlcode=f'''
-    <head>
-    {self.headtag}
-    <meta
-        name="description"
-        content="Visualize {departmentnamehalf} at UT Austin through diagrams and tabular data."
-        />
+               
 
-        <meta
-        name="keywords"
-        content="degree, major, UT Austin, degreeview, course diagrams, course excel files, degree stats, {displaydepartmentname}"
-        />
+       
 
-        <meta name="author" content="DegreeView" />
-
-        <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-            <!-- favicon icon -->
-            <link rel="icon" href="{self.images.get('site_favicon')}" type="image/png" />
-            <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
-        <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){{dataLayer.push(arguments);}}
-    gtag('js', new Date());
-
-    gtag('config', 'G-S06MYR1FV6');
-    </script>
-   
-            <title>{departmentnamehalf} UT Page - DegreeView</title>
-
-            
-        <!-- main stylesheet -->
-        <link rel="stylesheet" href="../../static/css/coursepage.css" />
-
-
-        {self.headlinks}
-
-            </head>
-
-    '''
-                def make_abovemainsitecode(startingletter):
-
-                    startingletter=startingletter.lower()
-                    letterwebsitepage=f'{startingletter}-departments.html'
-                    letterpagereferencepath=f'../{startingletter}/{letterwebsitepage}'
+                  
 
 
 
 
-                    abovemainsitecode=f'''
+       
 
-        <div class="abovemainsite">
-            <div class="topnav">
-            <nav class="breadcrumbs">
-                <ul>
-                <li><a href="../../utcoursesindex.html">DegreeView UT</a></li>
-                <i class="fa fa-chevron-right"></i>
-
-                <li><a href="{letterpagereferencepath}">{startingletter.upper()} Departments</a></li>
-                <i class="fa fa-chevron-right"></i>
-
-                <li id="current">
-                    {displaydepartmentname}
-                </li>
-                </ul>
-            </nav>
-            <nav class="homeandabout">
-                <ul>
-                
-               <li><a href="../../utcoursesindex.html">Home</a></li>
-              <li><a href="../../../aboutpage.html">About</a></li>
-              <li><a href="../../../ut-stats.html">Stats</a></li>
-                </ul>
-            </nav>
-            </div>
-            <div class="degreenamebox">
-            <h1 id="degreenametitle">
-            {displaydepartmentname}
-            </h1>
-            </div>
-        </div>
-    '''
-                    return abovemainsitecode
+       
+       
 
                 
                 def make_mainsitecode():
@@ -949,78 +920,28 @@ class createWebsite:
                     departmentnamehalf=displaydepartmentname[-1].strip()
                     displaydepartmentname=f'({code}) - {departmentnamehalf}'
                     
-                    undermainsitecode=f'''
-                <div class="undermainsite">
-                <h3 id="departmenttableheading"> {departmentnamehalf} Department Courses Table</h3>
-
-                <div class="copyanddownload">
-                    <div class="animatetable">
-                    <button id="animatebutton">Animate</button>
-                    </div>
-
-                    <i class="fa-regular fa-copy" id="copyicon" title="Copy Table"></i>
-                    <!-- contains the rendered csv -->
                 
-                </div>
+                
 
-                {htmltable}
-                </div>
-
-                '''
-                    return undermainsitecode
+                
+                
                 def makebodyhtmlcode():
-                    abovemainsitecode=make_abovemainsitecode(startingletter=startingletter)
-                    mainsitecode=make_mainsitecode()
-                    undermainsitecode=make_undermainsite_code()
+                  
+                   
 
 
                     csvlist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[0]
 
 
-                    scripts=f'''
+                   
 
-                    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-
-
-
-                    <!-- Hover Script -->
-
-                    <script src="../../static/js/headingcolorchange.js"></script>
-                    <!-- copy script -->
-                    <script src="../../static/js/copytable.js"></script>
-
-                    <!-- animate table script -->
-                    <script src="../../static/js/animatetable.js"></script>
-    '''
-
-                    bodyhtmlcode=f'''                    
-                    <body>
-                    {self.bodytag}       
-                    <div class="sitecontainer">
-                    {abovemainsitecode}
-                    {mainsitecode}
-                    {undermainsitecode}
-
-                    {self.footer}
-                    </div>
-                    {scripts}
-                    </body>
-
-    '''
+                
                     return bodyhtmlcode
 
 
                 def makefullhtmlcode(startingletter):
 
-                    bodyhtmlcode=makebodyhtmlcode()
-
-                    fullhtmlcode=f'''
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        {headhtmlcode}\n
-                        {bodyhtmlcode}\n
-                        
-                        </html>'''
+                   
 
         
                     # have to run createschoolpages() first so self.websiteschool folder works
