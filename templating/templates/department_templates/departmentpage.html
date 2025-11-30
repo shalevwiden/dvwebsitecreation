@@ -79,6 +79,114 @@
           <h1 id="degreenametitle">{displaydepartmentname}</h1>
         </div>
       </div>
+      <div class="mainsite">
+        <!-- left content has all the file references -->
+        <div class="leftcontent">
+          <div class="filescontainer" id="excelcontainer">
+            <div class="filesname">
+              <h3>Excel (.xlsx) Files</h3>
+              <span class="material-symbols-outlined"> view_module </span>
+            </div>
+            <ul>
+              {% for lidata in excelul %}
+              <li>
+                <div class="linkbox">
+                  <p>
+                    Department Courses
+                    <span id="{{ lidata[0] }}">{{ lidata[0] }} Theme</span>
+                  </p>
+                  <p>
+                    <!-- download attribute means they will download it -->
+                    Download:&nbsp;&nbsp;
+                    <a href="{{ lidata[1] }}" download>
+                      <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                    </a>
+                  </p>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+
+            <!-- end the for loop -->
+          </div>
+        </div>
+        <div class="rightcontent">
+          <div class="displaynamebox">
+            <h3 id="displayname">
+              {{displaydepartmentname}} Statistics &nbsp; &nbsp;<span
+                class="material-symbols-outlined"
+                id="charticon"
+              >
+                bar_chart_4_bars
+              </span>
+            </h3>
+          </div>
+          <!-- department stats here -->
+          <div class="departmentstats">
+            <section class="statsline" id="coursecount">
+              <div class="statsname">Department Course Count</div>
+              <div class="statscontent">{{ statsdict['course_count'] }}</div>
+            </section>
+
+            <section class="statsline" id="longestname">
+              <div class="statsname">Longest Course Name</div>
+              <div class="statscontent">
+                {{ statsdict['longest_course_name'] }}
+              </div>
+            </section>
+
+            <section class="statsline" id="shortestname">
+              <div class="statsname">Shortest Course Name</div>
+              <div class="statscontent">
+                {{ statsdict.get('shortest_course_name', 'Not found') }}
+              </div>
+            </section>
+
+            <section class="statsline" id="lowercount">
+              <div class="statsname">Lower Division Course Count</div>
+              <div class="statscontent">
+                {{ statsdict.get('lower_count', 'Not found') }}, {{
+                statsdict.get('lower_percent', 'Not found') }}
+              </div>
+            </section>
+
+            <section class="statsline" id="uppercount">
+              <div class="statsname">Upper Division Course Count</div>
+              <div class="statscontent">
+                {{ statsdict.get('upper_count', 'Not found') }}, {{
+                statsdict.get('upper_percent', 'Not found') }}
+              </div>
+            </section>
+
+            <section class="statsline" id="gradcount">
+              <div class="statsname">Graduate Courses Count</div>
+              <div class="statscontent">
+                {{ statsdict['grad_count'] }}, {{ statsdict['grad_percent'] }}
+              </div>
+            </section>
+
+            <section class="statsline" id="averagelength">
+              <div class="statsname">
+                Average Course Name Length (characters)
+              </div>
+              <div class="statscontent">
+                {{ statsdict['average_course_length'] }}
+              </div>
+            </section>
+
+            <section class="statsline" id="samenamecount">
+              <div class="statsname">
+                Number of {{ departmentnamehalf }} Courses with "{{
+                departmentnamehalf }}" in their name
+              </div>
+              <div class="statscontent">
+                {{ statsdict.get('samenamelen', 'Not found') }}, {{
+                statsdict.get('samenamepercent', 'Not found') }}
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
       <div class="undermainsite">
         <h3 id="departmenttableheading">
           {{departmentnamehalf}} Department Courses Table

@@ -622,6 +622,12 @@ class createWebsite:
                     <!-- animate table script -->
                     <script src="../../static/js/animatetable.js"></script>
     '''
+                # now I need to pass in all values from statsdict
+                statsdict=readfromjson()
+
+            #    all statsdict values are referenced in the template
+
+
 
                 departmentpagedata = {
                     "headlinks": self.headlinks,
@@ -634,7 +640,8 @@ class createWebsite:
                     "htmltable":htmltable,
                      "bodytag": self.bodytag,
                     "footer": self.footer,
-                    "scripts":scripts
+                    "scripts":scripts,
+                    "statsdict":statsdict
 
 
                 }
@@ -743,18 +750,6 @@ class createWebsite:
             
                
 
-       
-
-                  
-
-
-
-
-       
-
-       
-       
-
                 
                 def make_mainsitecode():
                     '''
@@ -804,6 +799,7 @@ class createWebsite:
                         template = env.get_template("leftcontentcode_departments.html")
 
                         # in jinja, reference the keys
+                        
                         variables={
                             "departmentnamehalf":departmentnamehalf,
 
@@ -821,92 +817,44 @@ class createWebsite:
 
 
                         }
+                        # this should be an excelul list
+                        '''
+                        This is a list of lists.
+                        The first element in each list is the name of the theme, and its also the id of the 
+                        label.
+                        The second is the path to the google cloud hosted file
+                        '''
+                        excelul=[
+                            ["original",originaltheme_excel],
+                            ["dark",darktheme_excel]
+                        ]
 
-                        rendered_html = template.render(variables)
+                        return excelul
+                        
+                        
 
-                        leftcontentcode=rendered_html
-
-                        return leftcontentcode
+                        
                     
-                    def makerightcontentcode():
-                        '''
-                        For the right content code it has stats in it
-                        '''
-
-                        statsdict=readfromjson()
+              
                        
 
 
-                        gradcountsection=f'''
-                        <section class="statsline" id="gradcount">
-                        <div class="statsname">Graduate Courses Count</div>
-                        <div class="statscontent">{statsdict['grad_count']}, {statsdict['grad_percent']}</div>
-                        </section>
-                            '''
-                        departmentstats=f'''
-<div class="departmentstats">
-            <section class="statsline" id="coursecount">
-              <div class="statsname">Department Course Count</div>
-              <div class="statscontent">{statsdict['course_count']}</div>
-            </section>
-            <section class="statsline" id="longestname">
-              <div class="statsname">Longest Course Name</div>
-              <div class="statscontent">{statsdict['longest_course_name']}</div>
-            </section>
-            <section class="statsline" id="shortestname">
-              <div class="statsname">Shortest Course Name</div>
-              <div class="statscontent">{statsdict.get('shortest_course_name',"Not found")}</div>
-            </section>
-            <section class="statsline" id="lowercount">
-              <div class="statsname">Lower Division Course Count</div>
-              <div class="statscontent">{statsdict.get('lower_count',"Not found")}, {statsdict.get('lower_percent',"Not found")}</div>
-            </section>
-            <section class="statsline" id="uppercount">
-              <div class="statsname">Upper Division Course Count</div>
-              <div class="statscontent">{statsdict.get('upper_count',"Not found")}, {statsdict.get('upper_percent',"Not found")}</div>
-            </section>
-            {gradcountsection}
-            <section class="statsline" id="averagelength">
-              <div class="statsname">Average Course Name Length (characters) </div>
-              <div class="statscontent">{statsdict['average_course_length']} </div>
-            </section>
-
-            <section class="statsline" id="samenamecount">
-              <div class="statsname">Number of {departmentnamehalf} Courses with "{departmentnamehalf}" in their name</div>
-              <div class="statscontent">{statsdict.get('samenamelen',"Not found")}, {statsdict.get('samenamepercent',"Not found")}</div>
-            </section>
-          </div>
-'''
-                        rightcontentcode=f'''
-                        <div class="rightcontent">
-                        <div class="displaynamebox">
-                <h3 id="displayname">{displaydepartmentname} Statistics &nbsp; &nbsp;<span class="material-symbols-outlined" id="charticon">
-                bar_chart_4_bars
-              </span> </h3>
-                
-                
-            </div>
-            {departmentstats}
-                    </div>
-
+                      
 
 
                     
 
             
-    '''
-                        return rightcontentcode
-                    # end makerightcontentcodefunction()
-                    
-                    leftcontentcode=makeleftcontentcode()
-                    rightcontentcode=makerightcontentcode()
+    
 
-                    mainsitecode=f'''<div class="mainsite">
-                    {leftcontentcode}
-                    {rightcontentcode}
-                    </div>
-                    '''
-                    return mainsitecode 
+                    
+
+
+
+
+
+
+
                 
                 def make_undermainsite_code():
 
