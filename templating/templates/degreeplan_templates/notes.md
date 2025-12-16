@@ -1,3 +1,3 @@
 # Degreeplan templates
 
-This is basically just for UT
+This is basically just for UT.

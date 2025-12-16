@@ -42,4 +42,10 @@ Theres a lot that needs to be done:
 6. I also wanna add a button to make the table of courses only if it has the department name in the course name.
 
 I should also make the degreeplan files into a template.
-What I plan to add to
+What I plan to add to.
+
+When I create all the pages for a school, its gonna do in the "departments" folder.
+Then eventually it needs to go in a "Blurbs" folder.
+<br>
+I need to create a JSON of all the DEGREEVIEW website pages which will go into the random page button creation stuff
+I need to use styling thats a folder above all the schools so all the schools can share the same scss obviously.

@@ -32,6 +32,12 @@ import importlib.util
 # the asset is important here because it contains the name of every degree in it.
 
 
+'''
+Ok so this needs to be redesigned to take in a json file.
+
+We might modify the JSON file in python using dictionary methods if needed.
+
+'''
 class createUniversity:
     def __init__(self):
 
