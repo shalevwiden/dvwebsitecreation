@@ -35,4 +35,11 @@ Theres a lot that needs to be done:
 1. Making the stats page for each school into a template.
    Then adding a method onto the createUniversity class that creates/updates the stats page for each school, with colors and data.
 2. In the Jinja, I need to set default values for everything using || because I might add more stuff to the json later.
-3.
+3. Make a new home page that supports multiple schools.
+4. Make a legacy Excel templates page which and a "schoolname" excel page.
+   The schoolname excel page will simply show the schools excel template and actually include the JSON file that created it.
+5. No new features until launch, so I'm not gonna do this yet, but I wanna add multiple animations to the tables
+6. I also wanna add a button to make the table of courses only if it has the department name in the course name.
+
+I should also make the degreeplan files into a template.
+What I plan to add to

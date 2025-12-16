@@ -9,13 +9,15 @@ The data for each object should probably be held in a json file.
 
 Updating the legacy UT part of the site needs to be in this file too.
 '''
-
+from createuniversity import createUniversity
 
 class createPages:
     def __init__(self):
         self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utcoursessite/departments'
     def schoolcontainingfunc():
         # utobj=
+        
         # rice obj
         # utd obj
+        pass
 
