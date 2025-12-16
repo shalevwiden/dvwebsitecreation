@@ -32,11 +32,12 @@ import importlib.util
 # the asset is important here because it contains the name of every degree in it.
 
 
-class createWebsite:
+class createUniversity:
     def __init__(self):
 
         self.assetspath='/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses'
 
+        # this is the JSON for all of the department names and department links
         self.jsondatapath ='/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/ut_courses/utjson.json'
 
         self.universityname='The University of Texas at Austin'
@@ -1050,8 +1051,8 @@ class createWebsite:
 
 
 
-def runcreateWebsite():
-    websiteobject=createWebsite()
+def runcreateUniversity():
+    websiteobject=createUniversity()
     websiteobject.create_department_pages()
     websiteobject.createletterpages()
 
@@ -1060,4 +1061,4 @@ def runcreateWebsite():
     
 print(f'\nthe python version being used is:{sys.executable}\n')
 
-runcreateWebsite()
+runcreateUniversity()

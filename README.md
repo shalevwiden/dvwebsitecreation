@@ -27,3 +27,12 @@ Which will host like 260 Excel files.
 ### Nov 30
 
 Ok lets make the course data pages into templates now.
+
+### Dec 16
+
+Theres a lot that needs to be done:
+
+1. Making the stats page for each school into a template.
+   Then adding a method onto the createUniversity class that creates/updates the stats page for each school, with colors and data.
+2. In the Jinja, I need to set default values for everything using || because I might add more stuff to the json later.
+3.
