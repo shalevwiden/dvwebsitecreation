@@ -88,3 +88,6 @@ Since Im usin Jinja for a lot of template rendering I have to pay attention to w
 
 In the actual pages on the site, all the styling should be from a main.css.
 Then I can simply ensure its linked correctly when generating the templates.
+
+I need to scss-ize like all the styling for DegreeView for sure lmao.
+Untangling the styling is gonna be tricky...
