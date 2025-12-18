@@ -91,3 +91,7 @@ Then I can simply ensure its linked correctly when generating the templates.
 
 I need to scss-ize like all the styling for DegreeView for sure lmao.
 Untangling the styling is gonna be tricky...
+
+**Ok big progess**
+Dec 18th is when I finally generated a poorly done, yet existing, full html department pages for another school besides UT (Rice University).
+I guess I gotta pull an all nighter to work on this.
