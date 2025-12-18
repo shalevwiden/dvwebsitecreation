@@ -52,9 +52,10 @@ class createUniversity:
         # university name like 'The University of Texas at Austin'
         self.universityname=universityname
 
-        self.randompagehspath="/Users/shalevwiden/Downloads/Projects/dvschoolsites/texas/utcoursessite/static/js/randompage.js"
+        
 
-        self.cloudbucketpath='https://storage.googleapis.com/utcourses'
+        # path like 'https://storage.googleapis.com/utcourses'
+        self.cloudbucketpath=cloudbucketpath
 
         env = Environment(loader=FileSystemLoader("templates"))
 

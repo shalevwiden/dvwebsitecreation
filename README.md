@@ -64,3 +64,18 @@ But I think once I get the set up right, I can expand to new schools like crazy.
 In createpages.py, Im gonna use in file python dictionaries instead of JSON for now, because Im still establishing exactly what arguments the createUniversity class in createuniversity.py will take.
 
 renamed "createwebsite.py" to "utdegreeplans.py" . This was the file that created the first version of DegreeView with UT Austin degree plans.
+
+### Dec 18
+
+Having ideas for how to do the random page button better.
+Instead of having all the links in one js file, put all the links in a json and read it in the js file.
+Standardize the name of the json. I should use the school abbreviation, so ut would be like `ut_dv_links.json`. Put it in an html element with display none and get it by id in js.
+
+The element would go in the school page template.
+
+Also I need to put the footer stuff inside the templates folder and also...standardize it.
+
+**dealing with css is a whole nother issue**
+I need to make a main.scss and just compile everything to that.
+For both legacy DegreeView and the new stuff.
+Legacy much later tho.
