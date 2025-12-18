@@ -80,11 +80,11 @@ class createPages:
 
         def rice():
             # update all of this with rice data
-            rice_specs=self.buildspecs("/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses",
-                "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/ut_courses/utjson.json",
-                "The University of Texas at Austin"
-                ,"https://storage.googleapis.com/utcourses",
-                "/Users/shalevwiden/Downloads/Projects/testsite/departments")
+            rice_specs=self.buildspecs("/Users/shalevwiden/Downloads/Projects/dvassets/texas/Rice",
+                "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/rice/ricejson.json",
+                "Rice University"
+                ,"https://storage.googleapis.com/ricecourses",
+                "/Users/shalevwiden/Downloads/Projects/testsite/ricedepartments")
         
             riceobj=createUniversity(**rice_specs)
             # instead of calling all of the functions 
@@ -94,7 +94,7 @@ class createPages:
             riceobj.create_department_pages()
         
         # call all the school functions here
-        ut()
+        # ut()
         rice()
 
     def createindex(self):

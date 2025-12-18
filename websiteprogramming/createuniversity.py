@@ -801,8 +801,10 @@ class createUniversity:
                     This makes an excel ul element which gets passed into the Jinja template.
                     '''
                     excellist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[1]
-
-                    originaltheme_excel=[file for file in excellist if "originaltheme" in file][0]
+                    if excellist:
+                        originaltheme_excel=[file for file in excellist if "originaltheme" in file][0]
+                    else:
+                        originaltheme_excel="placeholder, some schools dont have excel files generated yet."
                     
                     # make a custom college excel theme
                     # only two of em, original and college one.
@@ -826,7 +828,7 @@ class createUniversity:
                 htmltable=readhtmltable()
 
                 statsdict=readfromjson()
-                
+
                 departmentpagedata = {
                     "headlinks": self.headlinks,
                     "headtag": self.headtag,
@@ -852,7 +854,8 @@ class createUniversity:
                    
                     fulldepartmentpage=os.path.join(letterwebsitefolder,f'{departmentnamecleaned}.html')
                     departmentpagerendered=self.departmentpagetemplate.render(departmentpagedata)
-
+                    
+                    # w mode overrides it
                     with open(fulldepartmentpage,'w') as htmldepartmentpage:
                         htmldepartmentpage.write(departmentpagerendered)
 
