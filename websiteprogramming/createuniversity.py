@@ -57,11 +57,11 @@ class createUniversity:
         # path like 'https://storage.googleapis.com/utcourses'
         self.cloudbucketpath=cloudbucketpath
 
-        env = Environment(loader=FileSystemLoader("templates"))
+        env = Environment(loader=FileSystemLoader("templating/templates"))
 
 # 2. Load the template by name
         self.lettertemplate = env.get_template("letterpage.html")
-        self.departmentpagetemplate=env.get_template("departmentpage.html")
+        self.departmentpagetemplate=env.get_template("department_templates/departmentpage.html")
 
 
 
@@ -98,6 +98,8 @@ class createUniversity:
         # this one is important
         # is the location of the department folder for now
         self.websitefolder=websitefolder
+        if not os.path.exists(self.websitefolder):
+            os.makedirs(self.websitefolder, exist_ok=True)      
 
         self.images={
             
@@ -354,6 +356,8 @@ class createUniversity:
         '''
         On each school page include the school specific csv/.xlsx (listing all the degrees). Then also include another other school diagrams in the future.
         I need it to be modularized so I can do it school by school. As such, use the asset. 
+
+        This actually does create letter pages.
         '''
         # this ensures other folders arent added
         
@@ -368,16 +372,6 @@ class createUniversity:
         # --------------------------
             schoolinfo=f'Every degree page has 2 csvs, 2 excel files, and a sample semester diagram.\n\
             More files coming in the future.' 
-
-            letterpagedata = {
-                "headtag": self.headtag,
-                "startingletter": startingletter,
-                "site_favicon": self.images.get("site_favicon"),
-                "departmentlist_ul_element": make_departmentlist_ul(),
-                "linkicon": self.images.get("linkicon"),
-                "bodytag": self.bodytag,
-                "footer": self.footer
-            }
 
             def make_departmentlist_ul():
                 # keep this probs
@@ -427,7 +421,19 @@ class createUniversity:
                 <ul>{departmentlist_ul_element_content}
                 </ul>'''
                 return departmentlist_ul_element
-                      
+            
+            #now build the data dict  
+            letterpagedata = {
+                "headtag": self.headtag,
+                "startingletter": startingletter,
+                "site_favicon": self.images.get("site_favicon"),
+                "departmentlist_ul_element": make_departmentlist_ul(),
+                "linkicon": self.images.get("linkicon"),
+                "bodytag": self.bodytag,
+                "footer": self.footer
+            }
+
+              
             
             def makefullhtmlcode(startingletter):
 
@@ -670,7 +676,6 @@ class createUniversity:
                 letterwebsitepage=f'{startingletter}-departments.html'
                 letterpagereferencepath=f'../{startingletter}/{letterwebsitepage}'
 
-                htmltable=readhtmltable()
                 scripts=f'''
 
                     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -687,31 +692,9 @@ class createUniversity:
                     <script src="../../static/js/animatetable.js"></script>
     '''
                 # now I need to pass in all values from statsdict
-                statsdict=readfromjson()
+               
 
             #    all statsdict values are referenced in the template
-
-
-
-                departmentpagedata = {
-                    "headlinks": self.headlinks,
-                    "headtag": self.headtag,
-                    "departmentnamehalf": departmentnamehalf,
-                    "sitefavicon": self.images.get("site_favicon"),
-                    "displaydepartmentname": displaydepartmentname,
-                    "startingletter":startingletter,
-                    "letterpagereferencepath":letterpagereferencepath,
-                    "htmltable":htmltable,
-                     "bodytag": self.bodytag,
-                    "footer": self.footer,
-                    "scripts":scripts,
-                    "statsdict":statsdict
-
-
-                }
-
-
-            
 
             # get file types
 
@@ -733,6 +716,8 @@ class createUniversity:
                         tablecode=htmltable.read()
 
                     return tablecode
+
+               
 
 
                 
@@ -811,163 +796,67 @@ class createUniversity:
                 print(f'Display department name= {displaydepartmentname}')
                 # readd any that had slashes
 
-            
-               
-
-                
-                def make_mainsitecode():
+                def make_excel_ul():
                     '''
-                    This is simply a function that generates leftcontentcode and rightcontentcode, then puts it together in main content code. 
+                    This makes an excel ul element which gets passed into the Jinja template.
                     '''
-                    
-                    # get csv links
-                    csvlist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[0]
-                    print(f'CSV list: {csvlist}')
-                    # this is accurate
-                    coursescsv=[csv for csv in csvlist if "coursescsv" in csv][0]
-
-                    # get excel links
                     excellist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[1]
-
-
-                    blacktheme_excel=[file for file in excellist if "blacktheme" in file][0]
 
                     originaltheme_excel=[file for file in excellist if "originaltheme" in file][0]
                     
-                    
-                    
-                    darktheme_excel=[file for file in excellist if "darktheme" in file][0]
-                    
-                    green_excel=[file for file in excellist if "greentheme" in file][0]
+                    # make a custom college excel theme
+                    # only two of em, original and college one.
+                    # get rid of CSV's
 
-                    desert_excel=[file for file in excellist if "deserttheme" in file][0]
+                    # this should be an excelul list
+                    '''
+                    This is a list of lists.
+                    The first element in each list is the name of the theme, and its also the id of the 
+                    label.
+                    The second is the path to the google cloud hosted file
+                    '''
+                    excel_ul=[
+                        ["original",originaltheme_excel],
+                    ]
 
-                    grey_excel=[file for file in excellist if "grey" in file][0]
-
-                    ocean_excel=[file for file in excellist if "ocean" in file][0]
-                    pastel_excel=[file for file in excellist if "pastel" in file][0]
-
-                    primarycolors_excel=[file for file in excellist if "primarycolors" in file][0]
-                    neon_excel=[file for file in excellist if "neon" in file][0]
-
-
+                    return excel_ul
                 
-                    def makeleftcontentcode():
-                        '''Using the links just received above, now link them in the left content code in the website'''
+                excel_ul=make_excel_ul()
 
+                htmltable=readhtmltable()
 
-                        env = Environment(loader=FileSystemLoader("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/templates/department_templates"))
-        
-
-                        # Pick template
-                        template = env.get_template("leftcontentcode_departments.html")
-
-                        # in jinja, reference the keys
-                        
-                        variables={
-                            "departmentnamehalf":departmentnamehalf,
-
-                            "coursescsv":coursescsv,
-                            "blacktheme_excel": blacktheme_excel,
-                            "originaltheme_excel":originaltheme_excel,
-                            "darktheme_excel":darktheme_excel,
-                            "green_excel":green_excel,
-                            "desert_excel":desert_excel,
-                            "grey_excel":grey_excel,
-                            "ocean_excel":ocean_excel,
-                            "pastel_excel":pastel_excel,
-                            "primarycolors_excel":primarycolors_excel,
-                            "neon_excel":neon_excel
-
-
-                        }
-                        # this should be an excelul list
-                        '''
-                        This is a list of lists.
-                        The first element in each list is the name of the theme, and its also the id of the 
-                        label.
-                        The second is the path to the google cloud hosted file
-                        '''
-                        excelul=[
-                            ["original",originaltheme_excel],
-                            ["dark",darktheme_excel]
-                        ]
-
-                        return excelul
-                        
-                        
-
-                        
-                    
-              
-                       
-
-
-                      
-
-
-                    
-
-            
-    
-
-                    
-
-
-
-
-
-
-
+                statsdict=readfromjson()
                 
-                def make_undermainsite_code():
-
-
-                    htmltable=readhtmltable()
-
-
-                    displaydepartmentname=departmentname.replace('_','/')
-                    displaydepartmentname=departmentname.strip().split('-')
-                    code=displaydepartmentname[0].strip()
-                    departmentnamehalf=displaydepartmentname[-1].strip()
-                    displaydepartmentname=f'({code}) - {departmentnamehalf}'
-                    
-                
-                
-
-                
-                
-                def makebodyhtmlcode():
-                  
-                   
-
-
-                    csvlist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[0]
-
-
-                   
-
-                
-                    return bodyhtmlcode
-
-
+                departmentpagedata = {
+                    "headlinks": self.headlinks,
+                    "headtag": self.headtag,
+                    "departmentnamehalf": departmentnamehalf,
+                    "sitefavicon": self.images.get("site_favicon"),
+                    "displaydepartmentname": displaydepartmentname,
+                    "startingletter":startingletter,
+                    "letterpagereferencepath":letterpagereferencepath,
+                    "htmltable":htmltable,
+                     "bodytag": self.bodytag,
+                    "footer": self.footer,
+                    "scripts":scripts,
+                    "statsdict":statsdict,
+                    "excelul":excel_ul,
+                }
+     
                 def makefullhtmlcode(startingletter):
-
-                   
-
-        
                     # have to run createschoolpages() first so self.websiteschool folder works
 
                     startingletter=startingletter.lower()
                     print(f'Starting letter {startingletter}')
                     letterwebsitefolder=os.path.join(self.websitefolder,startingletter)
                    
-
                     fulldepartmentpage=os.path.join(letterwebsitefolder,f'{departmentnamecleaned}.html')
+                    departmentpagerendered=self.departmentpagetemplate.render(departmentpagedata)
 
                     with open(fulldepartmentpage,'w') as htmldepartmentpage:
-                        htmldepartmentpage.write(fullhtmlcode)
-                    print(f'\n Made {fulldepartmentpage} as part of making departmentpages\n')
+                        htmldepartmentpage.write(departmentpagerendered)
+
+                    print(f'\n Made {fulldepartmentpage} as part of rendering department {departmentnamecleaned}\n')
 
                 makefullhtmlcode(startingletter=startingletter)
 
@@ -1094,4 +983,5 @@ def runcreateUniversity():
     
 print(f'\nthe python version being used is:{sys.executable}\n')
 
-runcreateUniversity()
+if __name__=="__main__":
+    runcreateUniversity()

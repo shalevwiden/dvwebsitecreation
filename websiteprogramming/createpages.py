@@ -67,7 +67,7 @@ class createPages:
                 "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/ut_courses/utjson.json",
                 "The University of Texas at Austin"
                 ,"https://storage.googleapis.com/utcourses",
-                "/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utcoursessite/departments")
+                "/Users/shalevwiden/Downloads/Projects/testsite/departments")
         
             utobj=createUniversity(**ut_specs)
             # instead of calling all of the functions 
@@ -75,9 +75,28 @@ class createPages:
             utobj.createletterpages()
 
             utobj.create_department_pages()
-        # rice obj
-        # utd obj
-        pass
+        
+        ut()
+
+        def rice():
+            # update all of this with rice data
+            rice_specs=self.buildspecs("/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses",
+                "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/ut_courses/utjson.json",
+                "The University of Texas at Austin"
+                ,"https://storage.googleapis.com/utcourses",
+                "/Users/shalevwiden/Downloads/Projects/testsite/departments")
+        
+            riceobj=createUniversity(**rice_specs)
+            # instead of calling all of the functions 
+
+            riceobj.createletterpages()
+
+            riceobj.create_department_pages()
+        
+        # call all the school functions here
+        ut()
+        rice()
+
     def createindex(self):
         '''
         Creates the index

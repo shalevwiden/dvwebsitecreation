@@ -79,3 +79,12 @@ Also I need to put the footer stuff inside the templates folder and also...stand
 I need to make a main.scss and just compile everything to that.
 For both legacy DegreeView and the new stuff.
 Legacy much later tho.
+
+Inside the createPages class, instead of manually writing out all methods from the createUniversity class that need to be called, I should instead just make a function that does it and calls them. For schools I want to do manually I can just delete that call and write them manually.
+
+Since Im usin Jinja for a lot of template rendering I have to pay attention to where all the paths are.
+
+---
+
+In the actual pages on the site, all the styling should be from a main.css.
+Then I can simply ensure its linked correctly when generating the templates.
