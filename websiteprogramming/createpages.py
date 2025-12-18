@@ -9,15 +9,79 @@ The data for each object should probably be held in a json file.
 
 Updating the legacy UT part of the site needs to be in this file too.
 '''
+
+
+from pathlib import Path
+import os
+
+import sys
+if __name__=='__main__':
+    print(f'\nthe python version being used is:{sys.executable}\n')
+
+
+import subprocess
+import random
+
+import csv
+import time
+import json
+
+# use this to render template
+from jinja2 import Environment, FileSystemLoader
+
+
+
+# use this to upload stuff to google cloud
+from google.cloud import storage
+
+
+# use this to import stuff from other python files
+import importlib.util
+
 from createuniversity import createUniversity
 
 class createPages:
     def __init__(self):
         self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utcoursessite/departments'
-    def schoolcontainingfunc():
+
+        self.universityuldatapath=''
+    def schoolcontainingfunc(self):
+        '''
+        This function will call all of the school objects and their methods.
+        Itll be a big one.
+        Might wanna divide it up later.
+
+        '''
+
+        ut_specs={}
+
         # utobj=
         
         # rice obj
         # utd obj
         pass
+    def createindex(self):
+        '''
+        Creates the index
+        '''
+        # the key is what will be dislayed on the index, as in the school name the user will read.
+        indextemplate=''
+        '''
+        Technicalities to be aware of here:
+        The box color will actually be set in scss.
+        This is because with different colors I'll also have to adjust the TEXT color of the box.
+        
+        Therefore doing it in scss is the best approach
+
+        '''
+        with open(self.universityuldatapath,'r') as universityuldatajson:
+            universityuldata=json.load(universityuldatajson)
+
+
+    
+    def create_main_statspage():
+        '''
+        Uses the main stats page template to create the HTML file for the main stats 
+        of DegreeView (# schools, longest coursename so far, etc)
+        '''
 

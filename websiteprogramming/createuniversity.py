@@ -37,16 +37,20 @@ Ok so this needs to be redesigned to take in a json file.
 
 We might modify the JSON file in python using dictionary methods if needed.
 
+I need to add 
+
 '''
 class createUniversity:
-    def __init__(self):
+    def __init__(self,asset_folder_path,jsondatapath, universityname, cloudbucketpath,websitefolder,):
 
-        self.assetspath='/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses'
+        # where assets like excel files and csvs are
+        self.asset_folder_path=asset_folder_path
 
         # this is the JSON for all of the department names and department links
-        self.jsondatapath ='/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/ut_courses/utjson.json'
+        self.jsondatapath =jsondatapath
 
-        self.universityname='The University of Texas at Austin'
+        # university name like 'The University of Texas at Austin'
+        self.universityname=universityname
 
         self.randompagehspath="/Users/shalevwiden/Downloads/Projects/dvschoolsites/texas/utcoursessite/static/js/randompage.js"
 
@@ -83,14 +87,15 @@ class createUniversity:
 
         # -----------New cleaned schoolname and websitefoler stuff --------------
 
-        # self.departmentfolders= [os.path.join(self.assetspath,folder) for folder in os.listdir(self.assetspath) 
-        #    if os.path.isdir(os.path.join(self.assetspath, folder))]
+        # self.departmentfolders= [os.path.join(self.asset_folder_path,folder) for folder in os.listdir(self.asset_folder_path) 
+        #    if os.path.isdir(os.path.join(self.asset_folder_path, folder))]
         # self.departmentfolders.sort()
 
 
         # can I have spaces is the question
-
-        self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utcoursessite/departments'
+        
+        # this one is important
+        self.websitefolder=websitefolder
 
         self.images={
             
@@ -115,7 +120,60 @@ class createUniversity:
 
         # footer so I dont have to redefine it multiple times. 
 
+    def create_school_homepage(self):
+        '''
+        Uses a Jinja template to create each schools homepage.
+        Has to read some variables from the init.
+
+
+        '''
+
+        def create_homepage_ul():
+            '''
+            This returns the ul that will go on the homepage.
+
+            This needs to be moved to the create_school_homepage function
+            '''
+
+            lis=f'''
+
+                '''
+            for startingletter in self.alphabetizeddict:
+                startingletter=startingletter.lower()
+                
+                letterwebsitepage=f'{startingletter}-departments.html'
+
+                
+                fullpagepath=os.path.join("departments",startingletter,letterwebsitepage)
+
+            
+                li=f'''
+                <li class="homepage-column">
+                <a href="{fullpagepath}"
+                ><div class="contentdiv">{startingletter.upper()} Departments</div></a
+                >
+            </li>
+    '''
+                lis+=li
+                
+                
+            homepageul=f'''
+            <ul class="homepage-ul">
+            {lis}
+            </ul>
+            '''
+            print(homepageul)
+
+        pass
         
+        # with open a template...write to it with variables, boom.
+
+    
+    def create_school_statspage(self):
+        '''
+        This function should use JSON, like school stats json thats already linked in the init, to build a school stats page.
+        '''
+
 
     def upload_schoolfiles(self):
 
@@ -299,7 +357,7 @@ class createUniversity:
         
         for startingletter in self.alphabetizeddict:
 
-            letterfolder=os.path.join(self.assetspath,startingletter)
+            letterfolder=os.path.join(self.asset_folder_path,startingletter)
            
             
             
@@ -374,7 +432,7 @@ class createUniversity:
                
                 startingletter=startingletter.lower()
                 print(f'Starting letter {startingletter}')
-                letterwebsitefolder=os.path.join(self.websitepath,startingletter)
+                letterwebsitefolder=os.path.join(self.websitefolder,startingletter)
                 
                 letterwebsitepage=f'{startingletter}-departments.html'
 
@@ -403,7 +461,7 @@ class createUniversity:
 
         for startingletter in self.alphabetizeddict:
 
-            letterfolder=os.path.join(self.assetspath,startingletter)
+            letterfolder=os.path.join(self.asset_folder_path,startingletter)
             
             letterdict=self.alphabetizeddict[startingletter]
             for departmentname in letterdict:
@@ -561,10 +619,7 @@ class createUniversity:
 
             print(f'\n\nEnding Cloud Upload for {startingletter} degreefiles \n\n\n\n')
     
-                   
-
-
-
+                
 
     def create_department_pages(self):
         '''
@@ -576,7 +631,7 @@ class createUniversity:
         
         for startingletter in self.alphabetizeddict:
 
-            letterfolder=os.path.join(self.assetspath,startingletter)
+            letterfolder=os.path.join(self.asset_folder_path,startingletter)
             
             letterdict=self.alphabetizeddict[startingletter]
 
@@ -903,7 +958,7 @@ class createUniversity:
 
                     startingletter=startingletter.lower()
                     print(f'Starting letter {startingletter}')
-                    letterwebsitefolder=os.path.join(self.websitepath,startingletter)
+                    letterwebsitefolder=os.path.join(self.websitefolder,startingletter)
                    
 
                     fulldepartmentpage=os.path.join(letterwebsitefolder,f'{departmentnamecleaned}.html')
@@ -919,43 +974,13 @@ class createUniversity:
 # ---------------------END of make rendered degree pages
 
  
-    def create_homepage_ul(self):
-        '''
-        This returns the ul that will go on the homepage.
-        '''
-
-        lis=f'''
-
-            '''
-        for startingletter in self.alphabetizeddict:
-            startingletter=startingletter.lower()
-            
-            letterwebsitepage=f'{startingletter}-departments.html'
-
-            
-            fullpagepath=os.path.join("departments",startingletter,letterwebsitepage)
-
-          
-            li=f'''
-            <li class="homepage-column">
-            <a href="{fullpagepath}"
-              ><div class="contentdiv">{startingletter.upper()} Departments</div></a
-            >
-          </li>
-'''
-            lis+=li
-            
-            
-        homepageul=f'''
-        <ul class="homepage-ul">
-        {lis}
-        </ul>
-        '''
-        print(homepageul)
+    
 
     def create_randompage_js(self):
         '''
-        This file should essentially simply build all the departmentlinks, then build the full functional file
+        This file should essentially simply build all the departmentlinks, then build the full functional file.
+
+        Perhaps I could actually read the finished HTML files so I dont have to recreate what they are.
         '''
 
         randompagejspath=self.randompagejspath
@@ -966,7 +991,7 @@ class createUniversity:
         
         for startingletter in self.alphabetizeddict:
 
-            letterfolder=os.path.join(self.assetspath,startingletter)
+            letterfolder=os.path.join(self.asset_folder_path,startingletter)
             
             letterdict=self.alphabetizeddict[startingletter]
             for departmentname in letterdict:

@@ -47,5 +47,20 @@ What I plan to add to.
 When I create all the pages for a school, its gonna do in the "departments" folder.
 Then eventually it needs to go in a "Blurbs" folder.
 <br>
-I need to create a JSON of all the DEGREEVIEW website pages which will go into the random page button creation stuff
+I need to create a JSON of all the DEGREEVIEW (html) website pages which will go into the random page button creation stuff
 I need to use styling thats a folder above all the schools so all the schools can share the same scss obviously.
+<br>
+<br>
+Another change I wanna make:
+making the course data page just have it all with dividing it into "A departments, B..." with different subpages.
+those A B etc pages can be used when we divide it up by States on the homepage.
+
+<br>
+The set up truly is so much work.
+But I think once I get the set up right, I can expand to new schools like crazy.
+
+### Dec 17
+
+In createpages.py, Im gonna use in file python dictionaries instead of JSON for now, because Im still establishing exactly what arguments the createUniversity class in createuniversity.py will take.
+
+renamed "createwebsite.py" to "utdegreeplans.py" . This was the file that created the first version of DegreeView with UT Austin degree plans.
