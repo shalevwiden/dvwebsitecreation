@@ -45,6 +45,14 @@ class createPages:
         self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utcoursessite/departments'
 
         self.universityuldatapath=''
+    def buildspecs(self, asset_folder_path,jsondatapath,universityname,cloudbucketpath,websitefolder,):
+
+        
+        return {"asset_folder_path": asset_folder_path,
+    "jsondatapath": jsondatapath,
+    "universityname": universityname,
+    "cloudbucketpath": cloudbucketpath,
+    "websitefolder": websitefolder}
     def schoolcontainingfunc(self):
         '''
         This function will call all of the school objects and their methods.
@@ -53,10 +61,20 @@ class createPages:
 
         '''
 
-        ut_specs={}
-
-        # utobj=
+        def ut():
+            # I need need to standardize the location of all of this stuff
+            ut_specs=self.buildspecs("/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses",
+                "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/ut_courses/utjson.json",
+                "The University of Texas at Austin"
+                ,"https://storage.googleapis.com/utcourses",
+                "/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utcoursessite/departments")
         
+            utobj=createUniversity(**ut_specs)
+            # instead of calling all of the functions 
+
+            utobj.createletterpages()
+
+            utobj.create_department_pages()
         # rice obj
         # utd obj
         pass
@@ -85,3 +103,9 @@ class createPages:
         of DegreeView (# schools, longest coursename so far, etc)
         '''
 
+def main():
+    createpages=createPages()
+
+    createpages.schoolcontainingfunc()
+
+main()

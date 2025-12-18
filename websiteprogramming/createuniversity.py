@@ -96,6 +96,7 @@ class createUniversity:
         # can I have spaces is the question
         
         # this one is important
+        # is the location of the department folder for now
         self.websitefolder=websitefolder
 
         self.images={
