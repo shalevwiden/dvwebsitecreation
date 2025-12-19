@@ -168,6 +168,9 @@ class createUniversity:
             '''
             print(homepageul)
 
+        departmentcontainerdata={
+            "A":[{"departmentname":"","departmenturl":""},{"departmentname":"","departmenturl":""}]
+        }
         pass
         
         # with open a template...write to it with variables, boom.

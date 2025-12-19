@@ -95,3 +95,5 @@ Untangling the styling is gonna be tricky...
 **Ok big progess**
 Dec 18th is when I finally generated a poorly done, yet existing, full html department pages for another school besides UT (Rice University).
 I guess I gotta pull an all nighter to work on this.
+
+Using a custom ID on each site container, I can divide up the styling into their own scss files, but compile them all to one main.css
