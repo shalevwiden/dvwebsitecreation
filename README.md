@@ -112,3 +112,13 @@ UT has the department code and name seperated by a hyphen.
 While Rice has the department code at the end, in parenthesesis:
 Astronomy (ASTR)
 All that needs to be done for each school is to get the two needed displaydepartmentname and departmentname half variables.
+
+---
+
+Ok so now I'm thinking just use that code in the generation of the json for every department and just include them as variables at the top.
+Ok theres a 3rd one I need to include, departmentname cleaned.
+
+- No slahes
+- use "-" instead of slashes or commas
+
+Createuniversity.py is gonna get a lot cleaner once all of those variables are standardized and in the init.

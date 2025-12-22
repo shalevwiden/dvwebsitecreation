@@ -41,7 +41,7 @@ I need to add
 
 '''
 class createUniversity:
-    def __init__(self,asset_folder_path,jsondatapath, universityname, cloudbucketpath,websitefolder,):
+    def __init__(self,asset_folder_path,jsondatapath, universityname, cloudbucketpath,websitefolder,helperfunctionsfolder):
 
         # where assets like excel files and csvs are
         self.asset_folder_path=asset_folder_path
@@ -99,7 +99,12 @@ class createUniversity:
         # is the location of the department folder for now
         self.websitefolder=websitefolder
         if not os.path.exists(self.websitefolder):
-            os.makedirs(self.websitefolder, exist_ok=True)      
+            os.makedirs(self.websitefolder, exist_ok=True)    
+        
+        # this will include code specific to that school, which right now is only getting the departmentnamehalf and displaydepartmentname
+        # self.helperfunctionsfolder=helperfunctionsfolder
+
+        
 
         self.images={
             

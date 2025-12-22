@@ -10,6 +10,7 @@ def get_displaydepartmentname(departmentname):
     departmentnamehalf=displaydepartmentname[-1].strip()
     displaydepartmentname=f'({code}) - {departmentnamehalf}'
 
+    # put this logic inside the JInja template actually
     if len(displaydepartmentname)>60:
         displaydepartmentname=displaydepartmentname.split(')')
         displaydepartmentname=f'{displaydepartmentname[0]}<br>{displaydepartmentname[-1]}'
