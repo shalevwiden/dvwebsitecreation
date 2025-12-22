@@ -18,3 +18,7 @@ I'm gonna avoid the dolphin pdfs with UTD since its not accurate.
 
 I guess I could expand 4 year plans to one more university.
 Just for funzies. Because it is honestly pretty fun.
+
+### Dec 21
+
+Gonna write code to get certain variables for each

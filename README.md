@@ -97,3 +97,18 @@ Dec 18th is when I finally generated a poorly done, yet existing, full html depa
 I guess I gotta pull an all nighter to work on this.
 
 Using a custom ID on each site container, I can divide up the styling into their own scss files, but compile them all to one main.css
+
+All I have to do to make it scalable to all schools is:
+Finish the create university class.
+Design new homepage.
+
+### Dec 21
+
+I should make a way to have specific code for getting the displaydepartmentname and departmentname half variable across schools, becuase it can vary.
+UT has the department code and name seperated by a hyphen.
+
+"GRG - Geography"
+
+While Rice has the department code at the end, in parenthesesis:
+Astronomy (ASTR)
+All that needs to be done for each school is to get the two needed displaydepartmentname and departmentname half variables.

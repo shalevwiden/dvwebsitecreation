@@ -832,6 +832,9 @@ class createUniversity:
 
                 statsdict=readfromjson()
 
+                '''
+                I need to get departmentnamehalf and displaydepartmentname standardized across schools
+                '''
                 departmentpagedata = {
                     "headlinks": self.headlinks,
                     "headtag": self.headtag,

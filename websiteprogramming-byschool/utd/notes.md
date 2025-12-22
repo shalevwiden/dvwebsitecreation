@@ -1,0 +1,3 @@
+# Createutdwebsite.py...
+
+This is unique because I tried to also scrape utd degree plans.
