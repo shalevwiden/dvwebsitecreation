@@ -65,9 +65,6 @@ class catalogData:
         # Create spec from file
         from pathlib import Path
 
-        
-
-
 
         # Now you can access functions from that file
        
@@ -94,8 +91,14 @@ class catalogData:
             else:
                 self.alphabetizeddict[startingletter][departmentname]=departmenturl
 
+        
+    def get_departmentnamecleaned(self,departmentname):
 
-
+        departmentnamecleaned=departmentname.replace('/','_')
+        departmentnamecleaned=departmentname.replace(' ','').lower()
+        departmentnamecleaned=departmentnamecleaned.replace('/','-')
+        return departmentnamecleaned
+    
     def create_departmentname_json():
         '''
         This will create departmentnamejson for every department which will include 4 things.
@@ -106,6 +109,10 @@ class catalogData:
         departmentnamehalf
         departmentcode
 
+        This is tricky because all the other functions need to know how to get to this one, which means I think they all do need the minimum
+        departmentnamecleaned code.
+
+        This can serve as a function in the createuniversity class init and in this classes init
         '''
 
         for startingletter in self.alphabetizeddict:
@@ -117,11 +124,27 @@ class catalogData:
             letterdict=self.alphabetizeddict[startingletter]
 
             for departmentname in letterdict:
-                departmenturl=letterdict[departmentname]
 
                 # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
-                departmentname=departmentname.replace('/','_')
 
+
+                departmentnamecleaned=self.get_departmentnamecleaned(departmentname)
+
+                departmentfolderpath=os.path.join(letterfolder,departmentnamecleaned)
+
+
+                departmentnamestats={
+                    "departmentnamecleaned":"",
+                    "displaydepartmentname":"",
+                    "departmentnamehalf":"",
+                    "departmentcode":"",
+
+
+                }
+                departmentnamejson=f'{departmentnamecleaned}namejson.json'
+                departmentnamejsonpath=os.path.join(departmentfolderpath,departmentnamejson)
+                with open(departmentnamejsonpath,'w') as departmentnamejsonobj:
+                        json.dump(departmentnamestats,departmentnamejsonobj,indent=4)
 
     def upload_to_database(self):
         '''
@@ -228,17 +251,12 @@ class catalogData:
     def makestatsjson(self):
         '''
         
-        This function will make a stats JSON that will be used in the createwebsite.py.
+        This function will make a stats JSON that will be used in the createuniversity.py.
         
         '''        
 
         for startingletter in self.alphabetizeddict:
 
-            
-            
-
-             
-            
 
             letterfolder=os.path.join(self.assetspath,startingletter)
             if not os.path.exists(letterfolder):
