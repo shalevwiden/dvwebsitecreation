@@ -25,3 +25,7 @@ The Excel stuff has succesfully been fully completed.
 Now I have to draw a mermaid diagram about it.
 
 I now need to take all this Excel stuff and do it for Rice too lolz...
+
+# Dec 21, 2025
+
+The makedatafiles.py code is gonna be used to standardize school making.

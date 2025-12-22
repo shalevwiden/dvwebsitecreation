@@ -81,6 +81,7 @@ class catalogData:
             self.jsondata=json.load(universityjson)
         
         self.alphabetizeddict={}
+        # this is a function to divide up the departments alphabetically
         for departmentname in self.jsondata:
             departmenturl=self.jsondata[departmentname]
             startingletter=departmentname[0]
@@ -95,6 +96,31 @@ class catalogData:
 
 
 
+    def create_departmentname_json():
+        '''
+        This will create departmentnamejson for every department which will include 4 things.
+        It works well as JSON because I can get a visual on it 24/7
+
+        departmentnamecleaned
+        displaydepartmentname
+        departmentnamehalf
+        departmentcode
+
+        '''
+
+        for startingletter in self.alphabetizeddict:
+
+            letterfolder=os.path.join(self.assetspath,startingletter)
+            if not os.path.exists(letterfolder):
+                os.mkdir(letterfolder)
+            
+            letterdict=self.alphabetizeddict[startingletter]
+
+            for departmentname in letterdict:
+                departmenturl=letterdict[departmentname]
+
+                # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
+                departmentname=departmentname.replace('/','_')
 
 
     def upload_to_database(self):
