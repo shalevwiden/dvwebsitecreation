@@ -26,6 +26,14 @@ Now I have to draw a mermaid diagram about it.
 
 I now need to take all this Excel stuff and do it for Rice too lolz...
 
-# Dec 21, 2025
+### Dec 21, 2025
 
 The makedatafiles.py code is gonna be used to standardize school making.
+
+###
+
+So I'm gonna do getting the department name stuff here.
+In each schools folder there does need to be "departmentname.py" folder.
+
+Ok so this line`departmentname=departmentname.replace('/','_')` is actually required
+no matter where you are.

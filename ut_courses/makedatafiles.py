@@ -52,6 +52,7 @@ class catalogData:
         self.jsondatapath='/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/ut_courses/utjson.json'
         self.assetspath='/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses'
         self.universityname='The University of Texas at Austin'
+        
 
             
         
@@ -132,6 +133,7 @@ class catalogData:
             letterdict=self.alphabetizeddict[startingletter]
 
             for departmentname in letterdict:
+                
 
                 # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
 
@@ -140,6 +142,9 @@ class catalogData:
                 print(f'Departmentname cleaned is {departmentnamecleaned}')
 
                 # use departmentname for the asset folder, not departmentname cleaned
+                # use this line no matter where actually just to get rid of slashes, thats a necesity
+                departmentname=departmentname.replace('/','_')
+
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
 
 
@@ -152,7 +157,8 @@ class catalogData:
 
                 }
 
-                departmentnamejson=f'{departmentnamecleaned}namejson.json'
+                departmentnamejson=f'departmentnamejson.json'
+
                 departmentnamejsonpath=os.path.join(departmentfolderpath,departmentnamejson)
                 with open(departmentnamejsonpath,'w') as departmentnamejsonobj:
                         json.dump(departmentnamestats,departmentnamejsonobj,indent=4)
