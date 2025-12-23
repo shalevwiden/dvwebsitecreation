@@ -5,6 +5,10 @@ This is for UT Austin department names every school might be a little different
 
 '''
 
+# the departmentname itself is the name of the folders.
+# IMPORTANT - the name of the folders have slashes removed by default
+# departmentname=departmentname.replace('/','_')
+
 departmentname="ACF - Actuarial Foundations"
 
 def get_departmentnamecleaned(departmentname):

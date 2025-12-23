@@ -30,10 +30,18 @@ I now need to take all this Excel stuff and do it for Rice too lolz...
 
 The makedatafiles.py code is gonna be used to standardize school making.
 
-###
+### Dec 23
 
 So I'm gonna do getting the department name stuff here.
 In each schools folder there does need to be "departmentname.py" folder.
 
 Ok so this line`departmentname=departmentname.replace('/','_')` is actually required
 no matter where you are.
+
+Whenever I want to change a departmentname or such on the deployed website, I'll need to change the departmentname.py of the respective university.
+
+### Getting University stats
+
+I have universitystatsjson.json
+I need to add more data to it like the number of departments, biggest department, and smallest department by course amount.
+Then I need to make an HTML template which takes the universitystatsjson as arguments and renders it.
