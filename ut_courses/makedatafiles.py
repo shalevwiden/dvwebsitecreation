@@ -93,13 +93,21 @@ class catalogData:
 
         
     def get_departmentnamecleaned(self,departmentname):
+        '''
+        Docstring for get_departmentnamecleaned:
+        This is a helper function for create_departmentname_json()
+        
+        :param self: Description
+        :param departmentname: departmentname
+        '''
+        
 
         departmentnamecleaned=departmentname.replace('/','_')
         departmentnamecleaned=departmentname.replace(' ','').lower()
         departmentnamecleaned=departmentnamecleaned.replace('/','-')
         return departmentnamecleaned
     
-    def create_departmentname_json():
+    def create_departmentname_json(self):
         '''
         This will create departmentnamejson for every department which will include 4 things.
         It works well as JSON because I can get a visual on it 24/7
@@ -129,8 +137,10 @@ class catalogData:
 
 
                 departmentnamecleaned=self.get_departmentnamecleaned(departmentname)
+                print(f'Departmentname cleaned is {departmentnamecleaned}')
 
-                departmentfolderpath=os.path.join(letterfolder,departmentnamecleaned)
+                # use departmentname for the asset folder, not departmentname cleaned
+                departmentfolderpath=os.path.join(letterfolder,departmentname)
 
 
                 departmentnamestats={
@@ -141,6 +151,7 @@ class catalogData:
 
 
                 }
+
                 departmentnamejson=f'{departmentnamecleaned}namejson.json'
                 departmentnamejsonpath=os.path.join(departmentfolderpath,departmentnamejson)
                 with open(departmentnamejsonpath,'w') as departmentnamejsonobj:
@@ -1407,8 +1418,8 @@ def runcatalogDataclass():
 
     
     
-    
-    catalogobj.makestatsjson()    
+    catalogobj.create_departmentname_json()
+    # catalogobj.makestatsjson()    
     # catalogobj.make_excel_files()
     
     
