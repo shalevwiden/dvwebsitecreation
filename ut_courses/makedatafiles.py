@@ -1401,7 +1401,40 @@ class catalogData:
                     departmentcount=len(unidict)
                 return departmentcount
             
-            
+            def get_biggest_and_smallest_departments():
+                sorteddepartments=os.path.join(self.universitywidefolder,self.sorted_departments_filename)
+
+                with open(sorteddepartments,'r') as sdjson:
+                    sorted_departments=json.load(sdjson)
+                
+                # this makes a list of key value pairs as tuples
+                # this is a good idea when you need to index into a dictionary, like below
+                sorted_departments_list = list(sorted_departments.items())
+                print(f'sorted_departments_list :\n{sorted_departments_list}')
+                
+
+                first_dept=sorted_departments_list[0]
+                second_dept=sorted_departments_list[1]
+                third_dept=sorted_departments_list[2]
+
+                last_dept = sorted_departments_list[-1]
+                second_last_dept = sorted_departments_list[-2]
+                third_last_dept = sorted_departments_list[-3]
+
+                # return them all
+
+                # this is put together with "universitystatsdict" in getunidata
+
+                # so the values here are tuples which become lists/ arrays in json
+                biggest_and_smallest_departments = { 
+                "first_dept": first_dept,
+                "second_dept": second_dept,
+                "third_dept": third_dept,
+                "third_last_dept": third_last_dept,
+                "second_last_dept": second_last_dept,
+                "last_dept": last_dept,
+                }
+                return biggest_and_smallest_departments
 
 
             universitywidedatabase=os.path.join(self.universitywidefolder,'universitywidedatabase.db')
@@ -1473,8 +1506,12 @@ class catalogData:
             # use get_ordered_deparmentlist to get the biggest and smallest departments and return them
             # then load it here into the univeristy statsdict
             coursecount=get_course_count()
+
+            biggest_and_smallest_departments=get_biggest_and_smallest_departments()
             # this dict has the QUERIES
             resultsdict=get_longest_andshortest_coursename()
+
+
 
             universitystatsdict={
                 "departmentcount":departmentcount,
@@ -1484,18 +1521,9 @@ class catalogData:
 
             # merge
             universitystatsdict.update(resultsdict)
+            universitystatsdict.update(biggest_and_smallest_departments)
             
             return universitystatsdict
-
-        def get_biggest_and_smallest_departments():
-                sorteddepartments=os.path.join(self.universitywidefolder,self.sorted_departments_filename)
-
-                with open(sorteddepartments,'r') as sdjson:
-                    sorted_departments=json.load(sdjson)
-                
-                
-                    
-
 
         def makestatsjson():
             '''
@@ -1530,7 +1558,8 @@ def runcatalogDataclass():
     
     
     # catalogobj.create_departmentname_json()
-    catalogobj.get_sorted_departmentlist()
+    # catalogobj.get_sorted_departmentlist()
+    catalogobj.make_university_statsjson()
     # catalogobj.makestatsjson()    
     # catalogobj.make_excel_files()
     
