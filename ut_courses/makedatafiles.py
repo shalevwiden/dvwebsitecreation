@@ -55,11 +55,16 @@ class catalogData:
         
         self.universitywidefolder=os.path.join(self.assetspath,"universitywidefolder")
 
+        self.sorted_departments_json=os.path.join(self.universitywidefolder,"sorted_departments_json.json")
+        self.universitystatsjson=os.path.join(self.universitywidefolder,"universitystatsjson.json")
+        # I actually dont think Ill use this one
+        self.universitywidedatabase=os.path.join(self.universitywidefolder,"universitywidedatabase.db")
+
         if not os.path.exists(self.universitywidefolder):
             os.mkdir(self.universitywidefolder)
             # filenames in the university wide folder
 
-        self.sorted_departments_filename="sorted_departments_json.json"
+        
 
         with open('excelconfiglink.txt','r') as configlink:
             self.excelconfigpath=configlink.read()
@@ -1363,9 +1368,9 @@ class catalogData:
         # sort them with biggest first (descending)
         sorted_departments = dict(sorted(departmentsize_dict.items(), key=lambda x: x[1],reverse=True))
         # make the json path in the university wide folder
-        sorted_departments_json=os.path.join(self.universitywidefolder,self.sorted_departments_filename)
+        
         # create a json
-        with open(sorted_departments_json,'w') as sdjson:
+        with open( self.sorted_departments_json,'w') as sdjson:
             json.dump(sorted_departments,sdjson,indent=4)
 
 
@@ -1402,9 +1407,8 @@ class catalogData:
                 return departmentcount
             
             def get_biggest_and_smallest_departments():
-                sorteddepartments=os.path.join(self.universitywidefolder,self.sorted_departments_filename)
 
-                with open(sorteddepartments,'r') as sdjson:
+                with open(self.sorted_departments_json,'r') as sdjson:
                     sorted_departments=json.load(sdjson)
                 
                 # this makes a list of key value pairs as tuples
