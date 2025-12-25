@@ -62,3 +62,6 @@ First one is write the 3 smallest and 3 largest departments from sorteddepartmen
 then I also wanna make this a function in the init
 `.replace('-','_').replace(',','_').replace('&','and').replace("'","")`
 its a function to get the table name in the databases from the departmentnamecleaned
+
+To make DegreeView, I am using the catalogData class as well as the createUniversity class
+self.assetspath (from catalogData) and self.asset_folder_path (from createUniversity) basically refer to the same thing.
