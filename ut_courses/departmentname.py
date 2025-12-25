@@ -13,15 +13,14 @@ departmentname="ACF - Actuarial Foundations"
 
 def get_departmentnamecleaned(departmentname):
 
-    departmentname=departmentname.replace('/','_')
+    departmentnamecleaned=departmentname.replace('/','_')
 
 
 
 
-    departmentnamecleaned=departmentname.replace(' ','').lower()
+    departmentnamecleaned=departmentnamecleaned.replace(' ','').lower()
     departmentnamecleaned=departmentnamecleaned.replace(',','-').lower()
 
-    departmentnamecleaned=departmentnamecleaned.replace('/','_')
     return departmentnamecleaned
 
 def get_display_departmentname(departmentname):

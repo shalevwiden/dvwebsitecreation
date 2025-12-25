@@ -45,3 +45,20 @@ Whenever I want to change a departmentname or such on the deployed website, I'll
 I have universitystatsjson.json
 I need to add more data to it like the number of departments, biggest department, and smallest department by course amount.
 Then I need to make an HTML template which takes the universitystatsjson as arguments and renders it.
+
+I am going to add how many departments there are right now.
+Getting the biggest and smallest departments in each school is something you can do in many different ways.
+
+added get_departmentcount() in getunidata() in makedatafiles.py
+makedatafiles.py also has to work across schools.
+
+Now working on get_ordered_departmentlist()
+
+### Dec 25, 2025
+
+I wanna do many things today
+First one is write the 3 smallest and 3 largest departments from sorteddepartments_json.json to universitystatsjson.json
+
+then I also wanna make this a function in the init
+`.replace('-','_').replace(',','_').replace('&','and').replace("'","")`
+its a function to get the table name in the databases from the departmentnamecleaned

@@ -53,9 +53,13 @@ class catalogData:
         self.assetspath='/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses'
         self.universityname='The University of Texas at Austin'
         
+        self.universitywidefolder=os.path.join(self.assetspath,"universitywidefolder")
 
-            
-        
+        if not os.path.exists(self.universitywidefolder):
+            os.mkdir(self.universitywidefolder)
+            # filenames in the university wide folder
+
+        self.sorted_departments_filename="sorted_departments_json.json"
 
         with open('excelconfiglink.txt','r') as configlink:
             self.excelconfigpath=configlink.read()
@@ -71,6 +75,7 @@ class catalogData:
        
         self.make_excelfile = make_excelfile
         # self.make_checkerboard=module.make_excelfile()
+
 
 
 
@@ -992,15 +997,11 @@ class catalogData:
         This includes the University Wide Database, and some csv files I'm thinking
         '''
 
-        universitystatsfolder=os.path.join(self.assetspath,"universitywidefolder")
-
-        if not os.path.exists(universitystatsfolder):
-            os.mkdir(universitystatsfolder)
 
     # this will rewrite it everytime I start the file. Clearing it
 
         def make_universidewide_csv():
-            universitywidecsvpath=os.path.join(universitystatsfolder,'universitywidecsv.csv')
+            universitywidecsvpath=os.path.join(self.universitywidefolder,'universitywidecsv.csv')
 
             with open(universitywidecsvpath,'w') as universitywidecsv:
                 writer=csv.writer(universitywidecsv)
@@ -1097,7 +1098,7 @@ class catalogData:
         make_universidewide_csv()
 
         def make_universidewide_database():
-            universitywidedatabase=os.path.join(universitystatsfolder,'universitywidedatabase.db')
+            universitywidedatabase=os.path.join(self.universitywidefolder,'universitywidedatabase.db')
 
             if os.path.exists(universitywidedatabase):
                 os.remove(universitywidedatabase)
@@ -1195,7 +1196,7 @@ class catalogData:
                       
         make_universidewide_database()
         def makeuniversitywidehtmltable():
-            universitywidedatabase=os.path.join(universitystatsfolder,'universitywidedatabase.db')
+            universitywidedatabase=os.path.join(self.universitywidefolder,'universitywidedatabase.db')
             universitytablename=f'universitywidedata_table'
 
 
@@ -1226,7 +1227,7 @@ class catalogData:
 
             
 
-                universitywidehtmltable=os.path.join(universitystatsfolder,'universitywidetable.html')
+                universitywidehtmltable=os.path.join(self.universitywidefolder,'universitywidetable.html')
 
                 rows=getdatabasedata()
 
@@ -1295,24 +1296,115 @@ class catalogData:
             I just need to put it in a database and csv now. 
             '''
             pass
+    
+
+    def get_sorted_departmentlist(self):
+        '''
+        This one is tricky, but I want an ordered list of the name of the department and how many courses each department has
+
+        I'll then pass in the biggest and smallest department to be in the unversitystatsjson
+
+        But the full list should be in its own file, like a json or csv.
+
+        This file is gonna need me to open and query all departments databases, so it should probably be its own method
+        '''
+
+        departmentsize_dict={}
+        for startingletter in self.alphabetizeddict:
+
+
+            letterfolder=os.path.join(self.assetspath,startingletter)
+            if not os.path.exists(letterfolder):
+                os.mkdir(letterfolder)
+            
+            letterdict=self.alphabetizeddict[startingletter]
+
+            for departmentname in letterdict:
+                # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
+                departmentname=departmentname.replace('/','_')
+
+
+                departmentfolderpath=os.path.join(letterfolder,departmentname)
+
+                    
+                departmentnamecleaned=departmentname.replace(' ','').lower()
+
+
+                databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
+
+                # hyphens and commas not allowed in tablename
+                # this should hopefully work across schools
+                tabledepartmentname=departmentnamecleaned.replace('-','_').replace(',','_').replace('&','and').replace("'","")
+
+                tablename=f'{tabledepartmentname}_table'
+
+
+               
+                with sqlite3.connect(databasepath) as conn:
+                        cursor=conn.cursor()
+
+                def get_department_coursecount():
+                    countcoursescommand=f'''
+
+                    SELECT coursename 
+                    FROM {tablename} 
+                    WHERE coursename IS NOT NULL AND coursename != ''
+                    '''
+
+
+                    cursor.execute(countcoursescommand)
+                    courselist = cursor.fetchall()
+                    courselist=[row[0] for row in courselist] 
+
+                    return len(courselist)
+                coursecount = get_department_coursecount()
+                departmentsize_dict[departmentname]=coursecount
+        
+        # sort them with biggest first (descending)
+        sorted_departments = dict(sorted(departmentsize_dict.items(), key=lambda x: x[1],reverse=True))
+        # make the json path in the university wide folder
+        sorted_departments_json=os.path.join(self.universitywidefolder,self.sorted_departments_filename)
+        # create a json
+        with open(sorted_departments_json,'w') as sdjson:
+            json.dump(sorted_departments,sdjson,indent=4)
 
 
 
     def make_university_statsjson(self):
+        '''
+        This is the big function containing getting the data and making the file
+
+        The function that actually MAKES the json is makestatsjson()
+        '''
 
 
         universitywidedatabase='enterpathlater'
 
-        universitystatsfolder=os.path.join(self.assetspath,"universitywidefolder")
 
-        def getdatabasedata():
+        def getunidata():
             '''
             These are all the column names: coursename, coursecode, coursehours, classification
 
             It is case insensitive wow.
+
+            This used to be named getdatabasedata() but I changed it to getunidata because we are doing some non database stuff
             '''
 
-            universitywidedatabase=os.path.join(universitystatsfolder,'universitywidedatabase.db')
+            # this function gets the number of departments per school
+            def get_departmentcount():
+                '''
+                This uses the already created jsondata, under self.jsondatapath, which has the number of departments
+                '''
+
+                with open(self.jsondatapath) as unijson:
+                    unidict=json.load(unijson)
+                    departmentcount=len(unidict)
+                return departmentcount
+            
+            
+
+
+            universitywidedatabase=os.path.join(self.universitywidefolder,'universitywidedatabase.db')
 
             universitytablename=f'universitywidedata_table'
             with sqlite3.connect(universitywidedatabase) as conn:
@@ -1377,11 +1469,15 @@ class catalogData:
                     return results
 
 
-
+            departmentcount=get_departmentcount()
+            # use get_ordered_deparmentlist to get the biggest and smallest departments and return them
+            # then load it here into the univeristy statsdict
             coursecount=get_course_count()
+            # this dict has the QUERIES
             resultsdict=get_longest_andshortest_coursename()
 
             universitystatsdict={
+                "departmentcount":departmentcount,
                 "coursecount":coursecount,
                 
             }
@@ -1391,6 +1487,15 @@ class catalogData:
             
             return universitystatsdict
 
+        def get_biggest_and_smallest_departments():
+                sorteddepartments=os.path.join(self.universitywidefolder,self.sorted_departments_filename)
+
+                with open(sorteddepartments,'r') as sdjson:
+                    sorted_departments=json.load(sdjson)
+                
+                
+                    
+
 
         def makestatsjson():
             '''
@@ -1399,9 +1504,9 @@ class catalogData:
 
 
             '''
-            universityjson=os.path.join(universitystatsfolder,'universitystatsjson.json')
+            universityjson=os.path.join(self.universitywidefolder,'universitystatsjson.json')
 
-            universitystatsdict=getdatabasedata()
+            universitystatsdict=getunidata()
             print(universitystatsdict)
 
 
@@ -1424,7 +1529,8 @@ def runcatalogDataclass():
 
     
     
-    catalogobj.create_departmentname_json()
+    # catalogobj.create_departmentname_json()
+    catalogobj.get_sorted_departmentlist()
     # catalogobj.makestatsjson()    
     # catalogobj.make_excel_files()
     
