@@ -41,10 +41,30 @@ I need to add
 
 '''
 class createUniversity:
-    def __init__(self,asset_folder_path,jsondatapath, universityname, cloudbucketpath,websitefolder,helperfunctionsfolder):
+    def __init__(self,asset_folder_path,jsondatapath, universityname, cloudbucketpath,websitefolder,helperfunctionsfolder,schoolabrv):
+        
+        '''
+        
+        website folder is where the website files like html will be created
 
+        I should NOT include departments in it because in this class Im creating many university wide files
+        These files will go on the root level of the website
+        like 
+        
+        dv/texas/ut/stats.html
+        '''
         # where assets like excel files and csvs are
         self.asset_folder_path=asset_folder_path
+        # now based on that asset_folder_path get the university stats
+        self.universitywidefolder=os.path.join(self.asset_folder_path,"universitywidefolder")
+
+        # just keep the variable names the same as the filenames
+        self.sorted_departments_json=os.path.join(self.universitywidefolder,"sorted_departments_json.json")
+        self.universitystatsjson=os.path.join(self.universitywidefolder,"universitystatsjson.json")
+        # I actually dont think Ill use this one
+        self.universitywidedatabase=os.path.join(self.universitywidefolder,"universitywidedatabase.db")
+
+
 
         # this is the JSON for all of the department names and department links
         self.jsondatapath =jsondatapath
@@ -59,10 +79,9 @@ class createUniversity:
 
         env = Environment(loader=FileSystemLoader("templating/templates"))
 
-# 2. Load the template by name
         self.lettertemplate = env.get_template("letterpage.html")
         self.departmentpagetemplate=env.get_template("department_templates/departmentpage.html")
-
+        self.sorteddepartments_template=env.get_template("sorteddepartments_page.html")
 
 
         with open(self.jsondatapath,'r') as universityjson:
@@ -70,7 +89,7 @@ class createUniversity:
             self.jsondata=json.load(universityjson)
 
         self.alphabetizeddict={}
-
+        # this is a function to divide up the departments alphabetically
         for departmentname in self.jsondata:
             departmenturl=self.jsondata[departmentname]
             startingletter=departmentname[0]
@@ -86,11 +105,7 @@ class createUniversity:
         # this one is fixed 
         # this should work. If not I need to find a mystery
 
-        # -----------New cleaned schoolname and websitefoler stuff --------------
-
-        # self.departmentfolders= [os.path.join(self.asset_folder_path,folder) for folder in os.listdir(self.asset_folder_path) 
-        #    if os.path.isdir(os.path.join(self.asset_folder_path, folder))]
-        # self.departmentfolders.sort()
+      
 
 
         # can I have spaces is the question
@@ -99,12 +114,16 @@ class createUniversity:
         # is the location of the department folder for now
         self.websitefolder=websitefolder
         if not os.path.exists(self.websitefolder):
-            os.makedirs(self.websitefolder, exist_ok=True)    
+            os.makedirs(self.websitefolder, exist_ok=True)   
+        
+        # now lets define the names of the uni wide files
+
+        self.sorted_departments_page=os.path.join(self.websitefolder,"sorted-departments.html")
         
         # this will include code specific to that school, which right now is only getting the departmentnamehalf and displaydepartmentname
         # self.helperfunctionsfolder=helperfunctionsfolder
 
-        
+
 
         self.images={
             
@@ -878,14 +897,14 @@ class createUniversity:
 
 # ---------------------END of make rendered degree pages
 
- 
-    
 
     def create_randompage_js(self):
         '''
         This file should essentially simply build all the departmentlinks, then build the full functional file.
 
         Perhaps I could actually read the finished HTML files so I dont have to recreate what they are.
+
+        This allows for the functionality of the "random page button" 
         '''
 
         randompagejspath=self.randompagejspath
@@ -952,13 +971,14 @@ class createUniversity:
         
 
     def createstatspage(self):
-        '''This will create the University Wide stats html page'''
+        '''This will create the University wide stats html page'''
 
 
         env = Environment(loader=FileSystemLoader("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/templates"))
         
 
         # Pick template
+        # define the templates in the init tho ngl
         template = env.get_template("statstemplate.html")
 
         variables={
@@ -971,6 +991,29 @@ class createUniversity:
 
         with open(statspageoutput,'w') as statspage:
             statspage.write(rendered_html)
+
+    def create_sorteddepartments_page():
+        '''
+        This function will use sorted_departments_json.json and make a page for it for 
+        every instance of this class (every University)
+
+        '''
+
+        with open(self.sorted_departments_json,'r') as sdjson:
+            sorted_departments=json.load(sdjson)
+
+        
+        template_data={
+            "sorted_departments":sorted_departments,
+            "universityname":self.universityname
+        }
+        # Jinja must take name=value pairs
+        sorteddepartments_page_rendered=self.sorteddepartments_template.render(template_data)
+
+
+        with open(self.sorted_departments_page,'w') as fullpage:
+            fullpage.write(sorteddepartments_page_rendered)
+
 
 # -------------END of class -----------------------
 

@@ -122,3 +122,16 @@ Ok theres a 3rd one I need to include, departmentname cleaned.
 - use "-" instead of slashes or commas
 
 Createuniversity.py is gonna get a lot cleaner once all of those variables are standardized and in the init.
+
+### Dec 25, 2025
+
+Today I am working on getting data from the "universitywidefolder"
+and rendering it onto templates
+
+Made the "sorteddepartments_page.html" template in templates
+
+I should make it a convention to call the dictionary I pass into a template
+"template data", no matter what.
+
+For the sorteddepartments_page I thought about making a csv but, I'm just gonna make the table copyable.
+This means people can easily make a CSV from it if they so choose.

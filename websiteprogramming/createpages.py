@@ -84,6 +84,8 @@ class createPages:
                 "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/rice/ricejson.json",
                 "Rice University"
                 ,"https://storage.googleapis.com/ricecourses",
+
+                # so I can probably make a function to finish this path for whereever I actually host the website
                 "/Users/shalevwiden/Downloads/Projects/testsite/ricedepartments")
         
             riceobj=createUniversity(**rice_specs)
