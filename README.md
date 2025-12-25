@@ -135,3 +135,11 @@ I should make it a convention to call the dictionary I pass into a template
 
 For the sorteddepartments_page I thought about making a csv but, I'm just gonna make the table copyable.
 This means people can easily make a CSV from it if they so choose.
+
+The scss is a whole nother thing...
+All of the updated scss is actually in testsite rn
+Just need to edit the template that I copy pasted from dvdeployed
+
+I should also make some universal scss partials like "abovemainsite"
+"mainsite"
+"undermainsite"
