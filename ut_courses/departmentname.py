@@ -11,57 +11,63 @@ This is for UT Austin department names every school might be a little different
 
 departmentname="ACF - Actuarial Foundations"
 
-def get_departmentnamecleaned(departmentname):
+class DepartmentName:
+    def __init__(self, departmentname: str):
+        self.departmentname = departmentname
 
-    departmentnamecleaned=departmentname.replace('/','_')
+    def get_departmentnamecleaned(self):
+
+        departmentnamecleaned=self.departmentname.replace('/','_')
 
 
 
 
-    departmentnamecleaned=departmentnamecleaned.replace(' ','').lower()
-    departmentnamecleaned=departmentnamecleaned.replace(',','-').lower()
+        departmentnamecleaned=departmentnamecleaned.replace(' ','').lower()
+        departmentnamecleaned=departmentnamecleaned.replace(',','-').lower()
 
-    return departmentnamecleaned
+        return departmentnamecleaned
 
-def get_display_departmentname(departmentname):
-    '''
-    This one actually doesnt use departmentname cleaned, because capitalization will be displayed
-    
-    
-    '''
+    def get_display_departmentname(self):
+        '''
+        This one actually doesnt use departmentname cleaned, because capitalization will be displayed
+        
+        
+        '''
 
-    displaydepartmentname=departmentname.replace('_','/')
-    # the splitpoint is important, for UT its a "-"
-    displaydepartmentname=departmentname.strip().split('-')
-    code=displaydepartmentname[0].strip()
-    departmentnamehalf=displaydepartmentname[-1].strip()
+        displaydepartmentname=self.departmentname.replace('_','/')
+        # the splitpoint is important, for UT its a "-"
+        displaydepartmentname=departmentname.strip().split('-')
+        code=displaydepartmentname[0].strip()
+        departmentnamehalf=displaydepartmentname[-1].strip()
 
-    # so in this case I put display department name in parenthesis
-    # I may remove
-    displaydepartmentname=f'({code}) - {departmentnamehalf}'
-    return displaydepartmentname
+        # so in this case I put display department name in parenthesis
+        # I may remove
+        displaydepartmentname=f'({code}) - {departmentnamehalf}'
+        return displaydepartmentname
 
-def get_departmentnamehalf(departmentname):
-    displaydepartmentname=departmentname.replace('_','/')
-    # the splitpoint is important, for UT its a "-"
-    displaydepartmentname=departmentname.strip().split('-')
-    
-    departmentnamehalf=displaydepartmentname[-1].strip()
-    return departmentnamehalf
+    def get_departmentnamehalf(self):
+        displaydepartmentname=self.departmentname.replace('_','/')
+        # the splitpoint is important, for UT its a "-"
+        displaydepartmentname=departmentname.strip().split('-')
+        
+        departmentnamehalf=displaydepartmentname[-1].strip()
+        return departmentnamehalf
 
-def get_departmentcode(departmentname):
-    displaydepartmentname=departmentname.replace('_','/')
-    # the splitpoint is important, for UT its a "-"
-    displaydepartmentname=departmentname.strip().split('-')
-    
-    code=displaydepartmentname[0].strip()
-    return code
+    def get_departmentcode(self):
+        displaydepartmentname=self.departmentname.replace('_','/')
+        # the splitpoint is important, for UT its a "-"
+        displaydepartmentname=displaydepartmentname.strip().split('-')
+        
+        code=displaydepartmentname[0].strip()
+        return code
 
 def main():
-    departmentnamecleaned=get_departmentnamecleaned(departmentname)
-    display_departmentname=get_display_departmentname(departmentname)
-    departmentnamehalf=get_departmentnamehalf(departmentname)
-    code=get_departmentcode(departmentname)
+    dept = DepartmentName("ACF - Actuarial Foundations")
+
+    departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
+    display_departmentname=dept.get_display_departmentname(departmentname)
+    departmentnamehalf=dept.get_departmentnamehalf(departmentname)
+    code=dept.get_departmentcode(departmentname)
 
     print(departmentname)
     print(departmentnamecleaned)

@@ -65,3 +65,14 @@ its a function to get the table name in the databases from the departmentnamecle
 
 To make DegreeView, I am using the catalogData class as well as the createUniversity class
 self.assetspath (from catalogData) and self.asset_folder_path (from createUniversity) basically refer to the same thing.
+
+### Dec 29, 2025
+
+Similarly to createuniversity, there needs to be a file that calls all instances of the catalogData class
+
+Perhaps they can both be called in the same file since they may use similar arguments, say assets folder, university name and abreviation
+Thats probably the best idea
+
+So many paths to keep track of in this project.
+
+For the departmentname.py, I want the class to automatically look for a file named departmentname.py and use it to create the departmentname clean and display departmentname and all that.

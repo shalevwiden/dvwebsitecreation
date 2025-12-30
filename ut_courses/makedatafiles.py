@@ -2,6 +2,9 @@ import requests
 import bs4
 from bs4 import BeautifulSoup
 
+from departmentname import DepartmentName
+
+
 import sys
 import os
 import json
@@ -80,6 +83,11 @@ class catalogData:
        
         self.make_excelfile = make_excelfile
         # self.make_checkerboard=module.make_excelfile()
+        
+        # make this an argument in the init
+        self.departmentname_py_path="departmentname.py"
+
+
 
 
 
@@ -1372,7 +1380,6 @@ class catalogData:
         # create a json
         with open( self.sorted_departments_json,'w') as sdjson:
             json.dump(sorted_departments,sdjson,indent=4)
-
 
 
     def make_university_statsjson(self):
