@@ -45,14 +45,15 @@ class createPages:
         self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utcoursessite/departments'
 
         self.universityuldatapath=''
-    def buildspecs(self, asset_folder_path,jsondatapath,universityname,cloudbucketpath,websitefolder,):
+    def buildspecs(self, asset_folder_path,jsondatapath,universityname,cloudbucketpath,websitefolder, schoolabrv):
 
         
         return {"asset_folder_path": asset_folder_path,
     "jsondatapath": jsondatapath,
     "universityname": universityname,
     "cloudbucketpath": cloudbucketpath,
-    "websitefolder": websitefolder}
+    "websitefolder": websitefolder,
+    "schoolabrv":schoolabrv}
     def schoolcontainingfunc(self):
         '''
         This function will call all of the school objects and their methods.
@@ -60,44 +61,49 @@ class createPages:
         Might wanna divide it up later.
 
         '''
+        def texas():
+            '''
+            This contains all the schools within texas
+            '''
 
-        def ut():
-            # I need need to standardize the location of all of this stuff
-            ut_specs=self.buildspecs("/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses",
-                "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/ut_courses/utjson.json",
-                "The University of Texas at Austin"
-                ,"https://storage.googleapis.com/utcourses",
-                "/Users/shalevwiden/Downloads/Projects/testsite/departments")
-        
-            utobj=createUniversity(**ut_specs)
-            # instead of calling all of the functions 
+            def ut():
+                # I need need to standardize the location of all of this stuff
+                ut_specs=self.buildspecs("/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses",
+                    "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/ut_courses/utjson.json",
+                    "The University of Texas at Austin"
+                    ,"https://storage.googleapis.com/utcourses",
+                    "/Users/shalevwiden/Downloads/Projects/testsite/departments",
+                    "UT")
+            
+                utobj=createUniversity(**ut_specs)
+                # instead of calling all of the functions 
 
-            utobj.createletterpages()
+                utobj.createletterpages()
 
-            utobj.create_department_pages()
-        
-        ut()
+                utobj.create_department_pages()
+            
+            ut()
 
-        def rice():
-            # update all of this with rice data
-            rice_specs=self.buildspecs("/Users/shalevwiden/Downloads/Projects/dvassets/texas/Rice",
-                "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/rice/ricejson.json",
-                "Rice University"
-                ,"https://storage.googleapis.com/ricecourses",
+            def rice():
+                # update all of this with rice data
+                rice_specs=self.buildspecs("/Users/shalevwiden/Downloads/Projects/dvassets/texas/Rice",
+                    "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/rice/ricejson.json",
+                    "Rice University"
+                    ,"https://storage.googleapis.com/ricecourses",
 
-                # so I can probably make a function to finish this path for whereever I actually host the website
-                "/Users/shalevwiden/Downloads/Projects/testsite/ricedepartments")
-        
-            riceobj=createUniversity(**rice_specs)
-            # instead of calling all of the functions 
+                    # so I can probably make a function to finish this path for whereever I actually host the website
+                    "/Users/shalevwiden/Downloads/Projects/testsite/ricedepartments",schoolabrv="Rice")
+            
+                riceobj=createUniversity(**rice_specs)
+                # instead of calling all of the functions 
 
-            riceobj.createletterpages()
+                riceobj.createletterpages()
 
-            riceobj.create_department_pages()
-        
-        # call all the school functions here
-        # ut()
-        rice()
+                riceobj.create_department_pages()
+            
+            # call all the school functions here
+            # ut()
+            rice()
 
     def createindex(self):
         '''

@@ -51,7 +51,7 @@
 
       gtag("config", "G-S06MYR1FV6");
     </script>
-    <title>Astronomy (BSA) Rendered CSV Page - DegreeView</title>
+    <title>{{schoolabrv}} Sorted Departments</title>
 
     <!-- main stylesheet -->
     <link rel="stylesheet" href="../cssfiles/degreepage2.css" />
@@ -190,7 +190,20 @@
             ></a>
           </div>
 
-          <div id="semester-csvtablecontainer"></div>
+          <div id="semester-csvtablecontainer">
+            <table>
+              <tr>
+                <td>Department</td>
+                <td>Course Count</td>
+              </tr>
+              {% for department, coursecount in sorted_departments.items() %}
+              <tr>
+                <td>{{ department }}</td>
+                <td>{{ coursecount }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
         </div>
       </div>
 

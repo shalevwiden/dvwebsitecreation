@@ -41,7 +41,7 @@ I need to add
 
 '''
 class createUniversity:
-    def __init__(self,asset_folder_path,jsondatapath, universityname, cloudbucketpath,websitefolder,helperfunctionsfolder,schoolabrv):
+    def __init__(self,asset_folder_path,jsondatapath, universityname, cloudbucketpath,websitefolder,schoolabrv):
         
         '''
         
@@ -71,6 +71,10 @@ class createUniversity:
 
         # university name like 'The University of Texas at Austin'
         self.universityname=universityname
+        #university abbreviation like UT - for some schools there is no abbreviation.
+        # well maybe, Yale could be the abbreviation for Yale University
+        self.schoolabrv = schoolabrv
+
 
         
 
@@ -81,7 +85,7 @@ class createUniversity:
 
         self.lettertemplate = env.get_template("letterpage.html")
         self.departmentpagetemplate=env.get_template("department_templates/departmentpage.html")
-        self.sorteddepartments_template=env.get_template("sorteddepartments_page.html")
+        self.sorted_departments_template=env.get_template("sorted_departments_page.html")
 
 
         with open(self.jsondatapath,'r') as universityjson:
@@ -483,8 +487,6 @@ class createUniversity:
             makefullhtmlcode(startingletter=startingletter)
         # now its done
         return 0
-
-
 # --------------------------------Degree pages now ----------------------------------
 
     def upload_department_files(self):
@@ -1004,11 +1006,12 @@ class createUniversity:
 
         
         template_data={
+            "schoolabrv":self.schoolabrv,
             "sorted_departments":sorted_departments,
             "universityname":self.universityname
         }
         # Jinja must take name=value pairs
-        sorteddepartments_page_rendered=self.sorteddepartments_template.render(template_data)
+        sorteddepartments_page_rendered=self.sorted_departments_template.render(template_data)
 
 
         with open(self.sorted_departments_page,'w') as fullpage:
