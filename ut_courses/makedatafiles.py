@@ -308,21 +308,20 @@ class catalogData:
                 departmenturl=letterdict[departmentname]
 
                 # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
-                departmentname=departmentname.replace('/','_')
+                departmentname=self.sanitize_departmentname(departmentname)
 
 
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
 
-                    
-                departmentnamecleaned=departmentname.replace(' ','').lower()
+    
+                dept=DepartmentName()
 
+                departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
 
                 databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
+                
 
-                # hyphens and commas not allowed in tablename
-                tabledepartmentname=departmentnamecleaned.replace('-','_').replace(',','_').replace('&','and').replace("'","")
-
-                tablename=f'{tabledepartmentname}_table'
+                tablename=self.get_tablename(departmentnamecleaned)
 
 
                 def getdatabasestats():
@@ -487,9 +486,6 @@ class catalogData:
                     return statsdict
                 
                 def jsonfilemaking(departmentnamecleaned):
-                    departmentnamecleaned=departmentnamecleaned.replace(',','-')
-
-
                     statsjsonpath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-statsjson.json')
 
                     statsdict=getdatabasestats()
@@ -514,21 +510,21 @@ class catalogData:
                 departmenturl=letterdict[departmentname]
 
                 # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
-                departmentname=departmentname.replace('/','_')
+                departmentname=self.sanitize_departmentname(departmentname)
 
 
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
 
-                    
-                departmentnamecleaned=departmentname.replace(' ','').lower()
+                dept=DepartmentName()
 
-
+                departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
+                display_departmentname=dept.get_display_departmentname(departmentname)
+                departmentnamehalf=dept.get_departmentnamehalf(departmentname)
+                departmentcode=dept.get_departmentcode(departmentname)
                 databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
+                
 
-                # hyphens and commas not allowed in tablename
-                tabledepartmentname=departmentnamecleaned.replace('-','_').replace(',','_').replace('&','and').replace("'","")
-
-                tablename=f'{tabledepartmentname}_table'
+                tablename=self.get_tablename(departmentnamecleaned)
 
 
                 def getdatabasedata():
@@ -553,14 +549,6 @@ class catalogData:
 
 
                 def tablefilemaking(departmentname,departmentnamecleaned):
-                    departmentnamecleaned=departmentnamecleaned.replace(',','-')
-
-
-                    displaydepartmentname=departmentname.replace('_','/')
-                    displaydepartmentname=departmentname.strip().split('-')
-                    code=displaydepartmentname[0].strip()
-                    departmentnamehalf=displaydepartmentname[-1].strip()
-                    displaydepartmentname=f'({code}) - {departmentnamehalf}'
 
                     htmltablefile=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-htmltable.html')
 
