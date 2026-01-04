@@ -12,12 +12,10 @@ This is for UT Austin department names every school might be a little different
 departmentname="ACF - Actuarial Foundations"
 
 class DepartmentName:
-    def __init__(self, departmentname: str):
-        self.departmentname = departmentname
+   
+    def get_departmentnamecleaned(self, departmentname):
 
-    def get_departmentnamecleaned(self):
-
-        departmentnamecleaned=self.departmentname.replace('/','_')
+        departmentnamecleaned=departmentname.replace('/','_')
 
 
 
@@ -27,16 +25,16 @@ class DepartmentName:
 
         return departmentnamecleaned
 
-    def get_display_departmentname(self):
+    def get_display_departmentname(self, departmentname):
         '''
         This one actually doesnt use departmentname cleaned, because capitalization will be displayed
         
         
         '''
 
-        displaydepartmentname=self.departmentname.replace('_','/')
+        displaydepartmentname=departmentname.replace('_','/')
         # the splitpoint is important, for UT its a "-"
-        displaydepartmentname=departmentname.strip().split('-')
+        displaydepartmentname=displaydepartmentname.strip().split('-')
         code=displaydepartmentname[0].strip()
         departmentnamehalf=displaydepartmentname[-1].strip()
 
@@ -45,16 +43,16 @@ class DepartmentName:
         displaydepartmentname=f'({code}) - {departmentnamehalf}'
         return displaydepartmentname
 
-    def get_departmentnamehalf(self):
-        displaydepartmentname=self.departmentname.replace('_','/')
+    def get_departmentnamehalf(self, departmentname):
+        displaydepartmentname=departmentname.replace('_','/')
         # the splitpoint is important, for UT its a "-"
-        displaydepartmentname=departmentname.strip().split('-')
+        displaydepartmentname=displaydepartmentname.strip().split('-')
         
         departmentnamehalf=displaydepartmentname[-1].strip()
         return departmentnamehalf
 
-    def get_departmentcode(self):
-        displaydepartmentname=self.departmentname.replace('_','/')
+    def get_departmentcode(self, departmentname):
+        displaydepartmentname=departmentname.replace('_','/')
         # the splitpoint is important, for UT its a "-"
         displaydepartmentname=displaydepartmentname.strip().split('-')
         
@@ -62,7 +60,7 @@ class DepartmentName:
         return code
 
 def main():
-    dept = DepartmentName("ACF - Actuarial Foundations")
+    dept = DepartmentName()
 
     departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
     display_departmentname=dept.get_display_departmentname(departmentname)

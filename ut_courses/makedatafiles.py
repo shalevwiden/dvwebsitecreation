@@ -84,6 +84,8 @@ class catalogData:
         self.make_excelfile = make_excelfile
         # self.make_checkerboard=module.make_excelfile()
         
+
+        
         # make this an argument in the init
         self.departmentname_py_path="departmentname.py"
 
@@ -111,20 +113,17 @@ class catalogData:
                 self.alphabetizeddict[startingletter][departmentname]=departmenturl
 
         
-    def get_departmentnamecleaned(self,departmentname):
-        '''
-        Docstring for get_departmentnamecleaned:
-        This is a helper function for create_departmentname_json()
-        
-        :param self: Description
-        :param departmentname: departmentname
-        '''
-        
+    def sanitize_departmentname(self,departmentname):
+            # use departmentname for the asset folder, not departmentname cleaned
+            # use this line no matter where actually just to get rid of slashes, thats a necesity
+            
+            return departmentname.replace('/','_')
+    
+    def get_tablename(departmentnamecleaned):
+        tablename=departmentnamecleaned.replace('-','_').replace(',','_').replace('&','and').replace("'","")
+        tablename=f'{tablename}_table'
 
-        departmentnamecleaned=departmentname.replace('/','_')
-        departmentnamecleaned=departmentname.replace(' ','').lower()
-        departmentnamecleaned=departmentnamecleaned.replace('/','-')
-        return departmentnamecleaned
+
     
     def create_departmentname_json(self):
         '''
@@ -151,26 +150,31 @@ class catalogData:
             letterdict=self.alphabetizeddict[startingletter]
 
             for departmentname in letterdict:
+
+                dept=DepartmentName()
+
+                departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
+                display_departmentname=dept.get_display_departmentname(departmentname)
+                departmentnamehalf=dept.get_departmentnamehalf(departmentname)
+                departmentcode=dept.get_departmentcode(departmentname)
                 
 
                 # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
 
 
-                departmentnamecleaned=self.get_departmentnamecleaned(departmentname)
                 print(f'Departmentname cleaned is {departmentnamecleaned}')
 
-                # use departmentname for the asset folder, not departmentname cleaned
-                # use this line no matter where actually just to get rid of slashes, thats a necesity
-                departmentname=departmentname.replace('/','_')
+                
+                departmentname=self.sanitize_departmentname(departmentname)
 
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
 
 
                 departmentnamestats={
-                    "departmentnamecleaned":"",
-                    "displaydepartmentname":"",
-                    "departmentnamehalf":"",
-                    "departmentcode":"",
+                    "departmentnamecleaned":departmentnamecleaned,
+                    "displaydepartmentname":display_departmentname,
+                    "departmentnamehalf":departmentnamehalf,
+                    "departmentcode":departmentcode,
 
 
                 }
@@ -219,7 +223,7 @@ class catalogData:
             for departmentname in letterdict:
                 departmenturl=letterdict[departmentname]
 
-                departmentname=departmentname.replace('/','_')
+                departmentname=self.sanitize_departmentname(departmentname)
 
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
 
@@ -229,8 +233,9 @@ class catalogData:
 
             
             
-                departmentnamecleaned=departmentname.replace(' ','').lower()
-                departmentnamecleaned=departmentnamecleaned.replace('/','-')
+                dept=DepartmentName()
+
+                departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
 
 
 
@@ -250,9 +255,9 @@ class catalogData:
                     if os.path.exists(databasepath):
                         os.remove(databasepath)
                     # hyphens and commas not allowed in tablename
-                    tabledepartmentname=departmentnamecleaned.replace('-','_').replace(',','_').replace('&','and').replace("'","")
 
-                    tablename=f'{tabledepartmentname}_table'
+                    tablename=self.get_tablename(departmentnamecleaned)
+
                     def maketable():
                         '''This creates the table for course data in the db'''
 
