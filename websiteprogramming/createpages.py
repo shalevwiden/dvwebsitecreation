@@ -105,6 +105,7 @@ class createPages:
             # call all the school functions here
             # ut()
             rice()
+        texas()
 
     def createindex(self):
         '''

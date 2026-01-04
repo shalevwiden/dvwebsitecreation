@@ -156,3 +156,8 @@ since we are generating school level stuff
 
 Also had the idea on the schools home page to add a random button
 that takes you to a random REAL departments page
+
+Ok SCSS is tricky
+This probably isnt the greatest way to proceed
+But for each scss file I'm gonna put an id for the site container
+And then just make the scss for that page (like department page) only apply to that ID

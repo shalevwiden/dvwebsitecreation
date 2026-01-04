@@ -52,23 +52,7 @@
       gtag("config", "G-S06MYR1FV6");
     </script>
     <title>{{schoolabrv}} Sorted Departments</title>
-
-    <!-- main stylesheet -->
-    <link rel="stylesheet" href="../cssfiles/degreepage2.css" />
-
-    <!-- animation stylesheet -->
-    <link rel="stylesheet" href="../cssfiles/animations.css" />
-
-    <!-- table styling -->
-    <link rel="stylesheet" href="../cssfiles/tablestyling.css" />
-
-    <!-- Rendered CSV css -->
-
-    <link rel="stylesheet" href="../cssfiles/renderedcsv.css" />
-
-    <!-- footer stylesheet -->
-
-    <link rel="stylesheet" href="../static/css/footer.css" />
+    <link rel="stylesheet" href="../static/css/main.css" />
 
     <!-- Barlow Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -130,7 +114,7 @@
     ></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <div class="sitecontainer">
+    <div class="sitecontainer" id="sorted-departments">
       <div class="abovemainsite">
         <div class="topnav">
           <nav class="breadcrumbs">
@@ -138,20 +122,7 @@
               <li><a href="../../index.html">DegreeView UT</a></li>
               <i class="fa fa-chevron-right"></i>
 
-              <li>
-                <a href="collegeofnaturalsciences.html"
-                  >College of Natural Sciences</a
-                >
-              </li>
-              <i class="fa fa-chevron-right"></i>
-
-              <li>
-                <a href="astronomy-bsa.html">Astronomy (BSA)</a>
-              </li>
-
-              <i class="fa fa-chevron-right"></i>
-
-              <li id="current">Semester Table</li>
+              <li id="current">Sorted Departments Table</li>
             </ul>
           </nav>
           <nav class="homeandabout">
@@ -167,44 +138,43 @@
         </div>
       </div>
 
-      <div class="undermainsite">
-        <!-- contains the rendered csv -->
-        <div class="renderedcsvdiv">
-          <div class="copyanddownload">
-            <div class="animatetable">
-              <button id="animatebutton">Animate</button>
-            </div>
-
-            <i class="fa-regular fa-copy" id="copyicon" title="Copy Table"></i>
-            <!-- contains the rendered csv -->
-            <a
-              href="https://storage.googleapis.com/degreeview-ut/collegeofnaturalsciences/csvs/astronomy-bsa-semestercsvfilefull.csv"
-              id="downloadcsv"
-            >
-              <!-- use this id to get the href to place into the javascript script to render with sheet js  -->
-
-              <i
-                class="fa-solid fa-arrow-up-from-bracket"
-                title="downloadcsv"
-              ></i
-            ></a>
+      <div class="tablediv">
+        <div class="copyanddownload">
+          <div class="animatetable">
+            <button id="animatebutton">Animate</button>
           </div>
 
-          <div id="semester-csvtablecontainer">
-            <table>
-              <tr>
-                <td>Department</td>
-                <td>Course Count</td>
-              </tr>
-              {% for department, coursecount in sorted_departments.items() %}
-              <tr>
-                <td>{{ department }}</td>
-                <td>{{ coursecount }}</td>
-              </tr>
-              {% endfor %}
-            </table>
-          </div>
+          <i class="fa-regular fa-copy" id="copyicon" title="Copy Table"></i>
+          <!-- contains the rendered csv -->
+          <a
+            href="https://storage.googleapis.com/degreeview-ut/collegeofnaturalsciences/csvs/astronomy-bsa-semestercsvfilefull.csv"
+            id="downloadcsv"
+          >
+            <!-- use this id to get the href to place into the javascript script to render with sheet js  -->
+
+            <i class="fa-solid fa-arrow-up-from-bracket" title="downloadcsv"></i
+          ></a>
         </div>
+
+        <table id="sorted-departments-table">
+          <tr>
+            <td>Department</td>
+            <td>Course Count</td>
+            <td>Ranking</td>
+          </tr>
+          {% for department, coursecount in sorted_departments.items() %}
+          <tr>
+            <td>{{ department }}</td>
+            <td>{{ coursecount }}</td>
+            <td>{{ loop.index }}</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td>DegreeView</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
       </div>
 
       <footer>

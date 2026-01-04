@@ -83,9 +83,12 @@ class createUniversity:
 
         env = Environment(loader=FileSystemLoader("templating/templates"))
 
+        # define all the templates to be used
         self.lettertemplate = env.get_template("letterpage.html")
         self.departmentpagetemplate=env.get_template("department_templates/departmentpage.html")
         self.sorted_departments_template=env.get_template("sorted_departments_page.html")
+        self.statspage_template=env.get_template("statspage_template.html")
+
 
 
         with open(self.jsondatapath,'r') as universityjson:
@@ -122,10 +125,16 @@ class createUniversity:
 
         # this is where all the department pages are kept
         self.deparmentsfolder=os.path.join(self.websitefolder,"departments")
+        if not os.path.exists(self.deparmentsfolder):
+            os.makedirs(self.deparmentsfolder, exist_ok=True)   
         
         # now lets define the names of the uni wide files
-
+        # change their url behavior (somewhat easily here)
         self.sorted_departments_page=os.path.join(self.websitefolder,"sorted-departments.html")
+        self.statspage=os.path.join(self.websitefolder,f"{self.schoolabrv}stats.html")
+        self.homepage=os.path.join(self.websitefolder,f"{self.schoolabrv}-home.html")
+
+
         
         # this will include code specific to that school, which right now is only getting the departmentnamehalf and displaydepartmentname
         # self.helperfunctionsfolder=helperfunctionsfolder
@@ -987,18 +996,18 @@ class createUniversity:
         # define the templates in the init tho ngl
         template = env.get_template("statstemplate.html")
 
-        variables={
+        template_data={
             "universityname":self.universityname
         }
 
-        rendered_html = template.render(variables)
+        statspage_rendered=self.statspage_template.render(template_data)
 
         statspageoutput=os.path.join(self.outputspath,'statspageout.html')
 
         with open(statspageoutput,'w') as statspage:
             statspage.write(rendered_html)
 
-    def create_sorteddepartments_page():
+    def create_sorteddepartments_page(self):
         '''
         This function will use sorted_departments_json.json and make a page for it for 
         every instance of this class (every University)
@@ -1010,9 +1019,9 @@ class createUniversity:
 
         
         template_data={
-            "schoolabrv":self.schoolabrv,
-            "sorted_departments":sorted_departments,
-            "universityname":self.universityname
+        "schoolabrv":self.schoolabrv,
+        "sorted_departments":sorted_departments,
+        "universityname":self.universityname
         }
         # Jinja must take name=value pairs
         sorteddepartments_page_rendered=self.sorted_departments_template.render(template_data)
