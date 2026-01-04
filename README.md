@@ -143,3 +143,16 @@ Just need to edit the template that I copy pasted from dvdeployed
 I should also make some universal scss partials like "abovemainsite"
 "mainsite"
 "undermainsite"
+
+### Jan 3, 2026
+
+Goal: make the site scalable befor Jan 11, 2026
+Then just expand it all of 2026
+Make a big, yet simple, project
+
+What to do now:
+update the generation logic because the site path I'm passing in is not departments folder by default
+since we are generating school level stuff
+
+Also had the idea on the schools home page to add a random button
+that takes you to a random REAL departments page

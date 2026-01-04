@@ -119,6 +119,9 @@ class createUniversity:
         self.websitefolder=websitefolder
         if not os.path.exists(self.websitefolder):
             os.makedirs(self.websitefolder, exist_ok=True)   
+
+        # this is where all the department pages are kept
+        self.deparmentsfolder=os.path.join(self.websitefolder,"departments")
         
         # now lets define the names of the uni wide files
 
@@ -471,7 +474,7 @@ class createUniversity:
                
                 startingletter=startingletter.lower()
                 print(f'Starting letter {startingletter}')
-                letterwebsitefolder=os.path.join(self.websitefolder,startingletter)
+                letterwebsitefolder=os.path.join(self.deparmentsfolder,startingletter)
                 
                 letterwebsitepage=f'{startingletter}-departments.html'
 
@@ -882,7 +885,8 @@ class createUniversity:
 
                     startingletter=startingletter.lower()
                     print(f'Starting letter {startingletter}')
-                    letterwebsitefolder=os.path.join(self.websitefolder,startingletter)
+                    # departments folder passed in
+                    letterwebsitefolder=os.path.join(self.deparmentsfolder,startingletter)
                    
                     fulldepartmentpage=os.path.join(letterwebsitefolder,f'{departmentnamecleaned}.html')
                     departmentpagerendered=self.departmentpagetemplate.render(departmentpagedata)

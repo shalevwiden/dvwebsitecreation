@@ -72,7 +72,7 @@ class createPages:
                     "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/ut_courses/utjson.json",
                     "The University of Texas at Austin"
                     ,"https://storage.googleapis.com/utcourses",
-                    "/Users/shalevwiden/Downloads/Projects/testsite/departments",
+                    "/Users/shalevwiden/Downloads/Projects/testsite/ut",
                     "UT")
             
                 utobj=createUniversity(**ut_specs)
@@ -81,6 +81,7 @@ class createPages:
                 utobj.createletterpages()
 
                 utobj.create_department_pages()
+                utobj.create_sorteddepartments_page()
             
             ut()
 
@@ -92,7 +93,7 @@ class createPages:
                     ,"https://storage.googleapis.com/ricecourses",
 
                     # so I can probably make a function to finish this path for whereever I actually host the website
-                    "/Users/shalevwiden/Downloads/Projects/testsite/ricedepartments",schoolabrv="Rice")
+                    "/Users/shalevwiden/Downloads/Projects/testsite/rice",schoolabrv="Rice")
             
                 riceobj=createUniversity(**rice_specs)
                 # instead of calling all of the functions 
