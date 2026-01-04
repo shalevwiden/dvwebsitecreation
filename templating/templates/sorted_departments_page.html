@@ -146,35 +146,28 @@
 
           <i class="fa-regular fa-copy" id="copyicon" title="Copy Table"></i>
           <!-- contains the rendered csv -->
-          <a
-            href="https://storage.googleapis.com/degreeview-ut/collegeofnaturalsciences/csvs/astronomy-bsa-semestercsvfilefull.csv"
-            id="downloadcsv"
-          >
-            <!-- use this id to get the href to place into the javascript script to render with sheet js  -->
-
-            <i class="fa-solid fa-arrow-up-from-bracket" title="downloadcsv"></i
-          ></a>
         </div>
-
-        <table id="sorted-departments-table">
-          <tr>
-            <td>Department</td>
-            <td>Course Count</td>
-            <td>Ranking</td>
-          </tr>
-          {% for department, coursecount in sorted_departments.items() %}
-          <tr>
-            <td>{{ department }}</td>
-            <td>{{ coursecount }}</td>
-            <td>{{ loop.index }}</td>
-          </tr>
-          {% endfor %}
-          <tr>
-            <td>DegreeView</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </table>
+        <div class="table-scroll">
+          <table id="sorted-departments-table">
+            <tr>
+              <td>Department</td>
+              <td>Course Count</td>
+              <td>Ranking</td>
+            </tr>
+            {% for department, coursecount in sorted_departments.items() %}
+            <tr>
+              <td>{{ department }}</td>
+              <td>{{ coursecount }}</td>
+              <td>{{ loop.index }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td>DegreeView</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
       </div>
 
       <footer>

@@ -81,13 +81,7 @@ class createUniversity:
         # path like 'https://storage.googleapis.com/utcourses'
         self.cloudbucketpath=cloudbucketpath
 
-        env = Environment(loader=FileSystemLoader("templating/templates"))
-
-        # define all the templates to be used
-        self.lettertemplate = env.get_template("letterpage.html")
-        self.departmentpagetemplate=env.get_template("department_templates/departmentpage.html")
-        self.sorted_departments_template=env.get_template("sorted_departments_page.html")
-        self.statspage_template=env.get_template("statspage_template.html")
+        
 
 
 
@@ -133,6 +127,16 @@ class createUniversity:
         self.sorted_departments_page=os.path.join(self.websitefolder,"sorted-departments.html")
         self.statspage=os.path.join(self.websitefolder,f"{self.schoolabrv}stats.html")
         self.homepage=os.path.join(self.websitefolder,f"{self.schoolabrv}-home.html")
+
+        env = Environment(loader=FileSystemLoader("templating/templates"))
+
+        # define all the templates to be used
+        self.lettertemplate = env.get_template("letterpage.html")
+        self.departmentpagetemplate=env.get_template("department_templates/departmentpage.html")
+        self.sorted_departments_template=env.get_template("sorted_departments_page.html")
+        self.statspage_template=env.get_template("statspage_template.html")
+        
+        self.homepage_template=env.get_template("homepage.html")
 
 
         
