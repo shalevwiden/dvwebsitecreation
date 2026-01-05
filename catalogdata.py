@@ -2,7 +2,6 @@ import requests
 import bs4
 from bs4 import BeautifulSoup
 
-from departmentname import DepartmentName
 
 
 import sys
@@ -49,7 +48,6 @@ if __name__=='__main__':
     print(f'the version of requests is\n {(requests.__version__)}')
     print(f'\nthe python version being used is:{sys.executable}\n')
 
-from scrapecourses import scrapeutcourses
 
 class catalogData:
     def __init__(self, schoolfolder):
@@ -68,9 +66,7 @@ class catalogData:
             # filenames in the university wide folder
 
         
-
-        with open('excelconfiglink.txt','r') as configlink:
-            self.excelconfigpath=configlink.read()
+        
 
 
 # Absolute path
@@ -86,6 +82,7 @@ class catalogData:
         
         self.schoolfolder = schoolfolder
 
+        # I guess these are the only ones I really need from each school folder
         self.scrape_module = importlib.import_module(
             f"{schoolfolder}.scrapecourses"
         )
@@ -93,12 +90,22 @@ class catalogData:
             f"{schoolfolder}.departmentname"
         )
 
-        # grab what you need
+        
+        
+    
+
         self.scrapecourses = self.scrape_module.scrapecourses
         self.DepartmentName = self.dept_module.DepartmentName
         # but simply to read a file, not get operating code, just use os
         self.jsondatapath=os.path.join(schoolfolder,'unijson.json')
 
+        # I could use this in the future for school specific Excel file stuff
+        self.excelconfig=os.path.join(schoolfolder,'excelconfiglink.txt')
+        
+        with open(self.excelconfig,'r') as configlink:
+            # the txt file actually contains a path lmao
+            #  a little confused
+            self.excelconfigpath=configlink.read()
 
         
         # make this an argument in the init
@@ -166,7 +173,7 @@ class catalogData:
 
             for departmentname in letterdict:
 
-                dept=DepartmentName()
+                dept=self.DepartmentName()
 
                 departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
                 display_departmentname=dept.get_display_departmentname(departmentname)
@@ -248,7 +255,7 @@ class catalogData:
 
             
             
-                dept=DepartmentName()
+                dept=self.DepartmentName()
 
                 departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
 
@@ -329,7 +336,7 @@ class catalogData:
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
 
     
-                dept=DepartmentName()
+                dept=self.DepartmentName()
 
                 departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
 
@@ -530,7 +537,7 @@ class catalogData:
 
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
 
-                dept=DepartmentName()
+                dept=self.DepartmentName()
 
                 departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
                 display_departmentname=dept.get_display_departmentname(departmentname)
@@ -1572,13 +1579,13 @@ class catalogData:
 Now this is a class that is truly scalable and reproducable
 '''
 def runcatalogDataclass():
-    catalogobj=catalogData()
+    catalogobj=catalogData(schoolfolder='rice')
 
     
     
     # catalogobj.create_departmentname_json()
     # catalogobj.get_sorted_departmentlist()
-    catalogobj.make_university_statsjson()
+    print(catalogobj.schoolfolder)
     # catalogobj.makestatsjson()    
     # catalogobj.make_excel_files()
     

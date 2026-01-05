@@ -48,8 +48,8 @@ def createjson(catalogdict):
     finaldict=catalogdict
 
 
-    with open('utjson.json','w') as utjson:
+    with open('unijson.json','w') as unijson:
         # the dict, the file
-        json.dump(finaldict,utjson,indent=4)
+        json.dump(finaldict,unijson,indent=4)
 
 createjson(catalogdict=catalogdict)

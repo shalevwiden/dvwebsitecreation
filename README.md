@@ -1,4 +1,6 @@
-## UT Austin Course Scraping
+## Course Scraping and Data file making
+
+This started as notes for UT only and now its the README for the system I have developed for all schools.
 
 So it seems that .select() and .select_one() are way better for scraping.
 <br>
@@ -76,3 +78,7 @@ Thats probably the best idea
 So many paths to keep track of in this project.
 
 For the departmentname.py, I want the class to automatically look for a file named departmentname.py and use it to create the departmentname clean and display departmentname and all that.
+
+### Jan 4, 2026
+
+So in the init of the class Im importing all the code I need in each folder.

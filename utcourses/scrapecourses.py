@@ -16,7 +16,9 @@ if __name__=='__main__':
 
 englishurl='https://catalog.utexas.edu/general-information/coursesatoz/e/'
 
-def scrapeutcourses(departmenturl):
+# ut courses
+# but function name is the same
+def scrapecourses(departmenturl):
     departmentdata={}
 
     coursepage=requests.get(departmenturl)
@@ -128,6 +130,6 @@ def analyze_departmentdata(departmentdata):
 
 if __name__=='__main__':
         
-    departmentdata=scrapeutcourses(departmenturl=englishurl)
+    departmentdata=scrapecourses(departmenturl=englishurl)
     print(departmentdata)
 

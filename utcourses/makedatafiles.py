@@ -49,7 +49,7 @@ if __name__=='__main__':
     print(f'the version of requests is\n {(requests.__version__)}')
     print(f'\nthe python version being used is:{sys.executable}\n')
 
-from scrapecourses import scrapeutcourses
+from scrapecoursedata import scrapeutcourses
 
 class catalogData:
     def __init__(self, schoolfolder):
