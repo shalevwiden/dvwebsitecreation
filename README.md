@@ -82,3 +82,14 @@ For the departmentname.py, I want the class to automatically look for a file nam
 ### Jan 4, 2026
 
 So in the init of the class Im importing all the code I need in each folder.
+The catalogData class is getting much better
+
+Next I need to fix the Excel stuff
+Which there was a way I made it much better in my excel project stuff
+From Sep 25
+Excel Animations lmao
+
+### Jan 6, 2025
+
+Working on Excel stuff
+Adding more comments too.

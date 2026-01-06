@@ -107,9 +107,9 @@ class catalogData:
             #  a little confused
             self.excelconfigpath=configlink.read()
 
+        self.configsfolder=""
         
         # make this an argument in the init
-        self.departmentname_py_path="departmentname.py"
 
 
 
@@ -144,6 +144,12 @@ class catalogData:
     def get_tablename(departmentnamecleaned):
         tablename=departmentnamecleaned.replace('-','_').replace(',','_').replace('&','and').replace("'","")
         tablename=f'{tablename}_table'
+
+    def finishconfigpath(self,endofpath):
+        '''
+        This is for configs and is not related to saving the file at all
+        '''
+        return os.path.join(self.configsfolder,endofpath)
 
 
     
@@ -711,7 +717,7 @@ class catalogData:
             for departmentname in letterdict:
                 departmenturl=letterdict[departmentname]
 
-                departmentname=departmentname.replace('/','_')
+                departmentname=self.sanitize_departmentname()
 
                 def make_required_folders():
                     departmentfolderpath=os.path.join(letterfolder,departmentname)
@@ -729,21 +735,10 @@ class catalogData:
 
                 departmentfolderpath, excelfolderpath=make_required_folders()
             
-            
-                departmentnamecleaned=departmentname.replace(' ','').lower()
-                departmentnamecleaned=departmentnamecleaned.replace('/','-')
-                
-
-        
             # use the fact that its an underscore to readd it later in the website creation file
-            
+                dept=self.DepartmentName()
 
-
-
-                
-                    
-                departmentnamecleaned=departmentname.replace(' ','').lower()
-
+                departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
 
                 databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
 
@@ -781,23 +776,31 @@ class catalogData:
                 '''
                 Use Font and OpenPyXL to create nicely formatted tabular data
                 '''
+                utconfig=self.finishconfigpath('themedconfigs/ut.json')
 
-                def makegreentheme():
-                    
-                    configjsonpath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/testconfigs/green.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-coursesgreentheme.xlsx')
-                    with open(configjsonpath,'r') as configjson:
+                def make_themed_file(configpath,savepath,themename):
+                    '''
+                    This is a modular way to make excel files
+                    '''
+                    filename=f'{departmentnamecleaned}-{themename.lower().replace(' ','').strip()}.xlsx'
+                    savepath=os.path.join(excelfolderpath,filename)
+                    with open(configpath,'r') as configjson:
+                        # config json has styling data like colors and fonts
                         configjson=json.load(configjson)
+                    
                     config={
                     "departmentname":departmentname,
                     "universityname":self.universityname,
                     "savepath":savepath,
                     "rows":rows,
                     }
-                    config.update(configjson)
                     
+                    config.update(configjson)
+
+                    # this is an imported function defined it init
                     self.make_excelfile(**config)
 
+                
                 # makegreentheme()
                 def makeoriginaltheme():
                     configjsonpath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/originalconfig.json'
