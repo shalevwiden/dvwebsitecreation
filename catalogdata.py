@@ -733,9 +733,8 @@ class catalogData:
             for departmentname in letterdict:
 
                 # single excel file logic
-                if self.single_department:
-                    if departmentname != self.random_dept:
-                        continue
+                if self.single_department and departmentname != self.random_dept:
+                    continue
                 
                 departmenturl=letterdict[departmentname]
 
@@ -799,12 +798,17 @@ class catalogData:
                 utconfig=self.finishconfigpath('themedconfigs/ut.json')
                 originalconfig=self.finishconfigpath('originalconfig.json')
                 darkthemeconfig=self.finishconfigpath('darkthemeconfig.json')
+                redconfig=self.finishconfigpath('colorconfigs/redtheme.json')
+                blueconfig=self.finishconfigpath('colorconfigs/bluetheme.json')
+                checkerboardconfig=self.finishconfigpath('checkerboardconfigs/brownconfig.json')
 
                 def make_themed_file(configpath,themename):
                     '''
                     This is a modular way to make excel files.
                     '''
                     filename=f'{departmentnamecleaned}-{themename.lower().replace(' ','').strip()}.xlsx'
+                    # change this line to change the save path
+                    # kinda
                     savepath=os.path.join(excelfolderpath,filename)
                     with open(configpath,'r') as configjson:
                         # config json has styling data like colors and fonts
@@ -825,197 +829,10 @@ class catalogData:
                 make_themed_file(utconfig,'UT-theme')
                 make_themed_file(originalconfig,"original-theme")
                 make_themed_file(darkthemeconfig,'darktheme')
-                # makegreentheme()
+                make_themed_file(redconfig,'red-theme')
+                make_themed_file(blueconfig,'blue-theme')
 
-
-
-                def makeneon():
-                    configjsonpath= '/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/testconfigs/rainbow.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-neontheme.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    self.make_excelfile(**config)
-
-                # makeneon() 
-
-                def makedesert():
-                    configjsonpath=  '/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/newconfigs/desertnew.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-deserttheme.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    self.make_excelfile(**config)
-
-                # makedesert()
-                def makeocean():
-                    configjsonpath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/newconfigs/oceantheme.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-oceantheme.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    self.make_excelfile(**config)
-                   
-
-                # makeocean()
-
-                def makeprimary():
-                    configjsonpath= '/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/newconfigs/primarycolors.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-primarycolorstheme.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    self.make_excelfile(**config)
-                # makeprimary()
-
-                def makegreyscale():
-                    configjsonpath= '/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/newconfigs/greyscale.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-greyscaletheme.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    self.make_excelfile(**config)
-
-                # makegreyscale()
-
-                def makeblack():
-                    configjsonpath= '/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/newconfigs/blacktheme.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-blacktheme.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    self.make_excelfile(**config)
-                    
-                # makeblack()
-
-                def makepasteltheme():
-                    configjsonpath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/newconfigs/pastelconfig.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-pasteltheme.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    self.make_excelfile(**config)
-                
-                def testingexcel():
-                    configjsonpath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/newconfigs/pastelconfig.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-testing.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    self.make_excelfile(**config)
-
-                # testingexcel()
-
-                def checkerboardtheme():
-                    configjsonpath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/checkerboardconfigs/brownconfig.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-checkerboard.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    make_checkerboardfile(**config)
-
-                # checkerboardtheme()
-
-
-                def makeredtheme():
-                    configjsonpath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/colorconfigs/redtheme.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-redtheme.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    self.make_excelfile(**config)
-
-                makeredtheme()
-
-
-
-                def makebluetheme():
-                    configjsonpath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/colorconfigs/bluetheme.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-bluetheme.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    self.make_excelfile(**config)
-
-                makebluetheme()
-
+        
     def create_univeristy_files(self):
         '''what this function will do is initialize the University Wide files.
         This includes the University Wide Database, and some csv files I'm thinking
