@@ -1,7 +1,7 @@
 import requests
 import bs4
 from bs4 import BeautifulSoup
-
+import random
 
 
 import sys
@@ -42,19 +42,17 @@ import importlib
 
 
 
-# good to check everythings working with the venv:
-if __name__=='__main__':
-    print(f'the version of beautiful soup is\n {(bs4.__version__)}')
-    print(f'the version of requests is\n {(requests.__version__)}')
-    print(f'\nthe python version being used is:{sys.executable}\n')
+
 
 
 class catalogData:
     def __init__(self, schoolfolder):
-        self.assetspath='/Users/shalevwiden/Downloads/Projects/dvassets/texas/UT_courses'
+        # make the assets path in the schoolfolder in this folder
+        # use .gitignore to stop it from going through too
+        self.asset_folder_path=os.path.join(schoolfolder,'assets')
         self.universityname='The University of Texas at Austin'
         
-        self.universitywidefolder=os.path.join(self.assetspath,"universitywidefolder")
+        self.universitywidefolder=os.path.join(self.asset_folder_path,"universitywidefolder")
 
         self.sorted_departments_json=os.path.join(self.universitywidefolder,"sorted_departments_json.json")
         self.universitystatsjson=os.path.join(self.universitywidefolder,"universitystatsjson.json")
@@ -99,6 +97,22 @@ class catalogData:
         # but simply to read a file, not get operating code, just use os
         self.jsondatapath=os.path.join(schoolfolder,'unijson.json')
 
+        
+        with open(self.jsondatapath,'r') as universityjson:
+
+            self.jsondata=json.load(universityjson)
+            length=len(self.jsondata)
+
+            self.random_dept=list(self.jsondata)[random.randint(0,length-1)]
+
+        # this controls if you make Excel files for all departments or not
+        self.single_department=True
+
+
+
+
+
+
         # I could use this in the future for school specific Excel file stuff
         self.excelconfig=os.path.join(schoolfolder,'excelconfiglink.txt')
         
@@ -107,7 +121,8 @@ class catalogData:
             #  a little confused
             self.excelconfigpath=configlink.read()
 
-        self.configsfolder=""
+        self.configsfolder='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs'
+
         
         # make this an argument in the init
 
@@ -116,9 +131,7 @@ class catalogData:
 
 
 
-        with open(self.jsondatapath,'r') as universityjson:
-
-            self.jsondata=json.load(universityjson)
+        
         
         self.alphabetizeddict={}
         # this is a function to divide up the departments alphabetically
@@ -142,6 +155,9 @@ class catalogData:
             return departmentname.replace('/','_')
     
     def get_tablename(departmentnamecleaned):
+        '''
+        This gets the tablename in the department databases
+        '''
         tablename=departmentnamecleaned.replace('-','_').replace(',','_').replace('&','and').replace("'","")
         tablename=f'{tablename}_table'
 
@@ -171,7 +187,7 @@ class catalogData:
 
         for startingletter in self.alphabetizeddict:
 
-            letterfolder=os.path.join(self.assetspath,startingletter)
+            letterfolder=os.path.join(self.asset_folder_path,startingletter)
             if not os.path.exists(letterfolder):
                 os.mkdir(letterfolder)
             
@@ -243,7 +259,7 @@ class catalogData:
 
             '''
 
-            letterfolder=os.path.join(self.assetspath,startingletter)
+            letterfolder=os.path.join(self.asset_folder_path,startingletter)
             if not os.path.exists(letterfolder):
                 os.mkdir(letterfolder)
             
@@ -326,7 +342,7 @@ class catalogData:
         for startingletter in self.alphabetizeddict:
 
 
-            letterfolder=os.path.join(self.assetspath,startingletter)
+            letterfolder=os.path.join(self.asset_folder_path,startingletter)
             if not os.path.exists(letterfolder):
                 os.mkdir(letterfolder)
             
@@ -528,7 +544,7 @@ class catalogData:
     def makehtmltable(self):
         for startingletter in self.alphabetizeddict:
 
-            letterfolder=os.path.join(self.assetspath,startingletter)
+            letterfolder=os.path.join(self.asset_folder_path,startingletter)
             if not os.path.exists(letterfolder):
                 os.mkdir(letterfolder)
             
@@ -642,7 +658,7 @@ class catalogData:
             '''
             '''
 
-            letterfolder=os.path.join(self.assetspath,startingletter)
+            letterfolder=os.path.join(self.asset_folder_path,startingletter)
             if not os.path.exists(letterfolder):
                 os.mkdir(letterfolder)
             
@@ -709,12 +725,18 @@ class catalogData:
         '''
         for startingletter in self.alphabetizeddict:
             
-            letterfolder=os.path.join(self.assetspath,startingletter)
+            letterfolder=os.path.join(self.asset_folder_path,startingletter)
             if not os.path.exists(letterfolder):
                 os.mkdir(letterfolder)
             
             letterdict=self.alphabetizeddict[startingletter]
             for departmentname in letterdict:
+
+                # single excel file logic
+                if self.single_department:
+                    if departmentname != self.random_dept:
+                        continue
+                
                 departmenturl=letterdict[departmentname]
 
                 departmentname=self.sanitize_departmentname()
@@ -743,9 +765,7 @@ class catalogData:
                 databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
 
                 # hyphens and commas not allowed in tablename
-                tabledepartmentname=departmentnamecleaned.replace('-','_').replace(',','_').replace('&','and').replace("'","")
-
-                tablename=f'{tabledepartmentname}_table'
+                tablename=self.get_tablename(departmentnamecleaned)
 
 
                 def getdatabasedata():
@@ -777,10 +797,12 @@ class catalogData:
                 Use Font and OpenPyXL to create nicely formatted tabular data
                 '''
                 utconfig=self.finishconfigpath('themedconfigs/ut.json')
+                originalconfig=self.finishconfigpath('originalconfig.json')
+                darkthemeconfig=self.finishconfigpath('darkthemeconfig.json')
 
-                def make_themed_file(configpath,savepath,themename):
+                def make_themed_file(configpath,themename):
                     '''
-                    This is a modular way to make excel files
+                    This is a modular way to make excel files.
                     '''
                     filename=f'{departmentnamecleaned}-{themename.lower().replace(' ','').strip()}.xlsx'
                     savepath=os.path.join(excelfolderpath,filename)
@@ -800,41 +822,12 @@ class catalogData:
                     # this is an imported function defined it init
                     self.make_excelfile(**config)
 
-                
+                make_themed_file(utconfig,'UT-theme')
+                make_themed_file(originalconfig,"original-theme")
+                make_themed_file(darkthemeconfig,'darktheme')
                 # makegreentheme()
-                def makeoriginaltheme():
-                    configjsonpath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/originalconfig.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-courses-originaltheme.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    self.make_excelfile(**config)
 
-                # makeoriginaltheme()
 
-                def makedarktheme():
-                    configjsonpath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/darkthemeconfig.json'
-                    savepath=os.path.join(excelfolderpath,f'{departmentnamecleaned}-courses-darktheme.xlsx')
-                    with open(configjsonpath,'r') as configjson:
-                        configjson=json.load(configjson)
-                    config={
-                    "departmentname":departmentname,
-                    "universityname":self.universityname,
-                    "savepath":savepath,
-                    "rows":rows,
-                    }
-                    config.update(configjson)
-                    
-                    self.make_excelfile(**config)
-
-                # makedarktheme()
 
                 def makeneon():
                     configjsonpath= '/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs/testconfigs/rainbow.json'
@@ -1051,7 +1044,7 @@ class catalogData:
                     
                 
 
-                letterfolder=os.path.join(self.assetspath,startingletter)
+                letterfolder=os.path.join(self.asset_folder_path,startingletter)
                 if not os.path.exists(letterfolder):
                     os.mkdir(letterfolder)
                 
@@ -1152,7 +1145,7 @@ class catalogData:
 
             for startingletter in self.alphabetizeddict:
                 
-                letterfolder=os.path.join(self.assetspath,startingletter)
+                letterfolder=os.path.join(self.asset_folder_path,startingletter)
                 if not os.path.exists(letterfolder):
                     os.mkdir(letterfolder)
                 
@@ -1344,7 +1337,7 @@ class catalogData:
         for startingletter in self.alphabetizeddict:
 
 
-            letterfolder=os.path.join(self.assetspath,startingletter)
+            letterfolder=os.path.join(self.asset_folder_path,startingletter)
             if not os.path.exists(letterfolder):
                 os.mkdir(letterfolder)
             
@@ -1582,13 +1575,20 @@ class catalogData:
 Now this is a class that is truly scalable and reproducable
 '''
 def runcatalogDataclass():
-    catalogobj=catalogData(schoolfolder='rice')
+    
+    # good to check everythings working with the venv:
+    def check():
+        if __name__=='__main__':
+            print(f'the version of beautiful soup is\n {(bs4.__version__)}')
+            print(f'the version of requests is\n {(requests.__version__)}')
+            print(f'\nthe python version being used is:{sys.executable}\n')
+            catalogobj=catalogData(schoolfolder='utcourses')
 
     
-    
+    catalogobj=catalogData(schoolfolder='utcourses')
     # catalogobj.create_departmentname_json()
     # catalogobj.get_sorted_departmentlist()
-    print(catalogobj.schoolfolder)
+    print(catalogobj.random_dept)
     # catalogobj.makestatsjson()    
     # catalogobj.make_excel_files()
     
