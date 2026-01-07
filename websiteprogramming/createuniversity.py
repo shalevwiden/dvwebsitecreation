@@ -41,7 +41,7 @@ I need to add
 
 '''
 class createUniversity:
-    def __init__(self,asset_folder_path,jsondatapath, universityname, cloudbucketpath,websitefolder,schoolabrv):
+    def __init__(self,schoolfolder, universityname, cloudbucketpath,websitefolder,schoolabrv):
         
         '''
         
@@ -54,7 +54,8 @@ class createUniversity:
         dv/texas/ut/stats.html
         '''
         # where assets like excel files and csvs are
-        self.asset_folder_path=asset_folder_path
+        self.asset_folder_path=os.path.join(schoolfolder,'assets')
+
         # now based on that asset_folder_path get the university stats
         self.universitywidefolder=os.path.join(self.asset_folder_path,"universitywidefolder")
 
@@ -67,7 +68,7 @@ class createUniversity:
 
 
         # this is the JSON for all of the department names and department links
-        self.jsondatapath =jsondatapath
+        self.jsondatapath=os.path.join(schoolfolder,'unijson.json')
 
         # university name like 'The University of Texas at Austin'
         self.universityname=universityname
@@ -125,7 +126,7 @@ class createUniversity:
         # now lets define the names of the uni wide files
         # change their url behavior (somewhat easily here)
         self.sorted_departments_page=os.path.join(self.websitefolder,"sorted-departments.html")
-        self.statspage=os.path.join(self.websitefolder,f"{self.schoolabrv}stats.html")
+        self.statspage=os.path.join(self.websitefolder,f"{self.schoolabrv.lower()}stats.html")
         self.homepage=os.path.join(self.websitefolder,f"{self.schoolabrv}-home.html")
 
         env = Environment(loader=FileSystemLoader("templating/templates"))
@@ -992,24 +993,21 @@ class createUniversity:
     def createstatspage(self):
         '''This will create the University wide stats html page'''
 
-
-        env = Environment(loader=FileSystemLoader("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/templates"))
-        
-
-        # Pick template
-        # define the templates in the init tho ngl
-        template = env.get_template("statstemplate.html")
+        with open(self.universitystatsjson,'r') as sdjson:
+            universitystatsdict=json.load(sdjson)
 
         template_data={
-            "universityname":self.universityname
+        "schoolabrv":self.schoolabrv,
+        "universityname":self.universityname
         }
-
+        template_data.update(universitystatsdict)
+        # Jinja must take name=value pairs
         statspage_rendered=self.statspage_template.render(template_data)
 
-        statspageoutput=os.path.join(self.outputspath,'statspageout.html')
 
-        with open(statspageoutput,'w') as statspage:
-            statspage.write(rendered_html)
+        with open(self.statspage,'w') as fullpage:
+            fullpage.write(statspage_rendered)
+        
 
     def create_sorteddepartments_page(self):
         '''
@@ -1049,11 +1047,12 @@ class createUniversity:
 
 
 
+# deprecated
 
 def runcreateUniversity():
     websiteobject=createUniversity()
-    websiteobject.create_department_pages()
-    websiteobject.createletterpages()
+    # websiteobject.create_department_pages()
+    # websiteobject.createletterpages()
 
     
 
