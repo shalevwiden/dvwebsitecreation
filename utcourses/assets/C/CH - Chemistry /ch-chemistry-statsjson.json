@@ -1,0 +1,14 @@
+{
+    "course_count": 98,
+    "longest_course_name": "Biomolecular Structure by Nuclear Magnetic Resonance Spectroscopy",
+    "shortest_course_name": "Thesis",
+    "average_course_length": "32",
+    "lower_count": 18,
+    "upper_count": 44,
+    "grad_count": 36,
+    "lower_percent": "18.4%",
+    "upper_percent": "44.9%",
+    "grad_percent": "36.7%",
+    "samenamelen": 20,
+    "samenamepercent": "20.4%"
+}

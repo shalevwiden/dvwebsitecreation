@@ -1,0 +1,14 @@
+{
+    "course_count": 10,
+    "longest_course_name": "Environmental Chemistry for a Sustainable World",
+    "shortest_course_name": "Internship",
+    "average_course_length": "33",
+    "lower_count": 5,
+    "upper_count": 5,
+    "grad_count": 0,
+    "lower_percent": "50.0%",
+    "upper_percent": "50.0%",
+    "grad_percent": "0.0%",
+    "samenamelen": 3,
+    "samenamepercent": "30.0%"
+}

@@ -1,0 +1,42 @@
+Coursename,Coursecode,Hours,Classification
+Individual Reading and Research,CSE 370,3,Upper Division
+Tools and Techniques of Computational Science,CSE 380,3,Graduate
+Computer Graphics,CSE 382G,3,Graduate
+Foundational Techniques of Machine Learning and Data Sciences,CSE 382M,3,Graduate
+Numerical Analysis: Linear Algebra,CSE 383C,3,Graduate
+"Numerical Analysis: Interpolation, Approximation, Quadrature, and Differential Equations",CSE 383D,3,Graduate
+Numerical Analysis: Algebra and Approximation,CSE 383K,3,Graduate
+Numerical Analysis: Differential Equations,CSE 383L,3,Graduate
+Theory of Probability,CSE 384K,3,Graduate
+Theory of Probability,CSE 384L,3,Graduate
+Mathematical Statistics I,CSE 384R,3,Graduate
+Mathematical Statistics II,CSE 384S,3,Graduate
+Regression Analysis,CSE 384T,3,Graduate
+Design and Analysis of Experiments,CSE 384U,3,Graduate
+Methods of Mathematical Physics I,CSE 385M,3,Graduate
+Methods of Mathematical Physics II,CSE 385N,3,Graduate
+Real Analysis,CSE 385R,3,Graduate
+Complex Analysis,CSE 385S,3,Graduate
+Methods of Applied Mathematics,CSE 386C,3,Graduate
+Methods of Applied Mathematics,CSE 386D,3,Graduate
+Mathematical Methods in Science and Engineering,CSE 386L,3,Graduate
+Functional Analysis in Theoretical Mechanics,CSE 386M,3,Graduate
+Introduction to Mathematical Modeling in Science and Engineering I,CSE 389C,3,Graduate
+Introduction to Mathematical Modeling in Science and Engineering II,CSE 389D,3,Graduate
+Individual Research,"CSE 190, 390","1, 3",Graduate
+"Training in the Teaching of Computational Science, Engineering, and Mathematics",CSE 390T,3,Graduate
+Topics in Computer Science,CSE 392,3,Graduate
+Topics in Numerical Analysis,CSE 393,3,Graduate
+Finite Element Methods,CSE 393F,3,Graduate
+Advanced Theory of Finite Element Methods,CSE 393H,3,Graduate
+Numerical Methods for Flow and Transport Problems,CSE 393N,3,Graduate
+Computational and Variational Methods for Inverse Problems,CSE 393P,3,Graduate
+Topics in Probability and Statistics,CSE 394,3,Graduate
+Topics in Applied Mathematics,CSE 396,3,Graduate
+Topics in Computational Science and Engineering,CSE 397,3,Graduate
+Graduate Research Internship,CSE 397H,3,Graduate
+Thesis,CSE 698,6,Graduate
+Master's Report,CSE 398R,3,Graduate
+Dissertation,"CSE 399W, 699W, 999W","3, 6, 9",Graduate
+,,Total Hours: 120
+DegreeView

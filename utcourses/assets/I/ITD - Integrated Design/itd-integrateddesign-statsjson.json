@@ -1,0 +1,14 @@
+{
+    "course_count": 28,
+    "longest_course_name": "Presentation and Improvisational Skills in Design Thinking",
+    "shortest_course_name": "Design Thinking",
+    "average_course_length": "30",
+    "lower_count": 10,
+    "upper_count": 10,
+    "grad_count": 8,
+    "lower_percent": "35.7%",
+    "upper_percent": "35.7%",
+    "grad_percent": "28.6%",
+    "samenamelen": 6,
+    "samenamepercent": "21.4%"
+}

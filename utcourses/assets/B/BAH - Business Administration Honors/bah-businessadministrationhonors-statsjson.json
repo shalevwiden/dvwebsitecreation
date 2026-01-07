@@ -1,0 +1,14 @@
+{
+    "course_count": 4,
+    "longest_course_name": "Topics in Business Administration Honors",
+    "shortest_course_name": "Lyceum",
+    "average_course_length": "26",
+    "lower_count": 1,
+    "upper_count": 3,
+    "grad_count": 0,
+    "lower_percent": "25.0%",
+    "upper_percent": "75.0%",
+    "grad_percent": "0.0%",
+    "samenamelen": 2,
+    "samenamepercent": "50.0%"
+}

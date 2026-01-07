@@ -1,0 +1,124 @@
+Coursename,Coursecode,Hours,Classification
+Mechanics,PHY 301,3,Lower Division
+Laboratory for Physics 301,PHY 101L,1,Lower Division
+"General Physics Technical Course: Mechanics, Heat, and Sound",PHY 302K (TCCN: PHYS 1301),3,Lower Division
+"General Physics Technical Course: Electricity and Magnetism, Light, Atomic and Nuclear Physics",PHY 302L (TCCN: PHYS 1302),3,Lower Division
+Laboratory for Physics 302K,PHY 102M (TCCN: PHYS 1101),1,Lower Division
+Laboratory for Physics 302L,PHY 102N (TCCN: PHYS 1102),1,Lower Division
+"Electromagnetic, Quantum, and Semiconductor Physics",PHY 303E,3,Lower Division
+Engineering Physics I,PHY 303K (TCCN: PHYS 2325),3,Lower Division
+Engineering Physics II,PHY 303L (TCCN: PHYS 2326),3,Lower Division
+Laboratory for Physics 303K,PHY 103M (TCCN: PHYS 2125),1,Lower Division
+Laboratory for Physics 303L,PHY 103N (TCCN: PHYS 2126),1,Lower Division
+Introductory Physics Seminar,PHY 104,1,Lower Division
+"Laboratory For Physics 302K, 303K, and 317K",PHY 105M,1,Lower Division
+"Laboratory For Physics 302L, 303L, and 317L",PHY 105N,1,Lower Division
+Elementary Physics Methods,PHY 306,3,Lower Division
+Introduction to Research,PHY 108,1,Lower Division
+Introduction to Research,"PHY 208F, 308F","2, 3",Lower Division
+Elementary Physics for Nontechnical Students,PHY 309K (TCCN: PHYS 1305),3,Lower Division
+Elementary Physics for Nontechnical Students,PHY 309L (TCCN: PHYS 1307),3,Lower Division
+Topics in Conference Course,PHY 110C,1,Lower Division
+Wave Motion and Optics,PHY 315,3,Lower Division
+Laboratory for Physics 315,PHY 115L,1,Lower Division
+Electricity and Magnetism,PHY 316,3,Lower Division
+Laboratory for Physics 316,PHY 116L,1,Lower Division
+General Physics I,PHY 317K,3,Lower Division
+General Physics II,PHY 317L,3,Lower Division
+Laboratory for Physics 317K,PHY 117M,1,Lower Division
+Laboratory for Physics 317L,PHY 117N,1,Lower Division
+Topics in Physics,"PHY 119S, 219S, 319S, 419S, 519S, 619S, 719S, 819S, 919S","1, 2, 3, 4, 5, 6, 7, 8, 9",Lower Division
+Modern Physics: Plan II,PHY 321,3,Upper Division
+Introduction to Computational Physics,PHY 329,3,Upper Division
+Topics in Physics,"PHY 129S, 229S, 329S, 429S, 529S, 629S, 729S, 829S, 929S","1, 2, 3, 4, 5, 6, 7, 8, 9",Upper Division
+Cooperative Physics,PHY 329W,3,Upper Division
+Modern Optics,PHY 333,3,Upper Division
+Laboratory for Physics 333,PHY 133L,1,Upper Division
+Classical Dynamics,PHY 336K,3,Upper Division
+Fluid Dynamics,PHY 336L,3,Upper Division
+Electronic Techniques,PHY 338K,3,Upper Division
+Physics Cognition and Pedagogy,PHY 239C,2,Upper Division
+Selected Topics in Physics,PHY 341,3,Upper Division
+Biophysics,PHY 345,3,Upper Division
+Classical Electrodynamics I,PHY 352K,3,Upper Division
+Classical Electrodynamics II,PHY 352L,3,Upper Division
+Modern Physics Laboratory,PHY 353L,3,Upper Division
+Modern Physics and Thermodynamics,PHY 355,3,Upper Division
+Quantum Physics II: Atoms and Molecules,PHY 362K,3,Upper Division
+Quantum Physics III: Particles and Nuclei,PHY 362L,3,Upper Division
+Thermodynamics and Statistical Mechanics,PHY 369,3,Upper Division
+Senior Thesis,PHY 670T,6,Upper Division
+Individual Study in Physics,PHY 371C,3,Upper Division
+Quantum Physics I: Foundations,PHY 373,3,Upper Division
+Advanced Laboratory I,PHY 474,4,Upper Division
+Cosmology and AstroParticle Physics,PHY 375C,3,Upper Division
+Introductory Plasma Physics,PHY 375P,3,Upper Division
+Introduction to Relativity,PHY 375R,3,Upper Division
+Introductory Solid-State Physics,PHY 375S,3,Upper Division
+Honors Tutorial Course,PHY 379H,3,Upper Division
+Plasma Physics I,PHY 380L,3,Graduate
+Plasma Physics II,PHY 380M,3,Graduate
+Experimental Physics,PHY 380N,3,Graduate
+Topics in Advanced Physics,PHY 380T,3,Graduate
+Computational Physics,PHY 381C,3,Graduate
+Methods of Mathematical Physics I,PHY 381M,3,Graduate
+Methods of Mathematical Physics II,PHY 381N,3,Graduate
+Fluid Mechanics,PHY 382M,3,Graduate
+Nonlinear Dynamics,PHY 382N,3,Graduate
+Biophysics I,PHY 382P,3,Graduate
+Biophysics II,PHY 382Q,3,Graduate
+Seminar in Nonlinear Dynamics,PHY 382S,3,Graduate
+Classical Mechanics,PHY 385K,3,Graduate
+Statistical Mechanics,PHY 385L,3,Graduate
+Seminar in Statistical Physics,PHY 385S,3,Graduate
+Special Topics in Statistical Physics,PHY 385T,3,Graduate
+Physics of Sensors,PHY 386K,3,Graduate
+Technical Seminar,PHY 386N,3,Graduate
+Seminar in Applied Physics,PHY 386S,3,Graduate
+Electromagnetic Theory I,PHY 387K,3,Graduate
+Electromagnetic Theory II,PHY 387L,3,Graduate
+Relativity Theory I,PHY 387M,3,Graduate
+Relativity Theory II,PHY 387N,3,Graduate
+Graduate Colloquy,PHY 388M,3,Graduate
+Seminar in Teaching Physics,PHY 388S,3,Graduate
+Quantum Mechanics I,PHY 389K,3,Graduate
+Quantum Mechanics II,PHY 389L,3,Graduate
+Graduate Research,"PHY 190, 290, 390, 690, 990","1, 2, 3, 6, 9",Graduate
+Nonlinear Plasma Theory,PHY 391M,3,Graduate
+Seminar in Plasma Physics,PHY 391S,3,Graduate
+Special Subjects in Plasma Physics,PHY 391T,3,Graduate
+Seminar in Plasma Theory,PHY 391U,3,Graduate
+Solid-State Physics I,PHY 392K,3,Graduate
+Solid-State Physics II,PHY 392L,3,Graduate
+Many-Body Theory,PHY 392N,3,Graduate
+Advanced Optical Spectroscopy,PHY 392P,3,Graduate
+Density Functional Theory,PHY 392Q,3,Graduate
+Seminar in Solid-State Physics,PHY 392S,3,Graduate
+Special Topics in Solid-State Physics,PHY 392T,3,Graduate
+Seminar in Relativity,PHY 393S,3,Graduate
+Special Topics in Relativity,PHY 393T,3,Graduate
+Special Topics in Theoretical Physics,PHY 394U,3,Graduate
+Topics in Survey of Atomic and Molecular Physics,PHY 395,3,Graduate
+Nonlinear Optics and Lasers,PHY 395K,3,Graduate
+Laser Physics,PHY 395M,3,Graduate
+Seminar in Atomic and Molecular Physics,PHY 395S,3,Graduate
+Special Topics in Atomic and Molecular Physics,PHY 395T,3,Graduate
+Cosmology,PHY 396G,3,Graduate
+Introduction to Elementary Particle Physics,PHY 396J,3,Graduate
+Quantum Field Theory I,PHY 396K,3,Graduate
+Quantum Field Theory II,PHY 396L,3,Graduate
+String Theory I,PHY 396P,3,Graduate
+String Theory II,PHY 396Q,3,Graduate
+Topics in Particle Physics: Seminar,PHY 396S,3,Graduate
+Special Topics in Particle Physics,PHY 396T,3,Graduate
+High Energy and Astroparticle Physics,PHY 396V,3,Graduate
+Nuclear Physics,PHY 397K,3,Graduate
+Seminar in Nuclear Physics,PHY 397S,3,Graduate
+Special Topics in Nuclear Physics,PHY 397T,3,Graduate
+Graduate Seminar in Nanoscience,PHY 197U,1,Graduate
+Thesis,PHY 698,6,Graduate
+Seminar in High Energy Theory,PHY 398S,3,Graduate
+Supervised Teaching in Physics,PHY 398T,3,Graduate
+Dissertation,"PHY 399W, 699W, 999W","3, 6, 9",Graduate
+,,Total Hours: 337
+DegreeView

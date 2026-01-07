@@ -1,0 +1,83 @@
+Coursename,Coursecode,Hours,Classification
+First-Year Interest Group Seminar,B A 001F,0,Lower Division
+Professional Development and Career Planning: Honors,B A 101H,1,Lower Division
+Professional Development and Career Planning,B A 101S,1,Lower Division
+Professional Development and Career Planning,B A 101T,1,Lower Division
+Career Planning,B A 102F,1,Lower Division
+Topics in Business Administration Leadership,"B A 105, 205, 305","1, 2, 3",Lower Division
+Career Planning: The Business of Your Career,B A 111F,1,Lower Division
+Business Honors Program Seminar,B A 018H,0,Lower Division
+Topics in International Learning Seminar,"B A 119, 219, 319, 419, 519, 619","1, 2, 3, 4, 5, 6",Lower Division
+Topics in Business Administration,"B A 119S, 219S, 319S, 419S, 519S, 619S, 719S, 819S, 919S","1, 2, 3, 4, 5, 6, 7, 8, 9",Lower Division
+Foundations of Entrepreneurship,B A 320F,3,Upper Division
+Contemporary Leadership Issues,B A 321L,3,Upper Division
+Business Communication: Oral and Written,B A 324,3,Upper Division
+Business Communication: Oral and Written: Honors,B A 324H,3,Upper Division
+Topics in Business Administration,"B A 140S, 240S, 340S, 440S, 540S, 640S, 740S, 840S, 940S","1, 2, 3, 4, 5, 6, 7, 8, 9",Upper Division
+Topics in International Learning Seminar,"B A 149, 249, 349, 449, 549, 649","1, 2, 3, 4, 5, 6",Upper Division
+Internship in Foundations of Business Administration,B A 352F,3,Upper Division
+Internship in Business Administration,"B A 153, 253, 353, 653","1, 2, 3, 6",Upper Division
+Foundations of Business Administration Practicum,B A 366F,3,Upper Division
+Business Administration Practicum,B A 366P,3,Upper Division
+Advanced Topics in Finance and Accounting,"B A 176C, 276C, 376C","1, 2, 3",Upper Division
+Advanced Topics in Marketing,"B A 176D, 276D, 376D","1, 2, 3",Upper Division
+Advanced Topics in Leadership and Management,"B A 176E, 276E, 376E","1, 2, 3",Upper Division
+Advanced Topics in Business Analytics,"B A 176F, 276F, 376F","1, 2, 3",Upper Division
+Advanced Topics in Supply Chain,"B A 176G, 276G, 376G","1, 2, 3",Upper Division
+Advanced Topics in Energy,"B A 176J, 276J, 376J","1, 2, 3",Upper Division
+Advanced Topics in Strategy,"B A 176K, 276K, 376K","1, 2, 3",Upper Division
+Advanced Topics in Strategic Decision Making and Risk Management,"B A 176L, 276L, 376L","1, 2, 3",Upper Division
+Advanced Topics in Business,"B A 176N, 276N, 376N","1, 2, 3",Upper Division
+Independent Research in Foundations of Business Administration,"B A 178F, 378F","1, 3",Upper Division
+Information Technology Management,"B A 180C, 280C, 380C","1, 2, 3",Graduate
+Accounting Information for Managerial Decision Making,B A 380F,3,Graduate
+Executive Seminar,B A 180G,1,Graduate
+Management Science,B A 380M,3,Graduate
+Operations Management,"B A 180N, 280N, 380N","1, 2, 3",Graduate
+Project Management,B A 180P,1,Graduate
+Managerial Economics,"B A 180S, 280S, 380S","1, 2, 3",Graduate
+Strategic Career Planning,B A 181C,1,Graduate
+Marketing Management for Executives,B A 281M,2,Graduate
+Marketing Management,"B A 181T, 281T, 381T","1, 2, 3",Graduate
+Managerial Accounting,"B A 182T, 282T, 382T","1, 2, 3",Graduate
+Financial Reporting for Executives,B A 284F,2,Graduate
+Topics in Economics for Business,"B A 184S, 284S, 384S","1, 2, 3",Graduate
+Financial Accounting,"B A 184T, 284T, 384T","1, 2, 3",Graduate
+Financial Management Concepts and Applications for Executives,B A 285F,2,Graduate
+Strategies for Digital Transformation,"B A 185G, 285G, 385G","1, 2, 3",Graduate
+Financial Management,"B A 185T, 285T, 385T","1, 2, 3",Graduate
+Statistics for Executives,B A 286S,2,Graduate
+Statistics,"B A 186T, 286T, 386T","1, 2, 3",Graduate
+Legal and Regulatory Environment of Business,B A 287T,2,Graduate
+Foundations of Strategy for Executives,B A 288F,2,Graduate
+Strategic Management,"B A 188T, 288T, 388T","1, 2, 3",Graduate
+Managing People and Organizations,B A 389T,3,Graduate
+"Hardware, Software, and Telecommunications",B A 390C,3,Graduate
+Management Information Systems,"B A 190D, 290D, 390D","1, 2, 3",Graduate
+Information Systems Design and Implementation,B A 390F,3,Graduate
+Managing Information,B A 390H,3,Graduate
+"Data Communications, Networks, and Distributed Processing",B A 390J,3,Graduate
+Special Topics in Business Administration,"B A 191, 291, 391, 691","1, 2, 3, 6",Graduate
+"Special Studies in Business, Government, and Society","B A 192C, 292C, 392C, 692C","1, 2, 3, 6",Graduate
+"Special Studies in Business, Government, and Society","B A 192D, 292D, 392D, 692D","1, 2, 3, 6",Graduate
+Special Studies in Finance,"B A 192E, 292E, 392E, 692E","1, 2, 3, 6",Graduate
+Special Studies in Finance,"B A 192F, 292F, 392F, 692F","1, 2, 3, 6",Graduate
+Special Studies in International Business,"B A 192G, 292G, 392G, 692G","1, 2, 3, 6",Graduate
+Special Studies in International Business,"B A 192H, 292H, 392H, 692H","1, 2, 3, 6",Graduate
+Special Studies in Legal Environment of Business,"B A 192J, 292J, 392J, 692J","1, 2, 3, 6",Graduate
+Special Studies in Legal Environment of Business,"B A 192K, 292K, 392K, 692K","1, 2, 3, 6",Graduate
+Special Studies in Management,"B A 192L, 292L, 392L, 692L","1, 2, 3, 6",Graduate
+Special Studies in Management,"B A 192M, 292M, 392M, 692M","1, 2, 3, 6",Graduate
+Special Studies in Management Information Systems,"B A 192N, 292N, 392N, 692N","1, 2, 3, 6",Graduate
+Special Studies in Management Information Systems,"B A 192P, 292P, 392P, 692P","1, 2, 3, 6",Graduate
+Special Studies in Marketing,"B A 192Q, 292Q, 392Q, 692Q","1, 2, 3, 6",Graduate
+Special Studies in Marketing,"B A 192R, 292R, 392R, 692R","1, 2, 3, 6",Graduate
+Special Studies in Operations,"B A 192S, 292S, 392S, 692S","1, 2, 3, 6",Graduate
+Special Studies in Operations,"B A 192T, 292T, 392T, 692T","1, 2, 3, 6",Graduate
+Special Studies in Risk Management,"B A 192U, 292U, 392U, 692U","1, 2, 3, 6",Graduate
+Special Studies in Risk Management,"B A 192V, 292V, 392V, 692V","1, 2, 3, 6",Graduate
+Written and Oral Communication for International Students,B A 398L,3,Graduate
+Master's Report,B A 398R,3,Graduate
+Supervised Teaching in Business Administration,B A 398T,3,Graduate
+,,Total Hours: 212
+DegreeView

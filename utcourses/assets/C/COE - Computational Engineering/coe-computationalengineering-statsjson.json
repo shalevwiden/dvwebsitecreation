@@ -1,0 +1,14 @@
+{
+    "course_count": 17,
+    "longest_course_name": "Computational Methods for Structural Analysis",
+    "shortest_course_name": "Applied Mathematics I",
+    "average_course_length": "33",
+    "lower_count": 3,
+    "upper_count": 14,
+    "grad_count": 0,
+    "lower_percent": "17.6%",
+    "upper_percent": "82.4%",
+    "grad_percent": "0.0%",
+    "samenamelen": 3,
+    "samenamepercent": "17.6%"
+}

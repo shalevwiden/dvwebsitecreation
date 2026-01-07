@@ -1,0 +1,14 @@
+{
+    "course_count": 24,
+    "longest_course_name": "Conference Course in Creative Writing",
+    "shortest_course_name": "Green Poetry",
+    "average_course_length": "21",
+    "lower_count": 4,
+    "upper_count": 20,
+    "grad_count": 0,
+    "lower_percent": "16.7%",
+    "upper_percent": "83.3%",
+    "grad_percent": "0.0%",
+    "samenamelen": 5,
+    "samenamepercent": "20.8%"
+}

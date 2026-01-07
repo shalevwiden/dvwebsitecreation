@@ -1,0 +1,14 @@
+{
+    "course_count": 24,
+    "longest_course_name": "Directed Studies in Global Management and Business Practices",
+    "shortest_course_name": "International Trade",
+    "average_course_length": "33",
+    "lower_count": 1,
+    "upper_count": 21,
+    "grad_count": 2,
+    "lower_percent": "4.2%",
+    "upper_percent": "87.5%",
+    "grad_percent": "8.3%",
+    "samenamelen": 5,
+    "samenamepercent": "20.8%"
+}

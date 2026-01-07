@@ -1,0 +1,179 @@
+Coursename,Coursecode,Hours,Classification
+Foundations of Logical Thought,C S 301K,3,Lower Division
+Computer Fluency,C S 302,3,Lower Division
+Elements of Computers and Programming,C S 303E,3,Lower Division
+Ethical Foundations of Computer Science,C S 103F,1,Lower Division
+Competitive Programming,C S 104C,1,Lower Division
+Essentials of AI for Life and Society,C S 304I,3,Lower Division
+Computer Programming: C++,C S 105C,1,Lower Division
+Topics In Computer Programming Languages,C S 105P,1,Lower Division
+Topics in Software Systems,C S 108,1,Lower Division
+Topics in Computer Science,"C S 109, 209, 309","1, 2, 3",Lower Division
+Discrete Mathematics for Computer Science,C S 311,3,Lower Division
+Discrete Mathematics for Computer Science: Honors,C S 311H,3,Lower Division
+Introduction to Programming,C S 312,3,Lower Division
+Introduction to Programming: Honors,C S 312H,3,Lower Division
+Elements of Software Design,C S 313E,3,Lower Division
+Data Structures,C S 314,3,Lower Division
+Data Structures: Honors,C S 314H,3,Lower Division
+Introduction to Computer Science Research: Honors,C S 118H,1,Lower Division
+Topics in Computer Science,"C S 195T, 395T","1, 3",Graduate
+Topics in Computer Science for Nonmajors,"C S 120N, 220N, 320N","1, 2, 3",Upper Division
+Elements of Scientific Computing,C S 323E,3,Upper Division
+Elements of Scientific Computing: Honors,C S 323H,3,Upper Division
+Elements of Graphics and Visualization,C S 324E,3,Upper Division
+Elements of Networking,C S 326E,3,Upper Division
+Elements of Databases,C S 327E,3,Upper Division
+Topics in Elements of Computing,C S 328E,3,Upper Division
+Computer Organization and Architecture,C S 429,4,Upper Division
+Advanced Topics in Elements of Computing,C S 329E,3,Upper Division
+Computer Organization and Architecture: Honors,C S 429H,4,Upper Division
+Cooperative Computer Science,C S 329W,3,Upper Division
+Elements of Software Engineering I,C S 330E,3,Upper Division
+F1/10 Autonomous Driving,C S 330F,3,Upper Division
+F1/10 Autonomous Driving: Honors,C S 330H,3,Upper Division
+Algorithms and Complexity,C S 331,3,Upper Division
+Elements of Software Engineering II,C S 331E,3,Upper Division
+Algorithms and Complexity: Honors,C S 331H,3,Upper Division
+Elements of Data Integration,C S 333E,3,Upper Division
+Science of High-Performance Computing,C S 333P,3,Upper Division
+Technical Writing,C S 234,2,Upper Division
+Theory in Programming Practice,C S 337,3,Upper Division
+Theory in Programming Practice: Honors,C S 337H,3,Upper Division
+Principles of Computer Systems,C S 439,4,Upper Division
+Principles of Computer Systems: Honors,C S 439H,4,Upper Division
+Debugging & Verifying Programs,C S 340D,3,Upper Division
+Automata Theory,C S 341,3,Upper Division
+Automata Theory: Honors,C S 341H,3,Upper Division
+Neural Networks,C S 342,3,Upper Division
+Computational Brain,C S 342C,3,Upper Division
+Introduction to Speech and Audio Processing,C S 342S,3,Upper Division
+Artificial Intelligence,C S 343,3,Upper Division
+Artificial Intelligence: Honors,C S 343H,3,Upper Division
+Autonomous Multiagent Systems,C S 344M,3,Upper Division
+Robotics,C S 344R,3,Upper Division
+Programming Languages,C S 345,3,Upper Division
+Programming Languages: Honors,C S 345H,3,Upper Division
+Cryptography,C S 346,3,Upper Division
+Data Management,C S 347,3,Upper Division
+Contemporary Issues in Computer Science,C S 349,3,Upper Division
+Advanced Computer Architecture,C S 350C,3,Upper Division
+Operating Systems,C S 350F,3,Upper Division
+Theory of Computation,C S 353,3,Upper Division
+Computer Graphics,C S 354,3,Upper Division
+Computer Graphics: Honors,C S 354H,3,Upper Division
+Game Programming Paradigms,C S 354P,3,Upper Division
+Game Technology,C S 354R,3,Upper Division
+Game Development Capstone: Two-Dimensional Games,C S 354S,3,Upper Division
+Game Development Capstone: Three-Dimensional Games,C S 354T,3,Upper Division
+Computer Networks,C S 356,3,Upper Division
+Introduction to Wireless Networks,C S 356R,3,Upper Division
+Introduction to Quantum Information Science: Honors,C S 358H,3,Upper Division
+Virtualization,C S 360V,3,Upper Division
+Introduction to Computer Security,C S 361,3,Upper Division
+Information Assurance and Security,C S 361C,3,Upper Division
+Network Security and Privacy,C S 361S,3,Upper Division
+Principles of Machine Learning I: Honors,C S 363H,3,Upper Division
+Principles of Machine Learning I,C S 363M,3,Upper Division
+Principles of Machine Learning II,C S 364M,3,Upper Division
+Trustworthy Machine Learning,C S 365T,3,Upper Division
+Numerical Methods,C S 367,3,Upper Division
+Systems Modeling,C S 369,3,Upper Division
+Undergraduate Reading and Research,C S 370,3,Upper Division
+Undergraduate Reading and Research: Writing,C S 370F,3,Upper Division
+Distributed Computing,C S 371D,3,Upper Division
+Generic Programming and the STL,C S 371G,3,Upper Division
+iOS Mobile Computing,C S 371L,3,Upper Division
+Mobile Computing,C S 371M,3,Upper Division
+Natural Language Processing,C S 371N,3,Upper Division
+Object-Oriented Programming,C S 371P,3,Upper Division
+Information Retrieval and Web Search,C S 371R,3,Upper Division
+Object-Oriented Software Engineering,C S 371S,3,Upper Division
+Software Engineering,C S 373,3,Upper Division
+Social Impact Capstone,C S 173G,1,Upper Division
+Software Design,C S 373S,3,Upper Division
+Longhorn Startup,C S 374L,3,Upper Division
+Longhorn Startup Seminar,C S 174S,1,Upper Division
+Compilers,C S 375,3,Upper Division
+Computer Vision,C S 376,3,Upper Division
+Principles and Applications of Parallel Programming,C S 377,3,Upper Division
+Programming for Performance,C S 377P,3,Upper Division
+Undergraduate Topics in Computer Science,"C S 178, 378","1, 3",Upper Division
+Undergraduate Topics in Computer Science: Honors,"C S 178H, 378H","1, 3",Upper Division
+Computer Science Honors Thesis,C S 379H,3,Upper Division
+Compilers,C S 380C,3,Graduate
+Distributed Computing I,C S 380D,3,Graduate
+Structure and Implementation of Modern Programming Languages,C S 380I,3,Graduate
+Operating Systems Implementation,C S 380J,3,Graduate
+Advanced Operating Systems,C S 380L,3,Graduate
+Systems Modeling,C S 380N,3,Graduate
+Parallel Systems,C S 380P,3,Graduate
+Theory and Practice of Secure Systems,C S 380S,3,Graduate
+Virtualization,C S 380V,3,Graduate
+Artificial Intelligence,C S 381K,3,Graduate
+Visual Recognition,C S 381V,3,Graduate
+Advanced Computer Architecture,C S 382M,3,Graduate
+Numerical Analysis: Linear Algebra,C S 383C,3,Graduate
+"Numerical Analysis: Interpolation, Approximation, Quadrature, and Differential Equations",C S 383D,3,Graduate
+Computer Graphics,C S 384G,3,Graduate
+Multimedia Systems,C S 384M,3,Graduate
+Physical Simulation of Computer Graphics,C S 384P,3,Graduate
+Geometric Modeling and Visualization,C S 384R,3,Graduate
+Introduction to VLSI Design,C S 384V,3,Graduate
+Dependable Computing Systems,C S 386C,3,Graduate
+Database Systems,C S 386D,3,Graduate
+Numerical Treatment of Differential Equations,C S 386K,3,Graduate
+Programming Languages,C S 386L,3,Graduate
+Communication Networks,C S 386M,3,Graduate
+Android Programming,C S 386P,3,Graduate
+Network Protocol Security,C S 386S,3,Graduate
+Wireless Networking,C S 386W,3,Graduate
+Natural Language Processing,C S 388,3,Graduate
+Combinatorics and Graph Theory,C S 388C,3,Graduate
+Data-Driven Algorithm Design,C S 388D,3,Graduate
+Approximation Algorithms and Complexity,C S 388E,3,Graduate
+Automata and Formal Languages,C S 388F,3,Graduate
+Algorithms: Techniques and Theory,C S 388G,3,Graduate
+Cryptography,C S 388H,3,Graduate
+Optimization,C S 388J,3,Graduate
+Online Learning and Optimization,C S 388K,3,Graduate
+Introduction to Mathematical Logic,C S 388L,3,Graduate
+Communication Complexity,C S 388M,3,Graduate
+Parallel Algorithms,C S 388P,3,Graduate
+Quantum Information Science,C S 388Q,3,Graduate
+Randomized Algorithms,C S 388R,3,Graduate
+Formal Semantics and Verification,C S 388S,3,Graduate
+Theory of Computation,C S 388T,3,Graduate
+"Planning, Search, and Reasoning Under Uncertainty",C S 388U,3,Graduate
+Automated Logical Reasoning,C S 389L,3,Graduate
+Principles of Object-Oriented Software Technology,C S 389M,3,Graduate
+Recursion and Induction I,C S 389R,3,Graduate
+Distributed Computing II,C S 390D,3,Graduate
+Sublinear Algorithms,C S 390S,3,Graduate
+Data Mining: A Mathematical Perspective,C S 391D,3,Graduate
+Artificial Intelligence II,C S 391K,3,Graduate
+Machine Learning,C S 391L,3,Graduate
+Case Studies in Machine Learning,C S 391M,3,Graduate
+Robot Learning,C S 391R,3,Graduate
+Methods and Techniques for Parallel Programming,C S 392C,3,Graduate
+Automated Software Design,C S 392F,3,Graduate
+Agent-Based Electronic Commerce,C S 393C,3,Graduate
+Topics in Numerical Analysis,C S 393D,3,Graduate
+Numerical Solution of Elliptic Partial Differential Equations,C S 393N,3,Graduate
+Program Synthesis,C S 393P,3,Graduate
+Autonomous Robots,C S 393R,3,Graduate
+Algorithms for Computational Biology,C S 394C,3,Graduate
+Deep Learning,C S 394D,3,Graduate
+Knowledge Representation and Reasoning,C S 394F,3,Graduate
+Neural Networks,C S 394N,3,Graduate
+Automatic Programming,C S 394P,3,Graduate
+Reinforcement Learning: Theory and Practice,C S 394R,3,Graduate
+Topics in Conference Course,"C S 195, 295, 395","1, 2, 3",Graduate
+Topics in Conference Course,"C S 195L, 295L, 395L","1, 2, 3",Graduate
+Research Practice and Experience,C S 396,3,Graduate
+Advanced Networking Protocols,C S 396M,3,Graduate
+Thesis,C S 698,6,Graduate
+Supervised Teaching in Computer Science,C S 398T,3,Graduate
+Dissertation,"C S 399W, 699W, 999W","3, 6, 9",Graduate
+,,Total Hours: 518
+DegreeView

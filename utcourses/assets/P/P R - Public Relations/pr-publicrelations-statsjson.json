@@ -1,0 +1,14 @@
+{
+    "course_count": 40,
+    "longest_course_name": "Introduction to Advertising and Public Relations Research",
+    "shortest_course_name": "Social Media",
+    "average_course_length": "33",
+    "lower_count": 6,
+    "upper_count": 33,
+    "grad_count": 1,
+    "lower_percent": "15.0%",
+    "upper_percent": "82.5%",
+    "grad_percent": "2.5%",
+    "samenamelen": 10,
+    "samenamepercent": "25.0%"
+}

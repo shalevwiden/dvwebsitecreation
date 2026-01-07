@@ -1,0 +1,14 @@
+{
+    "course_count": 52,
+    "longest_course_name": "Introduction to the Latin and Greek Element in English",
+    "shortest_course_name": "Aristotle",
+    "average_course_length": "32",
+    "lower_count": 16,
+    "upper_count": 27,
+    "grad_count": 9,
+    "lower_percent": "30.8%",
+    "upper_percent": "51.9%",
+    "grad_percent": "17.3%",
+    "samenamelen": 4,
+    "samenamepercent": "7.7%"
+}

@@ -1,0 +1,14 @@
+{
+    "course_count": 10,
+    "longest_course_name": "Conference Course in Swahili Language and Literature",
+    "shortest_course_name": "Topics in Swahili",
+    "average_course_length": "24",
+    "lower_count": 8,
+    "upper_count": 2,
+    "grad_count": 0,
+    "lower_percent": "80.0%",
+    "upper_percent": "20.0%",
+    "grad_percent": "0.0%",
+    "samenamelen": 10,
+    "samenamepercent": "100.0%"
+}

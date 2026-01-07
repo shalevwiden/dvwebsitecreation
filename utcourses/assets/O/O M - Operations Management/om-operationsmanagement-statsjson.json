@@ -1,0 +1,14 @@
+{
+    "course_count": 18,
+    "longest_course_name": "Foundations of Operations and Supply Chain Management",
+    "shortest_course_name": "Operations Management",
+    "average_course_length": "38",
+    "lower_count": 1,
+    "upper_count": 13,
+    "grad_count": 4,
+    "lower_percent": "5.6%",
+    "upper_percent": "72.2%",
+    "grad_percent": "22.2%",
+    "samenamelen": 9,
+    "samenamepercent": "50.0%"
+}

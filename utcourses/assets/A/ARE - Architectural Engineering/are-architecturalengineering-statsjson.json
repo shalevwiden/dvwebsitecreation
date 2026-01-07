@@ -1,0 +1,14 @@
+{
+    "course_count": 39,
+    "longest_course_name": "General Topics in Construction Engineering and Project Management",
+    "shortest_course_name": "Thesis",
+    "average_course_length": "33",
+    "lower_count": 3,
+    "upper_count": 20,
+    "grad_count": 16,
+    "lower_percent": "7.7%",
+    "upper_percent": "51.3%",
+    "grad_percent": "41.0%",
+    "samenamelen": 5,
+    "samenamepercent": "12.8%"
+}

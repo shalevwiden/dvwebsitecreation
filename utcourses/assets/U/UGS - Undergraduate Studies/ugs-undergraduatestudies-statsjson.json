@@ -1,0 +1,14 @@
+{
+    "course_count": 20,
+    "longest_course_name": "First-Year Interest Group Returning Mentor Seminar",
+    "shortest_course_name": "Fundamentals",
+    "average_course_length": "32",
+    "lower_count": 16,
+    "upper_count": 4,
+    "grad_count": 0,
+    "lower_percent": "80.0%",
+    "upper_percent": "20.0%",
+    "grad_percent": "0.0%",
+    "samenamelen": 2,
+    "samenamepercent": "10.0%"
+}

@@ -1,0 +1,14 @@
+{
+    "course_count": 10,
+    "longest_course_name": "Topics in Engineering and Science",
+    "shortest_course_name": "Topics in Law",
+    "average_course_length": "23",
+    "lower_count": 0,
+    "upper_count": 0,
+    "grad_count": 10,
+    "lower_percent": "0.0%",
+    "upper_percent": "0.0%",
+    "grad_percent": "100.0%",
+    "samenamelen": 2,
+    "samenamepercent": "20.0%"
+}

@@ -1,0 +1,14 @@
+{
+    "course_count": 35,
+    "longest_course_name": "Topics in Graduate Reading Course: Biblical Greek",
+    "shortest_course_name": "Dissertation",
+    "average_course_length": "25",
+    "lower_count": 15,
+    "upper_count": 9,
+    "grad_count": 11,
+    "lower_percent": "42.9%",
+    "upper_percent": "25.7%",
+    "grad_percent": "31.4%",
+    "samenamelen": 25,
+    "samenamepercent": "71.4%"
+}

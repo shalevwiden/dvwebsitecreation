@@ -1,0 +1,30 @@
+Coursename,Coursecode,Hours,Classification
+Introduction to Informatics,I 301,3,Lower Division
+Academic Success in the Digital University,I 302,3,Lower Division
+Ethical Foundations for Informatics,I 303,3,Lower Division
+Programming for Informatics,I 304,3,Lower Division
+Research Methods for Informatics,I 305,3,Lower Division
+Statistics for Informatics,I 306,3,Lower Division
+Topics in Introductory Informatics,I 310,3,Lower Division
+Introduction to Cultural Heritage Informatics,I 310C,3,Lower Division
+Introduction to Human-Centered Data Science,I 310D,3,Lower Division
+Introduction to Social Justice Informatics,I 310J,3,Lower Division
+Introduction to Health Informatics,I 310M,3,Lower Division
+Introduction to Social Informatics,I 310S,3,Lower Division
+Introduction to User Experience Design,I 310U,3,Lower Division
+Topics in Informatics,"I 119S, 219S, 319S, 419S, 519S, 619S, 719S, 819S, 919S","1, 2, 3, 4, 5, 6, 7, 8, 9",Lower Division
+Topics in Informatics,"I 129S, 229S, 329S, 429S, 529S, 629S, 729S, 829S, 929S","1, 2, 3, 4, 5, 6, 7, 8, 9",Upper Division
+Topics in Cultural Heritage Informatics,I 320C,3,Upper Division
+Topics in Human-Centered Data Science,I 320D,3,Upper Division
+Topics in Social Justice Informatics,I 320J,3,Upper Division
+Topics in Health Informatics,I 320M,3,Upper Division
+Topics in Social Informatics,I 320S,3,Upper Division
+Topics in User Experience Design,I 320U,3,Upper Division
+Career Success in the Digital Organization,I 372,3,Upper Division
+Independent Study,"I 178I, 278I, 378I","1, 2, 3",Upper Division
+Research Experience,"I 178R, 278R, 378R","1, 2, 3",Upper Division
+Internship,"I 178T, 278T, 378T","1, 2, 3",Upper Division
+Capstone,I 379C,3,Upper Division
+Honors Thesis,I 679H,6,Upper Division
+,,Total Hours: 84
+DegreeView

@@ -1,0 +1,14 @@
+{
+    "course_count": 132,
+    "longest_course_name": "Numerical Analysis: Interpolation, Approximation, Quadrature, and Differential Equations",
+    "shortest_course_name": "Thesis",
+    "average_course_length": "29",
+    "lower_count": 24,
+    "upper_count": 58,
+    "grad_count": 50,
+    "lower_percent": "18.2%",
+    "upper_percent": "43.9%",
+    "grad_percent": "37.9%",
+    "samenamelen": 19,
+    "samenamepercent": "14.4%"
+}

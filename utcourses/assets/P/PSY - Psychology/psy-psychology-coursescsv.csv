@@ -1,0 +1,169 @@
+Coursename,Coursecode,Hours,Classification
+Introduction to Psychology,PSY 301 (TCCN: PSYC 2301),3,Lower Division
+Introduction to Child Psychology,PSY 304 (TCCN: PSYC 2308),3,Lower Division
+Introduction to Cognitive Psychology,PSY 305,3,Lower Division
+Introduction to Human Sexuality,PSY 306 (TCCN: PSYC 2306),3,Lower Division
+Biopsychology,PSY 308 (TCCN: PSYC 2330),3,Lower Division
+Personality,PSY 309 (TCCN: PSYC 2316),3,Lower Division
+Statistical Methods in Psychology,PSY 317 (TCCN: PSYC 2317),3,Lower Division
+Introduction to Statistics for the Behavioral Sciences,PSY 317L,3,Lower Division
+Social Psychology,"PSY 319K (TCCN: PSYC 2319, SOCI 2326)",3,Lower Division
+Introductory Research Experience,PSY 319R,3,Lower Division
+Topics in Psychology,"PSY 119S, 219S, 319S, 419S, 519S, 619S, 719S, 819S, 919S","1, 2, 3, 4, 5, 6, 7, 8, 9",Lower Division
+Psychological Methods and Statistics,PSY 420M,4,Upper Division
+R Programming for Behavioral Sciences,PSY 120R,1,Upper Division
+Perception,PSY 323,3,Upper Division
+"Perceptual Systems: Neurons, Behavior, and Evolution",PSY 323P,3,Upper Division
+Sex Differences in Cognition and Perception,PSY 323S,3,Upper Division
+Seeing and Acting in a Virtual World,PSY 323V,3,Upper Division
+Advanced Statistics,PSY 325K,3,Upper Division
+Principles of Conditioning and Learning,PSY 326K,3,Upper Division
+Topics in Psychology,"PSY 129S, 229S, 329S, 429S, 529S, 629S, 729S, 829S, 929S","1, 2, 3, 4, 5, 6, 7, 8, 9",Upper Division
+Behavioral Neuroscience,PSY 332,3,Upper Division
+Hormones and Behavior,PSY 332C,3,Upper Division
+Human Brain Imaging in Psychology,PSY 332D,3,Upper Division
+"Ethics, Genetics, and the Brain",PSY 332E,3,Upper Division
+The Developing Brain,PSY 332J,3,Upper Division
+The Neuroscience of Motivation and Reward,PSY 332M,3,Upper Division
+Neural Plasticity And Behavior,PSY 332P,3,Upper Division
+Psychology and Neuroscience of Sleep,PSY 332S,3,Upper Division
+Biological Clocks and Behavior,PSY 332T,3,Upper Division
+Diversity in Cognitive Aging,PSY 332U,3,Upper Division
+Vision and Action,PSY 332W,3,Upper Division
+Controversial Issues in Development,PSY 333C,3,Upper Division
+Introduction to Developmental Psychology,PSY 333D,3,Upper Division
+Identity Formation,PSY 333E,3,Upper Division
+Fantasy and Reality,PSY 333F,3,Upper Division
+The Development of Attachment Relationship,PSY 333G,3,Upper Division
+Infant Development,PSY 333M,3,Upper Division
+Cognitive Development,PSY 333N,3,Upper Division
+Child Language,PSY 333P,3,Upper Division
+Social Development in Children,PSY 333R,3,Upper Division
+Developmental Science of Adolescence,PSY 333S,3,Upper Division
+Adolescent Development,PSY 333T,3,Upper Division
+Moral Development,PSY 333W,3,Upper Division
+Psychology of Human Mating,PSY 334D,3,Upper Division
+Evolutionary Psychology,PSY 334E,3,Upper Division
+Psychology of Language,PSY 337,3,Upper Division
+Language Processing,PSY 337P,3,Upper Division
+Psychology of Reading,PSY 338K,3,Upper Division
+Behavior Problems of Children,PSY 339,3,Upper Division
+Industrial Psychology,PSY 340M,3,Upper Division
+Selected Topics in Psychology,PSY 341K,3,Upper Division
+Substance Abuse,PSY 343K,3,Upper Division
+Individual Differences,PSY 345,3,Upper Division
+Psychology of Sex,PSY 346K,3,Upper Division
+Motivation,PSY 350,3,Upper Division
+Psychopathology,PSY 352P,3,Upper Division
+Psychopharmacology,PSY 353K,3,Upper Division
+Cognition,PSY 355,3,Upper Division
+Development of Categories and Concepts,PSY 355C,3,Upper Division
+Animal Cognition,PSY 355D,3,Upper Division
+Psychology of Consciousness,PSY 355E,3,Upper Division
+The Cognitive Psychology of Music,PSY 355M,3,Upper Division
+Cognitive Neuroscience,PSY 355N,3,Upper Division
+Cognitive Science of Religion,PSY 355Q,3,Upper Division
+Reasoning and Decision Making,PSY 355R,3,Upper Division
+Social Cognition,PSY 355S,3,Upper Division
+Undergraduate Research,PSY 357,3,Upper Division
+Advanced Undergraduate Research,PSY 357R,3,Upper Division
+Experimental Psychology,PSY 458,4,Upper Division
+Honors Research Tutorial,PSY 158H,1,Upper Division
+Selected Topics: Readings: Tutorial,PSY 359,3,Upper Division
+Honors Research I,PSY 359H,3,Upper Division
+Introduction to Clinical Psychology,PSY 364,3,Upper Division
+Childhood Trauma and Adversity,PSY 364C,3,Upper Division
+Forensic Psychology,PSY 364F,3,Upper Division
+Mental Illness and the Brain,PSY 364M,3,Upper Division
+Positive Psychology and the Good Life,PSY 364P,3,Upper Division
+Human Sexuality,PSY 364S,3,Upper Division
+Multicultural Psychotherapy,PSY 364T,3,Upper Division
+"Behavioral Science, Equity, and Inclusion",PSY 365D,3,Upper Division
+Emotion,PSY 365E,3,Upper Division
+Gender and Racial Attitudes,PSY 365G,3,Upper Division
+Advanced Social Psychology,PSY 365L,3,Upper Division
+Learning and Memory,PSY 371,3,Upper Division
+Psychological Data Science Foundations I,PSY 371E,3,Upper Division
+Psychological Data Science Foundations II,PSY 371F,3,Upper Division
+Introduction to Machine Learning,PSY 371M,3,Upper Division
+Natural Human Behavior in the Real World,PSY 371N,3,Upper Division
+Applied Data Science,PSY 371P,3,Upper Division
+Ethics in Behavioral Data Science,PSY 371Q,3,Upper Division
+Brain Mechanisms and Learning Theory Applied to Real World Scenarios,PSY 371R,3,Upper Division
+Bayesian Data Analysis,PSY 371S,3,Upper Division
+Text Analysis for Behavioral Data Science,PSY 371T,3,Upper Division
+The Neurobiology of Attention,PSY 373N,3,Upper Division
+Undergraduate Practicum,"PSY 377P, 677P","3, 6",Upper Division
+Honors Research II,PSY 379H,3,Upper Division
+Human Neuropsychology,PSY 380C,3,Graduate
+Fundamentals of Evolutionary Psychology,PSY 380F,3,Graduate
+Grant Writing,PSY 380G,3,Graduate
+Writing Workshop,PSY 380W,3,Graduate
+Methods of fMRI: From Design to Data Analysis,PSY 381C,3,Graduate
+Advanced Topics in Neuroimaging,PSY 381D,3,Graduate
+Introduction to Psychophysiology,PSY 381E,3,Graduate
+Grant Writing for the National Science Foundation,PSY 381F,3,Graduate
+Grant Writing in the Behavioral and Biological Sciences,PSY 381G,3,Graduate
+Professional Development for Careers in Psychological Science,PSY 381H,3,Graduate
+Area Seminar in Cognitive Science,PSY 382E,3,Graduate
+R Programming in Behavioral Sciences,PSY 382F,3,Graduate
+Promoting Wellbeing and Thriving,PSY 182H,1,Graduate
+Internship in Clinical Psychology,"PSY 182K, 282K, 382K","1, 2, 3",Graduate
+Neural and Computational Basis of Vision,PSY 382V,3,Graduate
+Functional Neuroanatomy,PSY 383C,3,Graduate
+Area Seminar in Cognitive Neuroscience,PSY 383E,3,Graduate
+Fundamentals of Physiological Psychology,PSY 383M,3,Graduate
+Proseminar: Professional Development,PSY 383P,3,Graduate
+Principles of Sensory and Behavioral Neuroscience,PSY 383T,3,Graduate
+Bootstrap Statistics,PSY 384C,3,Graduate
+Area Seminar in Clinical Psychology,PSY 184E,1,Graduate
+Advanced Statistics: Experimental Design,PSY 384K,3,Graduate
+Advanced Statistics: Inferential,PSY 384M,3,Graduate
+Regression Analysis,PSY 384P,3,Graduate
+Advanced Applied Statistics I,PSY 384Q,3,Graduate
+Data analysis with R,PSY 184R,1,Graduate
+Advanced Applied Statistics II,PSY 384S,3,Graduate
+Structural Equation Modeling,PSY 384T,3,Graduate
+Area Seminar in Developmental Psychology,"PSY 185E, 385E","1, 3",Graduate
+Linear Models: Regression and ANOVA Methods,PSY 385J,3,Graduate
+Fundamentals of Personality Psychology,PSY 385N,3,Graduate
+Fundamentals of Social Psychology,PSY 385P,3,Graduate
+Multivariate Pattern Analysis,PSY 386D,3,Graduate
+Area Seminar in Individual Differences and Evolutionary Psychology,"PSY 186E, 386E","1, 3",Graduate
+Fundamentals of Psycholinguistics,PSY 386N,3,Graduate
+Human Language Processing,PSY 387C,3,Graduate
+"Area Seminar in Perception, Brain, and Behavior Psychology","PSY 187E, 387E","1, 3",Graduate
+Perceptual Systems,PSY 387N,3,Graduate
+Principles of Cognitive Neuroscience,PSY 387S,3,Graduate
+Individual Differences Psychology,PSY 388D,3,Graduate
+Area Seminar in Social and Personality Psychology,"PSY 188E, 388E","1, 3",Graduate
+Conference on Special Topics,PSY 388K,3,Graduate
+"Area Seminar in Cognition, Brain and Behavior",PSY 189E,1,Graduate
+Theory and Techniques of Assessment I,PSY 389K,3,Graduate
+Theory and Techniques of Assessment II,PSY 389L,3,Graduate
+Research,"PSY 190, 290, 390","1, 2, 3",Graduate
+Area Seminar in Behavioral Neuroscience,PSY 191E,1,Graduate
+Learning and Memory,PSY 391N,3,Graduate
+Issues and Controversies in Statistical and Scientific Inquiry,PSY 391P,3,Graduate
+Fundamentals of Comparative Psychology,PSY 392N,3,Graduate
+Clinical Practicum I,PSY 393,3,Graduate
+Clinical Practicum II,PSY 393K,3,Graduate
+Neuroinflammation in Health and Pathology,PSY 394I,3,Graduate
+Fundamentals of Social and Personality Development,PSY 394K,3,Graduate
+Fundamentals of Cognitive Development,PSY 394N,3,Graduate
+Topics in Seminars in Behavioral Neuroscience and Biopsychology,PSY 394P,3,Graduate
+Topics in Seminars in Clinical Psychology,"PSY 194Q, 394Q","1, 3",Graduate
+Topics in Seminars in Developmental Psychology,PSY 394S,3,Graduate
+Topics in Seminars in Evolutionary Psychology,PSY 394T,3,Graduate
+Topics in Seminars in Cognitive or Perception Psychology,PSY 394U,3,Graduate
+Topics in Seminars in Social and Personality Psychology,PSY 394V,3,Graduate
+Foundations of Social Psychology,PSY 394W,3,Graduate
+Fundamentals of Developmental Psychology,PSY 395S,3,Graduate
+Advanced Behavior Pathology,PSY 396,3,Graduate
+Child and Adolescent Psychopathology,PSY 396C,3,Graduate
+Clinical Psychopharmacology,PSY 396D,3,Graduate
+Thesis,PSY 698,6,Graduate
+Supervised Teaching in Psychology,PSY 398T,3,Graduate
+Dissertation,"PSY 399W, 699W, 999W","3, 6, 9",Graduate
+,,Total Hours: 489
+DegreeView

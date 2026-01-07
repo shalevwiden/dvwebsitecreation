@@ -1,0 +1,14 @@
+{
+    "course_count": 22,
+    "longest_course_name": "Conference Course in Japanese Language and Literature",
+    "shortest_course_name": "Japanese I",
+    "average_course_length": "27",
+    "lower_count": 9,
+    "upper_count": 11,
+    "grad_count": 2,
+    "lower_percent": "40.9%",
+    "upper_percent": "50.0%",
+    "grad_percent": "9.1%",
+    "samenamelen": 15,
+    "samenamepercent": "68.2%"
+}

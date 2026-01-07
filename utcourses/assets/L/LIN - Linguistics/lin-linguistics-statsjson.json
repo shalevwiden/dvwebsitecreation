@@ -1,0 +1,14 @@
+{
+    "course_count": 79,
+    "longest_course_name": "Syntax and Semantics: The Structure and Meaning of Utterances",
+    "shortest_course_name": "Bias",
+    "average_course_length": "28",
+    "lower_count": 8,
+    "upper_count": 38,
+    "grad_count": 33,
+    "lower_percent": "10.1%",
+    "upper_percent": "48.1%",
+    "grad_percent": "41.8%",
+    "samenamelen": 12,
+    "samenamepercent": "15.2%"
+}

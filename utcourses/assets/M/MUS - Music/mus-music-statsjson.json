@@ -1,0 +1,14 @@
+{
+    "course_count": 187,
+    "longest_course_name": "Beginning Instruction in Music Performance: Fourth-Semester Class Piano",
+    "shortest_course_name": "Thesis",
+    "average_course_length": "28",
+    "lower_count": 41,
+    "upper_count": 90,
+    "grad_count": 56,
+    "lower_percent": "21.9%",
+    "upper_percent": "48.1%",
+    "grad_percent": "29.9%",
+    "samenamelen": 85,
+    "samenamepercent": "45.5%"
+}

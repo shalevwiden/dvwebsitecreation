@@ -1,0 +1,14 @@
+{
+    "course_count": 4,
+    "longest_course_name": "Medical Laboratory Science Clinical Education Practicum",
+    "shortest_course_name": "Topics in Medical Laboratory Science",
+    "average_course_length": "42",
+    "lower_count": 2,
+    "upper_count": 2,
+    "grad_count": 0,
+    "lower_percent": "50.0%",
+    "upper_percent": "50.0%",
+    "grad_percent": "0.0%",
+    "samenamelen": 3,
+    "samenamepercent": "75.0%"
+}

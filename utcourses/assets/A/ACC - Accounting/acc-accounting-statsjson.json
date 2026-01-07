@@ -1,0 +1,14 @@
+{
+    "course_count": 42,
+    "longest_course_name": "Master in Professional Accounting Distinguished Speaker Lyceum",
+    "shortest_course_name": "Thesis",
+    "average_course_length": "32",
+    "lower_count": 6,
+    "upper_count": 18,
+    "grad_count": 18,
+    "lower_percent": "14.3%",
+    "upper_percent": "42.9%",
+    "grad_percent": "42.9%",
+    "samenamelen": 24,
+    "samenamepercent": "57.1%"
+}

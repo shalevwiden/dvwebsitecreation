@@ -1,0 +1,14 @@
+{
+    "course_count": 18,
+    "longest_course_name": "Advanced Optimization Methods and Decision Making",
+    "shortest_course_name": "Data Management",
+    "average_course_length": "31",
+    "lower_count": 3,
+    "upper_count": 15,
+    "grad_count": 0,
+    "lower_percent": "16.7%",
+    "upper_percent": "83.3%",
+    "grad_percent": "0.0%",
+    "samenamelen": 0,
+    "samenamepercent": "0.0%"
+}

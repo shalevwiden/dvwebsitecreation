@@ -1,0 +1,14 @@
+{
+    "course_count": 10,
+    "longest_course_name": "Conference Course in Bengali Language and Literature",
+    "shortest_course_name": "Topics in Bengali",
+    "average_course_length": "26",
+    "lower_count": 5,
+    "upper_count": 4,
+    "grad_count": 1,
+    "lower_percent": "50.0%",
+    "upper_percent": "40.0%",
+    "grad_percent": "10.0%",
+    "samenamelen": 10,
+    "samenamepercent": "100.0%"
+}

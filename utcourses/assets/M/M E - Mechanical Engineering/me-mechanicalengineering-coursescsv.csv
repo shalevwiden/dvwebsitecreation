@@ -1,0 +1,203 @@
+Coursename,Coursecode,Hours,Classification
+Introduction to Engineering Design and Graphics,M E 302,3,Lower Division
+Studies in Engineering Design Graphics,M E 103,1,Lower Division
+Introduction to Computers and Programming,M E 205,2,Lower Division
+Engineering Design Graphics,M E 210 (TCCN: ENGR 1204),2,Lower Division
+Engineering Design Graphics: Honors,M E 210H,2,Lower Division
+Applied Thermodynamics,M E 310T,3,Lower Division
+Materials Engineering,M E 311,3,Lower Division
+Materials Engineering Laboratory,M E 111L,1,Lower Division
+Dynamics,M E 314D,3,Lower Division
+Thermodynamics,M E 316T,3,Lower Division
+Engineering Computational Methods,M E 218,2,Lower Division
+Programming and Engineering Computational Methods,M E 318M,3,Lower Division
+Topics in Mechanical Engineering,"M E 119S, 219S, 319S, 419S, 519S, 619S, 719S, 819S, 919S","1, 2, 3, 4, 5, 6, 7, 8, 9",Lower Division
+Applied Thermodynamics,M E 385M,3,Graduate
+Humanitarian Engineering Seminar,M E 120C,1,Upper Division
+Dynamics,M E 324,3,Upper Division
+Thermodynamics,M E 326,3,Upper Division
+Thermodynamics: Honors,M E 326H,3,Upper Division
+Topics in Mechanical Engineering,M E 394M,3,Graduate
+Fluid Mechanics,M E 330,3,Upper Division
+Experimental Fluid Mechanics,M E 130L,1,Upper Division
+Engineering Communication: Honors,M E 333H,3,Upper Division
+Engineering Communication,M E 333T,3,Upper Division
+Materials Engineering,M E 334,3,Upper Division
+Materials Engineering Laboratory,M E 134L,1,Upper Division
+Engineering Statistics,M E 335,3,Upper Division
+Materials Processing,M E 336,3,Upper Division
+Materials Processing Laboratory,M E 136L,1,Upper Division
+Concepts in Nuclear and Radiation Engineering,"M E 136N, 236N","1, 2",Upper Division
+Concepts in Nuclear and Radiation Engineering,M E 336P,3,Upper Division
+Introduction to Nuclear Power Systems,M E 337C,3,Upper Division
+Nuclear Environmental Protection,M E 337F,3,Upper Division
+Nuclear Safety and Security,M E 337G,3,Upper Division
+Machine Elements,M E 338,3,Upper Division
+Heat Transfer,M E 339,3,Upper Division
+Experimental Heat Transfer,M E 139L,1,Upper Division
+Mechatronics,M E 340,3,Upper Division
+Mechatronics Laboratory,M E 140L,1,Upper Division
+Thermal-Fluid Systems,M E 343,3,Upper Division
+Dynamic Systems and Controls,M E 344,3,Upper Division
+Dynamic Systems and Controls Laboratory,"M E 144L, 244L","1, 2",Upper Division
+Topics in Processing of Materials,M E 347,3,Upper Division
+Advanced Mechatronics I,M E 348E,3,Upper Division
+Advanced Mechatronics II,M E 348F,3,Upper Division
+Corrosion Engineering,M E 349,3,Upper Division
+Machine Tool Operations for Engineers,M E 350,3,Upper Division
+Design and Control of Robots for Rehabilitation,M E 350D,3,Upper Division
+Robot Mechanism Design,M E 350R,3,Upper Division
+Engineering Computer Graphics,M E 352K,3,Upper Division
+Engineering Finance,M E 353,3,Upper Division
+Introduction to Biomechanical Engineering,M E 354,3,Upper Division
+Biomechanics of Human Movement,M E 354M,3,Upper Division
+Engineering Vibrations,M E 355K,3,Upper Division
+Materials Selection,"M E 259, 359","2, 3",Upper Division
+Vehicle System Dynamics and Controls,M E 360,3,Upper Division
+Cyber Vehicle Systems,M E 360C,3,Upper Division
+Propulsion Systems and Controls,M E 360D,3,Upper Division
+Advanced Vehicle Powertrain Systems and Control,M E 360E,3,Upper Division
+Metallurgy of Engineering Alloys,"M E 260K, 360K","2, 3",Upper Division
+Turbomachinery and Compressible Flow,M E 360L,3,Upper Division
+Intermediate Heat Transfer,M E 360N,3,Upper Division
+Advanced Packaging and Thermal Management,M E 360S,3,Upper Division
+Nuclear Reactor Operations and Engineering,M E 361E,3,Upper Division
+Radiation and Radiation Protection Laboratory,M E 361F,3,Upper Division
+Materials Thermodynamics,"M E 261M, 361M","2, 3",Upper Division
+Readings in Engineering,M E 362K,3,Upper Division
+Development of a Solar-Powered Vehicle,M E 362S,3,Upper Division
+Energy Systems Laboratory,M E 363L,3,Upper Division
+Energy Technology and Policy,M E 363M,3,Upper Division
+Intermediate Dynamics,M E 364D,3,Upper Division
+Automatic Control System Design,M E 364L,3,Upper Division
+Data Science for Engineers,M E 365D,3,Upper Division
+Engineering Entrepreneurship,M E 365E,3,Upper Division
+Finite Element Method,M E 365K,3,Upper Division
+Industrial Design for Production,M E 365L,3,Upper Division
+Mechanical Engineering Design Methodology,M E 366J,3,Upper Division
+Mechanical Engineering Design Project,M E 266K,2,Upper Division
+Operations Research Models,M E 366L,3,Upper Division
+Design Project Laboratory,M E 266P,2,Upper Division
+Deterministic Methods for Operations Research,M E 366Q,3,Upper Division
+Stochastic Methods for Operations Research,M E 366R,3,Upper Division
+Biomems and Bionems,M E 366T,3,Upper Division
+Simulation Modeling,M E 367S,3,Upper Division
+Additive Manufacturing,M E 368C,3,Upper Division
+Computer-Aided Design,M E 368J,3,Upper Division
+Introduction to Computational Fluid Dynamics,M E 369L,3,Upper Division
+Computational Methods in Thermal/Fluid Systems,M E 369M,3,Upper Division
+Application Programming for Engineers,M E 369P,3,Upper Division
+Medical Device Design and Manufacturing,M E 371D,3,Upper Division
+Legal Aspects of Engineering Practice,M E 371K,3,Upper Division
+Theory and Design for Mechanical Sensing and Measurements,M E 372C,3,Upper Division
+Robotics and Automation,M E 372J,3,Upper Division
+Mechanism Design,M E 372M,3,Upper Division
+Design of Smart Mechanisms,M E 372N,3,Upper Division
+Combustion Engine Processes,M E 374C,3,Upper Division
+Automotive Engineering Laboratory,M E 374D,3,Upper Division
+Race Car Engineering and Project Management,M E 374E,3,Upper Division
+Fire Science,M E 374F,3,Upper Division
+Design of Thermal Systems,M E 374L,3,Upper Division
+Design of Air Conditioning Systems,M E 374R,3,Upper Division
+Solar Energy Systems Design,M E 374S,3,Upper Division
+Renewable Energy Technology,M E 374T,3,Upper Division
+High Throughput Nanopatterning,M E 376N,3,Upper Division
+Projects in Mechanical Engineering,"M E 177K, 277K, 377K","1, 2, 3",Upper Division
+Electroceramics,M E 378C,3,Upper Division
+Failure Analysis,M E 378D,3,Upper Division
+Nanotechnology for Sustainable Energy,M E 378E,3,Upper Division
+Enhancing Sustainability Through Tribology,M E 378F,3,Upper Division
+Mechanical Behavior of Materials,M E 378K,3,Upper Division
+Properties and Applications of Polymers,M E 378P,3,Upper Division
+Polymer Nanocomposites,M E 378Q,3,Upper Division
+Structural Ceramics,M E 378S,3,Upper Division
+Undergraduate Honors Thesis,M E 679H,6,Upper Division
+Engineering Acoustics,M E 379N,3,Upper Division
+Musical Acoustics,M E 379Q,3,Upper Division
+Special Topics in Mechanical Engineering,"M E 180E, 280E, 380E","1, 2, 3",Graduate
+Research,"M E 180M, 280M, 380M, 680M, 980M","1, 2, 3, 6, 9",Graduate
+Topics in Mathematical Methods in Engineering,M E 380Q,3,Graduate
+Robot Mechanism Design,M E 380R,3,Graduate
+Statistical Methods for Process Control & Manufacturing,M E 381M,3,Graduate
+Topics in Dynamics of Fluids,M E 381P,3,Graduate
+Topics in Thermodynamics,M E 381Q,3,Graduate
+Topics in Heat Transfer and Rate Processes,M E 381R,3,Graduate
+Topics in Computational Fluid Dynamics,M E 382N,3,Graduate
+Topics in Experimental Thermal/Fluid Systems,M E 382P,3,Graduate
+Topics in Design of Thermal and Fluid Systems,M E 382Q,3,Graduate
+Topics in Combustion,M E 382R,3,Graduate
+Fire Science,M E 382T,3,Graduate
+Theory and Design for Mechanical Sensing and Measurements,M E 383D,3,Graduate
+Heat Transfer in Industrial Systems,M E 383M,3,Graduate
+Topics in Analysis of Mechanical Systems,M E 383Q,3,Graduate
+"Topics in Lubrication, Wear, and Bearing Technology",M E 383S,3,Graduate
+Intermediate Dynamics,M E 384D,3,Graduate
+Topics in Electromechanics,M E 384E,3,Graduate
+Fluid Mechanics in Industrial Processes,M E 384M,3,Graduate
+Topics in Acoustics,M E 384N,3,Graduate
+Topics in Design of Control Systems,M E 384Q,3,Graduate
+Topics in Robotics,M E 384R,3,Graduate
+Topics in Biomedical Engineering,M E 385J,3,Graduate
+"Modeling, Simulation, and Control of Physical Systems",M E 386M,3,Graduate
+Topics in Materials Science: Fundamentals,M E 386P,3,Graduate
+Topics in Materials Science: Structure and Properties,M E 386Q,3,Graduate
+Topics in Materials Science: Physical and Electronic Properties,M E 386R,3,Graduate
+Topics in Materials Science: Microelectronics and Thin Films,M E 386S,3,Graduate
+Topics in Materials Science: The Design of Technical Materials,M E 386T,3,Graduate
+Applied Dynamics and Feedback Control,M E 387M,3,Graduate
+Topics in Materials Science: Thermodynamics and Kinetics,M E 387Q,3,Graduate
+Topics in Materials Science: Experimental Techniques,M E 387R,3,Graduate
+Topics in Materials Processing,M E 387S,3,Graduate
+Nuclear Power Engineering,M E 388C,3,Graduate
+Nuclear Reactor Theory I,M E 388D,3,Graduate
+Nuclear Reactor Theory II,M E 388E,3,Graduate
+Computational Methods in Radiation Transport,M E 388F,3,Graduate
+Nuclear Radiation Shielding,M E 388G,3,Graduate
+Nuclear Safety and Security,M E 388H,3,Graduate
+Neutron Interactions and Their Applications in Nuclear Science and Engineering,M E 388J,3,Graduate
+Mathematical Methods for Nuclear and Radiation Engineering,M E 388M,3,Graduate
+Design of Nuclear Systems,M E 388N,3,Graduate
+Applied Nuclear Physics,M E 388P,3,Graduate
+Modern Trends in Nuclear and Radiation Engineering,M E 388S,3,Graduate
+Nuclear Environmental Protection,M E 389C,3,Graduate
+The Nuclear Fuel Cycle,M E 389F,3,Graduate
+Materials Processing,M E 389M,3,Graduate
+Topics in Nuclear and Radiation Engineering: Design of Systems,M E 389Q,3,Graduate
+Vehicle System Dynamics and Controls,M E 390,3,Graduate
+Cyber Vehicle Systems,M E 390C,3,Graduate
+Nuclear Security System Design,M E 390E,3,Graduate
+Nuclear Analysis Techniques,M E 390F,3,Graduate
+Nuclear Engineering Laboratory,M E 390G,3,Graduate
+The Enterprise of Technology,M E 390M,3,Graduate
+Health Physics Laboratory,M E 390N,3,Graduate
+Nuclear and Radiochemistry,M E 390T,3,Graduate
+Advanced Nuclear Engineering,M E 390V,3,Graduate
+Proposal Writing,M E 390W,3,Graduate
+Introduction to Manufacturing Systems,M E 391M,3,Graduate
+Artificial Intelligence Programming for Engineers,M E 391R,3,Graduate
+Design Optimization and Automation,M E 392C,3,Graduate
+Topics in Computer Graphics and Computer-Aided Design,M E 392G,3,Graduate
+Topics in Advanced Mechanical Design,M E 392M,3,Graduate
+Topics in Manufacturing,M E 392Q,3,Graduate
+Engineering Design & Innovation,M E 393M,3,Graduate
+The Enterprise of Technology,M E 395,3,Graduate
+Engineering Design and Innovation with Product Design,M E 395M,3,Graduate
+Decision and Control of Human-Centered Robots,M E 396D,3,Graduate
+Materials Science and Engineering,M E 396M,3,Graduate
+Application Programming for Engineers,M E 396P,3,Graduate
+Topics in Current Engineering Studies,M E 397,3,Graduate
+Topics in Graduate Seminar,"M E 197K, 297K, 397K","1, 2, 3",Graduate
+Graduate Research Internship,M E 397M,3,Graduate
+Projects in Mechanical Engineering,"M E 197P, 297P, 397P","1, 2, 3",Graduate
+Introduction to Graduate Studies,M E 097S,0,Graduate
+Thesis,M E 698,6,Graduate
+Engineering Teaching Practicum,"M E 198C, 398C, 698C","1, 3, 6",Graduate
+Introduction to Automatic Control,M E 398M,3,Graduate
+Topics in Engineering Teaching Practicum,"M E 198P, 398P, 698P","1, 3, 6",Graduate
+Topics in Teaching Portfolio Preparation,"M E 198Q, 398Q","1, 3",Graduate
+Master's Report,M E 398R,3,Graduate
+Assessment and Curriculum Design in Engineering,M E 398S,3,Graduate
+Supervised Teaching in Mechanical Engineering,M E 398T,3,Graduate
+Dissertation,"M E 399W, 699W, 999W","3, 6, 9",Graduate
+,,Total Hours: 581
+DegreeView

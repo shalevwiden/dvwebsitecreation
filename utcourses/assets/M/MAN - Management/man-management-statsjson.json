@@ -1,0 +1,14 @@
+{
+    "course_count": 44,
+    "longest_course_name": "Directed Studies in Global Management and Business Practices",
+    "shortest_course_name": "Thesis",
+    "average_course_length": "31",
+    "lower_count": 4,
+    "upper_count": 24,
+    "grad_count": 16,
+    "lower_percent": "9.1%",
+    "upper_percent": "54.5%",
+    "grad_percent": "36.4%",
+    "samenamelen": 15,
+    "samenamepercent": "34.1%"
+}

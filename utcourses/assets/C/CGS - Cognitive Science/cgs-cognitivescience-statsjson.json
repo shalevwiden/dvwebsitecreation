@@ -1,0 +1,14 @@
+{
+    "course_count": 3,
+    "longest_course_name": "Topics in Cognitive Science: The Study of Mind",
+    "shortest_course_name": "Bias",
+    "average_course_length": "29",
+    "lower_count": 0,
+    "upper_count": 2,
+    "grad_count": 1,
+    "lower_percent": "0.0%",
+    "upper_percent": "66.7%",
+    "grad_percent": "33.3%",
+    "samenamelen": 2,
+    "samenamepercent": "66.7%"
+}

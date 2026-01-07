@@ -1,0 +1,14 @@
+{
+    "course_count": 26,
+    "longest_course_name": "Introduction to Visual Communications and Geographic Information Systems for Planners",
+    "shortest_course_name": "Thesis",
+    "average_course_length": "33",
+    "lower_count": 1,
+    "upper_count": 2,
+    "grad_count": 23,
+    "lower_percent": "3.8%",
+    "upper_percent": "7.7%",
+    "grad_percent": "88.5%",
+    "samenamelen": 4,
+    "samenamepercent": "15.4%"
+}

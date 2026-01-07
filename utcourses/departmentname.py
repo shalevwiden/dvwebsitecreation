@@ -1,6 +1,8 @@
 
 '''
-This is for UT Austin department names every school might be a little different
+This is for UT Austin department names every school might be a little different.
+
+Use this class in catalogdata.py and createuniversity.py
 
 
 '''
@@ -13,6 +15,9 @@ departmentname="ACF - Actuarial Foundations"
 
 class DepartmentName:
    
+    def get_sanitized_departmentname(self,departmentname):
+        return departmentname.replace('/','_')
+
     def get_departmentnamecleaned(self, departmentname):
 
         departmentnamecleaned=departmentname.replace('/','_')

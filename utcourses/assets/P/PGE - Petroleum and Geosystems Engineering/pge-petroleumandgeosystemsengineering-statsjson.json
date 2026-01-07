@@ -1,0 +1,14 @@
+{
+    "course_count": 57,
+    "longest_course_name": "Advanced Petroleum Laboratory for Master's Degree Candidates",
+    "shortest_course_name": "Thesis",
+    "average_course_length": "34",
+    "lower_count": 4,
+    "upper_count": 28,
+    "grad_count": 25,
+    "lower_percent": "7.0%",
+    "upper_percent": "49.1%",
+    "grad_percent": "43.9%",
+    "samenamelen": 5,
+    "samenamepercent": "8.8%"
+}

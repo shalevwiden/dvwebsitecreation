@@ -1,0 +1,14 @@
+{
+    "course_count": 34,
+    "longest_course_name": "Project Implementation with Underserved Communities",
+    "shortest_course_name": "Nanodevices",
+    "average_course_length": "30",
+    "lower_count": 4,
+    "upper_count": 25,
+    "grad_count": 5,
+    "lower_percent": "11.8%",
+    "upper_percent": "73.5%",
+    "grad_percent": "14.7%",
+    "samenamelen": 2,
+    "samenamepercent": "5.9%"
+}

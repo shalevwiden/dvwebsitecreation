@@ -1,0 +1,14 @@
+{
+    "course_count": 55,
+    "longest_course_name": "Topics in Ecology, Evolution, and Behavior: Development and Reproduction",
+    "shortest_course_name": "Genetics",
+    "average_course_length": "32",
+    "lower_count": 13,
+    "upper_count": 12,
+    "grad_count": 30,
+    "lower_percent": "23.6%",
+    "upper_percent": "21.8%",
+    "grad_percent": "54.5%",
+    "samenamelen": 15,
+    "samenamepercent": "27.3%"
+}

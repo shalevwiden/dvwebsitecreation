@@ -1,0 +1,14 @@
+{
+    "course_count": 22,
+    "longest_course_name": "Topics in Health Informatics and Health Information Technology",
+    "shortest_course_name": "Global Health",
+    "average_course_length": "29",
+    "lower_count": 2,
+    "upper_count": 20,
+    "grad_count": 0,
+    "lower_percent": "9.1%",
+    "upper_percent": "90.9%",
+    "grad_percent": "0.0%",
+    "samenamelen": 4,
+    "samenamepercent": "18.2%"
+}

@@ -1,0 +1,14 @@
+{
+    "course_count": 40,
+    "longest_course_name": "Special Topics in Arts Management and Administration",
+    "shortest_course_name": "Success Seminar",
+    "average_course_length": "30",
+    "lower_count": 12,
+    "upper_count": 20,
+    "grad_count": 8,
+    "lower_percent": "30.0%",
+    "upper_percent": "50.0%",
+    "grad_percent": "20.0%",
+    "samenamelen": 8,
+    "samenamepercent": "20.0%"
+}

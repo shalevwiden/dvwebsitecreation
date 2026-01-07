@@ -1,0 +1,14 @@
+{
+    "course_count": 200,
+    "longest_course_name": "Neutron Interactions and Their Applications in Nuclear Science and Engineering",
+    "shortest_course_name": "Thesis",
+    "average_course_length": "32",
+    "lower_count": 13,
+    "upper_count": 100,
+    "grad_count": 87,
+    "lower_percent": "6.5%",
+    "upper_percent": "50.0%",
+    "grad_percent": "43.5%",
+    "samenamelen": 6,
+    "samenamepercent": "3.0%"
+}

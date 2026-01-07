@@ -1,0 +1,14 @@
+{
+    "course_count": 10,
+    "longest_course_name": "Topics in Second-Year Slavic and Eurasian Languages II",
+    "shortest_course_name": "Topics in Slavic and Eurasian Languages",
+    "average_course_length": "49",
+    "lower_count": 7,
+    "upper_count": 1,
+    "grad_count": 2,
+    "lower_percent": "70.0%",
+    "upper_percent": "10.0%",
+    "grad_percent": "20.0%",
+    "samenamelen": 10,
+    "samenamepercent": "100.0%"
+}

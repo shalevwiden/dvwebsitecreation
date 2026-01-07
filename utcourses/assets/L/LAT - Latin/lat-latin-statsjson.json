@@ -1,0 +1,14 @@
+{
+    "course_count": 27,
+    "longest_course_name": "Advanced Latin Grammar and Composition",
+    "shortest_course_name": "Dissertation",
+    "average_course_length": "25",
+    "lower_count": 9,
+    "upper_count": 7,
+    "grad_count": 11,
+    "lower_percent": "33.3%",
+    "upper_percent": "25.9%",
+    "grad_percent": "40.7%",
+    "samenamelen": 19,
+    "samenamepercent": "70.4%"
+}

@@ -1,0 +1,14 @@
+{
+    "course_count": 11,
+    "longest_course_name": "Introduction to Real Estate and Urban Land Development",
+    "shortest_course_name": "Topics in Real Estate",
+    "average_course_length": "30",
+    "lower_count": 1,
+    "upper_count": 7,
+    "grad_count": 3,
+    "lower_percent": "9.1%",
+    "upper_percent": "63.6%",
+    "grad_percent": "27.3%",
+    "samenamelen": 5,
+    "samenamepercent": "45.5%"
+}

@@ -1,0 +1,14 @@
+{
+    "course_count": 52,
+    "longest_course_name": "Topics in Flight Mechanics, Guidance, Navigation, and Control",
+    "shortest_course_name": "Thesis",
+    "average_course_length": "27",
+    "lower_count": 2,
+    "upper_count": 35,
+    "grad_count": 15,
+    "lower_percent": "3.8%",
+    "upper_percent": "67.3%",
+    "grad_percent": "28.8%",
+    "samenamelen": 6,
+    "samenamepercent": "11.5%"
+}

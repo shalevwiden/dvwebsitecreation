@@ -1,0 +1,164 @@
+Coursename,Coursecode,Hours,Classification
+Introduction to Electrical Engineering,ECE 302 (TCCN: ENGR 2305),3,Lower Division
+Introduction to Electrical Engineering: Honors,ECE 302H,3,Lower Division
+Introduction to Computing,ECE 306,3,Lower Division
+Introduction to Computing: Honors,ECE 306H,3,Lower Division
+Elements of Electrical and Computer Engineering,ECE 307E,3,Lower Division
+Engineering Leadership: Honors,ECE 107H,1,Lower Division
+Topics in Technical Skills,ECE 108S,1,Lower Division
+Topics in Electrical Engineering,"ECE 109K, 209K, 309K, 409K","1, 2, 3, 4",Lower Division
+Introduction to Professional Engineering,ECE 209P,2,Lower Division
+Development of a Solar-Powered Vehicle,ECE 309S,3,Lower Division
+Circuit Theory,ECE 411,4,Lower Division
+Circuit Theory:  Honors,ECE 411H,4,Lower Division
+Tools to Enhance Academic Success,ECE 111S,1,Lower Division
+Software Design and Implementation I,ECE 312,3,Lower Division
+Software Design and Implementation I: Honors,ECE 312H,3,Lower Division
+Linear Systems and Signals,ECE 313,3,Lower Division
+Linear Systems and Signals:  Honors,ECE 313H,3,Lower Division
+Digital Logic Design,ECE 316,3,Lower Division
+Introduction to Embedded Systems: Honors,ECE 319H,3,Lower Division
+Introduction to Embedded Systems,ECE 319K,3,Lower Division
+Topics in Electrical and Computer Engineering,"ECE 119S, 219S, 319S, 419S, 519S, 619S, 719S, 819S, 919S","1, 2, 3, 4, 5, 6, 7, 8, 9",Lower Division
+Mixed Signal and Circuits Laboratory,ECE 321K,3,Upper Division
+Software Design and Implementation II,ECE 422C,4,Upper Division
+Electromagnetic Engineering,ECE 325,3,Upper Division
+Antennas and Wireless Propagation,ECE 325K,3,Upper Division
+Internship in Electrical and Computer Engineering,ECE 125S,1,Upper Division
+Topics in Electrical and Computer Engineering,"ECE 129S, 229S, 329S, 429S, 529S, 629S, 729S, 829S, 929S","1, 2, 3, 4, 5, 6, 7, 8, 9",Upper Division
+"Electrical Circuits, Electronics, and Machinery",ECE 331,3,Upper Division
+Engineering Communication,ECE 333T,3,Upper Division
+Quantum Theory of Electronic Materials,ECE 334K,3,Upper Division
+Fundamentals of Electronic Circuits I Laboratory,ECE 438,4,Upper Division
+Analog Electronics,ECE 438K,4,Upper Division
+Analog Integrated Circuit Design,ECE 338L,3,Upper Division
+Solid-State Electronic Devices,ECE 339,3,Upper Division
+Solar Energy Conversion Devices,ECE 339S,3,Upper Division
+Integrated Circuit Nanomanufacturing Techniques,ECE 440,4,Upper Division
+High-Throughput Nanopatterning,ECE 340P,3,Upper Division
+Electric Drives and Machines,ECE 341,3,Upper Division
+Embedded Systems Design Laboratory,ECE 445L,4,Upper Division
+Embedded and Real-Time Systems Laboratory,ECE 445M,4,Upper Division
+Real-Time Digital Signal Processing Laboratory,ECE 445S,4,Upper Division
+Modern Optics,ECE 347,3,Upper Division
+Laser and Optical Engineering,ECE 348,3,Upper Division
+Probability and Random Processes:  Honors,ECE 351H,3,Upper Division
+Probability and Random Processes,ECE 351K,3,Upper Division
+Digital Signal Processing,ECE 351M,3,Upper Division
+Electrical and Computer Engineering Seminar,ECE 155,1,Upper Division
+Engineering Leadership Seminar,ECE 155L,1,Upper Division
+Undergraduate Research Seminar,ECE 155R,1,Upper Division
+Special Problems in Electrical and Computer Engineering,"ECE 160, 260, 360, 460","1, 2, 3, 4",Upper Division
+Algorithms,ECE 360C,3,Upper Division
+Introduction to Software Engineering,ECE 360F,3,Upper Division
+Programming Paradigms,ECE 360G,3,Upper Division
+Data Science Laboratory,ECE 460J,4,Upper Division
+Introduction to Digital Communications,ECE 360K,3,Upper Division
+Digital Systems Design Using Hardware Description Languages,ECE 460M,4,Upper Division
+Computer Architecture,ECE 460N,4,Upper Division
+Concurrent and Distributed Systems,ECE 360P,3,Upper Division
+Introduction to VLSI Design,ECE 460R,4,Upper Division
+Digital Integrated Circuit Design,ECE 360S,3,Upper Division
+Software Testing,ECE 360T,3,Upper Division
+Multicore Computing,ECE 361C,3,Upper Division
+System Design Metrics,ECE 361D,3,Upper Division
+Machine Learning and Data Analytics for Edge Artificial Intelligence,ECE 361E,3,Upper Division
+Engineering Program Analysis,ECE 361G,3,Upper Division
+Software Engineering and Design Laboratory,ECE 461L,4,Upper Division
+Software Architectures,ECE 361M,3,Upper Division
+Information Security and Privacy,ECE 361N,3,Upper Division
+Data Science Principles,ECE 461P,4,Upper Division
+Requirements Engineering,ECE 361Q,3,Upper Division
+Radio-Frequency Electronics,ECE 361R,3,Upper Division
+Operating Systems,ECE 461S,4,Upper Division
+Smart Grids,ECE 362G,3,Upper Division
+Introduction to Automatic Control,ECE 362K,3,Upper Division
+Power Electronics Laboratory,ECE 462L,4,Upper Division
+Power Electronics II,ECE 362M,3,Upper Division
+Power Quality and Harmonics,ECE 362Q,3,Upper Division
+Renewable Energy and Power Systems,ECE 362R,3,Upper Division
+Development of a Solar-Powered Vehicle,ECE 362S,3,Upper Division
+Microwave and Radio Frequency Engineering,ECE 363M,3,Upper Division
+Engineering Acoustics,ECE 363N,3,Upper Division
+Corporate Senior Design Project,ECE 464C,4,Upper Division
+Introduction to Engineering Design,ECE 364D,3,Upper Division
+Interdisciplinary Entrepreneurship,ECE 364E,3,Upper Division
+Multidisciplinary Senior Design Project,ECE 464G,4,Upper Division
+Honors Senior Design Project,ECE 464H,4,Upper Division
+Senior Design Project,ECE 464K,4,Upper Division
+Research Senior Design Project,ECE 464R,4,Upper Division
+Start-Up Senior Design Project,ECE 464S,4,Upper Division
+Engineering Economics I,ECE 366,3,Upper Division
+Engineering Economics II,ECE 366K,3,Upper Division
+Statistics for Manufacturing,ECE 366L,3,Upper Division
+Power Systems Apparatus and Laboratory,"ECE 368L, 468L","3, 4",Upper Division
+Power Systems Engineering,ECE 369,3,Upper Division
+Relay Protection of Power Systems,ECE 369L,3,Upper Division
+Automatic Control II,ECE 370,3,Upper Division
+Computer Control Systems,ECE 370K,3,Upper Division
+Introduction to Manufacturing Systems Automation,ECE 370L,3,Upper Division
+Introduction to Robotics and Mechatronics,ECE 370N,3,Upper Division
+Wireless Communications Laboratory,ECE 471C,4,Upper Division
+Introduction to Neural Networks,ECE 371D,3,Upper Division
+Communication Systems,ECE 371M,3,Upper Division
+Introduction to Computer Vision,ECE 371P,3,Upper Division
+Digital Image Processing,ECE 371Q,3,Upper Division
+Network Engineering Laboratory,ECE 472L,4,Upper Division
+Telecommunication Networks,ECE 372N,3,Upper Division
+Cryptography and Network Security,ECE 372S,3,Upper Division
+Biomedical Electronic Instrument Design,ECE 374K,3,Upper Division
+Applications of Biomedical Engineering,ECE 374L,3,Upper Division
+Neural Engineering,ECE 374N,3,Upper Division
+Undergraduate Honors Thesis,ECE 679H,6,Upper Division
+Topics in Electrical Engineering,"ECE 179K, 279K, 379K, 479K","1, 2, 3, 4",Upper Division
+Introduction to Optimization,ECE 380C,3,Graduate
+Introduction to System Theory,ECE 380K,3,Graduate
+Topics in Computer Systems in Engineering,ECE 380L,3,Graduate
+Topics in System Theory,ECE 380N,3,Graduate
+Verification and Validation,ECE 381C,3,Graduate
+Probability and Stochastic Processes I,ECE 381J,3,Graduate
+"Topics in Decision, Information, and Communications Engineering",ECE 381K,3,Graduate
+Digital Time Series Analysis and Applications,ECE 381L,3,Graduate
+Probability and Stochastic Processes II,ECE 381M,3,Graduate
+Space-Time Communication,ECE 381S,3,Graduate
+"Topics in Communications, Networks, and Systems",ECE 381V,3,Graduate
+Topics in Software Engineering and Systems,ECE 382C,3,Graduate
+Topics in Theory of Digital Systems,ECE 382L,3,Graduate
+Topics in Integrated Circuits and Systems,ECE 382M,3,Graduate
+"Topics in Architecture, Computer Systems, and Embedded Systems",ECE 382N,3,Graduate
+Topics in Computer Engineering,ECE 382V,3,Graduate
+Electromagnetic Field Theory,ECE 383L,3,Graduate
+Microwave Field Theory,ECE 383M,3,Graduate
+Theory of Electromagnetic Fields: Electrodynamics,ECE 383N,3,Graduate
+Topics in Optical Processing and Laser Communications,ECE 383P,3,Graduate
+Topics in Electromagnetics,ECE 383V,3,Graduate
+Topics in Acoustics,ECE 384N,3,Graduate
+Topics in Biomedical Engineering,ECE 385J,3,Graduate
+Software Architecture,ECE 386C,3,Graduate
+Statistical Methods in Engineering and Quality Assurance,ECE 390C,3,Graduate
+Topics in Manufacturing Systems Engineering,ECE 390V,3,Graduate
+Technical Entrepreneurship,ECE 391C,3,Graduate
+Software Testing,ECE 392C,3,Graduate
+Antenna Theory and Practice,ECE 392K,3,Graduate
+Computational Electromagnetics,ECE 392L,3,Graduate
+Principles of Radar,ECE 392N,3,Graduate
+Topics in Plasma Dynamics,ECE 393C,3,Graduate
+Topics in Power System Engineering,ECE 394,3,Graduate
+Topics in Energy Systems,ECE 394J,3,Graduate
+Power Systems Apparatus and Laboratory,ECE 394L,3,Graduate
+Topics in Solid-State Device Theory,ECE 396K,3,Graduate
+Topics in Quantum Electronics,ECE 396M,3,Graduate
+Topics in Nanotechnology,ECE 396N,3,Graduate
+Topics in Solid-State Electronics,ECE 396V,3,Graduate
+Research Problems,"ECE 197C, 297C, 397C, 697C, 997C","1, 2, 3, 6, 9",Graduate
+Research Problems,"ECE 197G, 297G, 397G, 697G, 997G","1, 2, 3, 6, 9",Graduate
+Advanced Topics in Electrical Engineering,ECE 397K,3,Graduate
+Graduate Research Internship,"ECE 197M, 297M, 397M","1, 2, 3",Graduate
+Conference Course,ECE 397N,3,Graduate
+Graduate Seminar in Electrical Engineering,"ECE 197S, 297S, 397S","1, 2, 3",Graduate
+Thesis,ECE 698,6,Graduate
+Master's Report,ECE 398R,3,Graduate
+Supervised Teaching in Electrical Engineering,ECE 398T,3,Graduate
+Dissertation,"ECE 399W, 499W, 599W, 699W, 799W, 899W, 999W","3, 4, 5, 6, 7, 8, 9",Graduate
+,,Total Hours: 499
+DegreeView

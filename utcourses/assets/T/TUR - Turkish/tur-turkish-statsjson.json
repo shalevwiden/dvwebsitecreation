@@ -1,0 +1,14 @@
+{
+    "course_count": 28,
+    "longest_course_name": "Conference Course in Turkish Language and Literature",
+    "shortest_course_name": "Turkish Cinema",
+    "average_course_length": "28",
+    "lower_count": 7,
+    "upper_count": 10,
+    "grad_count": 11,
+    "lower_percent": "25.0%",
+    "upper_percent": "35.7%",
+    "grad_percent": "39.3%",
+    "samenamelen": 19,
+    "samenamepercent": "67.9%"
+}

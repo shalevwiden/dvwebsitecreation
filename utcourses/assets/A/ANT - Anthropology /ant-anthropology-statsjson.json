@@ -1,0 +1,14 @@
+{
+    "course_count": 206,
+    "longest_course_name": "Introduction to Biological Anthropology: Behavior, Genetics, and Variation",
+    "shortest_course_name": "Thesis",
+    "average_course_length": "30",
+    "lower_count": 22,
+    "upper_count": 141,
+    "grad_count": 43,
+    "lower_percent": "10.7%",
+    "upper_percent": "68.4%",
+    "grad_percent": "20.9%",
+    "samenamelen": 1,
+    "samenamepercent": "0.5%"
+}
