@@ -125,9 +125,11 @@ class createUniversity:
         
         # now lets define the names of the uni wide files
         # change their url behavior (somewhat easily here)
-        self.sorted_departments_page=os.path.join(self.websitefolder,"sorted-departments.html")
-        self.statspage=os.path.join(self.websitefolder,f"{self.schoolabrv.lower()}stats.html")
-        self.homepage=os.path.join(self.websitefolder,f"{self.schoolabrv}-home.html")
+        lowered=self.schoolabrv.lower()
+
+        self.sorted_departments_page=os.path.join(self.websitefolder,f"sorted-departments.html")
+        self.statspage=os.path.join(self.websitefolder,f"{lowered}stats.html")
+        self.homepage=os.path.join(self.websitefolder,f"{lowered}-home.html")
 
         env = Environment(loader=FileSystemLoader("templating/templates"))
 
