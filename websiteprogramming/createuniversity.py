@@ -84,10 +84,22 @@ class createUniversity:
 
         
 
+        self.schoolfolder = schoolfolder
 
+        # I guess these are the only ones I really need from each school folder
+        def schoolfolder_stuff():
+            self.scrape_module = importlib.import_module(
+                f"{schoolfolder}.scrapecourses"
+            )
+            self.dept_module = importlib.import_module(
+                f"{schoolfolder}.departmentname"
+            )
+
+            self.scrapecourses = self.scrape_module.scrapecourses
+            self.DepartmentName = self.dept_module.DepartmentName
+        schoolfolder_stuff()
 
         with open(self.jsondatapath,'r') as universityjson:
-
             self.jsondata=json.load(universityjson)
 
         self.alphabetizeddict={}
@@ -130,6 +142,9 @@ class createUniversity:
         self.sorted_departments_page=os.path.join(self.websitefolder,f"sorted-departments.html")
         self.statspage=os.path.join(self.websitefolder,f"{lowered}stats.html")
         self.homepage=os.path.join(self.websitefolder,f"{lowered}-home.html")
+        self.randompagejspath=os.path.join(self.websitefolder,f"randompage.js")
+        # this json contains a list of all departmentpage names to be able to do random page functionality
+        self.departmentpagelinks=os.path.join(self.websitefolder,f"departmentpagelinks.json")
 
         env = Environment(loader=FileSystemLoader("templating/templates"))
 
@@ -894,6 +909,7 @@ class createUniversity:
                     "scripts":scripts,
                     "statsdict":statsdict,
                     "excelul":excel_ul,
+                    "departmentpagelinks_jsonpath":f'{os.path.join(self.schoolabrv,'departmentpagelinks.json')}',
                 }
      
                 def makefullhtmlcode(startingletter):
@@ -924,72 +940,59 @@ class createUniversity:
         '''
         This file should essentially simply build all the departmentlinks, then build the full functional file.
 
-        Perhaps I could actually read the finished HTML files so I dont have to recreate what they are.
+        This allows for the functionality of the "random page button".
 
-        This allows for the functionality of the "random page button" 
+        How it works is there is a json file with all of the links
+        And then the js reads it
         '''
 
         randompagejspath=self.randompagejspath
 
         departmentpagelinks=[]
 
+        for departmentname in self.jsondata():
 
+    
+
+            dept=self.DepartmentName()
+
+            departmentname=dept.get_sanitized_departmentname(departmentname)                
+            
+
+
+
+            
+            departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
+            display_departmentname=dept.get_display_departmentname(departmentname)
+            departmentnamehalf=dept.get_departmentnamehalf(departmentname)
+            departmentcode=dept.get_departmentcode(departmentname)
         
-        for startingletter in self.alphabetizeddict:
-
-            letterfolder=os.path.join(self.asset_folder_path,startingletter)
-            
-            letterdict=self.alphabetizeddict[startingletter]
-            for departmentname in letterdict:
-                departmenturl=letterdict[departmentname]
-
-                departmentname=departmentname.replace('/','_')
-                departmentfolderpath=os.path.join(letterfolder,departmentname)
-
-
-            
-            
-                departmentnamecleaned=departmentname.replace(' ','').lower()
-                departmentnamecleaned=departmentnamecleaned.replace('/','-')
+         
+    
+        
+            print(f'Starting for {departmentname}')
         
             
-                print(f'Starting for {departmentname}')
-            
-                departmentname=departmentname.replace('/','-').strip()
-
-                departmentnamecleaned=departmentname.replace(',',"-")
-                departmentnamecleaned=departmentnamecleaned.replace(" ", "").lower()
 
 
-                startingletter=startingletter.lower()
 
-                fulldepartmentpage=os.path.join('departments',startingletter,f'{departmentnamecleaned}.html')
 
-                departmentpagelinks.append(fulldepartmentpage)
-            
-        fulljscode=f'''
-            const pages={departmentpagelinks}
-                    
-            randombutton = document.getElementById("randompagebutton");
+            fulldepartmentpage=os.path.join('departments',f'{departmentnamecleaned}.html')
 
-            function gotorandompage(e) {{
-            e.preventDefault(); // Prevent default link behavior
+            departmentpagelinks.append(fulldepartmentpage)
 
-            // math.floor gets floor. Math.random returns float between 0 and 1.
-            const randomIndex = Math.floor(Math.random() * pages.length);
-            const randomPage = pages[randomIndex];
 
-            // need to use window change to make the entire button clickable
-            window.location.href = randomPage;
-            }}
-
-            // e means event handling
-            randombutton.addEventListener("click", gotorandompage);
-
-                '''
+        # the only thing thats dynamic is the json by school
+        # so thats the only thing we have to make
+        # in a better website 
+        with open(self.departmentpagelinks,'w') as departmentpagelinks_json:
+            json.dump(departmentpagelinks,departmentpagelinks_json,indent=4)
         
-        with open(randompagejspath,'w') as randompagejs:
-            randompagejs.write(fulljscode)
+            
+       
+        
+        
+        
         
 
     def createstatspage(self):
@@ -1052,7 +1055,16 @@ class createUniversity:
 # deprecated
 
 def runcreateUniversity():
-    websiteobject=createUniversity()
+
+    ut_specs=[
+                    "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/utcourses",
+                    "The University of Texas at Austin"
+                    ,"https://storage.googleapis.com/utcourses",
+                    "/Users/shalevwiden/Downloads/Projects/testsite/ut",
+                    "UT"]
+    websiteobject=createUniversity(*ut_specs)
+    print(websiteobject.asset_folder_path)
+
     # websiteobject.create_department_pages()
     # websiteobject.createletterpages()
 

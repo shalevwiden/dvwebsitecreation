@@ -168,3 +168,14 @@ Do home page
 Do main main homepage and statspage
 
 Then boom launch
+
+### Jan 6
+
+Worked on statspage a bit
+Need to do homepage
+
+Also need to add departmentname everywhere in the class to make it modular
+self.DepartmentName = self.dept_module.DepartmentName
+
+I think with a better website all of these with open statements
+especially for json would just be requests that return data
