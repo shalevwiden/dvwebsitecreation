@@ -27,7 +27,6 @@ import time
 import json
 
 # use this to render template
-from jinja2 import Environment, FileSystemLoader
 
 
 
@@ -111,7 +110,7 @@ class createPages:
 
     def createindex(self):
         '''
-        Creates the index
+        Creates the MAIN home page index
         '''
         # the key is what will be dislayed on the index, as in the school name the user will read.
         indextemplate=''

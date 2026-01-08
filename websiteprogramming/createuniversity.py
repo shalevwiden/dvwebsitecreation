@@ -1,5 +1,3 @@
-
-
 from pathlib import Path
 import os
 
@@ -944,6 +942,7 @@ class createUniversity:
         "schoolabrv":self.schoolabrv,
         "universityname":self.universityname
         }
+        
         template_data.update(universitystatsdict)
         # Jinja must take name=value pairs
         statspage_rendered=self.statspage_template.render(template_data)

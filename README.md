@@ -179,3 +179,17 @@ self.DepartmentName = self.dept_module.DepartmentName
 
 I think with a better website all of these with open statements
 especially for json would just be requests that return data
+
+### Jan 7, 2026
+
+I have to work on the stats page template
+And then the homepage template
+Simple right
+
+This means targeting the stats container component first. This will contain the primary descriptive statistics
+// lets change up the styling
+
+Also do an OOP tutorial
+
+And include this:
+print(self.**dict**)
