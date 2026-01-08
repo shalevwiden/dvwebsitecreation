@@ -82,6 +82,7 @@ class createPages:
                 # utobj.create_department_pages()
                 utobj.create_sorteddepartments_page()
                 utobj.createstatspage()
+                utobj.create_departmentpagelinks_json()
 
             
             ut()

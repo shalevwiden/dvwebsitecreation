@@ -7,6 +7,10 @@ import sys
 if __name__=='__main__':
     print(f'\nthe python version being used is:{sys.executable}\n')
 
+degreeview_expansion_folder="/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion"
+sys.path.append(
+    degreeview_expansion_folder
+)
 
 import subprocess
 import random
@@ -69,6 +73,8 @@ class createUniversity:
 
         # this is the JSON for all of the department names and department links
         self.jsondatapath=os.path.join(schoolfolder,'unijson.json')
+        with open(self.jsondatapath,'r') as universityjson:
+            self.jsondata=json.load(universityjson)
 
         # university name like 'The University of Texas at Austin'
         self.universityname=universityname
@@ -88,19 +94,19 @@ class createUniversity:
 
         # I guess these are the only ones I really need from each school folder
         def schoolfolder_stuff():
+            end_of_schoolfolder=self.schoolfolder.split('/')[-1]
             self.scrape_module = importlib.import_module(
-                f"{schoolfolder}.scrapecourses"
+                f"{end_of_schoolfolder}.scrapecourses"
             )
             self.dept_module = importlib.import_module(
-                f"{schoolfolder}.departmentname"
+                f"{end_of_schoolfolder}.departmentname"
             )
 
             self.scrapecourses = self.scrape_module.scrapecourses
             self.DepartmentName = self.dept_module.DepartmentName
         schoolfolder_stuff()
 
-        with open(self.jsondatapath,'r') as universityjson:
-            self.jsondata=json.load(universityjson)
+        
 
         self.alphabetizeddict={}
         # this is a function to divide up the departments alphabetically
@@ -185,63 +191,6 @@ class createUniversity:
             self.bodytag=bodytag.read()
 
         # footer so I dont have to redefine it multiple times. 
-
-    def create_school_homepage(self):
-        '''
-        Uses a Jinja template to create each schools homepage.
-        Has to read some variables from the init.
-
-
-        '''
-
-        def create_homepage_ul():
-            '''
-            This returns the ul that will go on the homepage.
-
-            This needs to be moved to the create_school_homepage function
-            '''
-
-            lis=f'''
-
-                '''
-            for startingletter in self.alphabetizeddict:
-                startingletter=startingletter.lower()
-                
-                letterwebsitepage=f'{startingletter}-departments.html'
-
-                
-                fullpagepath=os.path.join("departments",startingletter,letterwebsitepage)
-
-            
-                li=f'''
-                <li class="homepage-column">
-                <a href="{fullpagepath}"
-                ><div class="contentdiv">{startingletter.upper()} Departments</div></a
-                >
-            </li>
-    '''
-                lis+=li
-                
-                
-            homepageul=f'''
-            <ul class="homepage-ul">
-            {lis}
-            </ul>
-            '''
-            print(homepageul)
-
-        departmentcontainerdata={
-            "A":[{"departmentname":"","departmenturl":""},{"departmentname":"","departmenturl":""}]
-        }
-        pass
-        
-        # with open a template...write to it with variables, boom.
-
-    
-    def create_school_statspage(self):
-        '''
-        This function should use JSON, like school stats json thats already linked in the init, to build a school stats page.
-        '''
 
 
     def upload_schoolfiles(self):
@@ -936,7 +885,7 @@ class createUniversity:
 # ---------------------END of make rendered degree pages
 
 
-    def create_randompage_js(self):
+    def create_departmentpagelinks_json(self):
         '''
         This file should essentially simply build all the departmentlinks, then build the full functional file.
 
@@ -946,11 +895,10 @@ class createUniversity:
         And then the js reads it
         '''
 
-        randompagejspath=self.randompagejspath
 
         departmentpagelinks=[]
 
-        for departmentname in self.jsondata():
+        for departmentname in self.jsondata:
 
     
 
@@ -970,11 +918,8 @@ class createUniversity:
          
     
         
-            print(f'Starting for {departmentname}')
+            print(f'Department: {departmentname}')
         
-            
-
-
 
 
             fulldepartmentpage=os.path.join('departments',f'{departmentnamecleaned}.html')
@@ -989,12 +934,6 @@ class createUniversity:
             json.dump(departmentpagelinks,departmentpagelinks_json,indent=4)
         
             
-       
-        
-        
-        
-        
-
     def createstatspage(self):
         '''This will create the University wide stats html page'''
 
@@ -1037,10 +976,60 @@ class createUniversity:
         with open(self.sorted_departments_page,'w') as fullpage:
             fullpage.write(sorteddepartments_page_rendered)
 
+    def create_school_homepage(self):
+        '''
+        Uses a Jinja template to create each schools homepage.
+        Has to read some variables from the init.
+
+
+        '''
+
+        def create_homepage_ul():
+            '''
+            This returns the ul that will go on the homepage.
+
+            This needs to be moved to the create_school_homepage function
+            '''
+
+            lis=f'''
+
+                '''
+            for startingletter in self.alphabetizeddict:
+                startingletter=startingletter.lower()
+                
+                letterwebsitepage=f'{startingletter}-departments.html'
+
+                
+                fullpagepath=os.path.join("departments",startingletter,letterwebsitepage)
+
+            
+                li=f'''
+                <li class="homepage-column">
+                <a href="{fullpagepath}"
+                ><div class="contentdiv">{startingletter.upper()} Departments</div></a
+                >
+            </li>
+    '''
+                lis+=li
+                
+                
+            homepageul=f'''
+            <ul class="homepage-ul">
+            {lis}
+            </ul>
+            '''
+            print(homepageul)
+
+        departmentcontainerdata={
+            "A":[{"departmentname":"","departmenturl":""},{"departmentname":"","departmenturl":""}]
+        }
+        pass
+        
+        # with open a template...write to it with variables, boom.
 
 # -------------END of class -----------------------
 
-
+    
 
 
 # architecure_testing()
