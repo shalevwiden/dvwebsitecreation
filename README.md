@@ -98,3 +98,6 @@ So for each school scraping folder I should include an init.py as well
 Added random department.
 Can be used for some stuff
 `self.random_dept=list(self.jsondata)[random.randint(0,length-1)]`
+
+This removes all tracked stuff
+Then readds it

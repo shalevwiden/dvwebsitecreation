@@ -20,7 +20,7 @@ class DepartmentName:
 
     def get_departmentnamecleaned(self, departmentname):
 
-        departmentnamecleaned=departmentname.replace('/','_')
+        departmentnamecleaned=departmentname.replace('/','-')
 
 
 

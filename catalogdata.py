@@ -103,6 +103,8 @@ class catalogData:
             self.jsondata=json.load(universityjson)
             length=len(self.jsondata)
 
+            # I also need to pass this to the createuniversityclass somehow
+            # put it in a json
             self.random_dept=list(self.jsondata)[random.randint(0,length-1)]
 
         # this controls if you make Excel files for all departments or not
