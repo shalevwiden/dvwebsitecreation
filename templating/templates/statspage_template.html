@@ -93,11 +93,55 @@
           <li><a href="sorted-departments.html">Sorted Departments Page</a></li>
         </ul>
 
-        <div class="statscontainer">
+        <div class="statscontainer2">
           <div class="statsbox">
-            <div class="statscontent"><p>4.691</p></div>
-            <div class="statstitle">Average classes per semester</div>
+            <div class="title">Number of departments</div>
+            <div class="content">{{departmentcount}}</div>
           </div>
+
+          <div class="statsbox">
+            <div class="title">Number of courses</div>
+            <div class="content">{{coursecount}}</div>
+          </div>
+          <!-- this is a special box that will be a lot bigger -->
+          <div class="statsbox longest-shortest-course">
+            <p>Longest coursename:</p>
+            <p>{{longestcoursename}}</p>
+            <p>Course Code: {{longestcoursecode}}</p>
+            <p>Length (chars): {{longestlength}}</p>
+          </div>
+          <div class="statsbox longest-shortest-course">
+            <p>Shortest coursename:</p>
+            <p>{{shortestcoursename}}</p>
+            <p>Course Code: {{shortestcoursecode}}</p>
+            <p>Length (chars): {{shortestlength}}</p>
+          </div>
+          <div class="statsbox top3depts">
+            <div class="title">3 Biggest Departments</div>
+            <div class="content">
+              {{ first_dept[1] ~ ", " ~ first_dept[0] ~ "Courses" }}
+            </div>
+            <div class="content">
+              {{ second_dept[1] ~ ", " ~ second_dept[0] ~ " Courses" }}
+            </div>
+            <div class="content">
+              {{ third_dept[1] ~ ", " ~ third_dept[0] ~ " Courses" }}
+            </div>
+          </div>
+          <div class="statsbox top3depts">
+            <div class="title">3 Smallest Departments</div>
+            <div class="content">
+              {{ last_dept[1] ~ ", " ~ last_dept[0] ~ " Courses" }}
+            </div>
+            <div class="content">
+              {{ second_last_dept[1] ~ ", " ~ second_last_dept[0] ~ " Courses"
+              }}
+            </div>
+            <div class="content">
+              {{ third_last_dept[1] ~ ", " ~ third_last_dept[0] ~ " Courses" }}
+            </div>
+          </div>
+
           <div class="statsbox">
             <div class="statscontent"><p>47.13%</p></div>
             <div class="statstitle">

@@ -933,6 +933,7 @@ class createUniversity:
         with open(self.universitystatsjson,'r') as sdjson:
             universitystatsdict=json.load(sdjson)
 
+        print(f'universitystatsdict: {universitystatsdict}')
         template_data={
         "schoolabrv":self.schoolabrv,
         "universityname":self.universityname
@@ -1047,6 +1048,7 @@ def main():
                     "UT"]
     websiteobject=createUniversity(*ut_specs)
     print(websiteobject.asset_folder_path)
+    websiteobject.createstatspage()
 
     # websiteobject.create_department_pages()
     # websiteobject.createletterpages()
