@@ -125,6 +125,9 @@ class catalogData:
 
         self.configsfolder='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs'
 
+        # pass this in as an argument to the init
+        # then in the make_excel_files() function loop over this and create as many configs as is here pretty much
+        self.excelconfigs_list=[]
         
         # make this an argument in the init
 
