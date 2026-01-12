@@ -1392,8 +1392,9 @@ class catalogData:
 '''
 Now this is a class that is truly scalable and reproducable
 '''
-def runcatalogDataclass():
+def main():
     
+
     # good to check everythings working with the venv:
     def check():
         if __name__=='__main__':
@@ -1412,4 +1413,6 @@ def runcatalogDataclass():
     
     
 
-runcatalogDataclass()
+
+if __name__=="__main__":
+    main()

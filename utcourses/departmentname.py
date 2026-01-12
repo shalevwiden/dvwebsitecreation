@@ -11,7 +11,6 @@ Use this class in catalogdata.py and createuniversity.py
 # IMPORTANT - the name of the folders have slashes removed by default
 # departmentname=departmentname.replace('/','_')
 
-departmentname="ACF - Actuarial Foundations"
 
 class DepartmentName:
    
@@ -65,6 +64,11 @@ class DepartmentName:
         return code
 
 def main():
+    '''
+    Use this function to test when generation
+    '''
+    departmentname="ACF - Actuarial Foundations"
+
     dept = DepartmentName()
 
     departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
