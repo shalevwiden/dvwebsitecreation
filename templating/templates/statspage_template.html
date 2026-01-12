@@ -119,73 +119,29 @@
           <div class="statsbox top3depts">
             <div class="title">3 Biggest Departments</div>
             <div class="content">
-              {{ first_dept[1] ~ ", " ~ first_dept[0] ~ "Courses" }}
-            </div>
-            <div class="content">
-              {{ second_dept[1] ~ ", " ~ second_dept[0] ~ " Courses" }}
-            </div>
-            <div class="content">
-              {{ third_dept[1] ~ ", " ~ third_dept[0] ~ " Courses" }}
+              <ul class="dept_ul">
+                <li>{{ first_dept[1] ~ ", " ~ first_dept[0] ~ "Courses" }}</li>
+                <li>
+                  {{ second_dept[1] ~ ", " ~ second_dept[0] ~ " Courses" }}
+                </li>
+                <li>{{ third_dept[1] ~ ", " ~ third_dept[0] ~ " Courses" }}</li>
+              </ul>
             </div>
           </div>
           <div class="statsbox top3depts">
             <div class="title">3 Smallest Departments</div>
             <div class="content">
-              {{ last_dept[1] ~ ", " ~ last_dept[0] ~ " Courses" }}
-            </div>
-            <div class="content">
-              {{ second_last_dept[1] ~ ", " ~ second_last_dept[0] ~ " Courses"
-              }}
-            </div>
-            <div class="content">
-              {{ third_last_dept[1] ~ ", " ~ third_last_dept[0] ~ " Courses" }}
-            </div>
-          </div>
-
-          <div class="statsbox">
-            <div class="statscontent"><p>47.13%</p></div>
-            <div class="statstitle">
-              Average % of Major Classified Hours / <br />Total Hours
-            </div>
-          </div>
-          <div class="statsbox">
-            <div class="statscontent"><p>27</p></div>
-            <div class="statstitle">
-              Degree Plans with more than 8 semesters
-            </div>
-          </div>
-
-          <div class="statsbox" id="longestnamebox">
-            <div class="statscontent">
-              <p>Architecture-Architectural Engineering (BArch-BSArchE)</p>
-            </div>
-            <div class="statstitle">Longest Degree Program Name</div>
-          </div>
-          <div class="statsbox" id="shortestnamebox">
-            <div class="statscontent"><p>Dance (BFA)</p></div>
-            <div class="statstitle">Shortest Degree Program Name</div>
-          </div>
-          <div class="statsbox" id="longestcoursebox">
-            <div class="statscontent">
-              Introduction to Speech and Language Disorders Assessment and
-              Treatment in Children
-            </div>
-            <div class="statstitle">
-              Longest Coursename<sup>1, </sup><sup>2</sup><br /><span
-                style="margin-top: 6px; display: inline-block"
-                class="char"
-                >82 chars</span
-              >
-            </div>
-          </div>
-          <div class="statsbox" id="shortestcoursebox">
-            <div class="statscontent">Statics</div>
-            <div class="statstitle">
-              Shortest Coursename <sup>1, </sup><sup>2</sup><br /><span
-                style="margin-top: 6px; display: inline-block"
-                class="char"
-                >7 chars</span
-              >
+              <ul class="dept_ul">
+                <li>{{ last_dept[1] ~ ", " ~ last_dept[0] ~ " Courses" }}</li>
+                <li>
+                  {{ second_last_dept[1] ~ ", " ~ second_last_dept[0] ~ "
+                  Courses" }}
+                </li>
+                <li>
+                  {{ third_last_dept[1] ~ ", " ~ third_last_dept[0] ~ " Courses"
+                  }}
+                </li>
+              </ul>
             </div>
           </div>
         </div>
