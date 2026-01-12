@@ -193,3 +193,8 @@ Also do an OOP tutorial
 
 And include this:
 print(self.**dict**)
+
+### Jan 8, 2025
+
+Well there is a departmentname json.
+In the createuniversity class, that should be used instead of departmentname.py

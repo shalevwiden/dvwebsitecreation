@@ -485,22 +485,20 @@ class createUniversity:
             for departmentname in letterdict:
                 departmenturl=letterdict[departmentname]
 
-                departmentname=departmentname.replace('/','_')
+                dept=self.DepartmentName()
+
+                departmentname=dept.get_sanitized_departmentname(departmentname)
+
+                departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
+                display_departmentname=dept.get_display_departmentname(departmentname)
+                departmentnamehalf=dept.get_departmentnamehalf(departmentname)
+                departmentcode=dept.get_departmentcode(departmentname)
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
 
 
-            
-            
-                departmentnamecleaned=departmentname.replace(' ','').lower()
-                departmentnamecleaned=departmentnamecleaned.replace('/','-')
-        
-            
+                departmentfolderpath=os.path.join(letterfolder,departmentname)
+    
                 print(f'Starting for {departmentname}')
-            
-                departmentname=departmentname.replace('/','-').strip()
-
-                departmentnamecleaned=departmentname.replace(',',"-")
-                departmentnamecleaned=departmentnamecleaned.replace(" ", "").lower()
 
                 # its already cleaned
                 print(f'Department name cleaned {departmentnamecleaned}')
@@ -661,23 +659,24 @@ class createUniversity:
                     
 
                 departmenturl=letterdict[departmentname]
+                # just use all of this
+                dept=self.DepartmentName()
 
-                departmentname=departmentname.replace('/','_')
+                departmentname=dept.get_sanitized_departmentname(departmentname)
+
+                departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
+                displaydepartmentname=dept.get_display_departmentname(departmentname)
+                departmentnamehalf=dept.get_departmentnamehalf(departmentname)
+                departmentcode=dept.get_departmentcode(departmentname)
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
 
 
             
-            
-                departmentnamecleaned=departmentname.replace(' ','').lower()
-                departmentnamecleaned=departmentnamecleaned.replace('/','-')
         
             
                 print(f'Starting for {departmentname}')
             
-                departmentname=departmentname.replace('/','-').strip()
-
-                departmentnamecleaned=departmentname.replace(',',"-")
-                departmentnamecleaned=departmentnamecleaned.replace(" ", "").lower()
+        
 
                 # its already cleaned
                 print(f'Department name cleaned {departmentnamecleaned}')
@@ -793,11 +792,7 @@ class createUniversity:
                 
                 renderedcsvurl=f'{departmentnamecleaned}-rendered-csv.html'
 
-                displaydepartmentname=departmentname.replace('_','/')
-                displaydepartmentname=departmentname.strip().split('-')
-                code=displaydepartmentname[0].strip()
-                departmentnamehalf=displaydepartmentname[-1].strip()
-                displaydepartmentname=f'({code}) - {departmentnamehalf}'
+               
 
                 if len(displaydepartmentname)>60:
                     displaydepartmentname=displaydepartmentname.split(')')
@@ -1042,7 +1037,7 @@ class createUniversity:
 
 # deprecated
 
-def runcreateUniversity():
+def main():
 
     ut_specs=[
                     "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/utcourses",
@@ -1062,4 +1057,4 @@ def runcreateUniversity():
 print(f'\nthe python version being used is:{sys.executable}\n')
 
 if __name__=="__main__":
-    runcreateUniversity()
+    main()
