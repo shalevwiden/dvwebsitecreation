@@ -101,3 +101,16 @@ Can be used for some stuff
 
 This removes all tracked stuff
 Then readds it
+
+### Jan 11, 2026
+
+I guess I need a way to pass in a custom Excel theme for each school
+Make it difference for each instance of the class
+Also make it scalable
+Like let me pass in a list of excel configs, which is a list
+of json paths lets say
+I'll include all the Excel configs IN THIS VERY FOLDER
+So the paths can be relative
+Pass in that list of Excel configs
+Then use it in the Excel generation function to generate as many themes as I pass in
+Use this same logic for the original UT degree plans.
