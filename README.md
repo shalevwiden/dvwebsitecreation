@@ -203,3 +203,7 @@ In the createuniversity class, that should be used instead of departmentname.py
 
 The key is actually departmentnamecleaned
 Those are the ones we build the urls from
+
+As for front end components
+Im only using a couple of them manually
+Including the footer...

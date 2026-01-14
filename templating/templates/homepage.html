@@ -64,11 +64,11 @@
 
     <!-- this is just testing -->
 
-    <link rel="stylesheet" href="utaustin-site/cssfiles/filterchaos.css" />
+    <!-- <link rel="stylesheet" href="utaustin-site/cssfiles/filterchaos.css" /> -->
   </head>
   <body>
     <!-- this div basically has the entire site in it. Flex direction column -->
-    <div class="sitecontainer">
+    <div class="sitecontainer" id="unihomepage">
       <!-- 
       
       -->
@@ -110,12 +110,14 @@
           </nav>
         </div>
 
-        <div class="selector">
+        <!-- this selector is only used for some schools -->
+
+        <div class="selector" style="display: none">
           <div class="coursedata">
-            <a href="utcoursessite/utcoursesindex.html">Courses Data</a>
+            <a href="option1">Courses Data</a>
           </div>
 
-          <div class="degreeplans" id="currentpage">Degree Plans</div>
+          <div class="degreeplans" id="currentpage">Option 2</div>
         </div>
 
         <!-- 
@@ -123,101 +125,22 @@
         
         
         -->
-        <!-- now have the list of schools -->
-        <ul class="schoolist-ul">
-          <li class="schoolist-column">
-            <a
-              href="utaustin-site/schoolofarchitecture/schoolofarchitecture.html"
-              ><div class="schoolnamediv">School of Architecture</div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a
-              href="utaustin-site/redmccombsschoolofbusiness/redmccombsschoolofbusiness.html"
-              ><div class="schoolnamediv">
-                Red McCombs School of Business
-              </div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a
-              href="utaustin-site/schoolofcivicleadership/schoolofcivicleadership.html"
-              ><div class="schoolnamediv">School of Civic Leadership</div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a
-              href="utaustin-site/moodycollegeofcommunication/moodycollegeofcommunication.html"
-              ><div class="schoolnamediv">
-                Moody College of Communication
-              </div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a href="utaustin-site/collegeofeducation/collegeofeducation.html"
-              ><div class="schoolnamediv">College of Education</div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a
-              href="utaustin-site/cockrellschoolofengineering/cockrellschoolofengineering.html"
-              ><div class="schoolnamediv">
-                Cockrell School of Engineering
-              </div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a href="utaustin-site/collegeoffinearts/collegeoffinearts.html"
-              ><div class="schoolnamediv">College of Fine Arts</div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a
-              href="utaustin-site/johna.andkatherineg.jacksonschoolofgeosciences/johna.andkatherineg.jacksonschoolofgeosciences.html"
-              ><div class="schoolnamediv">
-                John A. and Katherine G. Jackson School of Geosciences
-              </div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a href="utaustin-site/schoolofinformation/schoolofinformation.html"
-              ><div class="schoolnamediv">School of Information</div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a
-              href="utaustin-site/collegeofliberalarts/collegeofliberalarts.html"
-              ><div class="schoolnamediv">College of Liberal Arts</div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a
-              href="utaustin-site/collegeofnaturalsciences/collegeofnaturalsciences.html"
-              ><div class="schoolnamediv">College of Natural Sciences</div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a href="utaustin-site/schoolofnursing/schoolofnursing.html"
-              ><div class="schoolnamediv">School of Nursing</div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a
-              href="utaustin-site/lyndonb.johnsonschoolofpublicaffairs/lyndonb.johnsonschoolofpublicaffairs.html"
-              ><div class="schoolnamediv">
-                Lyndon B. Johnson School of Public Affairs
-              </div></a
-            >
-          </li>
-          <li class="schoolist-column">
-            <a
-              href="utaustin-site/stevehicksschoolofsocialwork/stevehicksschoolofsocialwork.html"
-              ><div class="schoolnamediv">
-                Steve Hicks School of Social Work
-              </div></a
-            >
-          </li>
-        </ul>
+        <!-- now the departments -->
+        <!-- remember this template works in conjuction with the create_uni_homepage() function -->
+        <div class="homepage-div">
+          {% for letter in departmentlinks_dict %}
+          <h2 class="letter-section">{{ letter }}</h2>
+
+          <ul>
+            {% for departmentname, departmentpagelink in
+            departmentlinks_dict[letter].items() %}
+            <li>
+              <a href="{{ departmentpagelink }}">{{ departmentname }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endfor %}
+        </div>
       </div>
 
       <!-- end intro box -->

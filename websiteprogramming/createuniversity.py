@@ -915,9 +915,9 @@ class createUniversity:
         
 
 
-            fulldepartmentpage=os.path.join('departments',f'{departmentnamecleaned}.html')
+            departmentpagelink=os.path.join('departments',f'{departmentnamecleaned}.html')
 
-            departmentpagelinks.append(fulldepartmentpage)
+            departmentpagelinks.append(departmentpagelink)
 
 
         # the only thing thats dynamic is the json by school
@@ -1008,10 +1008,11 @@ class createUniversity:
                     departmentname=dept.get_sanitized_departmentname(departmentname)
 
                     departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
-                    fulldepartmentpage=os.path.join('departments',f'{departmentnamecleaned}.html')
+                    departmentpagelink=os.path.join('departments',f'{departmentnamecleaned}.html')
 
                     # adding to the dict logic
-                    departmentlinks_dict[startingletter][departmentname]=fulldepartmentpage
+                    # we do the og department name cause it looks best
+                    departmentlinks_dict[startingletter][departmentname]=departmentpagelink
             return departmentlinks_dict
         
         departmentlinks_dict=make_departmentlinks_dict()
@@ -1071,7 +1072,7 @@ class createUniversity:
         departmentcontainerdata={
             "A":[{"departmentname":"","departmenturl":""},{"departmentname":"","departmenturl":""}]
         }
-        pass
+        
         
         # with open a template...write to it with variables, boom.
 
@@ -1100,7 +1101,7 @@ def main():
                     "/Users/shalevwiden/Downloads/Projects/testsite/ut",
                     "UT"]
     websiteobject=createUniversity(*ut_specs)
-    print(websiteobject.alphabetizeddict)
+    # print(websiteobject.alphabetizeddict)
     # websiteobject.createstatspage()
     websiteobject.create_uni_homepage()
 
