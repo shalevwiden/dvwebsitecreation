@@ -80,8 +80,14 @@ class createPages:
 
                 # utobj.create_department_pages()
                 utobj.create_sorteddepartments_page()
-                utobj.createstatspage()
+                '''these two functions are actually not called for UT because UT is special
+                UT is the original DV'''
+
+                # utobj.createstatspage()
+                # utobj.create_uni_homepage()
+                # this one is tho I think...
                 utobj.create_departmentpagelinks_json()
+
 
             
             ut()

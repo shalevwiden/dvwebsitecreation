@@ -971,14 +971,67 @@ class createUniversity:
         with open(self.sorted_departments_page,'w') as fullpage:
             fullpage.write(sorteddepartments_page_rendered)
 
-    def create_school_homepage(self):
+    def create_uni_homepage(self):
         '''
         Uses a Jinja template to create each schools homepage.
         Has to read some variables from the init.
 
 
         '''
+        '''This will create the University wide stats html page'''
 
+        def make_departmentlinks_dict():
+            departmentlinks_dict={}
+
+            for startingletter in self.alphabetizeddict:
+
+                letterfolder=os.path.join(self.asset_folder_path,startingletter)
+                
+                letterdict=self.alphabetizeddict[startingletter]
+
+                if startingletter not in departmentlinks_dict:
+                    departmentlinks_dict[startingletter]={}
+
+
+
+                for departmentname in letterdict:
+                    '''
+                    This is the for loop everything has to be done in
+                    '''
+                    
+                        
+
+                    departmenturl=letterdict[departmentname]
+                    # just use all of this
+                    dept=self.DepartmentName()
+
+                    departmentname=dept.get_sanitized_departmentname(departmentname)
+
+                    departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
+                    fulldepartmentpage=os.path.join('departments',f'{departmentnamecleaned}.html')
+
+                    # adding to the dict logic
+                    departmentlinks_dict[startingletter][departmentname]=fulldepartmentpage
+            return departmentlinks_dict
+        
+        departmentlinks_dict=make_departmentlinks_dict()
+        print(f'Departmentlinks_dict for homepage: \n{departmentlinks_dict}')
+
+
+        template_data={
+        "schoolabrv":self.schoolabrv,
+        "universityname":self.universityname,
+        "departmentlinks_dict":departmentlinks_dict,
+        }
+        
+        
+        # Jinja must take name=value pairs
+        homepage_rendered=self.homepage_template.render(template_data)
+
+
+        with open(self.homepage,'w') as fullpage:
+            fullpage.write(homepage_rendered)
+        
         def create_homepage_ul():
             '''
             This returns the ul that will go on the homepage.
@@ -1047,8 +1100,9 @@ def main():
                     "/Users/shalevwiden/Downloads/Projects/testsite/ut",
                     "UT"]
     websiteobject=createUniversity(*ut_specs)
-    print(websiteobject.asset_folder_path)
-    websiteobject.createstatspage()
+    print(websiteobject.alphabetizeddict)
+    # websiteobject.createstatspage()
+    websiteobject.create_uni_homepage()
 
     # websiteobject.create_department_pages()
     # websiteobject.createletterpages()

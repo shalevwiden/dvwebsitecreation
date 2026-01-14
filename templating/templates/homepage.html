@@ -1,15 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta
+      name="description"
+      content="Explore Visualizations and Tabular Data for all 141 Degrees at UT Austin"
+    />
+
+    <meta
+      name="keywords"
+      content="degree, major, UT Austin, degreeview, course diagrams, course excel files, degree stats, csv, .xlsx,pdf"
+    />
+
+    <meta name="author" content="DegreeView" />
+    <!-- end seo -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link
+      rel="icon"
+      href="https://storage.googleapis.com/degreeview/degreeviewimages/site_favicon.png"
+      type="image/png"
+    />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-S06MYR1FV6");
+    </script>
+
+    <title>{{schoolabrv}} Home Page</title>
+
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="../static/css/main.css" />
+
+    <!-- Barlow Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Roboto Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons ( download icon from here is used) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <!-- this is just testing -->
+
+    <link rel="stylesheet" href="utaustin-site/cssfiles/filterchaos.css" />
   </head>
   <body>
-    <!-- javascript should read this and use it to get the links json path -->
-    <!-- I think the template for this is the homepage I already developed
-    just have to turn it into Jinja 
-    -->
-    <p id="dv_links_json">{{schoolabrv}}</p>
+    <!-- this div basically has the entire site in it. Flex direction column -->
+    <div class="sitecontainer">
+      <!-- 
+      
+      -->
+      <div class="abovemainsite">
+        <div class="topnav">
+          <!-- this is empty but is just on the top to take up space for the color
+           KEEP THIS-->
+        </div>
+        <div class="biglogobox">
+          <img
+            class="biglogo"
+            src="utaustin-site/metaassets/logo5.png"
+            alt=""
+            id="biglogoid"
+          />
+        </div>
+      </div>
+      <!-- mainsite
+        contains right and left sections
+      -->
+      <div class="mainsite">
+        <!-- intro box that is -->
+        <div class="introbox">
+          <div class="intro-paragraph">
+            <p>Course data for {{universityname}} on DegreeView</p>
+          </div>
+        </div>
+        <!-- 3 buttons -->
+        <div class="middlenav">
+          <nav class="home_random_stats">
+            <ul>
+              <!-- keep in mind the entire li is clickable here -->
+              <li><a href="aboutpage.html">About</a></li>
+              <li id="randompagebutton">
+                <a id="randomlink" href="">Random Page</a>
+              </li>
+              <li><a href="ut-stats.html">Stats</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="selector">
+          <div class="coursedata">
+            <a href="utcoursessite/utcoursesindex.html">Courses Data</a>
+          </div>
+
+          <div class="degreeplans" id="currentpage">Degree Plans</div>
+        </div>
+
+        <!-- 
+        
+        
+        
+        -->
+        <!-- now have the list of schools -->
+        <ul class="schoolist-ul">
+          <li class="schoolist-column">
+            <a
+              href="utaustin-site/schoolofarchitecture/schoolofarchitecture.html"
+              ><div class="schoolnamediv">School of Architecture</div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a
+              href="utaustin-site/redmccombsschoolofbusiness/redmccombsschoolofbusiness.html"
+              ><div class="schoolnamediv">
+                Red McCombs School of Business
+              </div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a
+              href="utaustin-site/schoolofcivicleadership/schoolofcivicleadership.html"
+              ><div class="schoolnamediv">School of Civic Leadership</div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a
+              href="utaustin-site/moodycollegeofcommunication/moodycollegeofcommunication.html"
+              ><div class="schoolnamediv">
+                Moody College of Communication
+              </div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a href="utaustin-site/collegeofeducation/collegeofeducation.html"
+              ><div class="schoolnamediv">College of Education</div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a
+              href="utaustin-site/cockrellschoolofengineering/cockrellschoolofengineering.html"
+              ><div class="schoolnamediv">
+                Cockrell School of Engineering
+              </div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a href="utaustin-site/collegeoffinearts/collegeoffinearts.html"
+              ><div class="schoolnamediv">College of Fine Arts</div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a
+              href="utaustin-site/johna.andkatherineg.jacksonschoolofgeosciences/johna.andkatherineg.jacksonschoolofgeosciences.html"
+              ><div class="schoolnamediv">
+                John A. and Katherine G. Jackson School of Geosciences
+              </div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a href="utaustin-site/schoolofinformation/schoolofinformation.html"
+              ><div class="schoolnamediv">School of Information</div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a
+              href="utaustin-site/collegeofliberalarts/collegeofliberalarts.html"
+              ><div class="schoolnamediv">College of Liberal Arts</div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a
+              href="utaustin-site/collegeofnaturalsciences/collegeofnaturalsciences.html"
+              ><div class="schoolnamediv">College of Natural Sciences</div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a href="utaustin-site/schoolofnursing/schoolofnursing.html"
+              ><div class="schoolnamediv">School of Nursing</div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a
+              href="utaustin-site/lyndonb.johnsonschoolofpublicaffairs/lyndonb.johnsonschoolofpublicaffairs.html"
+              ><div class="schoolnamediv">
+                Lyndon B. Johnson School of Public Affairs
+              </div></a
+            >
+          </li>
+          <li class="schoolist-column">
+            <a
+              href="utaustin-site/stevehicksschoolofsocialwork/stevehicksschoolofsocialwork.html"
+              ><div class="schoolnamediv">
+                Steve Hicks School of Social Work
+              </div></a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- end intro box -->
+
+      <!-- end left content -->
+
+      <!-- end main mainsite -->
+      <!-- this goes under main site( no way) -->
+      <div class="undermainsite"></div>
+      <!-- footer now -->
+      <footer>
+        <div class="footerleft">
+          <div class="links">
+            <div class="tooltip">
+              <a href="aboutpage.html">About</a>
+            </div>
+
+            <div class="tooltip">
+              <a href="#biglogoid">Home</a>
+            </div>
+
+            <div class="tooltip">
+              <a href="exceltemplates.html">Excel Templates Breakdown</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footerright">
+          <img
+            id="smalllogo"
+            src="https://storage.googleapis.com/degreeview/degreeviewimages/minilogo.png"
+            alt="smalldegreeviewlogo"
+          />
+          <p id="statement">DegreeView 2025</p>
+        </div>
+      </footer>
+      <a
+        href="utaustinsite/schoolofarchitecture/interiordesign-bsid-rendered-csv.html"
+      ></a>
+    </div>
+    <script src="utaustin-site/javascript_files/headingcolorchange.js"></script>
+    <!-- script for random button  -->
+    <script src="utaustin-site/javascript_files/randomdegreepage.js"></script>
   </body>
 </html>

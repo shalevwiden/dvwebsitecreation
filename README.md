@@ -194,7 +194,12 @@ Also do an OOP tutorial
 And include this:
 print(self.**dict**)
 
-### Jan 8, 2025
+### Jan 8, 2026
 
 Well there is a departmentname json.
 In the createuniversity class, that should be used instead of departmentname.py
+
+### Jan 13, 2026
+
+The key is actually departmentnamecleaned
+Those are the ones we build the urls from
