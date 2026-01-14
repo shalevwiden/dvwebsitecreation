@@ -119,3 +119,11 @@ Use this same logic for the original UT degree plans.
 
 So remember the files need to be named "scrapecourses.py" and "departmentname.py"
 No matter the school
+
+I need to make a scrapecourses boilerplate that has error checks
+
+So for each school there are really only 3 files to scrape the data.
+
+1. createjson.py
+2. scrapecourses.py
+3. Departmentname.py

@@ -9,3 +9,8 @@ I didnt know you could define a function like that...hmmm
 
 def is_all_i(word: str) -> bool:
 return all(ch.lower() == "i" for ch in word) and word != ""
+
+### Ok so testjson.json
+
+This was me just copy pasting the output of scrape courses
+But it could be good to make a function that puts it in a json automatically so I can test
