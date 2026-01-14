@@ -21,7 +21,7 @@ with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/a
 
 
 print(f'Avoidwords:\n {avoidwords}\n')
-def scrapericecourses(departmenturl):
+def scrapecourses(departmenturl):
     departmentdata={}
 
     coursepage=requests.get(departmenturl)
@@ -113,6 +113,6 @@ def analyze_departmentdata(departmentdata):
 
 if __name__=='__main__':
         
-    departmentdata=scrapericecourses(departmenturl=accurl)
+    departmentdata=scrapecourses(departmenturl=accurl)
     print(departmentdata)
 

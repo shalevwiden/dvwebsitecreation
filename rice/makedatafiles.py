@@ -35,7 +35,7 @@ if __name__=='__main__':
     print(f'the version of requests is\n {(requests.__version__)}')
     print(f'\nthe python version being used is:{sys.executable}\n')
 
-from scrapecoursedata import scrapericecourses
+from rice.scrapecourses import scrapericecourses
 
 class catalogData:
     def __init__(self):

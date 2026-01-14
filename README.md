@@ -114,3 +114,8 @@ So the paths can be relative
 Pass in that list of Excel configs
 Then use it in the Excel generation function to generate as many themes as I pass in
 Use this same logic for the original UT degree plans.
+
+### Jan 14
+
+So remember the files need to be named "scrapecourses.py" and "departmentname.py"
+No matter the school

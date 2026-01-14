@@ -169,6 +169,7 @@ class catalogData:
     def finishconfigpath(self,endofpath):
         '''
         This is for configs and is not related to saving the file at all
+        This is related to excel files
         '''
         return os.path.join(self.configsfolder,endofpath)
 
