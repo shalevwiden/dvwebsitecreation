@@ -207,3 +207,17 @@ Those are the ones we build the urls from
 As for front end components
 Im only using a couple of them manually
 Including the footer...
+
+### Jan 14
+
+This needs to be changed.
+Instead just open the database and read from that ngl
+def readhtmltable():
+
+---
+
+I also need to make a footer that is responsive
+I can pass in a list of links per school that will link to the schools media page,
+home page, stats page, etc
+But if thats not there the footer will go to the main DegreeView homepage
+There will be links to YouTube and X regardless

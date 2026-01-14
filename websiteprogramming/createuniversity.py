@@ -405,7 +405,7 @@ class createUniversity:
 
             
                 
-                    print(f'Starting for {departmentname}')
+                    # print(f'Starting for {departmentname}')
                 
                     
 
@@ -498,7 +498,7 @@ class createUniversity:
 
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
     
-                print(f'Starting for {departmentname}')
+                # print(f'Starting for {departmentname}')
 
                 # its already cleaned
                 print(f'Department name cleaned {departmentnamecleaned}')
@@ -674,7 +674,7 @@ class createUniversity:
             
         
             
-                print(f'Starting for {departmentname}')
+                # print(f'Starting for {departmentname}')
             
         
 
@@ -718,6 +718,7 @@ class createUniversity:
 
                     return statsdict
                 
+                # ok this needs to change
                 def readhtmltable():
                     htmltablepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-htmltable.html')
 
@@ -1008,7 +1009,7 @@ class createUniversity:
                     departmentname=dept.get_sanitized_departmentname(departmentname)
 
                     departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
-                    departmentpagelink=os.path.join('departments',f'{departmentnamecleaned}.html')
+                    departmentpagelink=os.path.join('departments',startingletter.lower(),f'{departmentnamecleaned}.html')
 
                     # adding to the dict logic
                     # we do the og department name cause it looks best
@@ -1108,7 +1109,6 @@ def main():
     # websiteobject.create_department_pages()
     # websiteobject.createletterpages()
 
-    
 
     
 print(f'\nthe python version being used is:{sys.executable}\n')

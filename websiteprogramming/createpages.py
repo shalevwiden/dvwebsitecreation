@@ -88,10 +88,6 @@ class createPages:
                 # this one is tho I think...
                 utobj.create_departmentpagelinks_json()
 
-
-            
-            ut()
-
             def rice():
                 # update all of this with rice data
                 rice_specs=self.buildspecs(
@@ -107,11 +103,15 @@ class createPages:
 
                 riceobj.createletterpages()
 
+
                 riceobj.create_department_pages()
+                riceobj.createstatspage()
+                riceobj.create_uni_homepage()
+
             
             # call all the school functions here
             # ut()
-            # rice()
+            rice()
         texas()
 
     def createindex(self):
