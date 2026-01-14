@@ -29,7 +29,6 @@ import json
 # use this to render template
 
 
-
 # use this to upload stuff to google cloud
 from google.cloud import storage
 
@@ -52,6 +51,7 @@ class createPages:
     "cloudbucketpath": cloudbucketpath,
     "websitefolder": websitefolder,
     "schoolabrv":schoolabrv,}
+    
     def schoolcontainingfunc(self):
         '''
         This function will call all of the school objects and their methods.
@@ -144,4 +144,5 @@ def main():
 
     createpages.schoolcontainingfunc()
 
-main()
+if __name__=="__main__":
+    main()

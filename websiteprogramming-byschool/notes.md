@@ -22,3 +22,8 @@ Just for funzies. Because it is honestly pretty fun.
 ### Dec 21
 
 Gonna write code to get certain variables for each
+
+### Jan 14, 2026
+
+So website programming by school is now deprecated
+because we are using createuniversity.py and just calling instances of that for each school.

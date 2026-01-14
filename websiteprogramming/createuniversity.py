@@ -178,7 +178,8 @@ class createUniversity:
         
         with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/degreeviewfooter.html','r') as footerfile:
             self.footer=footerfile.read()
-        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/departmentpage.html','r') as headfile:
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/headlinks.html','r') as headfile:
+            # we we actually do use this
             self.headlinks=headfile.read()
 
 
