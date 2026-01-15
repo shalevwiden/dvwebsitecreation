@@ -323,9 +323,10 @@ class catalogData:
                         
                     with sqlite3.connect(databasepath) as conn:
                         cursor=conn.cursor()
-                        departmentdata=scrapeutcourses(departmenturl=departmenturl)
+                        departmentdata=self.scrapecourses(departmenturl=departmenturl)
                         for coursename in departmentdata:
                             coursecode,coursehours,classification=departmentdata[coursename]
+                            # established second and third in scrape courses
                             coursename=coursename.replace('SECOND','').replace('THIRD','')
                             cursor.execute(f'INSERT INTO {tablename} (coursename, coursecode, coursehours, classification) values(?,?,?,?);',
                                         [coursename,coursecode,coursehours,classification])
@@ -468,11 +469,11 @@ class catalogData:
                         uppercount=0
                         gradcount=0
                         total=len(classificationlist)
+
                         for classification in classificationlist:
                             # must do this in the database for all schools
                             if "lower" in classification:
                                 lowercount+=1
-                                
                             elif "upper" in classification:
                                 uppercount+=1
                             elif "grad" in classification:
@@ -693,7 +694,7 @@ class catalogData:
 
                 with open(departmentcourses_csv,'w') as departmentcourses_csv:
 
-                    departmentdict=scrapeutcourses(departmenturl=departmenturl)
+                    departmentdict=self.scrapecourses(departmenturl=departmenturl)
 
                     # expirementing with quoting cause why not
                     writer=csv.writer(departmentcourses_csv,quotechar='"', delimiter=',')

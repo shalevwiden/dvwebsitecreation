@@ -127,3 +127,20 @@ So for each school there are really only 3 files to scrape the data.
 1. createjson.py
 2. scrapecourses.py
 3. Departmentname.py
+   And I guess every folder needs a **init**.py as well ngl
+
+I still have to set up the init for the catalogData class.
+
+The buildspecs function needs to be a lot more efficient as well
+Define a lot of stuff in the init.
+
+### Jan 15, 2026
+
+Fetchone vs fetch all
+
+Ensure all of this works
+
+coursename=coursename.replace('SECOND','').replace('THIRD','')
+
+Change classification data to either be L, U, or G
+then in the website table building, replace with the full data.
