@@ -56,6 +56,9 @@ class createUniversity:
         
         dv/texas/ut/stats.html
         '''
+
+        # call this
+        self._init_stuff()
         # where assets like excel files and csvs are
         self.asset_folder_path=os.path.join(schoolfolder,'assets')
 
@@ -75,6 +78,20 @@ class createUniversity:
         with open(self.jsondatapath,'r') as universityjson:
             self.jsondata=json.load(universityjson)
 
+        # random dept stuff
+
+        with open(self.jsondatapath,'r') as universityjson:
+
+            self.jsondata=json.load(universityjson)
+            length=len(self.jsondata)
+
+            # I also need to pass this to the createuniversityclass somehow
+            # put it in a json
+            self.random_dept=list(self.jsondata)[random.randint(0,length-1)]
+
+        # this controls if you make Excel files for all departments or not
+        self.single_department=True
+        
         # university name like 'The University of Texas at Austin'
         self.universityname=universityname
         #university abbreviation like UT - for some schools there is no abbreviation.
@@ -85,26 +102,13 @@ class createUniversity:
         
 
         # path like 'https://storage.googleapis.com/utcourses'
+        # the bucket should be the schoolabrv
         self.cloudbucketpath=cloudbucketpath
-
-        
 
         self.schoolfolder = schoolfolder
 
         # I guess these are the only ones I really need from each school folder
-        def schoolfolder_stuff():
-            end_of_schoolfolder=self.schoolfolder.split('/')[-1]
-            self.scrape_module = importlib.import_module(
-                f"{end_of_schoolfolder}.scrapecourses"
-            )
-            self.dept_module = importlib.import_module(
-                f"{end_of_schoolfolder}.departmentname"
-            )
-
-            self.scrapecourses = self.scrape_module.scrapecourses
-            self.DepartmentName = self.dept_module.DepartmentName
-        schoolfolder_stuff()
-
+        
         
 
         self.alphabetizeddict={}
@@ -192,6 +196,43 @@ class createUniversity:
 
         # footer so I dont have to redefine it multiple times. 
 
+    def _init_stuff(self):
+        '''
+        Just dividing this up more
+
+        '''
+
+        def schoolfolder_stuff():
+            end_of_schoolfolder=self.schoolfolder.split('/')[-1]
+            self.scrape_module = importlib.import_module(
+                f"{end_of_schoolfolder}.scrapecourses"
+            )
+            self.dept_module = importlib.import_module(
+                f"{end_of_schoolfolder}.departmentname"
+            )
+
+            self.scrapecourses = self.scrape_module.scrapecourses
+            self.DepartmentName = self.dept_module.DepartmentName
+
+        schoolfolder_stuff()
+
+        
+        def excel_stuff():
+            # I could use this in the future for school specific Excel file stuff
+            self.excelconfig=os.path.join(self.schoolfolder,'excelconfiglink.txt')
+            
+            with open(self.excelconfig,'r') as configlink:
+                # the txt file actually contains a path lmao
+                #  a little confused
+                self.excelconfigpath=configlink.read()
+
+            self.configsfolder='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs'
+
+            # pass this in as an argument to the init
+            # then in the make_excel_files() function loop over this and create as many configs as is here pretty much
+            self.excelconfigs_list=[]
+
+        excel_stuff()
 
     def get_tablename():
         '''
@@ -217,6 +258,7 @@ class createUniversity:
             departmentnamehalf,
             departmentcode,
         )
+
 
     def upload_schoolfiles(self):
 
@@ -800,11 +842,6 @@ class createUniversity:
                         </tr>
                         '''
                         courserows+=tr
-
-                    
-
-                    
-
                     return courserows
                 
 

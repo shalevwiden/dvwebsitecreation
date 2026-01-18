@@ -249,3 +249,11 @@ Like Postgre or something
 
 How?
 See that alone is gonna be super tricky and annoying ngl
+
+The bucket should be the schoolabrv
+
+Back to the classes
+Ok so heres the thing
+
+I will have two classes now. Using inheritance.
+Call the data methods and the website methods in the same file is what Im thinking.
