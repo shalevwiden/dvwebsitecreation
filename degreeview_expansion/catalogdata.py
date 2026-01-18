@@ -130,14 +130,7 @@ class catalogData:
         self.excelconfigs_list=[]
         
         # make this an argument in the init
-
-
-
-
-
-
-        
-        
+    
         self.alphabetizeddict={}
         # this is a function to divide up the departments alphabetically
         for departmentname in self.jsondata:
