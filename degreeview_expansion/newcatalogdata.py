@@ -56,6 +56,15 @@ class catalogData(createUniversity):
         self.course_list = []
         # child specific
         self.make_excelfile=make_excelfile
+        BASE_DIR = Path(__file__).resolve().parent
+        CONFIGS_DIR = os.path.join(str(BASE_DIR), 'excel','configs')
+            
+        self.configsfolder=CONFIGS_DIR
+
+        # pass this in as an argument to the init
+        # then in the make_excel_files() function loop over this and create as many configs as is here pretty much
+        self.excelconfigs_list=[]
+        
         
    
 

@@ -216,21 +216,7 @@ class createUniversity:
         schoolfolder_stuff()
 
         
-        def excel_stuff():
-            # I could use this in the future for school specific Excel file stuff
-            self.excelconfig=os.path.join(self.schoolfolder,'excelconfiglink.txt')
-            
-            with open(self.excelconfig,'r') as configlink:
-                # the txt file actually contains a path lmao
-                #  a little confused
-                self.excelconfigpath=configlink.read()
-
-            self.configsfolder='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/excelfile_configs'
-
-            # pass this in as an argument to the init
-            # then in the make_excel_files() function loop over this and create as many configs as is here pretty much
-            self.excelconfigs_list=[]
-        excel_stuff()
+       
 
     def get_tablename(self):
         '''

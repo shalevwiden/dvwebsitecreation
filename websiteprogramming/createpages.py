@@ -80,10 +80,9 @@ class createPages:
 
                 def data_methods():
                     utcatalogobj=catalogData(**ut_specs)
-                    print(utcatalogobj.single_department)
+                    print(f'Configs folder: {utcatalogobj.configsfolder}')
                     # utcatalogobj.makestatsjson()
                     utcatalogobj.make_excel_files()
-
                 data_methods()
 
 

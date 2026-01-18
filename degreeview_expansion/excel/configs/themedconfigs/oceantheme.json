@@ -1,0 +1,23 @@
+{
+  "schoolnamecolor": "2E8B57",
+  "bigbordercolor": "5DADE2",
+  "smallerbordercolor": "AED6F1",
+  "gridlinecolor": "BFD9F2",
+  "rowtextcolor": "2F4F4F",
+  "titlecolor": "2F4F4F",
+  "mainbackgroundcolor": "D6EAF8",
+  "paddingbackgroundcolor": "F9E79F",
+  "subheadingbordercolor": "F1948A",
+
+  "datafontname": "Georgia",
+  "titlefontname": "Georgia",
+  "logofontname": "Poppins",
+  "logocolor": "FF5722",
+  "subheadingsize": 19,
+  "subheadingcolor": "2F4F4F",
+  "headingsfontname": "Georgia",
+  "headingsfontcolor": "2F4F4F",
+  "datarowheight": 24,
+  "headingrowheight": 32,
+  "columnscaler": 1.15
+}

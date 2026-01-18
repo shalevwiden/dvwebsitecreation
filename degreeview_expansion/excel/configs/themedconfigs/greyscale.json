@@ -1,0 +1,23 @@
+{
+  "schoolnamecolor": "5C5C5C",
+  "bigbordercolor": "FFFFFF",
+  "smallerbordercolor": "C0C0C0",
+  "gridlinecolor": "D3D3D3",
+  "rowtextcolor": "2B2B2B",
+  "titlecolor": "2B2B2B",
+  "mainbackgroundcolor": "F2F2F2",
+  "paddingbackgroundcolor": "E0E0E0",
+  "subheadingbordercolor": "B0B0B0",
+
+  "datafontname": "Helvetica Neue",
+  "titlefontname": "Didot",
+  "logofontname": "Futura",
+  "logocolor": "284dbc",
+  "subheadingsize": 18,
+  "subheadingcolor": "2B2B2B",
+  "headingsfontname": "Helvetica Neue",
+  "headingsfontcolor": "2B2B2B",
+  "datarowheight": 24,
+  "headingrowheight": 32,
+  "columnscaler": 1.1
+}

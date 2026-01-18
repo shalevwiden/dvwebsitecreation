@@ -1,0 +1,23 @@
+{
+  "schoolnamecolor": "FFFFFF",
+  "bigbordercolor": "FFFFFF",
+  "smallerbordercolor": "FFFFFF",
+  "gridlinecolor": "FFFFFF",
+  "rowtextcolor": "FFFFFF",
+  "titlecolor": "FFFFFF",
+  "mainbackgroundcolor": "000000",
+  "paddingbackgroundcolor": "1A1A1A",
+  "subheadingbordercolor": "FFFFFF",
+
+  "datafontname": "Helvetica Neue",
+  "titlefontname": "Playfair Display",
+  "logofontname": "Poppins",
+  "logocolor": "7FDBFF",
+  "subheadingsize": 18,
+  "subheadingcolor": "FFFFFF",
+  "headingsfontname": "Montserrat",
+  "headingsfontcolor": "FFFFFF",
+  "datarowheight": 24,
+  "headingrowheight": 32,
+  "columnscaler": 1.1
+}
