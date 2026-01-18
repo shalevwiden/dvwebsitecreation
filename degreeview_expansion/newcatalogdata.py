@@ -55,12 +55,7 @@ class catalogData(createUniversity):
         self.catalogfile = None
         self.course_list = []
         
-    def get_tablename(departmentnamecleaned):
-        '''
-        This gets the tablename in the department databases
-        '''
-        tablename=departmentnamecleaned.replace('-','_').replace(',','_').replace('&','and').replace("'","")
-        tablename=f'{tablename}_table'
+   
 
     def finishconfigpath(self,endofpath):
         '''
@@ -109,22 +104,19 @@ class catalogData(createUniversity):
             for departmentname in letterdict:
                 departmenturl=letterdict[departmentname]
 
-                departmentname=self.sanitize_departmentname(departmentname)
+                (
+                departmentname,
+                departmentnamecleaned,
+                displaydepartmentname,
+                departmentnamehalf,
+                departmentcode,
+                ) = self.get_departmentnames(departmentname)
 
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
 
 
                 if not os.path.exists(departmentfolderpath):
                     os.mkdir(departmentfolderpath)
-
-            
-            
-                dept=self.DepartmentName()
-
-                departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
-
-
-
                         # now get the SQL stuff right, then just copy paste. 
                 def database_logic():
                 # its a little different from the database name, use underscore instead of hyphen
@@ -142,7 +134,7 @@ class catalogData(createUniversity):
                         os.remove(databasepath)
                     # hyphens and commas not allowed in tablename
 
-                    tablename=self.get_tablename(departmentnamecleaned)
+                    tablename=self.get_tablename()
 
                     def maketable():
                         '''This creates the table for course data in the db'''
@@ -1144,6 +1136,7 @@ def main():
     # catalogobj.create_departmentname_json()
     # catalogobj.get_sorted_departmentlist()
     print(catalogobj.random_dept)
+    catalogobj.upload_to_database()
     # catalogobj.makestatsjson()    
     # catalogobj.make_excel_files()
     

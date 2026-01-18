@@ -232,7 +232,7 @@ class createUniversity:
             self.excelconfigs_list=[]
         excel_stuff()
 
-    def get_tablename():
+    def get_tablename(self):
         '''
         This gets the tablename in the department databases
         '''

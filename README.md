@@ -265,3 +265,9 @@ Using inheritance in newcatalogdata.py works,
 I get access to all createUniversity attributes and methods.
 
 Removed create departmentname json
+
+Working on new catalog data as part of the inheritance stuff
+But if that doesnt work, just turn it back into normal class
+
+Creating assets just worked for UT Austin courses lets goo
+Lmao.
