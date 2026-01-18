@@ -1,2 +1,0 @@
-from .make_checkerboard import make_checkerboard
-from .make_excelfile import make_excelfile

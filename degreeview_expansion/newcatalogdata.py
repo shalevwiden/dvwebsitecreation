@@ -36,7 +36,7 @@ from pathlib import Path
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 print(os.path.dirname(os.path.dirname(__file__)))
 
-from excel import make_checkerboardfile, make_excelfile
+from .excel.functions import make_checkerboard, make_excelfile
 
 
 
