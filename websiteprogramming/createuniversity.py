@@ -57,8 +57,7 @@ class createUniversity:
         dv/texas/ut/stats.html
         '''
 
-        # call this
-        self._init_stuff()
+        
         # where assets like excel files and csvs are
         self.asset_folder_path=os.path.join(schoolfolder,'assets')
 
@@ -91,7 +90,7 @@ class createUniversity:
 
         # this controls if you make Excel files for all departments or not
         self.single_department=True
-        
+
         # university name like 'The University of Texas at Austin'
         self.universityname=universityname
         #university abbreviation like UT - for some schools there is no abbreviation.
@@ -193,6 +192,9 @@ class createUniversity:
             self.headtag=headtag.read()
         with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/degreeviewtag/bodytag.html','r') as bodytag:
             self.bodytag=bodytag.read()
+        
+        # call this
+        self._init_stuff()
 
         # footer so I dont have to redefine it multiple times. 
 
@@ -213,7 +215,6 @@ class createUniversity:
 
             self.scrapecourses = self.scrape_module.scrapecourses
             self.DepartmentName = self.dept_module.DepartmentName
-
         schoolfolder_stuff()
 
         
@@ -231,7 +232,6 @@ class createUniversity:
             # pass this in as an argument to the init
             # then in the make_excel_files() function loop over this and create as many configs as is here pretty much
             self.excelconfigs_list=[]
-
         excel_stuff()
 
     def get_tablename():

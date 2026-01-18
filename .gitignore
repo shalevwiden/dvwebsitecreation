@@ -22,3 +22,6 @@ htmlcov/
 # Build and distribution folders
 dist/
 build/
+
+# hide all assets folders no matter the level
+**/assets/

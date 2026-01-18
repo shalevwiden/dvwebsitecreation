@@ -38,6 +38,9 @@ import importlib.util
 
 from createuniversity import createUniversity
 
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+from degreeview_expansion.newcatalogdata import CatalogData
+
 class createPages:
     def __init__(self):
         self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utcoursessite/departments'
@@ -74,6 +77,10 @@ class createPages:
                     "UT")
             
                 utobj=createUniversity(**ut_specs)
+
+                utcatalogobj=CatalogData(**ut_specs)
+                print(f'Testing:\n')
+                print(utcatalogobj.single_department)
                 # instead of calling all of the functions 
 
                 # utobj.createletterpages()
@@ -110,8 +117,8 @@ class createPages:
 
             
             # call all the school functions here
-            # ut()
-            rice()
+            ut()
+            # rice()
         texas()
 
     def createindex(self):
