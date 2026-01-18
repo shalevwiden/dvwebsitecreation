@@ -246,9 +246,9 @@
         </div>
         <table id="departmentcoursestable">
           <tr>
-            <td colspan="2">{departmentnamehalf}</td>
+            <td colspan="2">{{departmentnamehalf}}</td>
 
-            <td colspan="2">{self.universityname}</td>
+            <td colspan="2">{{universityname}}</td>
           </tr>
           <tr>
             <td>Course Name</td>
@@ -257,6 +257,13 @@
             <td>Classification</td>
           </tr>
           {{courserows}}
+          <!-- ending row -->
+          <tr>
+            <td>DegreeView</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
         </table>
       </div>
       {{footer}}

@@ -16,6 +16,7 @@ import random
 import csv
 import time
 import json
+import sqlite3
 
 # use this to render template
 from jinja2 import Environment, FileSystemLoader
@@ -755,12 +756,10 @@ class createUniversity:
 
 
                     databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
-                    
-
                     tablename=self.get_tablename(departmentnamecleaned)
 
 
-                    def getdatabasedata():
+                    def getdatabaserows():
                         '''
                         These are all the column names: coursename, coursecode, coursehours, classification
                         '''
@@ -780,64 +779,34 @@ class createUniversity:
                             
                             return rows
 
+                    rows=getdatabaserows()
 
-                    def tablefilemaking(departmentname,departmentnamecleaned):
+                    
+                    courserows=f'''
 
-                        htmltablefile=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-htmltable.html')
-
-                        rows=getdatabasedata()
-
+                    '''
+                    for row in rows:
+                        coursename=f'<td>{row[0]}</td>'
+                        coursecode=f'<td>{row[1]}</td>'
+                        coursehours=f'<td>{row[2]}</td>'
+                        classification=f'<td>{row[3]}</td>'
                         
-                        htmlrows=f'''
-
-                        '''
-                        for row in rows:
-                            coursename=f'<td>{row[0]}</td>'
-                            coursecode=f'<td>{row[1]}</td>'
-                            coursehours=f'<td>{row[2]}</td>'
-                            classification=f'<td>{row[3]}</td>'
-                            
-                            tr=f'''
-                            <tr>
+                        tr=f'''
+                        <tr>
                         {coursename}
                         {coursecode}
                         {coursehours}
                         {classification}
-                            </tr>
-                            '''
-                            htmlrows+=tr
-                        htmlrows+=f'''
-                            <tr>
-                        <td>DegreeView</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            </tr>
-                            '''
-
-                        htmlcode=f'''
-                        <table id="departmentcoursestable">
-                            <tr>
-                            <td colspan="2">{departmentnamehalf}</td>
-                        
-                            <td colspan="2" >{self.universityname}</td>
-                            </tr>
-                            <tr>
-                            <td>Course Name</td>
-                            <td>Course Code</td>
-                            <td>Course Hours</td>
-                            <td>Classification</td>
-                            </tr>
-                            {htmlrows}
-                        </table>
+                        </tr>
                         '''
+                        courserows+=tr
 
+                    
 
+                    
 
-                        return courserows
-
-
-               
+                    return courserows
+                
 
 
                 
@@ -941,7 +910,7 @@ class createUniversity:
                 
                 excel_ul=make_excel_ul()
 
-                htmltable=readhtmltable()
+                courserows=make_course_rows()
 
                 statsdict=readfromjson()
 
@@ -949,6 +918,7 @@ class createUniversity:
                 I need to get departmentnamehalf and displaydepartmentname standardized across schools
                 '''
                 departmentpagedata = {
+                    "universityname":self.universityname,
                     "headlinks": self.headlinks,
                     "headtag": self.headtag,
                     "departmentnamehalf": departmentnamehalf,
@@ -956,13 +926,14 @@ class createUniversity:
                     "displaydepartmentname": displaydepartmentname,
                     "startingletter":startingletter,
                     "letterpagereferencepath":letterpagereferencepath,
-                    "htmltable":htmltable,
+                    "courserows":courserows,
                      "bodytag": self.bodytag,
                     "footer": self.footer,
-                    "scripts":scripts,
                     "statsdict":statsdict,
                     "excelul":excel_ul,
                     "departmentpagelinks_jsonpath":f'{os.path.join(self.schoolabrv,'departmentpagelinks.json')}',
+                    "scripts":scripts,
+                    
                 }
      
                 def makefullhtmlcode(startingletter):
