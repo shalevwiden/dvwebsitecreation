@@ -1,0 +1,7 @@
+{
+  "python.defaultInterpreterPath": "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/bs4_virtual_env/bin/python3",
+
+  "code-runner.executorMap": {
+    "python": "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/bs4_virtual_env/bin/python3"
+  }
+}

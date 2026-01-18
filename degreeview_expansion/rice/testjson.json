@@ -1,0 +1,268 @@
+{
+  "Principles Of Economics": ["ECON 100", "3", "Undergraduate Lower-Level"],
+  "Introduction To Microeconomics": [
+    "ECON 101",
+    "3",
+    "Undergraduate Lower-Level"
+  ],
+  "Quantitative Analysis For Social Sciences: Economics Lab": [
+    "ECON 102",
+    "0",
+    "Undergraduate Lower-Level"
+  ],
+  "Introduction To Macroeconomics": [
+    "ECON 103",
+    "3",
+    "Undergraduate Lower-Level"
+  ],
+  "Ap/oth Credit In Microeconomics": [
+    "ECON 111",
+    "1-6",
+    "Undergraduate Lower-Level"
+  ],
+  "Ap/oth Credit In Macroeconomics": [
+    "ECON 113",
+    "1-6",
+    "Undergraduate Lower-Level"
+  ],
+  "Microeconomics": ["ECON 200", "4", "Undergraduate Lower-Level"],
+  "Macroeconomics": ["ECON 203", "3", "Undergraduate Lower-Level"],
+  "Introduction To Game Theory": ["ECON 205", "3", "Undergraduate Lower-Level"],
+  "Applied Econometrics": ["ECON 209", "4", "Undergraduate Lower-Level"],
+  "Behavioral Economics": ["ECON 210", "3", "Undergraduate Lower-Level"],
+  "Money Matters: Economic Literacy And Decision-making": [
+    "ECON 211",
+    "3",
+    "Undergraduate Lower-Level"
+  ],
+  "Introduction To Environmental And Natural Resource Economics": [
+    "ECON 213",
+    "3",
+    "Undergraduate Lower-Level"
+  ],
+  "Special Topics": ["ECON 238", "1-4", "Undergraduate Lower-Level"],
+  "Law And Economics": ["ECON 239", "3", "Undergraduate Lower-Level"],
+  "Experiential Education In Economics": [
+    "ECON 299",
+    "1",
+    "Undergraduate Lower-Level"
+  ],
+  "Game Theory And Other Micro Topics For Econ Majors": [
+    "ECON 300",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Game Theory And Other Micro Topics For Mtec Majors": [
+    "ECON 305",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Probability And Statistics": ["ECON 307", "3", "Undergraduate Upper-Level"],
+  "Mathematics For Economists": ["ECON 308", "4", "Undergraduate Upper-Level"],
+  "Econometrics": ["ECON 310", "4", "Undergraduate Upper-Level"],
+  "Corporate Finance": ["ECON 343", "3", "Undergraduate Upper-Level"],
+  "Financial Markets": ["ECON 355", "3", "Undergraduate Upper-Level"],
+  "World Economic History": ["ECON 365", "3", "Undergraduate Upper-Level"],
+  "Independent Research": ["ECON 399", "3", "Undergraduate Upper-Level"],
+  "Labor Economics": ["ECON 415", "3", "Undergraduate Upper-Level"],
+  "Economic Forecasting": ["ECON 418", "3", "Undergraduate Upper-Level"],
+  "Data Tools For Computational Economics": [
+    "ECON 419",
+    "4",
+    "Undergraduate Upper-Level"
+  ],
+  "Quantitative Methods For Policy Evaluation + Practical Lab": [
+    "ECON 421",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "International Economics And Finance": [
+    "ECON 422",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Advanced Econometrics For Energy Markets": [
+    "ECON 423",
+    "4",
+    "Undergraduate Upper-Level"
+  ],
+  "Political Economy": ["ECON 432", "3", "Undergraduate Upper-Level"],
+  "Dynamic Models For Computational Economics": [
+    "ECON 433",
+    "4",
+    "Undergraduate Upper-Level"
+  ],
+  "Machine Learning And Algorithms For Computational Economics": [
+    "ECON 434",
+    "4",
+    "Undergraduate Upper-Level"
+  ],
+  "Industrial Organization": ["ECON 435", "3", "Undergraduate Upper-Level"],
+  "Energy Economics": ["ECON 437", "3", "Undergraduate Upper-Level"],
+  "Advanced Topics In Law And Economics": [
+    "ECON 439",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Economic Analysis Of Strategic Behavior": [
+    "ECON 441",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Financial Economics": ["ECON 443", "3", "Undergraduate Upper-Level"],
+  "Managerial Economics": ["ECON 445", "3", "Undergraduate Upper-Level"],
+  "Principles Of Financial Engineering": [
+    "ECON 449",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Economic Development": ["ECON 450", "3", "Undergraduate Upper-Level"],
+  "Religion, Ethics, And Economics": [
+    "ECON 452",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Money And Banking": ["ECON 455", "3", "Undergraduate Upper-Level"],
+  "Topics In Business Economics: Financial Market And Investments": [
+    "ECON 456",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Advanced Topics In Economic Development": [
+    "ECON 460",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Urban Economics": ["ECON 461", "3", "Undergraduate Upper-Level"],
+  "Economics Of Human Capital": ["ECON 462", "3", "Undergraduate Upper-Level"],
+  "Market Design": ["ECON 470", "3", "Undergraduate Upper-Level"],
+  "Special TopicsSECOND": ["ECON 677", "1-4", "Graduate"],
+  "Mathematical Foundations For Computational Economics": [
+    "ECON 479",
+    "4",
+    "Undergraduate Upper-Level"
+  ],
+  "The Economics Of Energy & The Environment": [
+    "ECON 480",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Health Economics": ["ECON 481", "3", "Undergraduate Upper-Level"],
+  "Public Economics: Taxation": ["ECON 483", "3", "Undergraduate Upper-Level"],
+  "Public Economics: Expenditures": [
+    "ECON 484",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "The Economics Of Sustainability, Conservation, And Pandemics": [
+    "ECON 485",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Economics Of Social Networks": [
+    "ECON 489",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Research In Economic Theory": ["ECON 496", "3", "Undergraduate Upper-Level"],
+  "Research In Econometrics": ["ECON 497", "3", "Undergraduate Upper-Level"],
+  "Honors Program In Economics-i": [
+    "ECON 498",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Honors Program In Economics-ii": [
+    "ECON 499",
+    "3",
+    "Undergraduate Upper-Level"
+  ],
+  "Microeconomics I": ["ECON 501", "3", "Graduate"],
+  "MacroeconomicsSECOND": ["ECON 502", "3", "Graduate"],
+  "Computational Economics": ["ECON 504", "3", "Graduate"],
+  "Financial Economics I": ["ECON 505", "3", "Graduate"],
+  "Mathematical Economics I": ["ECON 507", "3", "Graduate"],
+  "Microeconomics Ii": ["ECON 508", "3", "Graduate"],
+  "Topics In Microeconomics": ["ECON 509", "3", "Graduate"],
+  "Econometrics I": ["ECON 510", "3", "Graduate"],
+  "Econometrics Ii": ["ECON 511", "3", "Graduate"],
+  "International Trade Theory": ["ECON 512", "3", "Graduate"],
+  "Economics Of Insurance": ["ECON 513", "3", "Graduate"],
+  "Empirical Industrial Organization": ["ECON 514", "3", "Graduate"],
+  "Labor EconomicsSECOND": ["ECON 515", "3", "Graduate"],
+  "Empirical Microeconomics": ["ECON 516", "3", "Graduate"],
+  "Empirical Industrial Organization Ii": ["ECON 517", "3", "Graduate"],
+  "International Macroeconomics": ["ECON 518", "3", "Graduate"],
+  "Economic Growth And Development": ["ECON 519", "3", "Graduate"],
+  "Matching And Market Design": ["ECON 521", "3", "Graduate"],
+  "Public Economics: Tax Policy": ["ECON 522", "3", "Graduate"],
+  "Dynamic Optimization": ["ECON 523", "3", "Graduate"],
+  "Advanced Topics In Energy Economics": ["ECON 547", "3", "Graduate"],
+  "Health EconomicsSECOND": ["ECON 565", "3", "Graduate"],
+  "Topics In Macroeconomics I": ["ECON 575", "3", "Graduate"],
+  "Topics In Macroeconomics Ii": ["ECON 576", "3", "Graduate"],
+  "Topics In Economic Theory I": ["ECON 577", "3", "Graduate"],
+  "Topics In Econometrics I": ["ECON 578", "3", "Graduate"],
+  "Topics In Econometrics Ii": ["ECON 579", "3", "Graduate"],
+  "Topics In Policy And Applied Economics": ["ECON 592", "3", "Graduate"],
+  "Workshop In Microeconomics": ["ECON 593", "1", "Graduate"],
+  "Workshop In Economics Ii": ["ECON 594", "1", "Graduate"],
+  "Writing Workshop": ["ECON 595", "1-4", "Graduate"],
+  "Research Seminar": ["ECON 596", "0.5", "Graduate"],
+  "Colloquium On Research In Economics": ["ECON 597", "1", "Graduate"],
+  "Readings In Advanced Topics": ["ECON 598", "3", "Graduate"],
+  "Seminar Workshop": ["ECON 599", "0.5", "Graduate"],
+  "Energy Economics I": ["ECON 601", "4", "Graduate"],
+  "Microeconomics Of The Energy Sector": ["ECON 602", "4", "Graduate"],
+  "Applied Econometrics For Energy Markets": ["ECON 603", "4", "Graduate"],
+  "Energy Economics Ii": ["ECON 604", "4", "Graduate"],
+  "Taxation In The Energy Sector": ["ECON 605", "4", "Graduate"],
+  "Corporate Finance For The Energy Sector": ["ECON 606", "4", "Graduate"],
+  "The Economics Of Energy And The Environment": ["ECON 607", "4", "Graduate"],
+  "Risk Management In The Energy Industry": ["ECON 608", "4", "Graduate"],
+  "Advanced Econometric Topics For Applied Energy Economics": [
+    "ECON 609",
+    "4",
+    "Graduate"
+  ],
+  "Energy And The Macroeconomy": ["ECON 610", "4", "Graduate"],
+  "Geopolitics Of Energy": ["ECON 611", "4", "Graduate"],
+  "Energy Project Development": ["ECON 612", "4", "Graduate"],
+  "International Trade In Energy": ["ECON 613", "4", "Graduate"],
+  "Political Economy Of Energy And Resources Policy": [
+    "ECON 614",
+    "4",
+    "Graduate"
+  ],
+  "Social Studies Of Energy": ["ECON 615", "4", "Graduate"],
+  "Industrial Organization And The Energy Sector": [
+    "ECON 620",
+    "4",
+    "Graduate"
+  ],
+  "The Economics Of The Electricity Industry": ["ECON 621", "4", "Graduate"],
+  "Transportation Economics": ["ECON 622", "4", "Graduate"],
+  "Advanced Econometrics For Energy MarketsSECOND": [
+    "ECON 623",
+    "4",
+    "Graduate"
+  ],
+  "Mathematical Foundations For Computational EconomicsSECOND": [
+    "ECON 631",
+    "4",
+    "Graduate"
+  ],
+  "Data Tools For Computational EconomicsSECOND": ["ECON 632", "4", "Graduate"],
+  "Dynamic Models For Computational EconomicsSECOND": [
+    "ECON 633",
+    "4",
+    "Graduate"
+  ],
+  "Machine Learning And Algorithms For Computational EconomicsSECOND": [
+    "ECON 634",
+    "4",
+    "Graduate"
+  ],
+  "Practicum": ["ECON 699", "4", "Graduate"],
+  "Departmental Service Course": ["ECON 700", "3", "Graduate"],
+  "Graduate Research": ["ECON 800", "1-12", "Graduate"]
+}
