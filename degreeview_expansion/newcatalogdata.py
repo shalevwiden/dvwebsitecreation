@@ -187,20 +187,20 @@ class catalogData(createUniversity):
                 departmenturl=letterdict[departmentname]
 
                 # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
-                departmentname=self.sanitize_departmentname(departmentname)
-
+                (
+                departmentname,
+                departmentnamecleaned,
+                displaydepartmentname,
+                departmentnamehalf,
+                departmentcode,
+                ) = self.get_departmentnames(departmentname)
 
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
-
-    
-                dept=self.DepartmentName()
-
-                departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
 
                 databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
                 
 
-                tablename=self.get_tablename(departmentnamecleaned)
+                tablename=self.get_tablename()
 
 
                 def getdatabasestats():
@@ -377,7 +377,6 @@ class catalogData(createUniversity):
 
                 jsonfilemaking(departmentnamecleaned=departmentnamecleaned)   
                
-    
 
     def createcsvs(self):
         
@@ -394,16 +393,17 @@ class catalogData(createUniversity):
             for departmentname in letterdict:
                 departmenturl=letterdict[departmentname]
 
-                departmentname=departmentname.replace('/','_')
+                (
+                departmentname,
+                departmentnamecleaned,
+                displaydepartmentname,
+                departmentnamehalf,
+                departmentcode,
+                ) = self.get_departmentnames(departmentname)                
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
 
                 if not os.path.exists(departmentfolderpath):
                     os.mkdir(departmentfolderpath)
-
-            
-            
-                departmentnamecleaned=departmentname.replace(' ','').lower()
-                
 
         
             # use the fact that its an underscore to readd it later in the website creation file

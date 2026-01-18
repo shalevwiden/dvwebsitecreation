@@ -15,6 +15,8 @@ Use this class in catalogdata.py and createuniversity.py
 class DepartmentName:
    
     def get_sanitized_departmentname(self,departmentname):
+        
+        # removing slashes is important
         return departmentname.replace('/','_')
 
     def get_departmentnamecleaned(self, departmentname):
