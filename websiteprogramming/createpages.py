@@ -43,6 +43,7 @@ from degreeview_expansion.newcatalogdata import CatalogData
 
 class createPages:
     def __init__(self):
+        # havent used this yet
         self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utcoursessite/departments'
 
         self.universityuldatapath=''
@@ -70,7 +71,7 @@ class createPages:
             def ut():
                 # I need need to standardize the location of all of this stuff
                 ut_specs=self.buildspecs(
-                    "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/utcourses",
+                    "degreeview_expansion/utcourses",
                     "The University of Texas at Austin"
                     ,"https://storage.googleapis.com/utcourses",
                     "/Users/shalevwiden/Downloads/Projects/testsite/ut",

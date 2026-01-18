@@ -5,10 +5,8 @@ import sys
 if __name__=='__main__':
     print(f'\nthe python version being used is:{sys.executable}\n')
 
-degreeview_expansion_folder="/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion"
-sys.path.append(
-    degreeview_expansion_folder
-)
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 
 import subprocess
 import random
@@ -205,12 +203,12 @@ class createUniversity:
         '''
 
         def schoolfolder_stuff():
-            end_of_schoolfolder=self.schoolfolder.split('/')[-1]
+            schoolfolder_module=self.schoolfolder.replace('/','.')
             self.scrape_module = importlib.import_module(
-                f"{end_of_schoolfolder}.scrapecourses"
+                f"{schoolfolder_module}.scrapecourses"
             )
             self.dept_module = importlib.import_module(
-                f"{end_of_schoolfolder}.departmentname"
+                f"{schoolfolder_module}.departmentname"
             )
 
             self.scrapecourses = self.scrape_module.scrapecourses
@@ -843,10 +841,7 @@ class createUniversity:
                         '''
                         courserows+=tr
                     return courserows
-                
-
-
-                
+                                
                 def get_degree_assetcloudpaths_lists(departmentfolder,departmentnamecleaned):
                     '''
                     Reconstruct the asset names manually like this:
@@ -1135,7 +1130,9 @@ class createUniversity:
             return departmentlinks_dict
         
         departmentlinks_dict=make_departmentlinks_dict()
-        print(f'Departmentlinks_dict for homepage: \n{departmentlinks_dict}')
+        
+        # uncomment to show departmentlinksdict.
+        # print(f'Departmentlinks_dict for homepage: \n{departmentlinks_dict}')
 
 
         template_data={
@@ -1213,13 +1210,15 @@ class createUniversity:
 
 def main():
 
+   
     ut_specs=[
-                    "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/utcourses",
+                    "degreeview_expansion/utcourses",
                     "The University of Texas at Austin"
                     ,"https://storage.googleapis.com/utcourses",
                     "/Users/shalevwiden/Downloads/Projects/testsite/ut",
                     "UT"]
     websiteobject=createUniversity(*ut_specs)
+    print(websiteobject.schoolfolder)
     # print(websiteobject.alphabetizeddict)
     # websiteobject.createstatspage()
     websiteobject.create_uni_homepage()

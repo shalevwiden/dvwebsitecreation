@@ -34,6 +34,7 @@ exceltemplatespath = Path("/Users/shalevwiden/Downloads/Projects/dvwebsitecreati
 sys.path.append(str(exceltemplatespath))
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+print(os.path.dirname(os.path.dirname(__file__)))
 
 from sourcefiles.pythonfunctions.excel_templates import make_checkerboardfile, make_excelfile
 
@@ -46,13 +47,14 @@ from websiteprogramming.createuniversity import createUniversity
 import importlib
 
 
-class CatalogData(createUniversity):
+class catalogData(createUniversity):
     def __init__(self, schoolfolder, universityname, cloudbucketpath, websitefolder, schoolabrv):
         super().__init__(schoolfolder, universityname, cloudbucketpath, websitefolder, schoolabrv)
         # child specific methods
         
         self.catalogfile = None
         self.course_list = []
+    
 
 
 def main():
@@ -66,8 +68,14 @@ def main():
             print(f'\nthe python version being used is:{sys.executable}\n')
             catalogobj=catalogData(schoolfolder='utcourses')
 
+    ut_specs=[
+                "degreeview_expansion/utcourses",
+                "The University of Texas at Austin"
+                ,"https://storage.googleapis.com/utcourses",
+                "/Users/shalevwiden/Downloads/Projects/testsite/ut",
+                "UT"]
     
-    catalogobj=catalogData(schoolfolder='utcourses')
+    catalogobj=catalogData(*ut_specs)
     # catalogobj.create_departmentname_json()
     # catalogobj.get_sorted_departmentlist()
     print(catalogobj.random_dept)
