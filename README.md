@@ -263,3 +263,5 @@ Call the data methods and the website methods in the same file is what Im thinki
 Yeah this is getting tricky with all the paths.
 Using inheritance in newcatalogdata.py works,
 I get access to all createUniversity attributes and methods.
+
+Removed create departmentname json

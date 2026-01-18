@@ -1130,7 +1130,7 @@ class createUniversity:
             return departmentlinks_dict
         
         departmentlinks_dict=make_departmentlinks_dict()
-        
+
         # uncomment to show departmentlinksdict.
         # print(f'Departmentlinks_dict for homepage: \n{departmentlinks_dict}')
 
@@ -1218,7 +1218,7 @@ def main():
                     "/Users/shalevwiden/Downloads/Projects/testsite/ut",
                     "UT"]
     websiteobject=createUniversity(*ut_specs)
-    print(websiteobject.schoolfolder)
+    print(f'School folder :\n {websiteobject.schoolfolder}')
     # print(websiteobject.alphabetizeddict)
     # websiteobject.createstatspage()
     websiteobject.create_uni_homepage()
