@@ -211,7 +211,10 @@ Including the footer...
 ### Jan 14
 
 This needs to be changed.
-Instead just open the database and read from that ngl
+Instead just open the database and read from that ngl.
+
+I also need to remake all the databases with the tablename just being "departmenttable"
+
 def readhtmltable():
 
 ---
@@ -221,3 +224,28 @@ I can pass in a list of links per school that will link to the schools media pag
 home page, stats page, etc
 But if thats not there the footer will go to the main DegreeView homepage
 There will be links to YouTube and X regardless
+
+### Jan 15, 2026
+
+For styling, there needs to be the degree plan styling.
+Then add the about page.
+
+And all the MAIN MAIN pages which can honestly compile to a different css file too ngl
+Like mainhome.css.
+
+### Jan 17, 2026
+
+Added this:
+def get_departmentnames(self, departmentname):
+
+Hold up catalogdata.py and createuniversity.py are very similar
+They take like all the same arguments
+
+It makes sense for them to be one class
+Then I'll just make a file where I call the methods seperately
+
+Also on Jan 17 I already know, Im gonna need to move all the data off of SQLite3 one day
+Like Postgre or something
+
+How?
+See that alone is gonna be super tricky and annoying ngl

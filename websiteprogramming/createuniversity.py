@@ -192,6 +192,31 @@ class createUniversity:
         # footer so I dont have to redefine it multiple times. 
 
 
+    def get_tablename():
+        '''
+        This gets the tablename in the department databases
+        '''
+        tablename=f'coursestable'
+        return tablename
+
+    def get_departmentnames(self, departmentname):
+        dept=self.DepartmentName()
+
+        departmentname=dept.get_sanitized_departmentname(departmentname)
+
+        departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
+        displaydepartmentname=dept.get_display_departmentname(departmentname)
+        departmentnamehalf=dept.get_departmentnamehalf(departmentname)
+        departmentcode=dept.get_departmentcode(departmentname)
+
+        return (
+            departmentname,
+            departmentnamecleaned,
+            displaydepartmentname,
+            departmentnamehalf,
+            departmentcode,
+        )
+
     def upload_schoolfiles(self):
 
 
@@ -642,10 +667,6 @@ class createUniversity:
         '''
      this is hard af
         '''
-     
-
-
-        
         for startingletter in self.alphabetizeddict:
 
             letterfolder=os.path.join(self.asset_folder_path,startingletter)
@@ -661,15 +682,18 @@ class createUniversity:
 
                 departmenturl=letterdict[departmentname]
                 # just use all of this
-                dept=self.DepartmentName()
 
-                departmentname=dept.get_sanitized_departmentname(departmentname)
+                (
+                departmentname,
+                departmentnamecleaned,
+                displaydepartmentname,
+                departmentnamehalf,
+                departmentcode,
+                ) = self.get_departmentnames(departmentname)
 
-                departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
-                displaydepartmentname=dept.get_display_departmentname(departmentname)
-                departmentnamehalf=dept.get_departmentnamehalf(departmentname)
-                departmentcode=dept.get_departmentcode(departmentname)
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
+
+                
 
 
             
@@ -719,14 +743,99 @@ class createUniversity:
 
                     return statsdict
                 
-                # ok this needs to change
-                def readhtmltable():
-                    htmltablepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-htmltable.html')
+                
+                
+                
+                def make_course_rows():
+                    '''
+                    This will open up the departments database and make courserows
+                    Then pass it into the Jinja template.
+                    
+                    '''
 
-                    with open(htmltablepath) as htmltable:
-                        tablecode=htmltable.read()
 
-                    return tablecode
+                    databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
+                    
+
+                    tablename=self.get_tablename(departmentnamecleaned)
+
+
+                    def getdatabasedata():
+                        '''
+                        These are all the column names: coursename, coursecode, coursehours, classification
+                        '''
+                        with sqlite3.connect(databasepath) as conn:
+                            cursor=conn.cursor()
+
+                            getalldata=f'''
+
+                            SELECT *
+                            FROM {tablename} 
+                            WHERE coursename IS NOT NULL AND coursename != ''
+                            '''
+
+
+                            cursor.execute(getalldata)
+                            rows = cursor.fetchall()                        
+                            
+                            return rows
+
+
+                    def tablefilemaking(departmentname,departmentnamecleaned):
+
+                        htmltablefile=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-htmltable.html')
+
+                        rows=getdatabasedata()
+
+                        
+                        htmlrows=f'''
+
+                        '''
+                        for row in rows:
+                            coursename=f'<td>{row[0]}</td>'
+                            coursecode=f'<td>{row[1]}</td>'
+                            coursehours=f'<td>{row[2]}</td>'
+                            classification=f'<td>{row[3]}</td>'
+                            
+                            tr=f'''
+                            <tr>
+                        {coursename}
+                        {coursecode}
+                        {coursehours}
+                        {classification}
+                            </tr>
+                            '''
+                            htmlrows+=tr
+                        htmlrows+=f'''
+                            <tr>
+                        <td>DegreeView</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                            '''
+
+                        htmlcode=f'''
+                        <table id="departmentcoursestable">
+                            <tr>
+                            <td colspan="2">{departmentnamehalf}</td>
+                        
+                            <td colspan="2" >{self.universityname}</td>
+                            </tr>
+                            <tr>
+                            <td>Course Name</td>
+                            <td>Course Code</td>
+                            <td>Course Hours</td>
+                            <td>Classification</td>
+                            </tr>
+                            {htmlrows}
+                        </table>
+                        '''
+
+
+
+                        return courserows
+
 
                
 

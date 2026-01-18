@@ -244,8 +244,20 @@
           <i class="fa-regular fa-copy" id="copyicon" title="Copy Table"></i>
           <!-- contains the rendered csv -->
         </div>
+        <table id="departmentcoursestable">
+          <tr>
+            <td colspan="2">{departmentnamehalf}</td>
 
-        {{htmltable}}
+            <td colspan="2">{self.universityname}</td>
+          </tr>
+          <tr>
+            <td>Course Name</td>
+            <td>Course Code</td>
+            <td>Course Hours</td>
+            <td>Classification</td>
+          </tr>
+          {{courserows}}
+        </table>
       </div>
       {{footer}}
     </div>
