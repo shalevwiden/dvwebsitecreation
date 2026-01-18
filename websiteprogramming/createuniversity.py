@@ -225,7 +225,7 @@ class createUniversity:
                 #  a little confused
                 self.excelconfigpath=configlink.read()
 
-            self.configsfolder='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/Excelfile_configs'
+            self.configsfolder='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/excelfile_configs'
 
             # pass this in as an argument to the init
             # then in the make_excel_files() function loop over this and create as many configs as is here pretty much

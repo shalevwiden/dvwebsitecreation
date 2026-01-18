@@ -39,7 +39,7 @@ import importlib.util
 from createuniversity import createUniversity
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from degreeview_expansion.newcatalogdata import CatalogData
+from degreeview_expansion.newcatalogdata import catalogData
 
 class createPages:
     def __init__(self):
@@ -77,24 +77,33 @@ class createPages:
                     "/Users/shalevwiden/Downloads/Projects/testsite/ut",
                     "UT")
             
-                utobj=createUniversity(**ut_specs)
 
-                utcatalogobj=CatalogData(**ut_specs)
-                print(f'Testing:\n')
-                print(utcatalogobj.single_department)
+                def data_methods():
+                    utcatalogobj=catalogData(**ut_specs)
+                    print(utcatalogobj.single_department)
+                    # utcatalogobj.makestatsjson()
+                    utcatalogobj.make_excel_files()
+
+                data_methods()
+
+
+                def web_methods():
+                    utobj=createUniversity(**ut_specs)
+                    utobj.create_sorteddepartments_page()
+                    utobj.create_departmentpagelinks_json()
+
                 # instead of calling all of the functions 
 
                 # utobj.createletterpages()
 
                 # utobj.create_department_pages()
-                utobj.create_sorteddepartments_page()
+
                 '''these two functions are actually not called for UT because UT is special
                 UT is the original DV'''
 
                 # utobj.createstatspage()
                 # utobj.create_uni_homepage()
                 # this one is tho I think...
-                utobj.create_departmentpagelinks_json()
 
             def rice():
                 # update all of this with rice data
@@ -139,8 +148,6 @@ class createPages:
         with open(self.universityuldatapath,'r') as universityuldatajson:
             universityuldata=json.load(universityuldatajson)
 
-
-    
     def create_main_statspage():
         '''
         Uses the main stats page template to create the HTML file for the main stats 

@@ -30,13 +30,13 @@ import importlib.util
 
 from pathlib import Path
 # use the parent folder
-exceltemplatespath = Path("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/pythonfunctions")
-sys.path.append(str(exceltemplatespath))
+# exceltemplatespath = Path("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/pythonfunctions")
+# sys.path.append(str(exceltemplatespath))
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 print(os.path.dirname(os.path.dirname(__file__)))
 
-from sourcefiles.pythonfunctions.excel_templates import make_checkerboardfile, make_excelfile
+from excel import make_checkerboardfile, make_excelfile
 
 
 
@@ -54,6 +54,8 @@ class catalogData(createUniversity):
         
         self.catalogfile = None
         self.course_list = []
+        # child specific
+        self.make_excelfile=make_excelfile
         
    
 
@@ -379,7 +381,12 @@ class catalogData(createUniversity):
                
 
     def createcsvs(self):
-        
+        '''
+        SO RIGHT NOW
+        THIS ISNT UP TO SPEED
+        Because insted of scraping I read it from a database
+
+        '''
         for startingletter in self.alphabetizeddict:
 
             '''
@@ -408,7 +415,6 @@ class catalogData(createUniversity):
         
             # use the fact that its an underscore to readd it later in the website creation file
             
-
 
                 departmentcourses_csv=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-coursescsv.csv')
 
@@ -466,7 +472,13 @@ class catalogData(createUniversity):
                 
                 departmenturl=letterdict[departmentname]
 
-                departmentname=self.sanitize_departmentname()
+                (
+                departmentname,
+                departmentnamecleaned,
+                displaydepartmentname,
+                departmentnamehalf,
+                departmentcode,
+                ) = self.get_departmentnames(departmentname)   
 
                 def make_required_folders():
                     departmentfolderpath=os.path.join(letterfolder,departmentname)
@@ -485,16 +497,14 @@ class catalogData(createUniversity):
                 departmentfolderpath, excelfolderpath=make_required_folders()
             
             # use the fact that its an underscore to readd it later in the website creation file
-                dept=self.DepartmentName()
+              
 
-                departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
+              
 
                 databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
 
                 # hyphens and commas not allowed in tablename
-                tablename=self.get_tablename(departmentnamecleaned)
-
-
+                tablename=self.get_tablename()
                 def getdatabasedata():
                     '''
                     These are all the column names: coursename, coursecode, coursehours, classification
@@ -523,7 +533,7 @@ class catalogData(createUniversity):
                 '''
                 Use Font and OpenPyXL to create nicely formatted tabular data
                 '''
-                utconfig=self.finishconfigpath('themedconfigs/ut.json')
+                utconfig=self.finishconfigpath('uniconfigs/ut.json')
                 originalconfig=self.finishconfigpath('originalconfig.json')
                 darkthemeconfig=self.finishconfigpath('darkthemeconfig.json')
                 redconfig=self.finishconfigpath('colorconfigs/redtheme.json')
@@ -599,21 +609,18 @@ class catalogData(createUniversity):
                     departmenturl=letterdict[departmentname]
 
                     # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
-                    departmentname=self.sanitize_departmentname(departmentname)
-
+                    (
+                    departmentname,
+                    departmentnamecleaned,
+                    displaydepartmentname,
+                    departmentnamehalf,
+                    departmentcode,
+                    ) = self.get_departmentnames(departmentname)   
 
                     departmentfolderpath=os.path.join(letterfolder,departmentname)
 
                         
-                        
-                    dept=self.DepartmentName()
-
-                    departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
-                    display_departmentname=dept.get_display_departmentname(departmentname)
-                    departmentnamehalf=dept.get_departmentnamehalf(departmentname)
-                    departmentcode=dept.get_departmentcode(departmentname)
-
-
+                    
                     databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
 
                     # hyphens and commas not allowed in tablename
@@ -700,19 +707,15 @@ class catalogData(createUniversity):
                     departmenturl=letterdict[departmentname]
 
                     # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
-                    departmentname=self.sanitize_departmentname()
-
+                    (
+                    departmentname,
+                    departmentnamecleaned,
+                    displaydepartmentname,
+                    departmentnamehalf,
+                    departmentcode,
+                    ) = self.get_departmentnames(departmentname)   
 
                     departmentfolderpath=os.path.join(letterfolder,departmentname)
-
-                            
-                    dept=self.DepartmentName()
-
-                    departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
-                    display_departmentname=dept.get_display_departmentname(departmentname)
-                    departmentnamehalf=dept.get_departmentnamehalf(departmentname)
-                    departmentcode=dept.get_departmentcode(departmentname)
-
 
                     databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
 
@@ -762,6 +765,7 @@ class catalogData(createUniversity):
                         # commit to the database 
                       
         make_universidewide_database()
+
         def makeuniversitywidehtmltable():
             universitywidedatabase=os.path.join(self.universitywidefolder,'universitywidedatabase.db')
             universitytablename=f'universitywidedata_table'
@@ -770,6 +774,9 @@ class catalogData(createUniversity):
             def getdatabasedata():
                 '''
                 These are all the column names: coursename, coursecode, coursehours, classification
+                So instead of opening each individual database...
+
+                I just open the big universitywide one rn
                 '''
                 with sqlite3.connect(universitywidedatabase) as conn:
                     cursor=conn.cursor()
@@ -790,9 +797,7 @@ class catalogData(createUniversity):
 
             def univeristytablefilemaking():
                 
-
-
-            
+        
 
                 universitywidehtmltable=os.path.join(self.universitywidefolder,'universitywidetable.html')
 
@@ -1136,9 +1141,9 @@ def main():
     # catalogobj.create_departmentname_json()
     # catalogobj.get_sorted_departmentlist()
     print(catalogobj.random_dept)
-    catalogobj.upload_to_database()
+    
     # catalogobj.makestatsjson()    
-    # catalogobj.make_excel_files()
+    catalogobj.make_excel_files()
     
     
 
