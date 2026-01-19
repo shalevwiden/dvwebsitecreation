@@ -1,0 +1,18 @@
+{
+  "schoolnamecolor": "FFBF5701",
+  "bigbordercolor": "000000",
+  "smallerbordercolor": "000000",
+  "subheadingbordercolor": "000000",
+  "gridlinecolor": "DDDDDD",
+  "rowtextcolor": "040129",
+  "titlecolor": "040129",
+  "mainbackgroundcolor": "FFFFFF",
+  "paddingbackgroundcolor": "F0F0F0",
+
+  "rowtextcolor": "000000",
+  "titlecolor": "000000",
+  "subheadingcolor": "000000",
+  "headingsfontcolor": "000000",
+  "logocolor": "284dbc",
+  "urlcolor": "000000"
+}
