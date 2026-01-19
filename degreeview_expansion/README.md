@@ -144,3 +144,10 @@ coursename=coursename.replace('SECOND','').replace('THIRD','')
 
 Change classification data to either be L, U, or G
 then in the website table building, replace with the full data.
+
+### Jan 19, 2026
+
+The config for each Uni's excel file should be in their schoolfolder
+uniexcelconfig.json
+
+Then I can do many more standardized configs in the configs folder in the excel folder
