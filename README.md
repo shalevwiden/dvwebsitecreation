@@ -271,3 +271,8 @@ But if that doesnt work, just turn it back into normal class
 
 Creating assets just worked for UT Austin courses lets goo
 Lmao.
+
+create letter pages is still in create university
+So I could create the letter pages for UT and thats it
+
+For all other universities do not have them as letter pages.

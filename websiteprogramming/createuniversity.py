@@ -199,6 +199,7 @@ class createUniversity:
     def _init_stuff(self):
         '''
         Just dividing this up more
+        moved excelstuff to catalogdata class
 
         '''
 

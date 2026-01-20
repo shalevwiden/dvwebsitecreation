@@ -85,9 +85,10 @@ class createPages:
                     utcatalogobj.make_excel_files()
                 data_methods()
 
-
                 def web_methods():
                     utobj=createUniversity(**ut_specs)
+                    # do this for UT but not all others
+                    utobj.createletterpages()
                     utobj.create_sorteddepartments_page()
                     utobj.create_departmentpagelinks_json()
 
@@ -127,7 +128,7 @@ class createPages:
             
             # call all the school functions here
             ut()
-            # rice()
+            rice()
         texas()
 
     def createindex(self):
@@ -147,7 +148,7 @@ class createPages:
         with open(self.universityuldatapath,'r') as universityuldatajson:
             universityuldata=json.load(universityuldatajson)
 
-    def create_main_statspage():
+    def create_main_statspage(self):
         '''
         Uses the main stats page template to create the HTML file for the main stats 
         of DegreeView (# schools, longest coursename so far, etc)
