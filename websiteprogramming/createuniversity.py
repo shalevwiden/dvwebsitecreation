@@ -216,9 +216,6 @@ class createUniversity:
             self.DepartmentName = self.dept_module.DepartmentName
         schoolfolder_stuff()
 
-        
-       
-
     def get_tablename(self):
         '''
         This gets the tablename in the department databases
@@ -539,15 +536,14 @@ class createUniversity:
             for departmentname in letterdict:
                 departmenturl=letterdict[departmentname]
 
-                dept=self.DepartmentName()
-
-                departmentname=dept.get_sanitized_departmentname(departmentname)
-
-                departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
-                display_departmentname=dept.get_display_departmentname(departmentname)
-                departmentnamehalf=dept.get_departmentnamehalf(departmentname)
-                departmentcode=dept.get_departmentcode(departmentname)
-                departmentfolderpath=os.path.join(letterfolder,departmentname)
+                
+                (
+                departmentname,
+                departmentnamecleaned,
+                displaydepartmentname,
+                departmentnamehalf,
+                departmentcode,
+                    ) = self.get_departmentnames(departmentname)
 
 
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
@@ -996,18 +992,13 @@ class createUniversity:
 
     
 
-            dept=self.DepartmentName()
-
-            departmentname=dept.get_sanitized_departmentname(departmentname)                
-            
-
-
-
-            
-            departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
-            display_departmentname=dept.get_display_departmentname(departmentname)
-            departmentnamehalf=dept.get_departmentnamehalf(departmentname)
-            departmentcode=dept.get_departmentcode(departmentname)
+            (
+            departmentname,
+            departmentnamecleaned,
+            displaydepartmentname,
+            departmentnamehalf,
+            departmentcode,
+                ) = self.get_departmentnames(departmentname)
         
          
     
@@ -1104,11 +1095,14 @@ class createUniversity:
 
                     departmenturl=letterdict[departmentname]
                     # just use all of this
-                    dept=self.DepartmentName()
-
-                    departmentname=dept.get_sanitized_departmentname(departmentname)
-
-                    departmentnamecleaned=dept.get_departmentnamecleaned(departmentname)
+                    
+                    (
+                    departmentname,
+                    departmentnamecleaned,
+                    displaydepartmentname,
+                    departmentnamehalf,
+                    departmentcode,
+                        ) = self.get_departmentnames(departmentname)
                     departmentpagelink=os.path.join('departments',startingletter.lower(),f'{departmentnamecleaned}.html')
 
                     # adding to the dict logic
