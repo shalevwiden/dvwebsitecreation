@@ -55,7 +55,6 @@ class createUniversity:
         dv/texas/ut/stats.html
         '''
 
-        
         # where assets like excel files and csvs are
         self.asset_folder_path=os.path.join(schoolfolder,'assets')
 

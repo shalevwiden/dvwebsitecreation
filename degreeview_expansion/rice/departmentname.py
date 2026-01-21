@@ -35,38 +35,49 @@ class DepartmentName:
         
         '''
 
-        displaydepartmentname=departmentname.replace('_','/')
+        departmentname=departmentname.replace('_','/')
         # the splitpoint is important, for UT its a "-"
-        displaydepartmentname=displaydepartmentname.strip().split('-')
-        code=displaydepartmentname[0].strip()
-        departmentnamehalf=displaydepartmentname[-1].strip()
+        
+        departmentnamehalf,code=departmentname.split('(')
+        code=''.join(c for c in code if c.isalpha() or c.isspace())
+        departmentnamehalf=departmentnamehalf.strip()
 
         # so in this case I put display department name in parenthesis
         # I may remove
-        displaydepartmentname=f'({code}) - {departmentnamehalf}'
+        displaydepartmentname=f'{code} - {departmentnamehalf}'
         return displaydepartmentname
 
     def get_departmentnamehalf(self, departmentname):
-        displaydepartmentname=departmentname.replace('_','/')
-        # the splitpoint is important, for UT its a "-"
-        displaydepartmentname=displaydepartmentname.strip().split('-')
         
-        departmentnamehalf=displaydepartmentname[-1].strip()
+        departmentname=departmentname.replace('_','/')
+        # the splitpoint is important, for UT its a "-"
+        
+        departmentnamehalf,code=departmentname.split('(')
+        code=''.join(c for c in code if c.isalpha() or c.isspace())
+        departmentnamehalf=departmentnamehalf.strip()
+
+        # so in this case I put display department name in parenthesis
+        # I may remove
+
         return departmentnamehalf
 
     def get_departmentcode(self, departmentname):
-        displaydepartmentname=departmentname.replace('_','/')
+        departmentname=departmentname.replace('_','/')
         # the splitpoint is important, for UT its a "-"
-        displaydepartmentname=displaydepartmentname.strip().split('-')
         
-        code=displaydepartmentname[0].strip()
+        departmentnamehalf,code=departmentname.split('(')
+        code=''.join(c for c in code if c.isalpha() or c.isspace())
+
+        # so in this case I put display department name in parenthesis
+        # I may remove
+
         return code
 
 def main():
     '''
     Use this function to test when generation
     '''
-    departmentname="ACF - Actuarial Foundations"
+    departmentname="Ancient Mediterranean Civilizations (AMCI)"
 
     dept = DepartmentName()
 
@@ -75,11 +86,12 @@ def main():
     departmentnamehalf=dept.get_departmentnamehalf(departmentname)
     code=dept.get_departmentcode(departmentname)
 
-    print(departmentname)
-    print(departmentnamecleaned)
-    print(display_departmentname)
-    print(departmentnamehalf)
-    print(code)
+    
+    print(f"departmentname:\n{departmentname}")
+    print(f"departmentnamecleaned:\n{departmentnamecleaned}")
+    print(f"display_departmentname:\n{display_departmentname}")
+    print(f"departmentnamehalf:\n{departmentnamehalf}")
+    print(f"code:\n{code}")
 
 if __name__ == "__main__":
     main()

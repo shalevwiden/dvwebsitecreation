@@ -46,7 +46,8 @@ class DepartmentName:
 
         # so in this case I put display department name in parenthesis
         # I may remove
-        displaydepartmentname=f'({code}) - {departmentnamehalf}'
+        # this is where to build the display departmentname
+        displaydepartmentname=f'{code} - {departmentnamehalf}'
         return displaydepartmentname
 
     def get_departmentnamehalf(self, departmentname):
@@ -78,11 +79,11 @@ def main():
     departmentnamehalf=dept.get_departmentnamehalf(departmentname)
     code=dept.get_departmentcode(departmentname)
 
-    print(departmentname)
-    print(departmentnamecleaned)
-    print(display_departmentname)
-    print(departmentnamehalf)
-    print(code)
+    print(f"departmentname:\n{departmentname}")
+    print(f"departmentnamecleaned:\n{departmentnamecleaned}")
+    print(f"display_departmentname:\n{display_departmentname}")
+    print(f"departmentnamehalf:\n{departmentnamehalf}")
+    print(f"code:\n{code}")
 
 if __name__ == "__main__":
     main()
