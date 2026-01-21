@@ -410,7 +410,7 @@ class catalogData(createUniversity):
                                 samenamepercent=len(samenamelist)/len(courselist)
                                 return len(samenamelist),samenamepercent
                             elif not courselist:
-                                return [],0
+                                return 0,0
 
 
                             
@@ -427,15 +427,15 @@ class catalogData(createUniversity):
                                 "longest_course_name": longestcoursename,
                                 "shortest_course_name": shortestcoursename,
                                 "average_course_length":f'{averagelength:.0f}',
-                                
-                                    "lower_count": lowercount,
-                                    "upper_count": uppercount,
-                                    "grad_count": gradcount,
-                                    "lower_percent": f"{lowerpercent*100:.1f}%",
-                                    "upper_percent": f"{upperpercent*100:.1f}%",
-                                    "grad_percent": f"{gradpercent*100:.1f}%",
-                                    "samenamelen":samenamelen,
-                                    "samenamepercent": f"{samenamepercent*100:.1f}%"
+                            
+                                "lower_count": lowercount,
+                                "upper_count": uppercount,
+                                "grad_count": gradcount,
+                                "lower_percent": f"{lowerpercent*100:.1f}%",
+                                "upper_percent": f"{upperpercent*100:.1f}%",
+                                "grad_percent": f"{gradpercent*100:.1f}%",
+                                "samenamelen":samenamelen,
+                                "samenamepercent": f"{samenamepercent*100:.1f}%"
                                 
                                 }
 
