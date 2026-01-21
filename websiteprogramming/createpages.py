@@ -127,7 +127,7 @@ class createPages:
                     # ricecatalogobj.upload_to_database()
                     ricecatalogobj.makestatsjson()
                     # ricecatalogobj.make_excel_files()
-                    # ricecatalogobj.create_univeristy_files()
+                    ricecatalogobj.create_univeristy_files()
                     ricecatalogobj.make_sorteddepartment_json()
                     ricecatalogobj.make_university_statsjson()
                     
