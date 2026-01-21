@@ -284,3 +284,13 @@ Ok I got Excel file stuff working
 Make changes to the department excel files in:
 
 `degreeview_expansion/excel/functions/make_excelfile.py`
+
+Excel file creation should be good.
+All excel file configs for the school live in the school folder with the name
+`uniexcelconfig.json`.
+
+Hmm so classification...
+I want it to either be upper, lower, or grad.
+If I cant get it somehow I need to update everything as if it cannot be got.
+Just pass a different argument into the universitystatsjson for the classifications like
+"could not be retrieved" or something like that.

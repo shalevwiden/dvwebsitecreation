@@ -92,15 +92,15 @@ class createPages:
                 def web_methods():
                     utobj=createUniversity(**ut_specs)
                     # do this for UT but not all others
+                    # utobj.create_department_pages()
+
                     utobj.createletterpages()
                     utobj.create_sorteddepartments_page()
                     utobj.create_departmentpagelinks_json()
 
                 # instead of calling all of the functions 
-
                 # utobj.createletterpages()
 
-                # utobj.create_department_pages()
 
                 '''these two functions are actually not called for UT because UT is special
                 UT is the original DV'''
@@ -112,17 +112,24 @@ class createPages:
             def rice():
                 # update all of this with rice data
                 rice_specs=self.buildspecs(
-                    "/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/rice",
+                    "degreeview_expansion/rice",
                     "Rice University"
                     ,"https://storage.googleapis.com/ricecourses",
 
                     # so I can probably make a function to finish this path for whereever I actually host the website
                     "/Users/shalevwiden/Downloads/Projects/testsite/rice",schoolabrv="Rice")
+                
             
                 # instead of calling all of the functions 
 
                 def data_methods():
                     ricecatalogobj=catalogData(**rice_specs)
+                    # ricecatalogobj.upload_to_database()
+                    ricecatalogobj.makestatsjson()
+                    # ricecatalogobj.make_excel_files()
+                    # ricecatalogobj.create_univeristy_files()
+                    ricecatalogobj.make_sorteddepartment_json()
+                    ricecatalogobj.make_university_statsjson()
                     
                 data_methods()
 
@@ -137,8 +144,8 @@ class createPages:
 
             
             # call all the school functions here
-            ut()
-            # rice()
+            # ut()
+            rice()
         texas()
 
     def createindex(self):

@@ -220,199 +220,242 @@ class catalogData(createUniversity):
             letterdict=self.alphabetizeddict[startingletter]
 
             for departmentname in letterdict:
-                departmenturl=letterdict[departmentname]
+                try:
+                    departmenturl=letterdict[departmentname]
 
-                # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
-                (
-                departmentname,
-                departmentnamecleaned,
-                displaydepartmentname,
-                departmentnamehalf,
-                departmentcode,
-                ) = self.get_departmentnames(departmentname)
+                    # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
+                    (
+                    departmentname,
+                    departmentnamecleaned,
+                    displaydepartmentname,
+                    departmentnamehalf,
+                    departmentcode,
+                    ) = self.get_departmentnames(departmentname)
+                    print(f'Longest coursename for department: \n{departmentname}')
 
-                departmentfolderpath=os.path.join(letterfolder,departmentname)
+                    departmentfolderpath=os.path.join(letterfolder,departmentname)
 
-                databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
-                
-
-                tablename=self.get_tablename()
-
-
-                def getdatabasestats():
-                    '''
-                    These are all the column names: coursename, coursecode, coursehours, classification
-                    '''
-                    with sqlite3.connect(databasepath) as conn:
-                            cursor=conn.cursor()
-
-                    def get_department_coursecount():
-                        countcoursescommand=f'''
-
-                        SELECT coursename 
-                        FROM {tablename} 
-                        WHERE coursename IS NOT NULL AND coursename != ''
-                        '''
-
-
-                        cursor.execute(countcoursescommand)
-                        courselist = cursor.fetchall()
-                        courselist=[row[0] for row in courselist] 
-
-                        return len(courselist)
-                        
-                    def get_longest_coursename():
-                        longestnamecommand=f'''
-                        SELECT coursename 
-                        FROM {tablename} 
-                        WHERE Coursename IS NOT NULL AND coursename != ''
-                        ORDER BY LENGTH(coursename) DESC LIMIT 1;
-                        
-                        '''
-
-
-                        cursor.execute(longestnamecommand)
-                        longestresult=cursor.fetchone()[0]   
-
-                        return longestresult                 
-
-                                     
-                    def get_shortest_coursename():
-
-
-                        shortestnamecommand=f'''
-                        SELECT coursename 
-                        FROM {tablename} 
-                        WHERE coursename IS NOT NULL AND coursename != ''
-                        ORDER BY LENGTH(Coursename) ASC LIMIT 1;'''
-
-                        cursor.execute(shortestnamecommand)
-
-                        shortestresult=cursor.fetchone()[0]   
-                        return shortestresult
-
-                    def getaveragelength():
-                        getcoursescommand=f'''
-
-                        SELECT coursename 
-                        FROM {tablename} 
-                        WHERE coursename IS NOT NULL AND coursename != ''
-                        '''
-
-
-                        cursor.execute(getcoursescommand)
-
-                        courselist = cursor.fetchall()
-                        courselist=[row[0] for row in courselist]
-                        total=0
-                        for course in courselist:
-                            total+=len(course)
-                        averagelength=total/len(courselist)
-                        return averagelength
+                    databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
                     
-                    def get_classification_percents():
+
+                    tablename=self.get_tablename()
+
+
+                    def getdatabasestats():
                         '''
-                        This returns what percent is upper divison, lower division, and graduate, if applicable. 
+                        These are all the column names: coursename, coursecode, coursehours, classification
                         '''
-                        classificationlistcommand=f'''
+                        with sqlite3.connect(databasepath) as conn:
+                                cursor=conn.cursor()
 
-                        SELECT classification 
-                        FROM {tablename} 
-                        WHERE classification IS NOT NULL AND classification != ''
-                        '''
+                        def get_department_coursecount():
+                            countcoursescommand=f'''
 
-
-                        cursor.execute(classificationlistcommand)
-                        classificationlist = cursor.fetchall()
-                        classificationlist=[row[0].lower() for row in classificationlist] 
-
-                        # print(f'{departmentname} classificationlist: {classificationlist}')
+                            SELECT coursename 
+                            FROM {tablename} 
+                            WHERE coursename IS NOT NULL AND coursename != ''
+                            '''
 
 
-                        lowercount=0
-                        uppercount=0
-                        gradcount=0
-                        total=len(classificationlist)
+                            cursor.execute(countcoursescommand)
+                            courselist = cursor.fetchall()
+                            courselist=[row[0] for row in courselist] 
 
-                        for classification in classificationlist:
-                            # must do this in the database for all schools
-                            if "lower" in classification:
-                                lowercount+=1
-                            elif "upper" in classification:
-                                uppercount+=1
-                            elif "grad" in classification:
-                                gradcount+=1
-                        lowerpercent=lowercount/total
-                        upperpercent=uppercount/total
-                        gradpercent=gradcount/total
-                        
-                        return lowercount,uppercount,gradcount,lowerpercent,upperpercent,gradpercent
-
-                    def get_courseswithdepartmentnameinthem(departmentname):
-                        countcoursescommand=f'''
-
-                        SELECT coursename 
-                        FROM {tablename} 
-                        WHERE coursename IS NOT NULL AND coursename != ''
-                        '''
-
-
-                        cursor.execute(countcoursescommand)
-                        courselist = cursor.fetchall()
-                        courselist=[row[0] for row in courselist]
-                        
-                        departmentname=departmentname.split('-')[-1].lower()
-                        print(f'departmentname {departmentname}')
-
-                        samenamelist=[]
-                        for course in courselist:
-                            if departmentname in course.lower():
-                                samenamelist.append(course)
-                        print(samenamelist)
-                        samenamepercent=len(samenamelist)/len(courselist)
-                        return len(samenamelist),samenamepercent
-
-
-                        
-                    longestcoursename = get_longest_coursename()
-                    shortestcoursename = get_shortest_coursename()
-                    coursecount = get_department_coursecount()
-                    lowercount, uppercount, gradcount, lowerpercent, upperpercent, gradpercent = get_classification_percents()
-                    samenamelen,samenamepercent=get_courseswithdepartmentnameinthem(departmentname=departmentname)
-                    averagelength=getaveragelength()
-
-
-                    statsdict = {
-                            "course_count": coursecount,
-                            "longest_course_name": longestcoursename,
-                            "shortest_course_name": shortestcoursename,
-                            "average_course_length":f'{averagelength:.0f}',
+                            return len(courselist)
                             
-                                "lower_count": lowercount,
-                                "upper_count": uppercount,
-                                "grad_count": gradcount,
-                                "lower_percent": f"{lowerpercent*100:.1f}%",
-                                "upper_percent": f"{upperpercent*100:.1f}%",
-                                "grad_percent": f"{gradpercent*100:.1f}%",
-                                "samenamelen":samenamelen,
-                                "samenamepercent": f"{samenamepercent*100:.1f}%"
+                        def get_longest_coursename():
+                            longestnamecommand=f'''
+                            SELECT coursename 
+                            FROM {tablename} 
+                            WHERE Coursename IS NOT NULL AND coursename != ''
+                            ORDER BY LENGTH(coursename) DESC LIMIT 1;
                             
-                            }
-
-                    return statsdict
-                
-                def jsonfilemaking(departmentnamecleaned):
-                    statsjsonpath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-statsjson.json')
-
-                    statsdict=getdatabasestats()
+                            '''
 
 
+                            cursor.execute(longestnamecommand)
+                            row=cursor.fetchone()
+                            print(f'\n{row}')
+                            if row is None:
 
-                    with open(statsjsonpath,'w') as statsfile:
-                        json.dump(statsdict,statsfile,indent=4)
+                                longestresult = None 
+                            else:
+                                longestresult = row[0]  
 
-                jsonfilemaking(departmentnamecleaned=departmentnamecleaned)   
+                            return longestresult                 
+
+                                        
+                        def get_shortest_coursename():
+
+                            shortestnamecommand=f'''
+                            SELECT coursename 
+                            FROM {tablename} 
+                            WHERE coursename IS NOT NULL AND coursename != ''
+                            ORDER BY LENGTH(Coursename) ASC LIMIT 1;'''
+
+                            cursor.execute(shortestnamecommand)
+
+                            row=cursor.fetchone()
+                            # print(f'Row: \n {row}')
+                            if row is None:
+
+                                shortestresult = None   
+                            else:
+                                shortestresult = row[0]  
+
+                            return shortestresult       
+
+                        def getaveragelength():
+
+                            '''
+                            This one should be good if theres empty tables
+
+                            '''
+                            getcoursescommand=f'''
+
+                            SELECT coursename 
+                            FROM {tablename} 
+                            WHERE coursename IS NOT NULL AND coursename != ''
+                            '''
+
+
+                            cursor.execute(getcoursescommand)
+
+                            courselist = cursor.fetchall()
+                            courselist=[row[0] for row in courselist]
+
+                            if courselist:
+                                total=0
+                                for course in courselist:
+                                    total+=len(course)
+                                averagelength=total/len(courselist)
+                                return averagelength
+                            elif not courselist:
+                                return 0
+                        
+                        def get_classification_percents():
+                            '''
+                            This returns what percent is upper divison, lower division, and graduate, if applicable. 
+                            '''
+                            classificationlistcommand=f'''
+
+                            SELECT classification 
+                            FROM {tablename} 
+                            WHERE classification IS NOT NULL AND classification != ''
+                            '''
+
+
+                            cursor.execute(classificationlistcommand)
+                            classificationlist = cursor.fetchall()
+                            classificationlist=[row[0].lower() for row in classificationlist] 
+
+                            # if its not empty
+                            if classificationlist:
+
+                                # print(f'{departmentname} classificationlist: {classificationlist}')
+
+
+                                lowercount=0
+                                uppercount=0
+                                gradcount=0
+                                total=len(classificationlist)
+
+                                for classification in classificationlist:
+                                    # must do this in the database for all schools
+                                    if "lower" in classification:
+                                        lowercount+=1
+                                    elif "upper" in classification:
+                                        uppercount+=1
+                                    elif "grad" in classification:
+                                        gradcount+=1
+                                lowerpercent=lowercount/total
+                                upperpercent=uppercount/total
+                                gradpercent=gradcount/total
+                                
+                                return lowercount,uppercount,gradcount,lowerpercent,upperpercent,gradpercent
+                            
+                            elif not classificationlist:
+                                return [0] * 6
+                            
+                        def get_courseswithdepartmentnameinthem(departmentname):
+                            countcoursescommand=f'''
+
+                            SELECT coursename 
+                            FROM {tablename} 
+                            WHERE coursename IS NOT NULL AND coursename != ''
+                            '''
+
+
+                            cursor.execute(countcoursescommand)
+                            courselist = cursor.fetchall()
+                            courselist=[row[0] for row in courselist]
+                            # if its not empty
+                            if courselist:
+                                (
+                                departmentname,
+                                departmentnamecleaned,
+                                displaydepartmentname,
+                                departmentnamehalf,
+                                departmentcode,
+                                    ) = self.get_departmentnames(departmentname)
+            
+                                # print(f'departmentname {departmentname}')
+
+                                samenamelist=[]
+                                for course in courselist:
+                                    if departmentnamehalf in course.lower():
+                                        samenamelist.append(course)
+
+                                # print(samenamelist)
+                                samenamepercent=len(samenamelist)/len(courselist)
+                                return len(samenamelist),samenamepercent
+                            elif not courselist:
+                                return [],0
+
+
+                            
+                        longestcoursename = get_longest_coursename()
+                        shortestcoursename = get_shortest_coursename()
+                        coursecount = get_department_coursecount()
+                        lowercount, uppercount, gradcount, lowerpercent, upperpercent, gradpercent = get_classification_percents()
+                        samenamelen,samenamepercent=get_courseswithdepartmentnameinthem(departmentname=departmentname)
+                        averagelength=getaveragelength()
+
+
+                        statsdict = {
+                                "course_count": coursecount,
+                                "longest_course_name": longestcoursename,
+                                "shortest_course_name": shortestcoursename,
+                                "average_course_length":f'{averagelength:.0f}',
+                                
+                                    "lower_count": lowercount,
+                                    "upper_count": uppercount,
+                                    "grad_count": gradcount,
+                                    "lower_percent": f"{lowerpercent*100:.1f}%",
+                                    "upper_percent": f"{upperpercent*100:.1f}%",
+                                    "grad_percent": f"{gradpercent*100:.1f}%",
+                                    "samenamelen":samenamelen,
+                                    "samenamepercent": f"{samenamepercent*100:.1f}%"
+                                
+                                }
+
+                        return statsdict
+                    
+                    def jsonfilemaking(departmentnamecleaned):
+                        statsjsonpath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-statsjson.json')
+
+                        statsdict=getdatabasestats()
+
+
+
+                        with open(statsjsonpath,'w') as statsfile:
+                            json.dump(statsdict,statsfile,indent=4)
+
+                    jsonfilemaking(departmentnamecleaned=departmentnamecleaned)   
                
+                except Exception as e:
+                    print(f"error on this department {departmentname}: {e}")
+                    raise
 
     def createcsvs(self):
         '''
