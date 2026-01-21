@@ -143,8 +143,12 @@ class createPages:
 
 
                     riceobj.create_department_pages()
+                    riceobj.create_departmentpagelinks_json()
+
                     riceobj.createstatspage()
+                    riceobj.create_sorteddepartments_page()
                     riceobj.create_uni_homepage()
+                    
 
                 web_methods()
             # call all the school functions here

@@ -356,9 +356,7 @@ class createUniversity:
         print(f'\n\nEnding Cloud Upload for {startingletter} school specific files\n\n') 
 
         return 0  
-    
-
-                      
+                          
     def get_school_assetcloudpaths_lists(self):
         '''
         Reconstruct the asset names manually like this:
@@ -409,7 +407,6 @@ class createUniversity:
         # currently only csv path is updated. 
         return [csv_path_list,excel_path_list,pdf_path_list,mmd_path_list]
 
-    
     def createletterpages(self):
         '''
         On each school page include the school specific csv/.xlsx (listing all the degrees). Then also include another other school diagrams in the future.
@@ -680,11 +677,9 @@ class createUniversity:
 
             print(f'\n\nEnding Cloud Upload for {startingletter} degreefiles \n\n\n\n')
     
-                
-
     def create_department_pages(self):
         '''
-     this is hard af
+        this is hard af
         '''
         for startingletter in self.alphabetizeddict:
 
@@ -711,19 +706,8 @@ class createUniversity:
                 ) = self.get_departmentnames(departmentname)
 
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
-
                 
-
-
-            
-        
-            
                 # print(f'Starting for {departmentname}')
-            
-        
-
-                # its already cleaned
-                print(f'Department name cleaned {departmentnamecleaned}')
 
                 startingletter=startingletter.lower()
                 letterwebsitepage=f'{startingletter}-departments.html'
@@ -871,7 +855,8 @@ class createUniversity:
                 
                 # now use these lists in the website creation. 
                 # well this sample link stuff is working. Now I just have to upload them is the thing...
-                print(f'\n CSV LIST:{departmentname} cloud links for csvs is\n: {csvlist}\n')
+
+                # print(f'\n CSV LIST:{departmentname} cloud links for csvs is\n: {csvlist}\n')
 
                 # then I'll do upload to cloud, excel list, csv list, mermaid list, etc
                 
@@ -880,10 +865,9 @@ class createUniversity:
                
 
                 if len(displaydepartmentname)>60:
-                    displaydepartmentname=displaydepartmentname.split(')')
-                    displaydepartmentname=f'{displaydepartmentname[0]}<br>{displaydepartmentname[-1]}'
+                    
+                    displaydepartmentname=f'{departmentcode}<br>{departmentnamehalf}'
 
-                print(f'Display department name= {displaydepartmentname}')
                 # readd any that had slashes
 
                 def make_excel_ul():
@@ -926,6 +910,7 @@ class createUniversity:
                     "universityname":self.universityname,
                     "schoolabrv":self.schoolabrv,
                     "headlinks": self.headlinks,
+                    "unicolor":self.unicolor,
                     "headtag": self.headtag,
                     "departmentnamehalf": departmentnamehalf,
                     "sitefavicon": self.images.get("site_favicon"),
@@ -957,7 +942,7 @@ class createUniversity:
                     with open(fulldepartmentpage,'w') as htmldepartmentpage:
                         htmldepartmentpage.write(departmentpagerendered)
 
-                    print(f'\n Made {fulldepartmentpage} as part of rendering department {departmentnamecleaned}\n')
+                    # print(f'\n Made {fulldepartmentpage} as part of rendering department {departmentnamecleaned}\n')
 
                 makefullhtmlcode(startingletter=startingletter)
 
@@ -1111,59 +1096,22 @@ class createUniversity:
         "schoolabrv":self.schoolabrv,
         "universityname":self.universityname,
         "departmentlinks_dict":departmentlinks_dict,
-        "departmentpagelinks_jsonpath":f'{os.path.join(self.schoolabrv,'departmentpagelinks.json')}',
+        "statslink":f'{self.schoolabrv}stats.html'
         }
+
+        scripts=f'''
+        <script src="../static/js/headingcolorchange.js"></script>
+        <!-- script for random button  -->
+        <script src="../static/js/randompage.js"></script>
+        '''
+        template_data.update({"scripts":scripts})
         
         
         # Jinja must take name=value pairs
         homepage_rendered=self.homepage_template.render(template_data)
 
-
         with open(self.homepage,'w') as fullpage:
             fullpage.write(homepage_rendered)
-        
-        def create_homepage_ul():
-            '''
-            This returns the ul that will go on the homepage.
-
-            This needs to be moved to the create_school_homepage function
-            '''
-
-            lis=f'''
-
-                '''
-            for startingletter in self.alphabetizeddict:
-                startingletter=startingletter.lower()
-                
-                letterwebsitepage=f'{startingletter}-departments.html'
-
-                
-                fullpagepath=os.path.join("departments",startingletter,letterwebsitepage)
-
-            
-                li=f'''
-                <li class="homepage-column">
-                <a href="{fullpagepath}"
-                ><div class="contentdiv">{startingletter.upper()} Departments</div></a
-                >
-            </li>
-    '''
-                lis+=li
-                
-                
-            homepageul=f'''
-            <ul class="homepage-ul">
-            {lis}
-            </ul>
-            '''
-            print(homepageul)
-
-        departmentcontainerdata={
-            "A":[{"departmentname":"","departmenturl":""},{"departmentname":"","departmenturl":""}]
-        }
-        
-        
-        # with open a template...write to it with variables, boom.
 
 # -------------END of class -----------------------
 
