@@ -36,7 +36,11 @@ from pathlib import Path
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 print(os.path.dirname(os.path.dirname(__file__)))
 
-from .excel.functions import make_checkerboard, make_excelfile
+# from .excel.functions import make_checkerboard, make_excelfile
+
+from degreeview_expansion.excel.functions.make_checkerboard import make_checkerboard
+from degreeview_expansion.excel.functions.make_excelfile import make_excelfile
+
 
 
 
@@ -56,14 +60,35 @@ class catalogData(createUniversity):
         self.course_list = []
         # child specific
         self.make_excelfile=make_excelfile
-        BASE_DIR = Path(__file__).resolve().parent
-        CONFIGS_DIR = os.path.join(str(BASE_DIR), 'excel','configs')
-            
-        self.configsfolder=CONFIGS_DIR
+        def getconfigsfolder():
+            '''
+            We're not doing this anymore.
+            Although we might to get some universal configs like blue, red, etc
+            '''
+            BASE_DIR = Path(__file__).resolve().parent
+            CONFIGS_DIR = os.path.join(str(BASE_DIR), 'excel','configs')
+                
+            self.configsfolder=CONFIGS_DIR
 
+        getconfigsfolder()
+        # this is the way to get excel files
+
+        self.uniexcelconfig=os.path.join(schoolfolder,'uniexcelconfig.json')
         # pass this in as an argument to the init
         # then in the make_excel_files() function loop over this and create as many configs as is here pretty much
         self.excelconfigs_list=[]
+
+        with open(self.jsondatapath,'r') as universityjson:
+
+            self.jsondata=json.load(universityjson)
+            length=len(self.jsondata)
+
+            # I also need to pass this to the createuniversityclass somehow
+            # put it in a json
+            self.random_dept=list(self.jsondata)[random.randint(0,length-1)]
+
+        # this controls if you make Excel files for all departments or not
+        self.single_department=False
         
         
    
@@ -542,7 +567,8 @@ class catalogData(createUniversity):
                 '''
                 Use Font and OpenPyXL to create nicely formatted tabular data
                 '''
-                utconfig=self.finishconfigpath('uniconfigs/ut.json')
+                # just defining a new variable here for organization.
+                uniconfig=self.uniexcelconfig
                 originalconfig=self.finishconfigpath('originalconfig.json')
                 darkthemeconfig=self.finishconfigpath('darkthemeconfig.json')
                 redconfig=self.finishconfigpath('colorconfigs/redtheme.json')
@@ -573,8 +599,11 @@ class catalogData(createUniversity):
                     # this is an imported function defined it init
                     self.make_excelfile(**config)
 
-                make_themed_file(utconfig,'UT-theme')
+                # these two we should always keep for the first schools at least.
+                make_themed_file(uniconfig,f'{self.schoolabrv}-theme')
                 make_themed_file(originalconfig,"original-theme")
+
+
                 make_themed_file(darkthemeconfig,'darktheme')
                 make_themed_file(redconfig,'red-theme')
                 make_themed_file(blueconfig,'blue-theme')
@@ -879,8 +908,7 @@ class catalogData(createUniversity):
             '''
             pass
     
-
-    def get_sorted_departmentlist(self):
+    def make_sorteddepartment_json(self):
         '''
         This one is tricky, but I want an ordered list of the name of the department and how many courses each department has
 
@@ -889,6 +917,8 @@ class catalogData(createUniversity):
         But the full list should be in its own file, like a json or csv.
 
         This file is gonna need me to open and query all departments databases, so it should probably be its own method
+
+        This function created that json
         '''
 
         departmentsize_dict={}
@@ -903,22 +933,24 @@ class catalogData(createUniversity):
 
             for departmentname in letterdict:
                 # make the slashes underscores. This will normalize it. Then in the createwebsite.py, I've already coded ways to unnormalize it. 
-                departmentname=departmentname.replace('/','_')
+                (
+                departmentname,
+                departmentnamecleaned,
+                displaydepartmentname,
+                departmentnamehalf,
+                departmentcode,
+                ) = self.get_departmentnames(departmentname)
 
 
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
-
-                    
-                departmentnamecleaned=departmentname.replace(' ','').lower()
-
 
                 databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
 
                 # hyphens and commas not allowed in tablename
                 # this should hopefully work across schools
-                tabledepartmentname=departmentnamecleaned.replace('-','_').replace(',','_').replace('&','and').replace("'","")
+                
 
-                tablename=f'{tabledepartmentname}_table'
+                tablename=self.get_tablename()
 
 
                
@@ -950,7 +982,6 @@ class catalogData(createUniversity):
         with open( self.sorted_departments_json,'w') as sdjson:
             json.dump(sorted_departments,sdjson,indent=4)
 
-
     def make_university_statsjson(self):
         '''
         This is the big function containing getting the data and making the file
@@ -958,8 +989,6 @@ class catalogData(createUniversity):
         The function that actually MAKES the json is makestatsjson()
         '''
 
-
-        universitywidedatabase='enterpathlater'
 
 
         def getunidata():
@@ -1121,10 +1150,6 @@ class catalogData(createUniversity):
                 json.dump(universitystatsdict,statsfile,indent=4)
         
         makestatsjson()
-
-
-
-
 
 
 

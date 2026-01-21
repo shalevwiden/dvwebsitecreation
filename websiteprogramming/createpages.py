@@ -81,8 +81,12 @@ class createPages:
                 def data_methods():
                     utcatalogobj=catalogData(**ut_specs)
                     print(f'Configs folder: {utcatalogobj.configsfolder}')
-                    # utcatalogobj.makestatsjson()
-                    utcatalogobj.make_excel_files()
+                    
+                    utcatalogobj.makestatsjson()
+                    # utcatalogobj.make_excel_files()
+                    utcatalogobj.create_univeristy_files()
+                    utcatalogobj.make_sorteddepartment_json()
+                    utcatalogobj.make_university_statsjson()
                 data_methods()
 
                 def web_methods():
@@ -115,20 +119,26 @@ class createPages:
                     # so I can probably make a function to finish this path for whereever I actually host the website
                     "/Users/shalevwiden/Downloads/Projects/testsite/rice",schoolabrv="Rice")
             
-                riceobj=createUniversity(**rice_specs)
                 # instead of calling all of the functions 
 
-                riceobj.createletterpages()
+                def data_methods():
+                    ricecatalogobj=catalogData(**rice_specs)
+                    
+                data_methods()
+
+                def web_methods():
+                    riceobj=createUniversity(**rice_specs)
+                    riceobj.createletterpages()
 
 
-                riceobj.create_department_pages()
-                riceobj.createstatspage()
-                riceobj.create_uni_homepage()
+                    riceobj.create_department_pages()
+                    riceobj.createstatspage()
+                    riceobj.create_uni_homepage()
 
             
             # call all the school functions here
             ut()
-            rice()
+            # rice()
         texas()
 
     def createindex(self):

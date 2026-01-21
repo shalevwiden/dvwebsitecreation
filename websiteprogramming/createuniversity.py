@@ -62,6 +62,10 @@ class createUniversity:
         # now based on that asset_folder_path get the university stats
         self.universitywidefolder=os.path.join(self.asset_folder_path,"universitywidefolder")
 
+
+        if not os.path.exists(self.universitywidefolder):
+            os.makedirs(self.universitywidefolder, exist_ok=True)
+
         # just keep the variable names the same as the filenames
         self.sorted_departments_json=os.path.join(self.universitywidefolder,"sorted_departments_json.json")
         self.universitystatsjson=os.path.join(self.universitywidefolder,"universitystatsjson.json")
@@ -77,17 +81,7 @@ class createUniversity:
 
         # random dept stuff
 
-        with open(self.jsondatapath,'r') as universityjson:
-
-            self.jsondata=json.load(universityjson)
-            length=len(self.jsondata)
-
-            # I also need to pass this to the createuniversityclass somehow
-            # put it in a json
-            self.random_dept=list(self.jsondata)[random.randint(0,length-1)]
-
-        # this controls if you make Excel files for all departments or not
-        self.single_department=True
+       
 
         # university name like 'The University of Texas at Austin'
         self.universityname=universityname
@@ -113,7 +107,6 @@ class createUniversity:
         for departmentname in self.jsondata:
             departmenturl=self.jsondata[departmentname]
             startingletter=departmentname[0]
-
 
             if startingletter not in self.alphabetizeddict:
 

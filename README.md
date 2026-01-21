@@ -276,3 +276,11 @@ create letter pages is still in create university
 So I could create the letter pages for UT and thats it
 
 For all other universities do not have them as letter pages.
+
+### Jan 20, 2026
+
+Ok I got Excel file stuff working
+
+Make changes to the department excel files in:
+
+`degreeview_expansion/excel/functions/make_excelfile.py`

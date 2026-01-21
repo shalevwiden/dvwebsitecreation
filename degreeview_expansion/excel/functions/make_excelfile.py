@@ -31,6 +31,7 @@ def make_excelfile(departmentname,universityname,
                    datafontname="Helvetica",titlefontname='Calibri',
                    logofontname="Barlow",
                    logocolor="ffffff",
+                   urlcolor='ffffff',
                    subheadingsize=22,
                    subheadingcolor='ffffff',
                    headingsfontname='Calibri',
@@ -139,7 +140,8 @@ def make_excelfile(departmentname,universityname,
         # this dict is simple
     
         for row in rows:
-            print(f'Row in Excel\n {row}')
+            # we shouldnt actually need to do this because it already does this with the database
+            # print(f'Row in Excel\n {row}')
             coursename,coursecode,coursehours,upperlowerstatus=row
             coursename=coursename.replace('SECOND','').replace('THIRD','')
 
@@ -235,11 +237,11 @@ def make_excelfile(departmentname,universityname,
         if col_index==4:
             # site link cell
             # keep this the same
-            lastcell.font=Font(name='Roboto',size=19, bold=True, color='000000')
+            lastcell.font=Font(name='Roboto',size=19, bold=True, color=urlcolor)
             lastcell.alignment=Alignment(horizontal='left',vertical='bottom')
 
         else:
-            # logo cell - CHANGE THIS
+            # logo cell - CHANGE THIS - this says DegreeView in it
             lastcell.font=Font(name=logofontname,size=30, bold=True, color=logocolor)
             lastcell.alignment=Alignment(horizontal='left',vertical='center')
 
@@ -379,10 +381,13 @@ def make_excelfile(departmentname,universityname,
         for rowentry in range(rowval, rowindexes):
             # update it here so it updates by row not column...although
 
+            # here you can set a pattern, with the 2 its every 2nd row is taller
+
+            additional_height=0
             if rowentry%2==0:            
                 ws.row_dimensions[rowentry].height = datarowheight  # sets height of the entire row
             else:
-                ws.row_dimensions[rowentry].height = datarowheight+50  # sets height of the entire row
+                ws.row_dimensions[rowentry].height = datarowheight+additional_height  # sets height of the entire row
 
 
 
