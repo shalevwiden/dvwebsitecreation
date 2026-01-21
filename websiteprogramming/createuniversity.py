@@ -766,12 +766,10 @@ class createUniversity:
                     '''
                     This will open up the departments database and make courserows
                     Then pass it into the Jinja template.
-                    
                     '''
 
-
                     databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
-                    tablename=self.get_tablename(departmentnamecleaned)
+                    tablename=self.get_tablename()
 
 
                     def getdatabaserows():

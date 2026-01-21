@@ -231,7 +231,7 @@ class catalogData(createUniversity):
                     departmentnamehalf,
                     departmentcode,
                     ) = self.get_departmentnames(departmentname)
-                    print(f'Longest coursename for department: \n{departmentname}')
+                    
 
                     departmentfolderpath=os.path.join(letterfolder,departmentname)
 
@@ -275,7 +275,9 @@ class catalogData(createUniversity):
 
                             cursor.execute(longestnamecommand)
                             row=cursor.fetchone()
-                            print(f'\n{row}')
+
+                            # print(f'Longest coursename:\n{row}')
+
                             if row is None:
 
                                 longestresult = None 
@@ -1030,6 +1032,7 @@ class catalogData(createUniversity):
         This is the big function containing getting the data and making the file
 
         The function that actually MAKES the json is makestatsjson()
+        This needs to be done after make_sorteddepartment_json
         '''
 
 
@@ -1062,7 +1065,8 @@ class catalogData(createUniversity):
                 # this makes a list of key value pairs as tuples
                 # this is a good idea when you need to index into a dictionary, like below
                 sorted_departments_list = list(sorted_departments.items())
-                print(f'sorted_departments_list :\n{sorted_departments_list}')
+
+                # print(f'sorted_departments_list to view :\n{sorted_departments_list}')
                 
 
                 first_dept=sorted_departments_list[0]
@@ -1107,6 +1111,7 @@ class catalogData(createUniversity):
                     cursor.execute(countquery)
                     rowcount = cursor.fetchone()[0]                    
                     return rowcount
+                
                 def get_longest_andshortest_coursename():
 
                     longestnamecommand=f'''

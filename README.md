@@ -294,3 +294,7 @@ I want it to either be upper, lower, or grad.
 If I cant get it somehow I need to update everything as if it cannot be got.
 Just pass a different argument into the universitystatsjson for the classifications like
 "could not be retrieved" or something like that.
+
+### Jan 21, 2026
+
+The data methods must be called in the right order.

@@ -49,7 +49,11 @@ class createPages:
         self.universityuldatapath=''
     def buildspecs(self,schoolfolder,universityname,cloudbucketpath,websitefolder, schoolabrv):
 
-        
+        '''
+        change this to change the arguments that are passed into a class
+        I think here I can do defaults like _ if _ else _
+        Just put the defaults at the top of this function like placeholder='default'
+        '''
         return {"schoolfolder":schoolfolder,
     "universityname": universityname,
     "cloudbucketpath": cloudbucketpath,
@@ -98,16 +102,16 @@ class createPages:
                     utobj.create_sorteddepartments_page()
                     utobj.create_departmentpagelinks_json()
 
-                # instead of calling all of the functions 
-                # utobj.createletterpages()
+                    # instead of calling all of the functions 
+                    # utobj.createletterpages()
 
+                    '''these two functions are actually not called for UT because UT is special
+                    UT is the original DV'''
 
-                '''these two functions are actually not called for UT because UT is special
-                UT is the original DV'''
-
-                # utobj.createstatspage()
-                # utobj.create_uni_homepage()
-                # this one is tho I think...
+                    # utobj.createstatspage()
+                    # utobj.create_uni_homepage()
+                    # this one is tho I think...
+                # web_methods()
 
             def rice():
                 # update all of this with rice data
@@ -142,7 +146,7 @@ class createPages:
                     riceobj.createstatspage()
                     riceobj.create_uni_homepage()
 
-            
+                web_methods()
             # call all the school functions here
             # ut()
             rice()
