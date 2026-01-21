@@ -135,7 +135,7 @@ class createPages:
                     ricecatalogobj.make_sorteddepartment_json()
                     ricecatalogobj.make_university_statsjson()
                     
-                data_methods()
+                # data_methods()
 
                 def web_methods():
                     riceobj=createUniversity(**rice_specs)

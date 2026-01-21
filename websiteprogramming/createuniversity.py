@@ -88,6 +88,9 @@ class createUniversity:
         # well maybe, Yale could be the abbreviation for Yale University
         self.schoolabrv = schoolabrv
 
+        unicolorjson=os.path.join(schoolfolder,'unicolor.json')
+        with open(unicolorjson,'r') as colorjson:
+            self.unicolor=json.load(colorjson).get('unicolor')
 
         
 
@@ -729,18 +732,15 @@ class createUniversity:
                 scripts=f'''
 
                     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-
-
-
                     <!-- Hover Script -->
 
-                    <script src="../../static/js/headingcolorchange.js"></script>
+                    <script src="../../../static/js/headingcolorchange.js"></script>
                     <!-- copy script -->
-                    <script src="../../static/js/copytable.js"></script>
+                    <script src="../../../static/js/copytable.js"></script>
 
                     <!-- animate table script -->
-                    <script src="../../static/js/animatetable.js"></script>
-    '''
+                    <script src="../../../static/js/animatetable.js"></script>
+                '''
                 # now I need to pass in all values from statsdict
                
 
@@ -924,6 +924,7 @@ class createUniversity:
                 '''
                 departmentpagedata = {
                     "universityname":self.universityname,
+                    "schoolabrv":self.schoolabrv,
                     "headlinks": self.headlinks,
                     "headtag": self.headtag,
                     "departmentnamehalf": departmentnamehalf,
@@ -936,7 +937,7 @@ class createUniversity:
                     "footer": self.footer,
                     "statsdict":statsdict,
                     "excelul":excel_ul,
-                    "departmentpagelinks_jsonpath":f'{os.path.join(self.schoolabrv,'departmentpagelinks.json')}',
+                    
                     "scripts":scripts,
                     
                 }
@@ -1110,6 +1111,7 @@ class createUniversity:
         "schoolabrv":self.schoolabrv,
         "universityname":self.universityname,
         "departmentlinks_dict":departmentlinks_dict,
+        "departmentpagelinks_jsonpath":f'{os.path.join(self.schoolabrv,'departmentpagelinks.json')}',
         }
         
         

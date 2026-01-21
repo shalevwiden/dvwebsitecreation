@@ -38,6 +38,7 @@ class createWebsite:
         self.degreeviewfolderpath='/Users/shalevwiden/Downloads/Projects/originaldegreeview'
 
         self.schooldata=schooldata
+        self.unicolor='#bf5700'
         
         self.schoolnamekey=list(schooldata)[0]
         self.schoolname=schooldata[self.schoolnamekey]        
@@ -483,6 +484,9 @@ class createWebsite:
             {mainsitecode}
             {undermainsitecode}
             {self.footer}
+             <div id="hiddeninfo">
+        <p id="unicolor">{self.unicolor}</p>
+      </div>
             <!-- Hover Script -->
             <script src="../javascript_files/headingcolorchange.js"></script>
 
@@ -1089,6 +1093,9 @@ class createWebsite:
                 {mainsitecode}
                 {undermainsitecode}
                 {self.footer}
+                 <div id="hiddeninfo">
+        <p id="unicolor">{self.unicolor}</p>
+      </div>
 
                 <!-- Hover Script -->
 
@@ -1406,6 +1413,9 @@ class createWebsite:
                 {abovemainsitecode}
                 {undermainsitecode}
                 {self.footer}
+                 <div id="hiddeninfo">
+        <p id="unicolor">{self.unicolor}</p>
+      </div>
 
                 <!-- Hover Script -->
 
