@@ -54,7 +54,9 @@
         <div class="topnav">
           <nav class="breadcrumbs">
             <ul>
-              <li><a href="../../utcoursesindex.html">DegreeView UT</a></li>
+              <li>
+                <a href="../../utcoursesindex.html">{{schoolabrv}} Home</a>
+              </li>
               <i class="fa fa-chevron-right"></i>
 
               <li>
@@ -267,12 +269,12 @@
         </table>
       </div>
       {{footer}}
+
+      <div id="hiddeninfo">
+        <p id="headingcolor"></p>
+      </div>
     </div>
     <!-- put hidden info here for the JavaScript to get -->
-    <div id="hiddeninfo">
-      <p id="headingcolor"></p>
-      <p id="departmentpagelinks_jsonpath">{{departmentpagelinks_jsonpath}}</p>
-    </div>
 
     {{scripts}}
   </body>

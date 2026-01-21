@@ -87,11 +87,11 @@ def main():
     code=dept.get_departmentcode(departmentname)
 
     
-    print(f"departmentname:\n{departmentname}")
-    print(f"departmentnamecleaned:\n{departmentnamecleaned}")
-    print(f"display_departmentname:\n{display_departmentname}")
-    print(f"departmentnamehalf:\n{departmentnamehalf}")
-    print(f"code:\n{code}")
+    print(f"departmentname:\n{departmentname}\n")
+    print(f"departmentnamecleaned:\n{departmentnamecleaned}\n")
+    print(f"display_departmentname:\n{display_departmentname}\n")
+    print(f"departmentnamehalf:\n{departmentnamehalf}\n")
+    print(f"code:\n{code}\n")
 
 if __name__ == "__main__":
     main()

@@ -1191,7 +1191,7 @@ class catalogData(createUniversity):
             universityjson=os.path.join(self.universitywidefolder,'universitystatsjson.json')
 
             universitystatsdict=getunidata()
-            print(f'universitystatsdict: {universitystatsdict}')
+            # print(f'universitystatsdict: {universitystatsdict}')
 
 
             with open(universityjson,'w') as statsfile:
