@@ -139,9 +139,10 @@ class createPages:
 
                 def web_methods():
                     riceobj=createUniversity(**rice_specs)
-                    riceobj.createletterpages()
 
+                    # riceobj.createletterpages()
 
+                    # riceobj.upload_department_files()
                     riceobj.create_department_pages()
                     riceobj.create_departmentpagelinks_json()
 

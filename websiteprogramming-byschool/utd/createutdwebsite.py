@@ -21,8 +21,14 @@ import importlib.util
 
 
 
-with open("/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/degreeview_expansion/utd/utdasset.json", "r") as file:
+with open("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/degreeview_expansion/utd/utdasset.json", "r") as file:
     utdasset = json.load(file)
+
+total=0
+for i in utdasset:
+
+    total+=len(i)
+print(f'Total:\n{total}')
 
 # you can also assign a function
 
@@ -51,7 +57,7 @@ class createWebsite:
         # this should work. If not I need to find a mystery
 
         # -----------New cleaned schoolname and websitefoler stuff --------------
-        websitepath='/Users/shalevwiden/Downloads/Projects/dvschoolsites/texas/utdallas-site'
+        websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewwebsite/texas/utdallas-site'
 
 
         self.cleanedschoolname=self.schoolname.replace(' ','').lower()
@@ -144,7 +150,7 @@ class createWebsite:
                 # this should return the email used for google cloud. Its a service email tho
 
                 # yeah the project is the same as the bucket name. In the future change this, as the bucketname is what user sees
-                bucket = client.bucket('degreeview-utd-plans')
+                bucket = client.bucket('degreeview-ut')
                 # bucket list
 
 
@@ -207,9 +213,7 @@ class createWebsite:
         print(f'\n\nEnding Cloud Upload for {self.schoolname} school specific files\n\n') 
 
         return 0  
-    
-
-                      
+                          
     def get_school_assetcloudpaths_lists(self):
         '''
         Reconstruct the asset names manually like this:
@@ -259,8 +263,7 @@ class createWebsite:
 
         # currently only csv path is updated. 
         return [csv_path_list,excel_path_list,pdf_path_list,mmd_path_list]
-
-    
+ 
     def createschoolpages(self):
         '''
         On each school page include the school specific csv/.xlsx (listing all the degrees). Then also include another other school diagrams in the future.
@@ -517,8 +520,6 @@ class createWebsite:
         
         makefullhtmlcode()
         return 0
-
-
 # --------------------------------Degree pages now ----------------------------------
 
     def upload_degree_files(self):
@@ -645,22 +646,23 @@ class createWebsite:
                 excellist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[1]
                 pdflist=get_assetlists(degreenameassetfolder=degreenameassetfolder)[2]
 
-                majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
+                # majorcoursescsv=[csv for csv in csvlist if "courses" in csv][0]
 
                 # mmds currently not needing to be uplaoded.
                 
 
                 for pdffile in pdflist:
-                    if 'dolphinocean' in pdffile:
-                        upload_to_googlecloud(pdffile)
-                        print(f'Uploaded {pdffile} to cloud\n')
-                    elif 'stare' in pdffile:
-                        upload_to_googlecloud(pdffile)
-                        print(f'Uploaded {pdffile} to cloud\n')
+                   
+                    upload_to_googlecloud(pdffile)
+                    print(f'Uploaded {pdffile} to cloud\n')
+
+                   
+                   
+                   
 
         
                 
-                others=False
+                others=True
                 if others:
                     for csvfile in csvlist:
                         # comment these out depending on which ones I want
@@ -679,19 +681,10 @@ class createWebsite:
         return 0
                     
                    
-
-
-
-
     def create_degree_pages(self):
         '''
      this is hard af
         '''
-     
-
-
-        
-            
         # big for loop--------------------------------------------------------------------
         for degreefolder in self.degreefolders:
             print(f'Degree folder: \n{degreefolder}\n')
@@ -855,7 +848,7 @@ class createWebsite:
         <div class="topnav">
           <nav class="breadcrumbs">
             <ul>
-              <li><a href="../index.html">DegreeView UT</a></li>
+              <li><a href="../index.html">DegreeView UTD</a></li>
               <i class="fa fa-chevron-right"></i>
 
               <li><a href="{self.schoolpage}">{self.schoolname}</a></li>
@@ -1525,12 +1518,6 @@ class createWebsite:
         return degreepage_list, degreename_data
 
 
-
-
-    def createstatspage(self):
-        '''This will create the University Wide stats html page'''
-        pass
-
 # -------------END of class -----------------------
 
 
@@ -1601,16 +1588,17 @@ def basstesting():
 # basstesting()
 
 
-def unpacktheasset_into_createSchoolpages(utdasset):
+def main():
     for schooldict in utdasset[0:]:
         print(schooldict[list(schooldict)[0]])
         websiteobject=createWebsite(schooldata=schooldict)
         print(f'starting for {websiteobject.schoolname}\n\n\n')
         
+        # websiteobject.upload_degree_files()
         websiteobject.createschoolpages()
         websiteobject.create_degree_pages()
         websiteobject.create_renderedcsv_pages()
      
         
-
-unpacktheasset_into_createSchoolpages(utdasset=utdasset)
+if __name__=="__main__":
+    main()

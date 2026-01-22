@@ -298,3 +298,7 @@ Just pass a different argument into the universitystatsjson for the classificati
 ### Jan 21, 2026
 
 The data methods must be called in the right order.
+
+Made a frontend folder inside UT courses to display a Front end message
+On the homepage
+Just pass it in as an argument.

@@ -489,11 +489,10 @@ class createUniversity:
             }
 
               
+            startingletter=startingletter.lower()
             
-            def makefullhtmlcode(startingletter):
+            def makefullhtmlcode():
 
-               
-                startingletter=startingletter.lower()
                 print(f'Starting letter {startingletter}')
                 letterwebsitefolder=os.path.join(self.deparmentsfolder,startingletter)
                 
@@ -508,7 +507,7 @@ class createUniversity:
                 with open(fullpagepath,'w') as fullpage:
                     fullpage.write(letterpagerendered)
             
-            makefullhtmlcode(startingletter=startingletter)
+            makefullhtmlcode()
         # now its done
         return 0
 # --------------------------------Degree pages now ----------------------------------
@@ -907,6 +906,7 @@ class createUniversity:
                 I need to get departmentnamehalf and displaydepartmentname standardized across schools
                 '''
                 departmentpagedata = {
+
                     "universityname":self.universityname,
                     "schoolabrv":self.schoolabrv,
                     "headlinks": self.headlinks,
@@ -918,7 +918,7 @@ class createUniversity:
                     "startingletter":startingletter,
                     "letterpagereferencepath":letterpagereferencepath,
                     "courserows":courserows,
-                     "bodytag": self.bodytag,
+                    "bodytag": self.bodytag,
                     "footer": self.footer,
                     "statsdict":statsdict,
                     "excelul":excel_ul,
@@ -926,16 +926,16 @@ class createUniversity:
                     "scripts":scripts,
                     
                 }
-     
-                def makefullhtmlcode(startingletter):
+                startingletter=startingletter.lower()
+
+                def makefullhtmlcode():
                     # have to run createschoolpages() first so self.websiteschool folder works
 
-                    startingletter=startingletter.lower()
                     print(f'Starting letter {startingletter}')
                     # departments folder passed in
-                    letterwebsitefolder=os.path.join(self.deparmentsfolder,startingletter)
+                    # letterwebsitefolder=os.path.join(self.deparmentsfolder,startingletter)
                    
-                    fulldepartmentpage=os.path.join(letterwebsitefolder,f'{departmentnamecleaned}.html')
+                    fulldepartmentpage=os.path.join(self.deparmentsfolder,f'{departmentnamecleaned}.html')
                     departmentpagerendered=self.departmentpagetemplate.render(departmentpagedata)
                     
                     # w mode overrides it
@@ -944,7 +944,7 @@ class createUniversity:
 
                     # print(f'\n Made {fulldepartmentpage} as part of rendering department {departmentnamecleaned}\n')
 
-                makefullhtmlcode(startingletter=startingletter)
+                makefullhtmlcode()
 
         return 0
 
