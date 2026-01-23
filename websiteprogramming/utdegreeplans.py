@@ -1600,7 +1600,6 @@ def unpacktheasset_into_createSchoolpages(theasset):
         # websiteobject.upload_degree_files()
         websiteobject.create_degree_pages()
         websiteobject.create_renderedcsv_pages()
-        # websiteobject.upload_degree_files()
         
 if __name__=="__main__":
 

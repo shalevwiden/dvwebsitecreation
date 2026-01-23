@@ -57,7 +57,7 @@ class createWebsite:
         # this should work. If not I need to find a mystery
 
         # -----------New cleaned schoolname and websitefoler stuff --------------
-        websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewwebsite/texas/utdallas-site'
+        websitepath='/Users/shalevwiden/Downloads/Projects/utdallas-site'
 
 
         self.cleanedschoolname=self.schoolname.replace(' ','').lower()
@@ -80,7 +80,7 @@ class createWebsite:
 
             <a href="../index.html">Home</a>
           </div>
-          <p id="statement">DegreeView 2025</p>
+          <p id="statement">DegreeView 2026</p>
         </div>
 
         <div class="footerright">
@@ -379,8 +379,8 @@ class createWebsite:
         <ul>
             
               <li><a href="../index.html">Home</a></li>
-              <li><a href="../aboutpage.html">About</a></li>
-              <li><a href="../ut-stats.html">Stats</a></li>
+              <li><a href="../about.html">About</a></li>
+              <li><a href="../utd-stats.html">Stats</a></li>
         </ul>
         </nav>
     </div>
@@ -683,7 +683,7 @@ class createWebsite:
                    
     def create_degree_pages(self):
         '''
-     this is hard af
+        this is hard af
         '''
         # big for loop--------------------------------------------------------------------
         for degreefolder in self.degreefolders:
@@ -863,8 +863,8 @@ class createWebsite:
             <ul>
               
               <li><a href="../index.html">Home</a></li>
-              <li><a href="../aboutpage.html">About</a></li>
-              <li><a href="../ut-stats.html">Stats</a></li>
+              <li><a href="../about.html">About</a></li>
+              <li><a href="../utd-stats.html">Stats</a></li>
             </ul>
           </nav>
         </div>
@@ -1363,8 +1363,8 @@ class createWebsite:
             <ul>
               
               <li><a href="../index.html">Home</a></li>
-              <li><a href="../aboutpage.html">About</a></li>
-              <li><a href="../ut-stats.html">Stats</a></li>
+              <li><a href="../about.html">About</a></li>
+              <li><a href="../utd-stats.html">Stats</a></li>
             </ul>
           </nav>
         </div>
@@ -1437,6 +1437,9 @@ class createWebsite:
 
                 <!-- animate table script -->
                 <script src="../static/js/animatetable.js"></script>
+
+                      <script src="../static/js/degreecsvrendered.js"></script>
+
                 </div>
                 </body>
 
