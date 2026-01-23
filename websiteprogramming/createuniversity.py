@@ -58,6 +58,9 @@ class createUniversity:
         # where assets like excel files and csvs are
         self.asset_folder_path=os.path.join(schoolfolder,'assets')
 
+
+        if not os.path.exists(self.asset_folder_path):
+            os.makedirs(self.asset_folder_path, exist_ok=True)
         # now based on that asset_folder_path get the university stats
         self.universitywidefolder=os.path.join(self.asset_folder_path,"universitywidefolder")
 

@@ -52,7 +52,7 @@ class createWebsite:
         # this should work. If not I need to find a mystery
 
         # -----------New cleaned schoolname and websitefoler stuff --------------
-        self.degreeviewwebsite_path='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utaustin-site'
+        self.degreeviewwebsite_path=websitepath
 
 
         self.cleanedschoolname=self.schoolname.replace(' ','').lower()
@@ -549,8 +549,6 @@ class createWebsite:
 
 
             def get_assetlists(degreenameassetfolder):
-                    
-
                     csvlist=[]
                     excellist=[]
                     pdflist=[]
@@ -606,7 +604,7 @@ class createWebsite:
                     uploadblob =f'{self.cleanedschoolname}/csvs/{cleaned_object_name}'
                     uploadblob=bucket.blob(uploadblob)
                 elif os.path.splitext(source_file_name)[1]=='.xlsx':
-                    uploadblob =f'{self.cleanedschoolname}/excel-files/{cleaned_object_name}'
+                    uploadblob =f'{self.cleanedschoolname}/excel-files/newexcel/{cleaned_object_name}'
                     uploadblob=bucket.blob(uploadblob)
 
 
@@ -665,11 +663,12 @@ class createWebsite:
                 #     elif 'stare' in pdffile:
                 #         upload_to_googlecloud(pdffile)
                 #         print(f'Uploaded {pdffile} to cloud\n')
+
                 upload_to_googlecloud(fullsemestercsv)
-                # for excelfile in excellist:
-                #     if not excelfile.startswith(("~$", "$")) and "greentheme" in excelfile:
-                #         upload_to_googlecloud(excelfile)
-                #         print(f'Uploaded {excelfile} to cloud\n')
+                for excelfile in excellist:
+                    if not excelfile.startswith(("~$", "$")):
+                        upload_to_googlecloud(excelfile)
+                        print(f'Uploaded {excelfile} to cloud\n')
                 
                 
 
@@ -788,12 +787,12 @@ class createWebsite:
                         
                         if os.path.splitext(file)[1]=='.xlsx' and not file.startswith(("~$", "$")):
 
-                            objectname_incloud=f'{self.cleanedschoolname}/excel-files/{file}'
+                            objectname_incloud=f'{self.cleanedschoolname}/excel-files/newexcel/{file}'
                             googlecloudpath=f'https://storage.googleapis.com/degreeview-ut/{objectname_incloud}'
                         
                             excel_path_list.append(googlecloudpath)
                        
-                return [excel_path_list]
+                return excel_path_list
             
             csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
             # now use these lists in the website creation. 
@@ -931,17 +930,29 @@ class createWebsite:
 
                 # get excel links 
                 excelfiles_folder=os.path.join(degreenameassetfolder,'excelfiles')
-                excellist=get_excel_assetcloudpaths_lists(excelfolder=excelfiles_folder)[0]
-                # print(f'Excel list:{excellist}')
+                excellist=get_excel_assetcloudpaths_lists(excelfolder=excelfiles_folder)
+                print(f'Excel list:{excellist}')
 
-                originaltheme_excel=[file for file in excellist if "original" in file][0]
-                # have to do this since it selects the neon one. In the future I will explicitly name it original
+                def find_theme(excellist, keyword):
+                    for file in excellist:
+                        if keyword in file.lower():
+                            return file
+                    return None  # prevents crashes
+                originaltheme_excel = find_theme(excellist, "originaltheme")
+                darktheme_excel     = find_theme(excellist, "darktheme")
+                green_excel         = find_theme(excellist, "greentheme")
+                print(f'green_excel {green_excel}')
 
+                desert_excel        = find_theme(excellist, "desert")
+                grey_excel          = find_theme(excellist, "greyscale")
+                ocean_excel         = find_theme(excellist, "ocean")
+                pastel_excel        = find_theme(excellist, "pastel")
+                primarycolors_excel = find_theme(excellist, "primarycolors")
+                neon_excel          = find_theme(excellist, "neon")
+                blacktheme_excel    = find_theme(excellist, "blacktheme")
+                bluetheme_excel     = find_theme(excellist, "bluetheme")
 
-                darktheme_excel=[file for file in excellist if "dark" in file][0]
-                green_excel=[file for file in excellist if "greentheme" in file][0]
-                green_excel = green_excel.removesuffix(".xlsx")
-                green_excel = f"{green_excel}semesters.xlsx"
+                
 
 
                 # get pdf links
@@ -979,13 +990,14 @@ class createWebsite:
                         "darktheme_excel":darktheme_excel,
                         "green_excel":green_excel,
 
-                        # "desert_excel":desert_excel,
-                        # "grey_excel":grey_excel,
-                        # "ocean_excel":ocean_excel,
-                        # "pastel_excel":pastel_excel,
-                        # "primarycolors_excel":primarycolors_excel,
-                        # "neon_excel":neon_excel,
-                        # "blacktheme_excel": blacktheme_excel,
+                        "desert_excel":desert_excel,
+                        "grey_excel":grey_excel,
+                        "ocean_excel":ocean_excel,
+                        "pastel_excel":pastel_excel,
+                        "primarycolors_excel":primarycolors_excel,
+                        "neon_excel":neon_excel,
+                        "blacktheme_excel": blacktheme_excel,
+                        "bluetheme_excel":bluetheme_excel,
 
 
                         # now all the pdfs
@@ -1609,13 +1621,14 @@ def get_all_schools(theasset):
 def unpacktheasset_into_createSchoolpages(theasset):
     for schooldict in theasset[0:]:
         print(schooldict[list(schooldict)[0]])
-        websiteobject=createWebsite(schooldata=schooldict)
+        websiteobject=createWebsite(schooldata=schooldict,websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utaustin-site')
         print(f'starting for {websiteobject.schoolname}\n\n\n')
         
         websiteobject.createschoolpages()
         # websiteobject.upload_degree_files()
         websiteobject.create_degree_pages()
         websiteobject.create_renderedcsv_pages()
+        # websiteobject.upload_degree_files()
         
 if __name__=="__main__":
 
