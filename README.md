@@ -302,3 +302,8 @@ The data methods must be called in the right order.
 Made a frontend folder inside UT courses to display a Front end message
 On the homepage
 Just pass it in as an argument.
+
+### Jan 23
+
+I'm gonna include the starting letter in the pages
+Cause thats simply better for organization.

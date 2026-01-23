@@ -148,13 +148,14 @@ def make_excelfile(departmentname,universityname,
             excelobject.append([coursename,coursecode,coursehours,upperlowerstatus])
 
             if ',' in coursehours:
+                # for UT only
                 coursehours=coursehours.split(',')[-1]
-            totalhours+=int(coursehours)
+
+            
 
         # write an empty line at the end
-        return totalhours
-
-    totalhours=writecoursedata()
+    
+    writecoursedata()
         
 
     # adding to excel file
@@ -213,20 +214,20 @@ def make_excelfile(departmentname,universityname,
 
 # -----------------------------end data stuff --------------------------------------------------------
     ws.append(blankrow)
-    totalhoursrow=['','',f'Total Hours: {totalhours}','','']
+    
 
     # this lastrow value is actually used for the last TWO rows
     lastrowindex=len(excelobject)+6
-    for col_index, value in enumerate(totalhoursrow, start=1):
+    
         
-        # use.font to assign the font I see
-        cell=ws.cell(row=lastrowindex+1, column=col_index, value=value)
-        # FF=full opacity 
-        cell.font=datafont
+    
+    
+    
+    
 
 
     lastrow=['DegreeView','','','degreeviewsite.com']
-    lastrowindex+=2 # 6 rows before we start data stuff. Then rowcount is the amount of data. 
+    lastrowindex+=1 # 6 rows before we start data stuff. Then rowcount is the amount of data. 
 
     # change the logo colors here
     for col_index, value in enumerate(lastrow, start=1):

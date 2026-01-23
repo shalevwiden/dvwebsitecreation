@@ -191,18 +191,35 @@ class createPages:
                     ,"https://storage.googleapis.com/stanford",
                     "/Users/shalevwiden/Downloads/Projects/testsite/stanford",
                     "Stanford")
+                
                 def data_methods():
                     stanfordcatalogobj=catalogData(**stanford_specs)
                     print(f'Configs folder: {stanfordcatalogobj.configsfolder}')
                     
-                    stanfordcatalogobj.upload_to_database()
+                    # stanfordcatalogobj.upload_to_database()
+                    
                     stanfordcatalogobj.makestatsjson()
                     stanfordcatalogobj.make_excel_files()
                     stanfordcatalogobj.create_univeristy_files()
                     stanfordcatalogobj.make_sorteddepartment_json()
                     stanfordcatalogobj.make_university_statsjson()
 
-                data_methods()
+                # data_methods()
+                def web_methods():
+                    stanfordobj=createUniversity(**stanford_specs)
+
+                    # stanfordobj.createletterpages()
+
+                    # stanfordobj.upload_department_files()
+                    stanfordobj.create_department_pages()
+                    stanfordobj.create_departmentpagelinks_json()
+
+                    stanfordobj.createstatspage()
+                    stanfordobj.create_sorteddepartments_page()
+                    stanfordobj.create_uni_homepage()
+                    
+
+                web_methods()
             stanford()
         california()
 

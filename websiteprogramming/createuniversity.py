@@ -879,7 +879,7 @@ class createUniversity:
                     '''
                     excellist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[1]
                     if excellist:
-                        originaltheme_excel=[file for file in excellist if "originaltheme" in file][0]
+                        originaltheme_excel=[file for file in excellist if "original-theme" in file][0]
                     else:
                         originaltheme_excel="placeholder, some schools dont have excel files generated yet."
                     
@@ -921,11 +921,13 @@ class createUniversity:
                     "displaydepartmentname": displaydepartmentname,
                     "startingletter":startingletter,
                     "letterpagereferencepath":letterpagereferencepath,
+                    "homepage":f'../../{os.path.basename(self.homepage)}',
                     "courserows":courserows,
                     "bodytag": self.bodytag,
                     "footer": self.footer,
                     "statsdict":statsdict,
                     "excelul":excel_ul,
+
                     
                     "scripts":scripts,
                     
@@ -937,9 +939,12 @@ class createUniversity:
 
                     print(f'Starting letter {startingletter}')
                     # departments folder passed in
-                    # letterwebsitefolder=os.path.join(self.deparmentsfolder,startingletter)
+                    letterwebsitefolder=os.path.join(self.deparmentsfolder,startingletter)
+
+                    if not os.path.exists(letterwebsitefolder):
+                        os.mkdir(letterwebsitefolder)
                    
-                    fulldepartmentpage=os.path.join(self.deparmentsfolder,f'{departmentnamecleaned}.html')
+                    fulldepartmentpage=os.path.join(self.deparmentsfolder,startingletter,f'{departmentnamecleaned}.html')
                     departmentpagerendered=self.departmentpagetemplate.render(departmentpagedata)
                     
                     # w mode overrides it

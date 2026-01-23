@@ -59,6 +59,10 @@ def scrapecourses(departmenturl):
 
         # Determine course level from the number
         
+        def get_coursehours():
+            coursehours=''
+            return coursehours
+
 
         def get_status():
             match = re.search(r'\d+', coursecode)
@@ -71,12 +75,13 @@ def scrapecourses(departmenturl):
             else:
                 status = "Lower Division"
             # override here
-            status='too hard'
+            status=''
             return status
         
+        coursehours=get_coursehours()
         status=get_status()
+
         # Handle repeated course names
-        coursehours='idk'
         if coursename not in departmentdata:
             departmentdata[coursename] = [coursecode, coursehours, status]
         elif f"{coursename}SECOND" not in departmentdata:

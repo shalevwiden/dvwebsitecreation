@@ -209,6 +209,130 @@ class catalogData(createUniversity):
                         print(f'Created {departmentnamecleaned}-database.db\n')
                 database_logic()
 
+    def upload_stragglers_todb(self):
+        '''
+        
+        Get the ones that timed out
+
+        
+        '''
+        skipnum=3
+        limited_dict = {key: self.alphabetizeddict[key] for key in list(self.alphabetizeddict)[skipnum:]}
+        for startingletter in self.alphabetizeddict:
+
+            '''
+            More complex logic now with multiple stuff on one page.
+
+            We will use similar logic for UTSA.
+
+            I'll also need to create some databases for each notes ... maybe.
+            For that I could just use the utcoursescraping file since just the notes will be much faster.
+
+             
+
+
+            '''
+
+            letterfolder=os.path.join(self.asset_folder_path,startingletter)
+            if not os.path.exists(letterfolder):
+                os.mkdir(letterfolder)
+            
+            letterdict=self.alphabetizeddict[startingletter]
+            for departmentname in letterdict:
+                departmenturl=letterdict[departmentname]
+
+                (
+                departmentname,
+                departmentnamecleaned,
+                displaydepartmentname,
+                departmentnamehalf,
+                departmentcode,
+                ) = self.get_departmentnames(departmentname)
+
+                departmentfolderpath=os.path.join(letterfolder,departmentname)
+
+
+                if not os.path.exists(departmentfolderpath):
+                    os.mkdir(departmentfolderpath)
+                        # now get the SQL stuff right, then just copy paste. 
+                def database_logic():
+                # its a little different from the database name, use underscore instead of hyphen
+                    '''
+                    There was a tricky problem with the seconds...thats why I used SECOND
+                    '''
+
+                    
+
+                    databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
+
+                    tablename=self.get_tablename()
+
+                    # start fresh
+
+                    def check_if_empty(tablename, db_path):
+
+                        # Connect to the database
+                        conn = sqlite3.connect(db_path)
+                        cursor = conn.cursor()
+
+                        # Check if the table has any rows
+                        cursor.execute(f"SELECT COUNT(*) FROM {tablename}")
+                        count = cursor.fetchone()[0]
+
+                        conn.close()
+
+                        if count > 0:
+                            return False
+                        else:
+                            # just for readability
+                            return True
+                    # Usage
+                    empty = check_if_empty(tablename, databasepath)
+                    if not empty:
+                        # stop further processing cause the table is full
+                        return
+                    else:
+                        print(f'Redoing Department:\n{departmentname}\n ')
+                    
+
+                    # hyphens and commas not allowed in tablename
+
+
+                    def maketable():
+                        '''This creates the table for course data in the db'''
+
+                        # this line makes the db
+                        with sqlite3.connect(databasepath) as conn:
+                            cursor=conn.cursor()
+
+                        # table name lowercase- since we changed from notes to category we also changed UpperDivStatus-UpperLowerStatus
+                            createtablecommand=f'''CREATE TABLE IF NOT EXISTS "{tablename}" (coursename TEXT , coursecode TEXT, coursehours TEXT, classification TEXT);'''
+                            cursor.execute(createtablecommand)
+                            conn.commit()
+                    maketable()
+                        
+                    with sqlite3.connect(databasepath) as conn:
+                        cursor=conn.cursor()
+
+                        departmentdata=self.scrapecourses(departmenturl=departmenturl)
+                        if departmentdata is None:
+                            print('departmentdata is none, ending')
+                            return
+                        for coursename in departmentdata:
+                            coursecode,coursehours,classification=departmentdata[coursename]
+                            # established second and third in scrape courses
+                            coursename=coursename.replace('SECOND','').replace('THIRD','')
+                            cursor.execute(f'INSERT INTO {tablename} (coursename, coursecode, coursehours, classification) values(?,?,?,?);',
+                                        [coursename,coursecode,coursehours,classification])
+                                    
+
+
+                                
+                        # commit to the database 
+                        conn.commit()
+                        print(f'Created {departmentnamecleaned}-database.db\n')
+                database_logic()
+
     def makestatsjson(self):
         '''
         
