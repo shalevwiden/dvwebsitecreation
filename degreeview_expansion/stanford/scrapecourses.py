@@ -1,135 +1,111 @@
-import requests
-import bs4
+import re
+import time
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
-import sys
-import os
-import json
-
-import csv
-
-# good to check everythings working with the venv:
-if __name__=='__main__':
-    print(f'the version of beautiful soup is\n {(bs4.__version__)}')
-    print(f'the version of requests is\n {(requests.__version__)}')
-    print(f'\nthe python version being used is:{sys.executable}\n')
-
-englishurl='https://catalog.utexas.edu/general-information/coursesatoz/e/'
-
-# ut courses
-# but function name is the same
 def scrapecourses(departmenturl):
-    departmentdata={}
+    departmentdata = {}
 
-    coursepage=requests.get(departmenturl)
-    coursesoup=BeautifulSoup(coursepage.text,'html.parser')
+    # Setup Chrome options
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # run in background
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--no-sandbox")
 
-    courselines=coursesoup.select('div#textcontainer > h5')
-
-    for line in courselines:
-        linetext=line.get_text()
-        print(linetext)
-
-            
-        coursecode=linetext.split('.')[0]
-        coursename=linetext.split('.')[1:]
-        # remove empty strings
-        coursename=[part for part in coursename if part]
-        coursename='.'.join(coursename)
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.set_page_load_timeout(60)  # increase if needed
 
 
-        coursename=coursename.strip()
-        coursecode=coursecode.replace('\xa0',' ')
+    try:
+        driver.get(departmenturl)
+
+        if "/courses" not in driver.current_url:
+            print(f"Redirected to a non-course page: {driver.current_url}. Skipping...")
+            return None
         
-        if '(' in coursecode:
-            cleanedcoursecode=coursecode.split('(')[0].strip()
-        else:
-            cleanedcoursecode=coursecode
+        time.sleep(5)  # wait for JS to render the table
+        html = driver.page_source
+        coursesoup = BeautifulSoup(html, 'html.parser')
+    except Exception as e:
+        print(f"Error loading page: {e}")
+        driver.quit()
+        return None
+    finally:
+        driver.quit()
+
+    table = coursesoup.select_one('section#coursesTabContent table')
+    if not table:
+        print(f"No table found for {departmenturl}")
+        return None
+
+    tbody = table.select_one('tbody.base-table__body')
+    if not tbody:
+        print(f"\n\nNo tbody found for {departmenturl}")
+        return None
+    
+
+    trs = tbody.select('tr')
+
+    for tr in trs:
+        code_cell = tr.select_one('th')
+        if not code_cell:
+            continue
+
+        coursecode = code_cell.get_text(strip=True).replace('\xa0', ' ')
+
+        td_cells = tr.select('td')
+        coursename = td_cells[0].get_text(strip=True) if len(td_cells) > 0 else ""
+
+        # Determine course level from the number
         
-        print(f'Cleancoursecode={cleanedcoursecode}')
-        coursenumber=cleanedcoursecode.split(' ')[-1]
-        print(f'coursenumber: {coursenumber}')
 
-        coursehours=coursenumber[0]
+        def get_status():
+            match = re.search(r'\d+', coursecode)
+            identifynumber = int(match.group()) if match else 0
 
-        identifynumber=coursenumber
-        print(f'identifynumber: {identifynumber}')
-        identifynumber = "".join(ch for ch in identifynumber if ch.isdigit())
-        identifynumber=identifynumber[1:]
-
-        identifynumber=int(identifynumber)
-
-
-
-        status=''
-        if identifynumber>=80:
-            status='Graduate'
-        elif identifynumber>=20:
-            status="Upper Division"
-        else:
-            status="Lower Division"
-
-
-        # for them coursenames with crazy hours
-        if len(cleanedcoursecode.split(' ')[1:])>1:
-            removeletters=''
-            for i in cleanedcoursecode:
-                if not i.isalpha():
-                    removeletters+=i
-            cleanedcoursecode=removeletters
-            print(f'new: {cleanedcoursecode}')
-            coursenumbers=cleanedcoursecode.split(',')
-            print(coursenumbers)
-            coursehourslist=[]
-
-            for coursenumber in coursenumbers:
-                coursehours=coursenumber.strip()[0]
-                coursehourslist.append(coursehours)
-            
-            coursehours=', '.join(coursehourslist)
-            
-
-            
-
-
-
-        # plans for up to THREE repeated coursenames bro
+            if identifynumber >= 400:
+                status = 'Graduate'
+            elif identifynumber >= 200:
+                status = "Upper Division"
+            else:
+                status = "Lower Division"
+            # override here
+            status='too hard'
+            return status
+        
+        status=get_status()
+        # Handle repeated course names
+        coursehours='idk'
         if coursename not in departmentdata:
-
-            departmentdata[coursename]=[coursecode,coursehours,status]
-        elif coursename in departmentdata:
-            coursename+="SECOND"
-            departmentdata[coursename]=[coursecode,coursehours,status]
-        elif f"{coursename}SECOND" in departmentdata:
+            departmentdata[coursename] = [coursecode, coursehours, status]
+        elif f"{coursename}SECOND" not in departmentdata:
+            coursename += "SECOND"
+            departmentdata[coursename] = [coursecode, coursehours, status]
+        else:
             coursename += "THIRD"
             departmentdata[coursename] = [coursecode, coursehours, status]
 
-
-
-
     return departmentdata
 
+
 def analyze_departmentdata(departmentdata):
-    
+    namelengthlist = []
 
-        totalhours=0
-        namelengthlist=[]
-        for key in departmentdata:
+    for key in departmentdata:
+        coursecode, coursehours, category = departmentdata[key]
+        coursename = key
+        namelengthlist.append([coursename, len(coursename)])
 
-            coursecode,coursehours,category=departmentdata[key]
+    namelengthlist = sorted(namelengthlist, key=lambda x: x[1], reverse=True)
+    print("Course name lengths (descending):", namelengthlist)
+    print(f'\nLongest name: {namelengthlist[0]}')
+    print(f'Shortest name: {namelengthlist[-1]}')
 
-            
-            coursename=key
-            namelengthlist.append([coursename,len(coursename)])
 
-
-        namelengthlist=sorted(namelengthlist, key=lambda x:x[1],reverse=True)
-        print(namelengthlist)
-        print(f'\nLongest name {namelengthlist[0]}\n')
-        print(f'Shortest name {namelengthlist[-1]}')
-
-if __name__=='__main__':
-        
-    departmentdata=scrapecourses(departmenturl=englishurl)
-    print(departmentdata)
-
+if __name__ == '__main__':
+    testurl = 'https://bulletin.stanford.edu/departments/PSYCHIATRY/courses'
+    departmentdata = scrapecourses(departmenturl=testurl)
+    if departmentdata:
+        print(departmentdata)
+        # analyze_departmentdata(departmentdata)

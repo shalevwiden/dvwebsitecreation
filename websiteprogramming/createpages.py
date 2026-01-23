@@ -179,8 +179,34 @@ class createPages:
             # call all the school functions here
             ut()
             rice()
-        texas()
+        # texas()
+        def california():
+            def stanford():
+                 
+                #  we'll do bucket stuff later
 
+                stanford_specs=self.buildspecs(
+                    "degreeview_expansion/stanford",
+                    "Stanford University"
+                    ,"https://storage.googleapis.com/stanford",
+                    "/Users/shalevwiden/Downloads/Projects/testsite/stanford",
+                    "Stanford")
+                def data_methods():
+                    stanfordcatalogobj=catalogData(**stanford_specs)
+                    print(f'Configs folder: {stanfordcatalogobj.configsfolder}')
+                    
+                    stanfordcatalogobj.upload_to_database()
+                    stanfordcatalogobj.makestatsjson()
+                    stanfordcatalogobj.make_excel_files()
+                    stanfordcatalogobj.create_univeristy_files()
+                    stanfordcatalogobj.make_sorteddepartment_json()
+                    stanfordcatalogobj.make_university_statsjson()
+
+                data_methods()
+            stanford()
+        california()
+
+        
     def createindex(self):
         '''
         Creates the MAIN home page index

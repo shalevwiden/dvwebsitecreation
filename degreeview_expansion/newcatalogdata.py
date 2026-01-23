@@ -117,6 +117,8 @@ class catalogData(createUniversity):
 
         
         '''
+        skipnum=3
+        limited_dict = {key: self.alphabetizeddict[key] for key in list(self.alphabetizeddict)[skipnum:]}
         for startingletter in self.alphabetizeddict:
 
             '''
@@ -187,7 +189,11 @@ class catalogData(createUniversity):
                         
                     with sqlite3.connect(databasepath) as conn:
                         cursor=conn.cursor()
+
                         departmentdata=self.scrapecourses(departmenturl=departmenturl)
+                        if departmentdata is None:
+                            print('departmentdata is none, ending')
+                            return
                         for coursename in departmentdata:
                             coursecode,coursehours,classification=departmentdata[coursename]
                             # established second and third in scrape courses
@@ -338,6 +344,8 @@ class catalogData(createUniversity):
                         def get_classification_percents():
                             '''
                             This returns what percent is upper divison, lower division, and graduate, if applicable. 
+                            This should automatically return all 0's if 
+                            the lower and grad and upper data isnt there.
                             '''
                             classificationlistcommand=f'''
 
@@ -350,6 +358,7 @@ class catalogData(createUniversity):
                             cursor.execute(classificationlistcommand)
                             classificationlist = cursor.fetchall()
                             classificationlist=[row[0].lower() for row in classificationlist] 
+                            
 
                             # if its not empty
                             if classificationlist:

@@ -91,7 +91,8 @@ class createUniversity:
         # well maybe, Yale could be the abbreviation for Yale University
         self.schoolabrv = schoolabrv
 
-        unicolorjson=os.path.join(schoolfolder,'unicolor.json')
+        frontendfolder=os.path.join(schoolfolder,'frontend')
+        unicolorjson=os.path.join(frontendfolder,'unicolor.json')
         with open(unicolorjson,'r') as colorjson:
             self.unicolor=json.load(colorjson).get('unicolor')
 
