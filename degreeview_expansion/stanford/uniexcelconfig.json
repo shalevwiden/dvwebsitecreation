@@ -1,15 +1,15 @@
 {
-  "schoolnamecolor": "FFD7B2",
-  "bigbordercolor": "F6F4FF",
+  "schoolnamecolor": "#fae7e2",
+  "bigbordercolor": "#fff6f4",
 
   "smallerbordercolor": "FFFFFF",
   "subheadingbordercolor": "FFFFFF",
-  "gridlinecolor": "D98C4A",
+  "gridlinecolor": "#ffffff",
   "rowtextcolor": "FFFFFF",
   "titlecolor": "FFFFFF",
-  "mainbackgroundcolor": "BF5700",
-  "paddingbackgroundcolor": "E0845D",
-  "logocolor": "909BFF",
+  "mainbackgroundcolor": "#9a2c2c",
+  "paddingbackgroundcolor": "#8C1515",
+  "logocolor": "#93bfe7",
   "urlcolor": "FFFFFF",
 
   "datafontname": "Helvetica",

@@ -132,7 +132,7 @@
                 </div>
               </li>
 
-              <li>
+              <li style="display: none">
                 <div class="linkbox">
                   <p>
                     <small id="underconstruction"
@@ -180,6 +180,14 @@
                 {{ statsdict['longest_course_name'] }}
               </div>
             </section>
+            {% if statsdict.get('longest_course_name') %}
+            <section class="statsline shortbox">
+              <div class="statsname">Longest Course Name Length (chars)</div>
+              <div class="statscontent">
+                {{ statsdict.get('longest_course_name', 'Not found') | length }}
+              </div>
+            </section>
+            {% endif %}
 
             <section class="statsline" id="shortestname">
               <div class="statsname">Shortest Course Name</div>
@@ -187,6 +195,16 @@
                 {{ statsdict.get('shortest_course_name', 'Not found') }}
               </div>
             </section>
+            {% if statsdict.get('longest_course_name') %}
+
+            <section class="statsline shortbox">
+              <div class="statsname">Shortest Course Name Length (chars)</div>
+              <div class="statscontent">
+                {{ statsdict.get('shortest_course_name', 'Not found') | length
+                }}
+              </div>
+            </section>
+            {% endif %}
 
             <section class="statsline" id="lowercount">
               <div class="statsname">Lower Division Course Count</div>

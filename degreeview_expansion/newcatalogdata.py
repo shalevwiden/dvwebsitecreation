@@ -410,7 +410,7 @@ class catalogData(createUniversity):
 
                             if row is None:
 
-                                longestresult = None 
+                                longestresult = None
                             else:
                                 longestresult = row[0]  
 
@@ -431,7 +431,7 @@ class catalogData(createUniversity):
                             # print(f'Row: \n {row}')
                             if row is None:
 
-                                shortestresult = None   
+                                shortestresult = None  
                             else:
                                 shortestresult = row[0]  
 
@@ -538,7 +538,9 @@ class catalogData(createUniversity):
 
                                 samenamelist=[]
                                 for course in courselist:
-                                    if departmentnamehalf in course.lower():
+                                    # keep this to have a lot of print statements
+                                    # print(departmentnamehalf)
+                                    if departmentnamehalf.lower() in course.lower():
                                         samenamelist.append(course)
 
                                 # print(samenamelist)
@@ -764,6 +766,9 @@ class catalogData(createUniversity):
                     with open(configpath,'r') as configjson:
                         # config json has styling data like colors and fonts
                         configjson=json.load(configjson)
+                        for key, value in configjson.items():
+                            if isinstance(value, str) and '#' in value:
+                                configjson[key] = value.replace('#', '')
                     
                     config={
                     "departmentname":departmentname,

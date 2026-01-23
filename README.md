@@ -307,3 +307,8 @@ Just pass it in as an argument.
 
 I'm gonna include the starting letter in the pages
 Cause thats simply better for organization.
+
+WE'll have hyphens in the excel file names here
+
+Like this:
+uni_theme= find_theme(excellist, f"{self.schoolabrv.lower()}-theme")

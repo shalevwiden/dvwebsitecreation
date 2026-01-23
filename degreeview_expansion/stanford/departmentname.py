@@ -40,37 +40,23 @@ class DepartmentName:
 
         displaydepartmentname=departmentname.replace('_','/')
         # the splitpoint is important, for UT its a "-"
-        displaydepartmentname=displaydepartmentname.strip().split('-')
-        code=displaydepartmentname[0].strip()
-        departmentnamehalf=displaydepartmentname[-1].strip()
-
-        # so in this case I put display department name in parenthesis
-        # I may remove
-        # this is where to build the display departmentname
-        displaydepartmentname=f'{code} - {departmentnamehalf}'
+        displaydepartmentname=displaydepartmentname.strip()
+       
         return displaydepartmentname
 
     def get_departmentnamehalf(self, departmentname):
-        displaydepartmentname=departmentname.replace('_','/')
-        # the splitpoint is important, for UT its a "-"
-        displaydepartmentname=displaydepartmentname.strip().split('-')
-        
-        departmentnamehalf=displaydepartmentname[-1].strip()
+        departmentnamehalf=departmentname
         return departmentnamehalf
 
     def get_departmentcode(self, departmentname):
-        displaydepartmentname=departmentname.replace('_','/')
-        # the splitpoint is important, for UT its a "-"
-        displaydepartmentname=displaydepartmentname.strip().split('-')
-        
-        code=displaydepartmentname[0].strip()
+        code=''
         return code
 
 def main():
     '''
     Use this function to test when generation
     '''
-    departmentname="ACF - Actuarial Foundations"
+    departmentname="Psychology"
 
     dept = DepartmentName()
 

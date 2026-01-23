@@ -52,7 +52,10 @@ class createWebsite:
         # this should work. If not I need to find a mystery
 
         # -----------New cleaned schoolname and websitefoler stuff --------------
+        if not os.path.exists(websitepath):
+            os.mkdir(websitepath)
         self.degreeviewwebsite_path=websitepath
+        
 
 
         self.cleanedschoolname=self.schoolname.replace(' ','').lower()
@@ -341,23 +344,7 @@ class createWebsite:
 
         <link rel="stylesheet" href="../static/css/footer.css" />
 
-    <!-- Barlow Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-
-    <!-- Roboto Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet"
-    />
-    <!-- Icons ( download icon and many file icons from here is used) -->
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    />
+   {self.headlinks}
 </head>
 '''
         def make_abovemainsitecode():
@@ -859,23 +846,8 @@ class createWebsite:
 
         <link rel="stylesheet" href="../static/css/footer.css" />
 
-        <!-- Barlow Font -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+          {self.headlinks}
 
-        <!-- Roboto Font -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet"
-        />
-        <!-- Icons ( download icon and file icons from here is used) -->
-        <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        />
         </head>
 
 '''

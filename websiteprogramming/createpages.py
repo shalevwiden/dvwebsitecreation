@@ -48,6 +48,13 @@ class createPages:
         self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utcoursessite/departments'
 
         self.universityuldatapath=''
+
+        # use these when making big changes
+
+        self.data=False
+        self.web=True
+        
+
     def buildspecs(self,schoolfolder,universityname,cloudbucketpath,websitefolder, schoolabrv):
 
         '''
@@ -60,6 +67,7 @@ class createPages:
     "cloudbucketpath": cloudbucketpath,
     "websitefolder": websitefolder,
     "schoolabrv":schoolabrv,}
+
     
     def schoolcontainingfunc(self):
         '''
@@ -92,7 +100,9 @@ class createPages:
                     utcatalogobj.create_univeristy_files()
                     utcatalogobj.make_sorteddepartment_json()
                     utcatalogobj.make_university_statsjson()
-                # data_methods()
+
+                if self.data:    
+                    data_methods()
 
                 def web_methods():
                     utobj=createUniversity(**ut_specs)
@@ -125,7 +135,7 @@ class createPages:
                     def unpacktheasset_into_createSchoolpages(theasset):
                         for schooldict in theasset[0:]:
                             print(schooldict[list(schooldict)[0]])
-                            utdegreeplans=createWebsite(schooldata=schooldict,websitepath='/Users/shalevwiden/Downloads/Projects/testsite/ut')
+                            utdegreeplans=createWebsite(schooldata=schooldict,websitepath='/Users/shalevwiden/Downloads/Projects/testsite/ut/degreeplans')
                             
                             utdegreeplans.createschoolpages()
                             utdegreeplans.create_degree_pages()
@@ -134,8 +144,8 @@ class createPages:
 
                     unpacktheasset_into_createSchoolpages(theasset=theasset)
                     
-                    
-                web_methods()
+                if self.web:
+                    web_methods()
 
             def rice():
                 # update all of this with rice data
@@ -175,11 +185,11 @@ class createPages:
                     riceobj.create_uni_homepage()
                     
 
-                web_methods()
+                # web_methods()
             # call all the school functions here
             ut()
             rice()
-        # texas()
+        texas()
         def california():
             def stanford():
                  
@@ -199,12 +209,12 @@ class createPages:
                     # stanfordcatalogobj.upload_to_database()
                     
                     stanfordcatalogobj.makestatsjson()
-                    stanfordcatalogobj.make_excel_files()
-                    stanfordcatalogobj.create_univeristy_files()
-                    stanfordcatalogobj.make_sorteddepartment_json()
-                    stanfordcatalogobj.make_university_statsjson()
+                    # stanfordcatalogobj.make_excel_files()
+                  # stanfordcatalogobj.create_univeristy_files()
+                    # stanfordcatalogobj.make_sorteddepartment_json()
+                    # stanfordcatalogobj.make_university_statsjson()
 
-                # data_methods()
+                data_methods()
                 def web_methods():
                     stanfordobj=createUniversity(**stanford_specs)
 

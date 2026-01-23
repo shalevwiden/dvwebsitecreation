@@ -877,9 +877,19 @@ class createUniversity:
                     '''
                     This makes an excel ul element which gets passed into the Jinja template.
                     '''
+
+                    def find_theme(excellist, keyword):
+                        for file in excellist:
+                            if keyword in file.lower():
+                                return file
+                        return None  
+                    
+                    
+
                     excellist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[1]
                     if excellist:
-                        originaltheme_excel=[file for file in excellist if "original-theme" in file][0]
+                        originaltheme_excel = find_theme(excellist, "original-theme")
+                        uni_theme= find_theme(excellist, f"{self.schoolabrv.lower()}-theme")
                     else:
                         originaltheme_excel="placeholder, some schools dont have excel files generated yet."
                     
@@ -896,6 +906,7 @@ class createUniversity:
                     '''
                     excel_ul=[
                         ["original",originaltheme_excel],
+                        [f"{self.schoolabrv} Theme",uni_theme]
                     ]
 
                     return excel_ul
@@ -973,35 +984,36 @@ class createUniversity:
 
         departmentpagelinks=[]
 
-        for departmentname in self.jsondata:
+        for startingletter in self.alphabetizeddict:                    
+            letterdict=self.alphabetizeddict[startingletter]
+            for departmentname in letterdict:
 
-    
 
-            (
-            departmentname,
-            departmentnamecleaned,
-            displaydepartmentname,
-            departmentnamehalf,
-            departmentcode,
-                ) = self.get_departmentnames(departmentname)
+                (
+                departmentname,
+                departmentnamecleaned,
+                displaydepartmentname,
+                departmentnamehalf,
+                departmentcode,
+                    ) = self.get_departmentnames(departmentname)
+            
+            
         
-         
-    
-        
-            print(f'Department: {departmentname}')
-        
+            
+                print(f'Department: {departmentname}')
+            
 
 
-            departmentpagelink=os.path.join('departments',f'{departmentnamecleaned}.html')
+                departmentpagelink=os.path.join('departments',startingletter.lower(),f'{departmentnamecleaned}.html')
 
-            departmentpagelinks.append(departmentpagelink)
+                departmentpagelinks.append(departmentpagelink)
 
 
-        # the only thing thats dynamic is the json by school
-        # so thats the only thing we have to make
-        # in a better website 
-        with open(self.departmentpagelinks,'w') as departmentpagelinks_json:
-            json.dump(departmentpagelinks,departmentpagelinks_json,indent=4)
+            # the only thing thats dynamic is the json by school
+            # so thats the only thing we have to make
+            # in a better website 
+            with open(self.departmentpagelinks,'w') as departmentpagelinks_json:
+                json.dump(departmentpagelinks,departmentpagelinks_json,indent=4)
         
             
     def createstatspage(self):
