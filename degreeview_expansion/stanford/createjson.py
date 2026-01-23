@@ -1,6 +1,8 @@
 import requests
 import bs4
 from bs4 import BeautifulSoup
+from pathlib import Path
+
 
 import sys
 import os
@@ -14,7 +16,7 @@ if __name__=='__main__':
     print(f'the version of requests is\n {(requests.__version__)}')
     print(f'\nthe python version being used is:{sys.executable}\n')
 
-cataloglink='https://catalog.utexas.edu/general-information/coursesatoz/'
+cataloglink='https://bulletin.stanford.edu/departments'
 
 
 def scrapecatalog():
@@ -23,20 +25,28 @@ def scrapecatalog():
     catalogpage=requests.get(cataloglink)
     catalogsoup=BeautifulSoup(catalogpage.text,'html.parser')
 
-    atozdiv=catalogsoup.find('div',{"class":"az_sitemap"})
+    atozdiv=catalogsoup.select_one('div#main-content')
+    atozdiv = atozdiv.select_one('div.lg\\:w-3\\/4.w-full.mr-4')
 
-    uls=atozdiv.find_all('ul',recursive=False)
 
-    lis = catalogsoup.select("div.az_sitemap > ul > li")  # only direct ul > li
-    for li in lis:
-            atag=li.find('a')
+    divs=atozdiv.find_all('div',recursive=False)
+
+    for div in divs:
+        atags=div.select('ul>li>a')
+
+        for atag in atags:
             if atag:
 
-                departmentname=atag.get_text()
-                departmentlink=atag['href']
+                departmentname = atag.get_text().strip().strip('\n')
+                departmentlink=atag['href'].replace('overview','courses')
 
-                departmentlink=f'https://catalog.utexas.edu{departmentlink}'
+                departmentlink=f'https://bulletin.stanford.edu{departmentlink}'
                 catalogdict[departmentname]=departmentlink
+         
+         
+    
+            
+            
 
 
     return catalogdict
@@ -45,11 +55,16 @@ catalogdict=scrapecatalog()
 print(catalogdict)
 
 def createjson(catalogdict):
-    finaldict=catalogdict
+    
 
+    script_folder = Path(__file__).parent  
 
-    with open('unijson.json','w') as unijson:
+    
+    json_path = script_folder / 'unijson.json'
+
+    # Write the JSON
+    with open(json_path, 'w') as unijson:
         # the dict, the file
-        json.dump(finaldict,unijson,indent=4)
+        json.dump(catalogdict,unijson,indent=4)
 
 createjson(catalogdict=catalogdict)
