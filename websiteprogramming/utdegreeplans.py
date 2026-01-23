@@ -17,19 +17,22 @@ from google.cloud import storage
 import importlib.util
 
 from jinja2 import Environment, FileSystemLoader
+from pathlib import Path
 
 
-file_path = '/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/college_course_scraping/theassetcontainment.py'
 
-with open('/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/college_course_scraping/theassetcontainment.json') as assetjson:
-    theasset=json.load(assetjson)
+BASE_DIR = Path(__file__).resolve().parent
+asset_path = BASE_DIR / "json" / "theasset.json"
+
+with open(asset_path) as assetjson:
+    theasset = json.load(assetjson)
 # you can also assign a function
 
 # the asset is important here because it contains the name of every degree in it.
 
 
 class createWebsite:
-    def __init__(self,schooldata):
+    def __init__(self,schooldata,websitepath):
         # this is the assets folder
 
                 # this is the assets folder
@@ -60,7 +63,7 @@ class createWebsite:
 
         self.fullschoolpage=os.path.join(self.websiteschoolfolder,self.schoolpage)
 
-        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/departmentpage.html','r') as headfile:
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/headlinks.html','r') as headfile:
             self.headlinks=headfile.read()
 
         with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/footerwithouttooltip.html','r') as footerfile:
@@ -676,14 +679,9 @@ class createWebsite:
         print(f'\n\nEnding Cloud Upload for {self.schoolname} degreefiles \n\n\n\n')
         return 0
                     
-                   
-
-
-
-
     def create_degree_pages(self):
         '''
-        Hold on this is kinda easy
+        Hold on
         '''
         def get_degreename_lists():
             degreenamelist=[]
@@ -795,8 +793,6 @@ class createWebsite:
                         
                             excel_path_list.append(googlecloudpath)
                        
-                       
-
                 return [excel_path_list]
             
             csvlist=get_degree_assetcloudpaths_lists(degreenameassetfolder=degreenameassetfolder)[0]
@@ -935,13 +931,14 @@ class createWebsite:
 
                 # get excel links 
                 excelfiles_folder=os.path.join(degreenameassetfolder,'excelfiles')
-                excellist=get_excel_assetcloudpaths_lists(excelfolder=excelfiles_folder)[1]
+                excellist=get_excel_assetcloudpaths_lists(excelfolder=excelfiles_folder)[0]
+                # print(f'Excel list:{excellist}')
 
                 originaltheme_excel=[file for file in excellist if "original" in file][0]
                 # have to do this since it selects the neon one. In the future I will explicitly name it original
 
 
-                darktheme_excel=[file for file in excellist if "semesterfile" in file and "dark" in file][0]
+                darktheme_excel=[file for file in excellist if "dark" in file][0]
                 green_excel=[file for file in excellist if "greentheme" in file][0]
                 green_excel = green_excel.removesuffix(".xlsx")
                 green_excel = f"{green_excel}semesters.xlsx"
@@ -969,7 +966,7 @@ class createWebsite:
 
 
                     '''
-                    env = Environment(loader=FileSystemLoader("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/templates/degreeplan_templates"))
+                    env = Environment(loader=FileSystemLoader("/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/templates/degreeplan_page_templates"))
         
 
                         # Pick template
@@ -1618,8 +1615,8 @@ def unpacktheasset_into_createSchoolpages(theasset):
         websiteobject.createschoolpages()
         # websiteobject.upload_degree_files()
         websiteobject.create_degree_pages()
-        # websiteobject.createschoolpages()
         websiteobject.create_renderedcsv_pages()
         
+if __name__=="__main__":
 
-unpacktheasset_into_createSchoolpages(theasset=theasset)
+    unpacktheasset_into_createSchoolpages(theasset=theasset)

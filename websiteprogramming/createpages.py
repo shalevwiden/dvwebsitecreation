@@ -37,8 +37,9 @@ from google.cloud import storage
 import importlib.util
 
 from createuniversity import createUniversity
+from utdegreeplans import createWebsite
 
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+# sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from degreeview_expansion.newcatalogdata import catalogData
 
 class createPages:
@@ -91,7 +92,7 @@ class createPages:
                     utcatalogobj.create_univeristy_files()
                     utcatalogobj.make_sorteddepartment_json()
                     utcatalogobj.make_university_statsjson()
-                data_methods()
+                # data_methods()
 
                 def web_methods():
                     utobj=createUniversity(**ut_specs)
@@ -111,7 +112,30 @@ class createPages:
                     # utobj.createstatspage()
                     # utobj.create_uni_homepage()
                     # this one is tho I think...
-                # web_methods()
+                    '''
+                    Now UT degree plans stuff
+                    '''
+                                        
+                    BASE_DIR = Path(__file__).resolve().parent
+                    asset_path = BASE_DIR / "json" / "theasset.json"
+
+                    with open(asset_path) as assetjson:
+                        theasset = json.load(assetjson)
+
+                    def unpacktheasset_into_createSchoolpages(theasset):
+                        for schooldict in theasset[0:]:
+                            print(schooldict[list(schooldict)[0]])
+                            utdegreeplans=createWebsite(schooldata=schooldict,websitepath='/Users/shalevwiden/Downloads/Projects/testsite/ut')
+                            
+                            utdegreeplans.createschoolpages()
+                            utdegreeplans.create_degree_pages()
+                            utdegreeplans.create_renderedcsv_pages()
+                            
+
+                    unpacktheasset_into_createSchoolpages(theasset=theasset)
+                    
+                    
+                web_methods()
 
             def rice():
                 # update all of this with rice data
@@ -153,7 +177,7 @@ class createPages:
 
                 web_methods()
             # call all the school functions here
-            # ut()
+            ut()
             rice()
         texas()
 
