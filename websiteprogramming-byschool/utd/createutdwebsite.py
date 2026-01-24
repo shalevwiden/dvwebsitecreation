@@ -69,6 +69,11 @@ class createWebsite:
 
         self.fullschoolpage=os.path.join(self.websiteschoolfolder,self.schoolpage)
 
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/degreeviewtag/headtag.html','r') as headtag:
+            self.headtag=headtag.read()
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/degreeviewtag/bodytag.html','r') as bodytag:
+            self.bodytag=bodytag.read()
+
 
         # footer so I dont have to redefine it multiple times. 
 
@@ -326,15 +331,7 @@ class createWebsite:
 
      <!-- favicon icon -->
     <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
-    <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
-
-  gtag('config', 'G-S06MYR1FV6');
-</script>
+  {self.headtag}
 
     <title>{self.schoolname} Page - DegreeView</title>
 
@@ -482,6 +479,8 @@ class createWebsite:
 '''
             bodyhtmlcode=f'''
             <body>
+            {self.bodytag}
+
 
             <div class="sitecontainer">
             {abovemainsitecode}
@@ -802,15 +801,8 @@ class createWebsite:
 
          <!-- favicon icon -->
          <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
-         <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
-    <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
+          {self.headtag}
 
-  gtag('config', 'G-S06MYR1FV6');
-</script>
         <title>{displaydegreename_nobr} Page - DegreeView</title>
 
         
@@ -1093,6 +1085,8 @@ class createWebsite:
 
                 bodyhtmlcode=f'''                    
                 <body>       
+                                {self.bodytag}
+
                 <div class="sitecontainer">
                 {abovemainsitecode}
                 {mainsitecode}
@@ -1292,15 +1286,8 @@ class createWebsite:
 
          <!-- favicon icon -->
          <link rel="icon" href="../metaassets/site_favicon.png" type="image/png" />
-         <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
-    <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
+         {self.headtag}
 
-  gtag('config', 'G-S06MYR1FV6');
-</script>
         <title>{displaydegreename_nobr} Rendered CSV Page - DegreeView</title>
 
             
@@ -1419,6 +1406,7 @@ class createWebsite:
 
                 bodyhtmlcode=f'''                    
                 <body>       
+                {self.bodytag}
                 <div class="sitecontainer">
                 {abovemainsitecode}
                 {undermainsitecode}

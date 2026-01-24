@@ -187,6 +187,47 @@ class createPages:
 
                 # web_methods()
             # call all the school functions here
+            def utsa():
+                # update all of this with utsa data
+                utsa_specs=self.buildspecs(
+                    "degreeview_expansion/utsa",
+                    "University of Texas at San Antonio"
+                    ,"https://storage.googleapis.com/utsacourses",
+
+                    # so I can probably make a function to finish this path for whereever I actually host the website
+                    "/Users/shalevwiden/Downloads/Projects/testsite/utsa",schoolabrv="utsa")
+                
+            
+                # instead of calling all of the functions 
+
+                def data_methods():
+                    utsacatalogobj=catalogData(**utsa_specs)
+
+                    utsacatalogobj.upload_to_database()
+                    utsacatalogobj.makestatsjson()
+                    # utsacatalogobj.make_excel_files()
+                    utsacatalogobj.create_univeristy_files()
+                    utsacatalogobj.make_sorteddepartment_json()
+                    utsacatalogobj.make_university_statsjson()
+                    
+                # data_methods()
+
+                def web_methods():
+                    utsaobj=createUniversity(**utsa_specs)
+
+                    # utsaobj.createletterpages()
+
+                    # utsaobj.upload_department_files()
+                    utsaobj.create_department_pages()
+                    utsaobj.create_departmentpagelinks_json()
+
+                    utsaobj.createstatspage()
+                    utsaobj.create_sorteddepartments_page()
+                    utsaobj.create_uni_homepage()
+                    
+
+                # web_methods()
+            # call all the school functions here
             ut()
             rice()
         texas()
