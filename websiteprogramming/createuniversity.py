@@ -185,10 +185,10 @@ class createUniversity:
 
 
         self.outputspath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/outputs'
-        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/degreeviewtag/headtag.html','r') as headtag:
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/headtag.html','r') as headtag:
             self.headtag=headtag.read()
-        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/degreeviewtag/bodytag.html','r') as bodytag:
-            self.bodytag=bodytag.read()
+
+        
         
         # call this
         self._init_stuff()
@@ -488,7 +488,6 @@ class createUniversity:
                 "site_favicon": self.images.get("site_favicon"),
                 "departmentlist_ul_element": make_departmentlist_ul(),
                 "linkicon": self.images.get("linkicon"),
-                "bodytag": self.bodytag,
                 "footer": self.footer
             }
 
@@ -934,7 +933,6 @@ class createUniversity:
                     "letterpagereferencepath":letterpagereferencepath,
                     "homepage":f'../../{os.path.basename(self.homepage)}',
                     "courserows":courserows,
-                    "bodytag": self.bodytag,
                     "footer": self.footer,
                     "statsdict":statsdict,
                     "excelul":excel_ul,

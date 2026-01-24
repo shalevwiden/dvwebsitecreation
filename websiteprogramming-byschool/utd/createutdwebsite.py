@@ -69,9 +69,9 @@ class createWebsite:
 
         self.fullschoolpage=os.path.join(self.websiteschoolfolder,self.schoolpage)
 
-        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/degreeviewtag/headtag.html','r') as headtag:
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/headtag.html','r') as headtag:
             self.headtag=headtag.read()
-        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/degreeviewtag/bodytag.html','r') as bodytag:
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/bodytag.html','r') as bodytag:
             self.bodytag=bodytag.read()
 
 
@@ -479,7 +479,6 @@ class createWebsite:
 '''
             bodyhtmlcode=f'''
             <body>
-            {self.bodytag}
 
 
             <div class="sitecontainer">
@@ -1085,7 +1084,6 @@ class createWebsite:
 
                 bodyhtmlcode=f'''                    
                 <body>       
-                                {self.bodytag}
 
                 <div class="sitecontainer">
                 {abovemainsitecode}
@@ -1406,7 +1404,6 @@ class createWebsite:
 
                 bodyhtmlcode=f'''                    
                 <body>       
-                {self.bodytag}
                 <div class="sitecontainer">
                 {abovemainsitecode}
                 {undermainsitecode}
