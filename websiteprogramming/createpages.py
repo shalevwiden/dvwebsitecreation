@@ -45,7 +45,7 @@ from degreeview_expansion.newcatalogdata import catalogData
 class createPages:
     def __init__(self):
         # havent used this yet
-        self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utcoursessite/departments'
+        self.websitepath='/Users/shalevwiden/Downloads/Projects/testsite'
 
         self.universityuldatapath=''
 
@@ -53,6 +53,11 @@ class createPages:
 
         self.data=False
         self.web=True
+
+        self.totalcourses=0
+
+        # just update this manuallyfor now lmao
+        self.totalschools=3
         
 
     def buildspecs(self,schoolfolder,universityname,cloudbucketpath,websitefolder, schoolabrv):
@@ -87,7 +92,7 @@ class createPages:
                     "degreeview_expansion/utcourses",
                     "The University of Texas at Austin"
                     ,"https://storage.googleapis.com/utcourses",
-                    "/Users/shalevwiden/Downloads/Projects/testsite/ut",
+                    os.path.join(self.websitepath,'ut'),
                     "UT")
             
 
@@ -155,7 +160,7 @@ class createPages:
                     ,"https://storage.googleapis.com/ricecourses",
 
                     # so I can probably make a function to finish this path for whereever I actually host the website
-                    "/Users/shalevwiden/Downloads/Projects/testsite/rice",schoolabrv="Rice")
+                    os.path.join(self.websitepath,'rice'),schoolabrv="Rice")
                 
             
                 # instead of calling all of the functions 
@@ -195,7 +200,7 @@ class createPages:
                     ,"https://storage.googleapis.com/utsacourses",
 
                     # so I can probably make a function to finish this path for whereever I actually host the website
-                    "/Users/shalevwiden/Downloads/Projects/testsite/utsa",schoolabrv="utsa")
+                    os.path.join(self.websitepath,'utsa'),schoolabrv="utsa")
                 
             
                 # instead of calling all of the functions 
@@ -240,7 +245,7 @@ class createPages:
                     "degreeview_expansion/stanford",
                     "Stanford University"
                     ,"https://storage.googleapis.com/stanford",
-                    "/Users/shalevwiden/Downloads/Projects/testsite/stanford",
+                    os.path.join(self.websitepath,'stanford'),
                     "Stanford")
                 
                 def data_methods():
@@ -298,10 +303,41 @@ class createPages:
         of DegreeView (# schools, longest coursename so far, etc)
         '''
 
+        totalcourses=0
+        BASE_DIR = Path(__file__).resolve().parent
+        print(f'BASE_DIR {BASE_DIR}')
+        base_path = BASE_DIR.parent / "degreeview_expansion"
+
+        for folder in os.listdir(base_path):
+            folder_path = os.path.join(base_path, folder)
+
+            # Make sure it's actually a directory
+            if os.path.isdir(folder_path): 
+                assets_path = os.path.join(folder_path, "assets") 
+
+                if os.path.isdir(assets_path): 
+                    print("Found assets folder:", assets_path,'\n')
+
+                    universitywidefolder=os.path.join(base_path,folder,'assets','universitywidefolder')
+
+                    unistatsjson=os.path.join(universitywidefolder,'universitystatsjson.json')
+
+                    with open(unistatsjson) as statsjson:
+                        universitystatsdict=json.load(statsjson)
+                        coursecount=universitystatsdict.get('coursecount')
+                        totalcourses+=coursecount
+                    # next open the sorted departments, get the top dept, and compare those
+        print(f'Total courses: {totalcourses}')
+        template_data={"totalcourses":0,
+                       "biggestdepartments":[],
+                       }
+        
+
 def main():
     createpages=createPages()
 
-    createpages.schoolcontainingfunc()
+    # createpages.schoolcontainingfunc()
+    createpages.create_main_statspage()
 
 if __name__=="__main__":
     main()

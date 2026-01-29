@@ -2,8 +2,7 @@ from pathlib import Path
 import os
 
 import sys
-if __name__=='__main__':
-    print(f'\nthe python version being used is:{sys.executable}\n')
+
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
@@ -1017,8 +1016,8 @@ class createUniversity:
     def createstatspage(self):
         '''This will create the University wide stats html page'''
 
-        with open(self.universitystatsjson,'r') as sdjson:
-            universitystatsdict=json.load(sdjson)
+        with open(self.universitystatsjson,'r') as statsjson:
+            universitystatsdict=json.load(statsjson)
 
         print(f'universitystatsdict: {universitystatsdict}')
         template_data={
@@ -1168,7 +1167,8 @@ def main():
 
 
     
-print(f'\nthe python version being used is:{sys.executable}\n')
 
 if __name__=="__main__":
+    print(f'\nthe python version being used is:{sys.executable}\n')
+
     main()
