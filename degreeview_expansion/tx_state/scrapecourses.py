@@ -41,8 +41,8 @@ def scrapecourses(departmenturl):
 
         coursecode = title.get_text(strip=True).replace('\xa0', ' ').split('.')[0]
 
-        coursename = title.get_text(strip=True).replace('\xa0', ' ').split('.')[1].strip()
-
+        coursenameparts = title.get_text(strip=True).replace('\xa0', ' ').split('.')
+        coursename = '.'.join(coursenameparts[1:]).strip().rstrip('.')
         # Determine course level from the number
         
         def get_coursehours():
@@ -106,7 +106,7 @@ def analyze_departmentdata(departmentdata):
 
 
 if __name__ == '__main__':
-    testurl = 'https://mycatalog.txstate.edu/courses/acc/'
+    testurl = 'https://mycatalog.txstate.edu/courses/eng/'
     departmentdata = scrapecourses(departmenturl=testurl)
     if departmentdata:
         print(departmentdata)

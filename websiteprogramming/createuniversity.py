@@ -150,6 +150,7 @@ class createUniversity:
         # this json contains a list of all departmentpage names to be able to do random page functionality
         self.departmentpagelinks=os.path.join(self.websitefolder,f"departmentpagelinks.json")
 
+
         env = Environment(loader=FileSystemLoader("templating/templates"))
 
         # define all the templates to be used
@@ -903,8 +904,8 @@ class createUniversity:
                     The second is the path to the google cloud hosted file
                     '''
                     excel_ul=[
-                        ["original",originaltheme_excel],
-                        [f"{self.schoolabrv} Theme",uni_theme]
+                        ["Original",originaltheme_excel],
+                        [f"{self.schoolabrv.replace('_',' ')}",uni_theme]
                     ]
 
                     return excel_ul
@@ -921,16 +922,20 @@ class createUniversity:
                 departmentpagedata = {
 
                     "universityname":self.universityname,
-                    "schoolabrv":self.schoolabrv,
+                    "schoolabrv":self.schoolabrv.replace('_',' '),
+                                            
                     "headlinks": self.headlinks,
                     "unicolor":self.unicolor,
                     "headtag": self.headtag,
                     "departmentnamehalf": departmentnamehalf,
                     "sitefavicon": self.images.get("site_favicon"),
                     "displaydepartmentname": displaydepartmentname,
+                    "statslink":f'{self.schoolabrv}stats.html',
+
                     "startingletter":startingletter,
                     "letterpagereferencepath":letterpagereferencepath,
                     "homepage":f'../../{os.path.basename(self.homepage)}',
+                    
                     "courserows":courserows,
                     "footer": self.footer,
                     "statsdict":statsdict,
@@ -966,8 +971,6 @@ class createUniversity:
         return 0
 
 # ---------------------END of make rendered degree pages
-
-
     def create_departmentpagelinks_json(self):
         '''
         This file should essentially simply build all the departmentlinks, then build the full functional file.
@@ -1011,7 +1014,6 @@ class createUniversity:
             # in a better website 
             with open(self.departmentpagelinks,'w') as departmentpagelinks_json:
                 json.dump(departmentpagelinks,departmentpagelinks_json,indent=4)
-        
             
     def createstatspage(self):
         '''This will create the University wide stats html page'''
@@ -1021,7 +1023,7 @@ class createUniversity:
 
         print(f'universitystatsdict: {universitystatsdict}')
         template_data={
-        "schoolabrv":self.schoolabrv,
+        "schoolabrv":self.schoolabrv.replace('_',' '),
         "universityname":self.universityname
         }
         
@@ -1046,7 +1048,8 @@ class createUniversity:
 
         
         template_data={
-        "schoolabrv":self.schoolabrv,
+        "homepage":f'{os.path.basename(self.homepage)}',
+        "schoolabrv":self.schoolabrv.replace('_',' '),
         "sorted_departments":sorted_departments,
         "universityname":self.universityname
         }
@@ -1111,7 +1114,7 @@ class createUniversity:
 
 
         template_data={
-        "schoolabrv":self.schoolabrv,
+        "schoolabrv":self.schoolabrv.replace('_',' '),
         "universityname":self.universityname,
         "departmentlinks_dict":departmentlinks_dict,
         "statslink":f'{self.schoolabrv}stats.html'

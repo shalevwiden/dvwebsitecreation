@@ -1,0 +1,27 @@
+{
+  "schoolnamecolor": "E6C79C",
+  "bigbordercolor": "F5EFEA",
+
+  "smallerbordercolor": "FFFFFF",
+  "subheadingbordercolor": "FFFFFF",
+  "gridlinecolor": "8C6A3C",
+  "rowtextcolor": "FFFFFF",
+  "titlecolor": "FFFFFF",
+  "mainbackgroundcolor": "501214",
+  "paddingbackgroundcolor": "7A1E1E",
+  "logocolor": "C8A44D",
+  "urlcolor": "FFFFFF",
+
+  "datafontname": "Helvetica",
+  "titlefontname": "Georgia",
+  "logofontname": "Calibri",
+  "headingsfontname": "Calibri",
+
+  "subheadingsize": 17,
+  "subheadingcolor": "FFFFFF",
+  "headingsfontcolor": "FFFFFF",
+
+  "datarowheight": 24,
+  "headingrowheight": 34,
+  "columnscaler": 1.2
+}

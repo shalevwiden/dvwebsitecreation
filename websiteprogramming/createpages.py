@@ -233,8 +233,49 @@ class createPages:
 
                 # web_methods()
             # call all the school functions here
-            ut()
-            rice()
+            
+            def txstate():
+                # update all of this with rice data
+                txstate_specs=self.buildspecs(
+                "degreeview_expansion/tx_state",
+                "Texas State University"
+                ,"https://storage.googleapis.com/txstate",
+
+                # so I can probably make a function to finish this path for whereever I actually host the website
+                os.path.join(self.websitepath,'txstate'),schoolabrv="TX_State")
+                
+            
+                # instead of calling all of the functions 
+
+                def data_methods():
+                    txstatecatalogobj=catalogData(**txstate_specs)
+                    txstatecatalogobj.upload_to_database()
+                    txstatecatalogobj.makestatsjson()
+                    txstatecatalogobj.make_excel_files()
+                    txstatecatalogobj.create_univeristy_files()
+                    txstatecatalogobj.make_sorteddepartment_json()
+                    txstatecatalogobj.make_university_statsjson()
+                    
+                data_methods()
+
+                def web_methods():
+                    txstateobj=createUniversity(**txstate_specs)
+
+                    # txstateobj.createletterpages()
+
+                    # txstateobj.upload_department_files()
+                    txstateobj.create_department_pages()
+                    txstateobj.create_departmentpagelinks_json()
+                    txstateobj.createstatspage()
+                    txstateobj.create_sorteddepartments_page()
+                    txstateobj.create_uni_homepage()
+                    
+
+                web_methods()
+            # ut()
+            # rice()
+            txstate()
+            
         texas()
         def california():
             def stanford():
@@ -277,7 +318,7 @@ class createPages:
 
                 web_methods()
             stanford()
-        california()
+        # california()
 
         
     def createindex(self):
@@ -336,8 +377,8 @@ class createPages:
 def main():
     createpages=createPages()
 
-    # createpages.schoolcontainingfunc()
-    createpages.create_main_statspage()
+    createpages.schoolcontainingfunc()
+    # createpages.create_main_statspage()
 
 if __name__=="__main__":
     main()

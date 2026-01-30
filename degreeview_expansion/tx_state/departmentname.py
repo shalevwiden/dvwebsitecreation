@@ -25,6 +25,9 @@ class DepartmentName:
 
         departmentnamecleaned=departmentnamecleaned.replace(' ','').lower()
         departmentnamecleaned=departmentnamecleaned.replace(',','-').lower()
+        departmentnamecleaned=departmentnamecleaned.replace('(','').replace(')','')
+
+
 
         return departmentnamecleaned
 
@@ -77,7 +80,7 @@ def main():
     '''
     Use this function to test when generation
     '''
-    departmentname="Ancient Mediterranean Civilizations (AMCI)"
+    departmentname="American Sign Language (ASL)"
 
     dept = DepartmentName()
 
