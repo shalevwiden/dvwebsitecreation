@@ -7,6 +7,8 @@ import os
 
 import csv
 import json
+from pathlib import Path
+
 
 # good to check everythings working with the venv:
 if __name__=='__main__':
@@ -14,7 +16,7 @@ if __name__=='__main__':
     print(f'the version of requests is\n {(requests.__version__)}')
     print(f'\nthe python version being used is:{sys.executable}\n')
 
-cataloglink='https://mycatalog.txstate.edu/courses/'
+cataloglink='https://mycatalog.txstate.edu/courses'
 
 
 def scrapecatalog():
@@ -38,7 +40,7 @@ def scrapecatalog():
                 departmentname=atag.get_text()
                 departmentlink=atag['href']
 
-                departmentlink=f'https://mycatalog.txstate.edu/courses/{departmentlink}'
+                departmentlink=f'https://mycatalog.txstate.edu{departmentlink}'
                 catalogdict[departmentname]=departmentlink
 
 
@@ -50,11 +52,14 @@ catalogdict=scrapecatalog()
 
 
 def createjson(catalogdict):
-    finaldict=catalogdict
+    script_folder = Path(__file__).parent  
 
+    
+    json_path = script_folder / 'unijson.json'
 
-    with open('txst.json','w') as txst_json:
+    # Write the JSON
+    with open(json_path, 'w') as unijson:
         # the dict, the file
-        json.dump(finaldict,txst_json,indent=4)
+        json.dump(catalogdict,unijson,indent=4)
 
 createjson(catalogdict=catalogdict)
