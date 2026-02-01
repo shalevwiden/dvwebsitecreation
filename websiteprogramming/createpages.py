@@ -25,6 +25,8 @@ import random
 import csv
 import time
 import json
+from jinja2 import Environment, FileSystemLoader
+
 
 # use this to render template
 
@@ -47,8 +49,15 @@ class createPages:
         # havent used this yet
         self.websitepath='/Users/shalevwiden/Downloads/Projects/testsite'
 
-        self.universityuldatapath=''
+        self.universityuldatapath='json/universityuldata.json'
 
+
+
+        env = Environment(loader=FileSystemLoader("templating/templates"))
+
+        # define all the templates to be used
+        self.indextemplate = env.get_template("main_templates/indextemplate.html")
+        self.mainstatstemplate=env.get_template("main_templates/mainstatspage.html")
         # use these when making big changes
 
         self.data=False

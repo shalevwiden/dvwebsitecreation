@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta
+      name="description"
+      content="Explore Visualizations and Tabular Data for all 141 Degrees at UT Austin"
+    />
+
+    <meta
+      name="keywords"
+      content="degree, major, UT Austin, degreeview, course diagrams, course excel files, degree stats, csv, .xlsx,pdf"
+    />
+
+    <meta name="author" content="DegreeView" />
+    <!-- end seo -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="metaassets/site_favicon.png" type="image/png" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-S06MYR1FV6");
+    </script>
+
+    <title>Home - DegreeView</title>
+
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="static/css/index.css" />
+
+    <!-- animation stylesheet -->
+    <link rel="stylesheet" href="cssfiles/animations.css" />
+    <!-- Barlow Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Roboto Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons ( download icon from here is used) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <!-- this is just testing -->
+
+    <link rel="stylesheet" href="cssfiles/filterchaos.css" />
+  </head>
+  <body>
+    <!-- this div basically has the entire site in it. Flex direction column -->
+    <div class="sitecontainer">
+      <!-- 
+      
+      -->
+      <div class="abovemainsite">
+        <div class="topnav">
+          <!-- this is empty but is just on the top to take up space for the color
+           KEEP THIS-->
+          <img src="" alt="" id="minimagnifyingglass" />
+        </div>
+        <div class="hero">
+          <div class="lefthero">
+            <h1 class="heading">DegreeView</h1>
+            <p class="subheading">
+              This is a big data analysis project with the topic being course
+              catalogs at universities.
+            </p>
+            <button class="cta">See Schools</button>
+          </div>
+          <div class="righthero">
+            <img src="images/excellogo.png" alt="" id="excelicon" />
+            <img src="images/barchart.webp" alt="" id="barchart" />
+            <img src="images/csvicon.png" alt="" id="csvicon" />
+            <img src="images/htmltable.png" alt="tableicon" id="tableicon" />
+            <img src="images/piecharticon.png" alt="" id="piechart" />
+          </div>
+        </div>
+      </div>
+      <!-- mainsite
+        contains right and left sections
+      -->
+      <div class="mainsite">
+        <!-- in the future I want an interactive USA map here showing states stuff -->
+        <ul class="universityul">
+          {% for university, data in universityuldata.items() %}
+          <li
+            class="universitybox"
+            id="{{ data.schoolabvr }}box"
+            style="background-color: {{ data.boxcolor}};"
+          >
+            <a href="{{ university ~ '/' ~ university ~ '.html' }}"
+              >{{ university }}</a
+            >
+          </li>
+          {% endfor %}
+        </ul>
+
+        <!-- 3 buttons -->
+        <div class="sidebar">
+          <h3 id="sidebartitle">Sidebar</h3>
+          <p>
+            See stats for schools, progress posts, and updates for DegreeView on
+            YouTube and X
+            <a href="">go to socials box</a>
+          </p>
+          <div class="middlenav">
+            <nav class="home_random_stats">
+              <ul>
+                <!-- keep in mind the entire li is clickable here -->
+                <li><a href="aboutpage.html">About</a></li>
+                <li id="randompagebutton">
+                  <a id="randomlink" href="">Random School</a>
+                </li>
+                <li><a href="degreeviewstats.html">Stats</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <!-- now have the list of schools -->
+      </div>
+
+      <!-- future search bar will go here -->
+
+      <div class="futuresearchbar" style="display: none"></div>
+
+      <!-- end intro box -->
+
+      <!-- end left content -->
+
+      <!-- end main mainsite -->
+      <!-- this goes under main site( no way) -->
+      <div class="borderdiv"></div>
+      <div class="undermainsite">
+        <h3>Statistics at a glance</h3>
+        <div class="quickstats">
+          <h4>{{schoolcount}} Schools</h4>
+          <h4>{{total_file_count}} Files</h4>
+          <h4>Data on {{total_course_count}} courses</h4>
+        </div>
+        <button id="statslink">DegreeView Stats</button>
+      </div>
+      <!-- footer now -->
+      <footer>
+        <div class="footerleft">
+          <div class="links">
+            <a href="aboutpage.html">About</a>
+
+            <a href="#biglogoid">Home</a>
+          </div>
+          <p id="statement">DegreeView 2025</p>
+        </div>
+
+        <div class="footerright">
+          <img
+            id="smalllogo"
+            src="metaassets/minilogo.png"
+            alt="smalldegreeviewlogo"
+          />
+        </div>
+      </footer>
+    </div>
+    <script src="javascript_files/headingcolorchange.js"></script>
+    <!-- script for random button  -->
+    <script src="javascript_files/randomdegreepage.js"></script>
+  </body>
+</html>

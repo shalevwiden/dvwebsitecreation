@@ -156,10 +156,10 @@ class createUniversity:
         # define all the templates to be used
         self.lettertemplate = env.get_template("letterpage.html")
         self.departmentpagetemplate=env.get_template("department_templates/departmentpage.html")
-        self.sorted_departments_template=env.get_template("sorted_departments_page.html")
-        self.statspage_template=env.get_template("statspage_template.html")
+        self.sorted_departments_template=env.get_template("uniwide_templates/sorted_departments_page.html")
+        self.statspage_template=env.get_template("uniwide_templates/statspage_template.html")
         
-        self.homepage_template=env.get_template("homepage.html")
+        self.homepage_template=env.get_template("uniwide_templates/homepage.html")
 
 
         
@@ -1173,5 +1173,4 @@ def main():
 
 if __name__=="__main__":
     print(f'\nthe python version being used is:{sys.executable}\n')
-
     main()
