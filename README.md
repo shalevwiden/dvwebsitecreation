@@ -312,3 +312,8 @@ WE'll have hyphens in the excel file names here
 
 Like this:
 uni_theme= find_theme(excellist, f"{self.schoolabrv.lower()}-theme")
+
+### Uni specs folder
+
+Write all the school specs into the unispecs folder with json.
+Then in the index of the website, simply create it

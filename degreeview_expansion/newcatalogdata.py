@@ -113,7 +113,7 @@ class catalogData(createUniversity):
 
         This was fucking tricky.
 
-        Make a video e
+        Make a video
 
         
         '''
