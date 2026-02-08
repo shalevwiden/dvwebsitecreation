@@ -1,1 +1,366 @@
 <!-- the main stats page for the whole site -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta
+      name="description"
+      content="Pie Charts, Bar Charts, and Bite Sized Stats for UT Austin"
+    />
+
+    <meta
+      name="keywords"
+      content="degree, major, UT Austin, degreeview, course diagrams, course excel files, degree stats, pie chart, bar chart, biggest degree programs"
+    />
+
+    <meta name="author" content="DegreeView" />
+    <!-- end seo -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="metaassets/site_favicon.png" type="image/png" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-S06MYR1FV6");
+    </script>
+
+    <title>DegreeView Stats</title>
+
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="static/css/degreeviewstats.css" />
+
+    <!-- animation stylesheet -->
+    <link rel="stylesheet" href="cssfiles/animations.css" />
+
+    <!-- Barlow Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Roboto Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons ( download and view icons from here are used) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <!-- this is just testing -->
+
+    <link rel="stylesheet" href="cssfiles/filterchaos.css" />
+  </head>
+  <body>
+    <!-- this div basically has the entire site in it. Flex direction column -->
+    <div class="sitecontainer">
+      <!-- 
+      
+      -->
+      <div class="abovemainsite">
+        <div class="topnav">
+          <div class="biglogobox">
+            <img class="biglogo" src="metaassets/logo5.png" alt="" />
+          </div>
+          <nav class="homeandabout">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="aboutpage.html">About</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="headingbox">
+          <h1 id="headingtitle">DegreeView Stats</h1>
+        </div>
+      </div>
+      <!-- mainsite
+      no left or right sections jere.
+      -->
+      <div class="mainsite">
+        <div class="statscontainer">
+          <div class="statsbox">
+            <div class="statscontent"><p>4.691</p></div>
+            <div class="statstitle">Average classes per semester</div>
+          </div>
+          <div class="statsbox">
+            <div class="statscontent"><p>47.13%</p></div>
+            <div class="statstitle">
+              Average % of Major Classified Hours / <br />Total Hours
+            </div>
+          </div>
+          <div class="statsbox">
+            <div class="statscontent"><p>27</p></div>
+            <div class="statstitle">
+              Degree Plans with more than 8 semesters
+            </div>
+          </div>
+
+          <div class="statsbox" id="longestnamebox">
+            <div class="statscontent">
+              <p>Architecture-Architectural Engineering (BArch-BSArchE)</p>
+            </div>
+            <div class="statstitle">Longest Degree Program Name</div>
+          </div>
+          <div class="statsbox" id="shortestnamebox">
+            <div class="statscontent"><p>Dance (BFA)</p></div>
+            <div class="statstitle">Shortest Degree Program Name</div>
+          </div>
+          <div class="statsbox" id="longestcoursebox">
+            <div class="statscontent">
+              Introduction to Speech and Language Disorders Assessment and
+              Treatment in Children
+            </div>
+            <div class="statstitle">
+              Longest Coursename<sup>1, </sup><sup>2</sup><br /><span
+                style="margin-top: 6px; display: inline-block"
+                class="char"
+                >82 chars</span
+              >
+            </div>
+          </div>
+          <div class="statsbox" id="shortestcoursebox">
+            <div class="statscontent">Statics</div>
+            <div class="statstitle">
+              Shortest Coursename <sup>1, </sup><sup>2</sup><br /><span
+                style="margin-top: 6px; display: inline-block"
+                class="char"
+                >7 chars</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="footnotes">
+          <div class="rightfootnotes">
+            <p>
+              1. Only includes courses on the suggested arrangement of courses
+              pages. Doesn't include the entire course catalog.
+            </p>
+            <p>
+              2.Refers to specific coursename. For example "track" is not
+              included as it is not a full coursename.
+            </p>
+          </div>
+        </div>
+        <div class="sectioncontainer" id="degreeviewcounts">
+          <div class="minimainsite">
+            <div class="leftcontent">
+              <div class="filescontainer" id="csvcontainer">
+                <h3>CSV Files</h3>
+                <ul>
+                  <li>
+                    <div class="linkbox">
+                      <p>University of Texas Stats CSV</p>
+                      <p>
+                        View:&nbsp;&nbsp;
+                        <a href="#csvheading"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </p>
+                      <p>
+                        <!-- download attribute means they will download it -->
+                        Download:&nbsp;&nbsp;<a
+                          href="https://storage.googleapis.com/degreeview-ut/ut-stats/csvs/universityoftexas_stats.csv"
+                          download
+                          ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                        ></a>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="linkbox">
+                      <p>Longest Coursenames UT</p>
+                      <p style="display: none">
+                        View:&nbsp;&nbsp;
+                        <a href="#csvheading"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </p>
+                      <p>
+                        <!-- download attribute means they will download it -->
+                        Download:&nbsp;&nbsp;<a
+                          href="https://storage.googleapis.com/degreeview-ut/ut-stats/csvs/longest_courselengths_ut.csv"
+                          download
+                          ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                        ></a>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="linkbox">
+                      <p>Shortest Coursenames UT</p>
+                      <p style="display: none">
+                        View:&nbsp;&nbsp;
+                        <a href="#csvheading"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </p>
+                      <p>
+                        <!-- download attribute means they will download it -->
+                        Download:&nbsp;&nbsp;<a
+                          href="https://storage.googleapis.com/degreeview-ut/ut-stats/csvs/shortest_courselengths_ut.csv"
+                          download
+                          ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                        ></a>
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!--  -->
+
+            <div class="rightcontent">
+              <!-- charts and visuals in this one -->
+              <img
+                src="metaassets/degreeprogramcount.png"
+                alt="degreecountpng"
+                id="degreecountpng"
+              />
+            </div>
+          </div>
+
+          <!-- this is one long horizontal div -->
+        </div>
+        <div class="sectioncontainer" id="largestschoolstats">
+          <div class="minimainsite">
+            <div class="rightcontent">
+              <!-- charts and visuals in this one -->
+              <img
+                src="metaassets/degreeprogramcount.png"
+                alt="degreecountpng"
+                id="degreecountpng"
+              />
+            </div>
+            <div class="leftcontent">
+              <div class="filescontainer" id="csvcontainer">
+                <h3>CSV Files</h3>
+                <ul>
+                  <li>
+                    <div class="linkbox">
+                      <p>University of Texas Stats CSV</p>
+                      <p>
+                        View:&nbsp;&nbsp;
+                        <a href="#csvheading"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </p>
+                      <p>
+                        <!-- download attribute means they will download it -->
+                        Download:&nbsp;&nbsp;<a
+                          href="https://storage.googleapis.com/degreeview-ut/ut-stats/csvs/universityoftexas_stats.csv"
+                          download
+                          ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                        ></a>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="linkbox">
+                      <p>Longest Coursenames UT</p>
+                      <p style="display: none">
+                        View:&nbsp;&nbsp;
+                        <a href="#csvheading"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </p>
+                      <p>
+                        <!-- download attribute means they will download it -->
+                        Download:&nbsp;&nbsp;<a
+                          href="https://storage.googleapis.com/degreeview-ut/ut-stats/csvs/longest_courselengths_ut.csv"
+                          download
+                          ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                        ></a>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="linkbox">
+                      <p>Shortest Coursenames UT</p>
+                      <p style="display: none">
+                        View:&nbsp;&nbsp;
+                        <a href="#csvheading"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </p>
+                      <p>
+                        <!-- download attribute means they will download it -->
+                        Download:&nbsp;&nbsp;<a
+                          href="https://storage.googleapis.com/degreeview-ut/ut-stats/csvs/shortest_courselengths_ut.csv"
+                          download
+                          ><i class="fa-solid fa-arrow-up-from-bracket"></i
+                        ></a>
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!--  -->
+          </div>
+
+          <!-- this is one long horizontal div -->
+        </div>
+        <div class="morestats">
+          <img
+            src="metaassets/topdegreehours.png"
+            alt=""
+            id="topdegreehourspng"
+          />
+          <img src="metaassets/topmajorhours.png" alt="" id="topmajorhours" />
+        </div>
+        <!-- end mini main site container -->
+        <div class="renderedcsvdiv">
+          <h3 id="csvheading">University of Texas Stats CSV, rendered</h3>
+          <div id="csvtablecontainer"></div>
+        </div>
+      </div>
+      <!-- put something here later -->
+      <div class="undermainsite">
+        <!-- this can be empty and like 20 px tall just to take up space, and be used for something in the future
+      -->
+        <button id="returnbutton">
+          <a href="#headingtitle">Go to top of page</a>
+        </button>
+      </div>
+      <footer>
+        <div class="footerleft">
+          <div class="links">
+            <a href="about.html">About</a>
+
+            <a href="index.html">Home</a>
+          </div>
+          <p id="statement">DegreeView 2025</p>
+        </div>
+
+        <div class="footerright">
+          <img
+            id="smalllogo"
+            src="metaassets/minilogo.png"
+            alt="smalldegreeviewlogo"
+          />
+        </div>
+        <!--  -->
+      </footer>
+    </div>
+    <script src="javascript_files/headingcolorchange.js"></script>
+    <!-- sheet js stuff -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+    <script src="javascript_files/statstable.js"></script>
+  </body>
+</html>

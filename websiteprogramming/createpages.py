@@ -49,7 +49,9 @@ class createPages:
         # havent used this yet
         self.websitepath='/Users/shalevwiden/Downloads/Projects/testsite'
 
-        self.universityuldatapath='json/universityuldata.json'
+        BASE_DIR = Path(__file__).resolve().parent
+        print(f'BASE_DIR {BASE_DIR}')
+        self.universityuldatapath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "universityuldata.json"
 
 
 
@@ -258,14 +260,14 @@ class createPages:
 
                 def data_methods():
                     txstatecatalogobj=catalogData(**txstate_specs)
-                    txstatecatalogobj.upload_to_database()
+                    # txstatecatalogobj.upload_to_database()
                     txstatecatalogobj.makestatsjson()
                     txstatecatalogobj.make_excel_files()
                     txstatecatalogobj.create_univeristy_files()
                     txstatecatalogobj.make_sorteddepartment_json()
                     txstatecatalogobj.make_university_statsjson()
                     
-                data_methods()
+                # data_methods()
 
                 def web_methods():
                     txstateobj=createUniversity(**txstate_specs)
@@ -335,28 +337,41 @@ class createPages:
         Creates the MAIN home page index
         '''
         # the key is what will be dislayed on the index, as in the school name the user will read.
-        indextemplate=''
         '''
         Technicalities to be aware of here:
         The box color will actually be set in scss.
         This is because with different colors I'll also have to adjust the TEXT color of the box.
-        
         Therefore doing it in scss is the best approach
-
         '''
+
         with open(self.universityuldatapath,'r') as universityuldatajson:
             universityuldata=json.load(universityuldatajson)
+
+
+        template_data={"totalcourses":0,
+                       "biggestdepartments":[],
+                       }
+        
+        mainindexrendered=self.indextemplate.render(template_data)
+
+        mainindexpath=os.path.join(self.websitepath,'index.html')
+
+        with open(mainindexpath,'w') as mainindex:
+            mainindex.write(mainindexrendered)
 
     def create_main_statspage(self):
         '''
         Uses the main stats page template to create the HTML file for the main stats 
         of DegreeView (# schools, longest coursename so far, etc)
+
+        Opens degreeview expansion folder because thats where all the assets are
         '''
 
         totalcourses=0
         BASE_DIR = Path(__file__).resolve().parent
         print(f'BASE_DIR {BASE_DIR}')
         base_path = BASE_DIR.parent / "degreeview_expansion"
+
 
         for folder in os.listdir(base_path):
             folder_path = os.path.join(base_path, folder)
@@ -377,17 +392,32 @@ class createPages:
                         coursecount=universitystatsdict.get('coursecount')
                         totalcourses+=coursecount
                     # next open the sorted departments, get the top dept, and compare those
+
         print(f'Total courses: {totalcourses}')
-        template_data={"totalcourses":0,
+        template_data={
+            "universities":5,
+            "totalcourses":0,
                        "biggestdepartments":[],
                        }
         
+        mainstatspath=os.path.join(self.websitepath,'degreeviewstats.html')
+
+        mainstatspagerendered=self.mainstatstemplate.render(template_data)
+
+        with open(mainstatspath,'w') as mainstats:
+            mainstats.write(mainstatspagerendered)
+
+
+        
 
 def main():
-    createpages=createPages()
+    print(os.getcwd())
 
-    createpages.schoolcontainingfunc()
-    # createpages.create_main_statspage()
+    createpagesobj=createPages()
+
+    # createpagesobj.schoolcontainingfunc()
+    createpagesobj.create_main_statspage()
+    createpagesobj.createindex()
 
 if __name__=="__main__":
     main()

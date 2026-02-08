@@ -694,8 +694,6 @@ class createUniversity:
                 This is the for loop everything has to be done in
                 '''
                 
-                    
-
                 departmenturl=letterdict[departmentname]
                 # just use all of this
 
