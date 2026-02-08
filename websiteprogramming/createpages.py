@@ -60,6 +60,8 @@ class createPages:
         # define all the templates to be used
         self.indextemplate = env.get_template("main_templates/indextemplate.html")
         self.mainstatstemplate=env.get_template("main_templates/mainstatspage.html")
+        self.abouttemplate=env.get_template("main_templates/abouttemplate.html")
+
         # use these when making big changes
 
         self.data=False
@@ -68,7 +70,7 @@ class createPages:
         self.totalcourses=0
 
         # just update this manuallyfor now lmao
-        self.totalschools=3
+        self.universitycount=5
         
 
     def buildspecs(self,schoolfolder,universityname,cloudbucketpath,websitefolder, schoolabrv):
@@ -331,34 +333,7 @@ class createPages:
             stanford()
         # california()
 
-        
-    def createindex(self):
-        '''
-        Creates the MAIN home page index
-        '''
-        # the key is what will be dislayed on the index, as in the school name the user will read.
-        '''
-        Technicalities to be aware of here:
-        The box color will actually be set in scss.
-        This is because with different colors I'll also have to adjust the TEXT color of the box.
-        Therefore doing it in scss is the best approach
-        '''
-
-        with open(self.universityuldatapath,'r') as universityuldatajson:
-            universityuldata=json.load(universityuldatajson)
-
-
-        template_data={"totalcourses":0,
-                       "biggestdepartments":[],
-                       }
-        
-        mainindexrendered=self.indextemplate.render(template_data)
-
-        mainindexpath=os.path.join(self.websitepath,'index.html')
-
-        with open(mainindexpath,'w') as mainindex:
-            mainindex.write(mainindexrendered)
-
+    
     def create_main_statspage(self):
         '''
         Uses the main stats page template to create the HTML file for the main stats 
@@ -394,9 +369,11 @@ class createPages:
                     # next open the sorted departments, get the top dept, and compare those
 
         print(f'Total courses: {totalcourses}')
+        self.totalcourses = f"{totalcourses:,}"
+
         template_data={
-            "universities":5,
-            "totalcourses":0,
+            "universities":self.universitycount,
+            "totalcourses":self.totalcourses,
                        "biggestdepartments":[],
                        }
         
@@ -406,18 +383,71 @@ class createPages:
 
         with open(mainstatspath,'w') as mainstats:
             mainstats.write(mainstatspagerendered)
+    def createindex(self):
+        '''
+        Creates the MAIN home page index
+        '''
+        # the key is what will be dislayed on the index, as in the school name the user will read.
+        '''
+        Technicalities to be aware of here:
+        The box color will actually be set in scss.
+        This is because with different colors I'll also have to adjust the TEXT color of the box.
+        Therefore doing it in scss is the best approach
+        '''
 
+        with open(self.universityuldatapath,'r') as universityuldatajson:
+            universityuldata=json.load(universityuldatajson)
+
+
+        template_data={
+            "universityuldata":universityuldata,
+            "universitycount":self.universitycount,
+            "totalcourses": self.totalcourses,
+                       "biggestdepartments":[],
+                       }
+        
+        mainindexrendered=self.indextemplate.render(template_data)
+
+        mainindexpath=os.path.join(self.websitepath,'index.html')
+
+        with open(mainindexpath,'w') as mainindex:
+            mainindex.write(mainindexrendered)
+    def createabout(self):
+        '''
+        Creates the aboutpage
+        '''
+        # the key is what will be dislayed on the index, as in the school name the user will read.
+        '''
+        Technicalities to be aware of here:
+        The box color will actually be set in scss.
+        This is because with different colors I'll also have to adjust the TEXT color of the box.
+        Therefore doing it in scss is the best approach
+        '''
+
+
+
+        template_data={
+          
+                       }
+        
+        aboutrendered=self.abouttemplate.render(template_data)
+
+        aboutpath=os.path.join(self.websitepath,'about.html')
+
+        with open(aboutpath,'w') as about:
+            about.write(aboutrendered)
 
         
 
 def main():
-    print(os.getcwd())
+    # print(os.getcwd())
 
     createpagesobj=createPages()
 
     # createpagesobj.schoolcontainingfunc()
     createpagesobj.create_main_statspage()
     createpagesobj.createindex()
+    createpagesobj.createabout()
 
 if __name__=="__main__":
     main()

@@ -317,3 +317,7 @@ uni_theme= find_theme(excellist, f"{self.schoolabrv.lower()}-theme")
 
 Write all the school specs into the unispecs folder with json.
 Then in the index of the website, simply create it
+
+### Feb 8, 2026
+
+The key of university ul data is what shows up in the box

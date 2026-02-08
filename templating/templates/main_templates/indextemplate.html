@@ -35,7 +35,7 @@
     <title>Home - DegreeView</title>
 
     <!-- main stylesheet -->
-    <link rel="stylesheet" href="static/css/index.css" />
+    <link rel="stylesheet" href="../static/css/dv_main.css" />
 
     <!-- animation stylesheet -->
     <link rel="stylesheet" href="cssfiles/animations.css" />
@@ -66,7 +66,7 @@
   </head>
   <body>
     <!-- this div basically has the entire site in it. Flex direction column -->
-    <div class="sitecontainer">
+    <div class="sitecontainer" id="index">
       <!-- 
       
       -->
@@ -152,9 +152,9 @@
       <div class="undermainsite">
         <h3>Statistics at a glance</h3>
         <div class="quickstats">
-          <h4>{{schoolcount}} Schools</h4>
+          <h4>{{universitycount}} Schools</h4>
           <h4>{{total_file_count}} Files</h4>
-          <h4>Data on {{total_course_count}} courses</h4>
+          <h4>Data on {{totalcourses}} courses</h4>
         </div>
         <button id="statslink">DegreeView Stats</button>
       </div>
@@ -166,7 +166,7 @@
 
             <a href="#biglogoid">Home</a>
           </div>
-          <p id="statement">DegreeView 2025</p>
+          <p id="statement">DegreeView 2026</p>
         </div>
 
         <div class="footerright">
@@ -178,8 +178,7 @@
         </div>
       </footer>
     </div>
-    <script src="javascript_files/headingcolorchange.js"></script>
     <!-- script for random button  -->
-    <script src="javascript_files/randomdegreepage.js"></script>
+    <script src="static/js/randomuni.js"></script>
   </body>
 </html>

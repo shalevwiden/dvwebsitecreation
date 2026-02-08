@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta
+      name="description"
+      content="About DegreeView and the technologies that support it."
+    />
+
+    <meta
+      name="keywords"
+      content="degree, major, UT Austin, degreeview, course diagrams, course excel files, degree stats, csv, .xlsx,pdf, aboutpage"
+    />
+
+    <meta name="author" content="DegreeView" />
+    <!-- end seo -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://storage.googleapis.com/degreeview/degreeviewimages/site_favicon.png"
+      type="image/png"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-S06MYR1FV6");
+    </script>
+    <title>About DegreeView</title>
+
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="../static/css/dv_main.css" />
+    <!-- Barlow Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Roboto Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,100;1,300;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons ( download icon from here is used) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <!-- normalize css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+
+    <!-- this is just testing -->
+
+    <link rel="stylesheet" href="utaustin-site/cssfiles/filterchaos.css" />
+  </head>
+  <body>
+    <!-- this div basically has the entire site in it. Flex direction column -->
+    <div class="sitecontainer" id="about">
+      <!-- 
+      
+      -->
+      <div class="abovemainsite">
+        <div class="topnav">
+          <div class="biglogobox">
+            <img
+              class="biglogo"
+              src="utaustin-site/metaassets/logo5.png"
+              alt=""
+            />
+          </div>
+          <nav class="homeandabout">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="ut-stats.html">Stats</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="headingbox">
+          <h1 id="headingtitle">About</h1>
+        </div>
+      </div>
+      <!-- mainsite
+      no left or right sections jere.
+      -->
+      <div class="mainsite">
+        <div class="aboutbox">
+          <div class="about-paragraph">
+            <p>
+              DegreeView is a website that provides and displays data
+              visualizations and data on degree programs and courses. All data
+              is sourced directly from university catalog pages.
+
+              <br /><br />
+              DegreeView uses OpenPyXL for creating stylized and formatted Excel
+              files and mermaid.js for creating flowchart graphs. The following
+              python libraries are also used: BeautifulSoup and Requests (for
+              web scraping), csv, google-cloud (for automating uploading to
+              Google Cloud Storage), and ReportLab, Pillow, PyPDF2, and cairoSVG
+              for pdf generation. <br />
+              SQlite3 is used to pipeline data into .db databases, and perform
+              queries to derive descriptive statistics featured on the
+              <a href="ut-stats.html#csvheading">stats page </a>.
+            </p>
+            <br />
+          </div>
+          <p id="disclaimer">
+            Disclaimer: DegreeView is not affiliated with the University of
+            Texas at Austin or any other university.
+          </p>
+        </div>
+        <div class="substackcontainer">
+          <p>
+            There is a substack DegreeView page where updates, new features, and
+            possible expansions will be posted.
+            <br />
+            <br />
+            <a href="https://substack.com/@degreeview"> Substack Page Link</a>.
+            <br />
+          </p>
+          <a
+            href="https://substack.com/@degreeview"
+            title="Follow the Substack"
+            target="_blank"
+            id="substacklink"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-substack"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M15 3.604H1v1.891h14v-1.89ZM1 7.208V16l7-3.926L15 16V7.208zM15 0H1v1.89h14z"
+              /></svg
+          ></a>
+        </div>
+
+        <div class="platformscontainer" style="display: none">
+          <div class="platformsbox">
+            <p>Built by Shalev Widen</p>
+            <div class="icons">
+              <a
+                href="https://www.linkedin.com/in/shalev-widen
+
+"
+                target="_blank"
+                title="the linkedin"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a
+                href="https://swervinaround.substack.com/"
+                title="Follow the Substack"
+                target="_blank"
+                id="substacklink"
+                style="display: none"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-substack"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M15 3.604H1v1.891h14v-1.89ZM1 7.208V16l7-3.926L15 16V7.208zM15 0H1v1.89h14z"
+                  /></svg
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- put something here later -->
+      <div class="undermainsite">
+        <!-- this can be empty and like 20 px tall just to take up space, and be used for something in the future
+          -->
+      </div>
+      <footer>
+        <div class="footerleft">
+          <div class="links">
+            <div class="tooltip">
+              <a href="#headingtitle">About</a>
+            </div>
+
+            <div class="tooltip">
+              <a href="index.html">Home</a>
+            </div>
+
+            <div class="tooltip">
+              <a href="exceltemplates.html">Excel Templates Breakdown</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footerright">
+          <img
+            id="smalllogo"
+            src="https://storage.googleapis.com/degreeview/degreeviewimages/minilogo.png"
+            alt="smalldegreeviewlogo"
+          />
+          <p id="statement">DegreeView 2026</p>
+        </div>
+      </footer>
+    </div>
+    <script src="utaustin-site/javascript_files/headingcolorchange.js"></script>
+  </body>
+</html>
