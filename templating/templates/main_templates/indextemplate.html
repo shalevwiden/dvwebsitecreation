@@ -107,18 +107,18 @@
         <!-- in the future I want an interactive USA map here showing states stuff -->
         <ul class="universityul" id="universityul">
           {% for university, data in universityuldata.items() %}
-
-          <li
-            class="universitybox"
-            id="{{ data.schoolabrv | lower }}box"
-            style="background-color: {{ data.boxcolor}};"
+          <a
+            href="{{ data.schoolabrv | lower ~ '/' ~ data.schoolabrv | lower ~ '-home.html' }}"
           >
-            <a
-              href="{{ data.schoolabrv | lower ~ '/' ~ data.schoolabrv | lower ~ '-home.html' }}"
+            <li
+              class="universitybox"
+              id="{{ data.schoolabrv | lower }}box"
+              style="border-color: {{ data.boxcolor}};"
             >
-              {{ university }}</a
-            >
-          </li>
+              {{ university }}
+            </li>
+          </a>
+
           {% endfor %}
         </ul>
 
@@ -126,8 +126,8 @@
         <div class="sidebar">
           <h3 id="sidebartitle">Sidebar</h3>
           <p>
-            See stats for schools, progress posts, and updates for DegreeView on
-            YouTube and X
+            See stats for universities, progress posts + behind the scenes, and
+            updates for DegreeView on X.
             <a href="">go to socials box</a>
           </p>
           <div class="middlenav">
@@ -157,15 +157,18 @@
 
       <!-- end main mainsite -->
       <!-- this goes under main site( no way) -->
-      <div class="borderdiv"></div>
       <div class="undermainsite">
+        <div class="borderdiv"></div>
+
         <h3>Statistics at a glance</h3>
         <div class="quickstats">
           <h4>{{universitycount}} Universities</h4>
           <h4>{{excelfilecount}} Excel Files</h4>
           <h4>{{totalcourses}} courses on the site</h4>
         </div>
-        <button id="statslink">DegreeView Stats</button>
+        <button id="statslink">
+          <a href="degreeviewstats.html">DegreeView Stats</a>
+        </button>
       </div>
       <!-- footer now -->
       {{footer}}

@@ -913,9 +913,14 @@ class createUniversity:
                     
 
                     excellist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[1]
+                    uni_theme = 'uniexcelplaceholder'
+
                     if excellist:
                         originaltheme_excel = find_theme(excellist, "original-theme")
                         uni_theme= find_theme(excellist, f"{self.schoolabrv.lower()}-theme")
+
+                        if uni_theme is None:
+                            uni_theme='uniexcelplaceholder'
                     else:
                         originaltheme_excel="placeholder, some schools dont have excel files generated yet."
                     
@@ -980,7 +985,7 @@ class createUniversity:
                     "departmentnamehalf": departmentnamehalf,
                     "sitefavicon": self.images.get("site_favicon"),
                     "displaydepartmentname": displaydepartmentname,
-                    "statslink":f'{self.schoolabrv}stats.html',
+                    "statslink":f'{self.schoolabrv.lower()}stats.html',
 
                     "startingletter":startingletter,
                     "letterpagereferencepath":letterpagereferencepath,
@@ -1072,10 +1077,37 @@ class createUniversity:
             universitystatsdict=json.load(statsjson)
 
         print(f'universitystatsdict: {universitystatsdict}')
+
+        def make_rendered_footer():
+            height = "../../../"
+
+            aboutpath = f"{height}about.html"
+            indexpath = f"{height}index.html"
+            exceltemplatespath = f"{height}exceltemplates.html"
+            statspath = f"{height}degreeviewstats.html"
+
+            footerdata = {
+                "aboutpath": aboutpath,
+                "indexpath": indexpath,
+                "exceltemplatespath": exceltemplatespath,
+                "statspath": statspath,
+                "minilogo":self.images.get('minilogo')
+
+            }
+
+            rendered_footer=self.footertemplate.render(footerdata)
+            return rendered_footer
+        
+        rendered_footer=make_rendered_footer()
+
         template_data={
         "schoolabrv":self.schoolabrv.replace('_',' '),
-        "universityname":self.universityname
+        "universityname":self.universityname,
+        "footer": rendered_footer,
+
         }
+
+        
         
         template_data.update(universitystatsdict)
         # Jinja must take name=value pairs
@@ -1096,12 +1128,36 @@ class createUniversity:
         with open(self.sorted_departments_json,'r') as sdjson:
             sorted_departments=json.load(sdjson)
 
+        def make_rendered_footer():
+            height = "../"
+
+            aboutpath = f"{height}about.html"
+            indexpath = f"{height}index.html"
+            exceltemplatespath = f"{height}exceltemplates.html"
+            statspath = f"{height}degreeviewstats.html"
+
+            footerdata = {
+                "aboutpath": aboutpath,
+                "indexpath": indexpath,
+                "exceltemplatespath": exceltemplatespath,
+                "statspath": statspath,
+                "minilogo":self.images.get('minilogo')
+
+            }
+
+            rendered_footer=self.footertemplate.render(footerdata)
+            return rendered_footer
         
+        rendered_footer=make_rendered_footer()
         template_data={
         "homepage":f'{os.path.basename(self.homepage)}',
         "schoolabrv":self.schoolabrv.replace('_',' '),
         "sorted_departments":sorted_departments,
-        "universityname":self.universityname
+        "universityname":self.universityname,
+        "statslink":f'{self.schoolabrv.lower()}stats.html',
+
+        "footer": rendered_footer,
+
         }
         # Jinja must take name=value pairs
         sorteddepartments_page_rendered=self.sorted_departments_template.render(template_data)
@@ -1163,11 +1219,35 @@ class createUniversity:
         # print(f'Departmentlinks_dict for homepage: \n{departmentlinks_dict}')
 
 
+        def make_rendered_footer():
+            height = "../"
+
+            aboutpath = f"{height}about.html"
+            indexpath = f"{height}index.html"
+            exceltemplatespath = f"{height}exceltemplates.html"
+            statspath = f"{height}degreeviewstats.html"
+
+            footerdata = {
+                "aboutpath": aboutpath,
+                "indexpath": indexpath,
+                "exceltemplatespath": exceltemplatespath,
+                "statspath": statspath,
+                "minilogo":self.images.get('minilogo')
+
+            }
+
+            rendered_footer=self.footertemplate.render(footerdata)
+            return rendered_footer
+        
+        rendered_footer=make_rendered_footer()
+
         template_data={
         "schoolabrv":self.schoolabrv.replace('_',' '),
         "universityname":self.universityname,
         "departmentlinks_dict":departmentlinks_dict,
-        "statslink":f'{self.schoolabrv}stats.html'
+        "statslink":f'{self.schoolabrv.lower()}stats.html',
+        "footer": rendered_footer,
+
         }
 
         scripts=f'''
@@ -1176,6 +1256,7 @@ class createUniversity:
         <script src="../static/js/randompage.js"></script>
         '''
         template_data.update({"scripts":scripts})
+        template_data.update(self.images)
         
         
         # Jinja must take name=value pairs

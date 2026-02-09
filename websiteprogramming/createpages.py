@@ -155,7 +155,8 @@ class createPages:
                 def web_methods():
                     utobj=createUniversity(**ut_specs)
                     # do this for UT but not all others
-                    # utobj.create_department_pages()
+                    utobj.create_department_pages()
+                    
 
                     utobj.createletterpages()
                     utobj.create_sorteddepartments_page()
@@ -216,8 +217,8 @@ class createPages:
                     ricecatalogobj.create_univeristy_files()
                     ricecatalogobj.make_sorteddepartment_json()
                     ricecatalogobj.make_university_statsjson()
-                    
-                # data_methods()
+                if self.data:   
+                    data_methods()
 
                 def web_methods():
                     riceobj=createUniversity(**rice_specs)
@@ -232,8 +233,8 @@ class createPages:
                     riceobj.create_sorteddepartments_page()
                     riceobj.create_uni_homepage()
                     
-
-                # web_methods()
+                if self.web:
+                    web_methods()
             # call all the school functions here
             def utsa():
                 # update all of this with utsa data
@@ -257,8 +258,10 @@ class createPages:
                     utsacatalogobj.create_univeristy_files()
                     utsacatalogobj.make_sorteddepartment_json()
                     utsacatalogobj.make_university_statsjson()
-                    
-                # data_methods()
+
+                if self.data:   
+                    # data_methods()
+                    print('doing data methods for utsa')
 
                 def web_methods():
                     utsaobj=createUniversity(**utsa_specs)
@@ -273,8 +276,8 @@ class createPages:
                     utsaobj.create_sorteddepartments_page()
                     utsaobj.create_uni_homepage()
                     
-
-                # web_methods()
+                if self.web:
+                    web_methods()
             # call all the school functions here
             
             def txstate():
@@ -315,10 +318,11 @@ class createPages:
                     txstateobj.create_sorteddepartments_page()
                     txstateobj.create_uni_homepage()
                     
+                if self.web:
 
-                web_methods()
-            # ut()
-            # rice()
+                    web_methods()
+            ut()
+            rice()
             txstate()
             
         texas()
@@ -360,8 +364,9 @@ class createPages:
                     stanfordobj.create_sorteddepartments_page()
                     stanfordobj.create_uni_homepage()
                     
+                if self.web:
 
-                web_methods()
+                    web_methods()
             stanford()
         california()
 
