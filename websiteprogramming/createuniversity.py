@@ -161,6 +161,9 @@ class createUniversity:
         
         self.homepage_template=env.get_template("uniwide_templates/homepage.html")
 
+        self.footertemplate=env.get_template('components/dvfooter.html')
+
+
 
         
         # this will include code specific to that school, which right now is only getting the departmentnamehalf and displaydepartmentname
@@ -168,22 +171,18 @@ class createUniversity:
 
 
 
-        self.images={
-            
-            "linkicon":"https://storage.googleapis.com/degreeview/degreeviewimages/linkicon.svg",
-            "logo5":"https://storage.googleapis.com/degreeview/degreeviewimages/logo5.png",
-
-            "minilogo":"https://storage.googleapis.com/degreeview/degreeviewimages/minilogo.png",
-            "site_favicon":"https://storage.googleapis.com/degreeview/degreeviewimages/site_favicon.png"
-        }
+        
         
         BASE_DIR = Path(__file__).resolve().parent
         print(f'BASE_DIR {BASE_DIR}')
-        self.universityuldatapath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "universityuldata.json"
-        self.footertemplatepath=BASE_DIR.parent / "sourcefiles" / "html_components" / "dvfooter.html"
+        self.imagesjsonpath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "images.json"
 
-        with open(self.footertemplatepath) as footerfile:
-            self.footertemplate=footerfile.read()
+
+        with open(self.imagesjsonpath) as imagejson:
+            self.images = json.load(imagejson)
+
+        
+
 
 
         with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/headlinks.html','r') as headfile:
@@ -489,6 +488,29 @@ class createUniversity:
                 return departmentlist_ul_element
             
             #now build the data dict  
+
+            def make_rendered_footer():
+                height = "../../../"
+
+                aboutpath = f"{height}about.html"
+                indexpath = f"{height}index.html"
+                exceltemplatespath = f"{height}exceltemplates.html"
+                statspath = f"{height}degreeviewstats.html"
+
+                footerdata = {
+                    "aboutpath": aboutpath,
+                    "indexpath": indexpath,
+                    "exceltemplatespath": exceltemplatespath,
+                    "statspath": statspath,
+                    "minilogo":self.images.get('minilogo')
+
+                }
+
+                rendered_footer=self.footertemplate.render(footerdata)
+                return rendered_footer
+            rendered_footer=make_rendered_footer()
+
+            
             letterpagedata = {
                 "headtag": self.headtag,
                 "startingletter": startingletter,
@@ -938,6 +960,8 @@ class createUniversity:
                         "indexpath": indexpath,
                         "exceltemplatespath": exceltemplatespath,
                         "statspath": statspath,
+                        "minilogo":self.images.get('minilogo')
+
                     }
 
                     rendered_footer=self.footertemplate.render(footerdata)

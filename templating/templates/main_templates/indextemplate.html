@@ -83,14 +83,20 @@
               This is a big data analysis project with the topic being course
               catalogs at universities.
             </p>
-            <button class="cta">See Schools</button>
+            <button class="cta"><a href="#universityul">See Schools</a></button>
           </div>
           <div class="righthero">
-            <img src="images/excellogo.png" alt="" id="excelicon" />
-            <img src="images/barchart.webp" alt="" id="barchart" />
-            <img src="images/csvicon.png" alt="" id="csvicon" />
-            <img src="images/htmltable.png" alt="tableicon" id="tableicon" />
-            <img src="images/piecharticon.png" alt="" id="piechart" />
+            <img src="{{towericon}}" alt="towericon" id="towericon" />
+            <img src="{{excelicon}}" alt="" id="excelicon" />
+            <img src="{{minilogo}}" alt="" id="minilogohero" />
+
+            <img src="{{universityicon}}" alt="" id="uniicon" />
+            <img src="{{tableicon}}" alt="tableicon" id="tableicon" />
+            <img
+              src="{{piecharticon}}"
+              alt="pie chart icon"
+              id="piecharticon"
+            />
           </div>
         </div>
       </div>
@@ -99,7 +105,7 @@
       -->
       <div class="mainsite">
         <!-- in the future I want an interactive USA map here showing states stuff -->
-        <ul class="universityul">
+        <ul class="universityul" id="universityul">
           {% for university, data in universityuldata.items() %}
 
           <li
@@ -162,24 +168,7 @@
         <button id="statslink">DegreeView Stats</button>
       </div>
       <!-- footer now -->
-      <footer>
-        <div class="footerleft">
-          <div class="links">
-            <a href="aboutpage.html">About</a>
-
-            <a href="#biglogoid">Home</a>
-          </div>
-          <p id="statement">DegreeView 2026</p>
-        </div>
-
-        <div class="footerright">
-          <img
-            id="smalllogo"
-            src="metaassets/minilogo.png"
-            alt="smalldegreeviewlogo"
-          />
-        </div>
-      </footer>
+      {{footer}}
     </div>
     <!-- script for random button  -->
     <script src="static/js/randomuni.js"></script>

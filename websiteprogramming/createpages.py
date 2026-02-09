@@ -52,10 +52,29 @@ class createPages:
         BASE_DIR = Path(__file__).resolve().parent
         print(f'BASE_DIR {BASE_DIR}')
         self.universityuldatapath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "universityuldata.json"
+
+        self.imagesjsonpath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "images.json"
         self.footertemplatepath=BASE_DIR.parent / "sourcefiles" / "html_components" / "dvfooter.html"
 
-        with open(self.footertemplatepath) as footerfile:
-            self.footertemplate=footerfile.read()
+
+        with open(self.imagesjsonpath) as imagejson:
+            self.images = json.load(imagejson)
+
+
+       
+
+
+
+
+        env = Environment(loader=FileSystemLoader("templating/templates"))
+
+        # define all the templates to be used
+        self.indextemplate = env.get_template("main_templates/indextemplate.html")
+        self.mainstatstemplate=env.get_template("main_templates/mainstatspage.html")
+        self.abouttemplate=env.get_template("main_templates/abouttemplate.html")
+
+        
+        self.footertemplate=env.get_template('components/dvfooter.html')
 
         aboutpath = "about.html"
         indexpath = "index.html"
@@ -67,19 +86,10 @@ class createPages:
             "indexpath": indexpath,
             "exceltemplatespath": exceltemplatespath,
             "statspath": statspath,
+            "minilogo":self.images.get('minilogo')
         }
 
         self.rendered_footer=self.footertemplate.render(footerdata)
-
-
-
-
-        env = Environment(loader=FileSystemLoader("templating/templates"))
-
-        # define all the templates to be used
-        self.indextemplate = env.get_template("main_templates/indextemplate.html")
-        self.mainstatstemplate=env.get_template("main_templates/mainstatspage.html")
-        self.abouttemplate=env.get_template("main_templates/abouttemplate.html")
 
         # use these when making big changes
 
@@ -448,16 +458,18 @@ class createPages:
             "totalcourses": self.totalcourses,
             "biggestdepartments":[],
             "excelfilecount": self.excelfilecount,
-            "footer":self.rendered_footer
-
-                       }
+            "footer":self.rendered_footer,     
+        }
         
+        template_data.update(self.images)
+
         mainindexrendered=self.indextemplate.render(template_data)
 
         mainindexpath=os.path.join(self.websitepath,'index.html')
 
         with open(mainindexpath,'w') as mainindex:
             mainindex.write(mainindexrendered)
+
     def createabout(self):
         '''
         Creates the aboutpage
