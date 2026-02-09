@@ -177,8 +177,15 @@ class createUniversity:
             "site_favicon":"https://storage.googleapis.com/degreeview/degreeviewimages/site_favicon.png"
         }
         
-        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/dvfooter.html','r') as footerfile:
+        BASE_DIR = Path(__file__).resolve().parent
+        print(f'BASE_DIR {BASE_DIR}')
+        self.universityuldatapath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "universityuldata.json"
+        self.footertemplatepath=BASE_DIR.parent / "sourcefiles" / "html_components" / "dvfooter.html"
+
+        with open(self.footertemplatepath) as footerfile:
             self.footertemplate=footerfile.read()
+
+
         with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/headlinks.html','r') as headfile:
             # we we actually do use this
             self.headlinks=headfile.read()
@@ -488,7 +495,7 @@ class createUniversity:
                 "site_favicon": self.images.get("site_favicon"),
                 "departmentlist_ul_element": make_departmentlist_ul(),
                 "linkicon": self.images.get("linkicon"),
-                "footer": self.footertemplate
+                "footer": rendered_footer,
             }
 
               
@@ -917,6 +924,27 @@ class createUniversity:
                 '''
                 I need to get departmentnamehalf and displaydepartmentname standardized across schools
                 '''
+
+                def make_rendered_footer():
+                    height = "../../../"
+
+                    aboutpath = f"{height}about.html"
+                    indexpath = f"{height}index.html"
+                    exceltemplatespath = f"{height}exceltemplates.html"
+                    statspath = f"{height}degreeviewstats.html"
+
+                    footerdata = {
+                        "aboutpath": aboutpath,
+                        "indexpath": indexpath,
+                        "exceltemplatespath": exceltemplatespath,
+                        "statspath": statspath,
+                    }
+
+                    rendered_footer=self.footertemplate.render(footerdata)
+                    return rendered_footer
+                
+                rendered_footer=make_rendered_footer()
+
                 departmentpagedata = {
 
                     "universityname":self.universityname,
@@ -935,7 +963,7 @@ class createUniversity:
                     "homepage":f'../../{os.path.basename(self.homepage)}',
                     
                     "courserows":courserows,
-                    "footer": self.footertemplate,
+                    "footer": rendered_footer,
                     "statsdict":statsdict,
                     "excelul":excel_ul,
 
