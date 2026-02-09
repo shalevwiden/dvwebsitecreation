@@ -321,3 +321,9 @@ Then in the index of the website, simply create it
 ### Feb 8, 2026
 
 The key of university ul data is what shows up in the box
+In universityuldata.json the schoolabrv needs to match the schoolabrv in createpages.py
+
+dvfooter.html is the footer that should be used everywhere.
+It can possibly refer to an excel templates page for all the schools ngl.
+
+Also footer has to actually be a template in which the level it goes up to is passed in.

@@ -101,13 +101,16 @@
         <!-- in the future I want an interactive USA map here showing states stuff -->
         <ul class="universityul">
           {% for university, data in universityuldata.items() %}
+
           <li
             class="universitybox"
-            id="{{ data.schoolabvr }}box"
+            id="{{ data.schoolabrv | lower }}box"
             style="background-color: {{ data.boxcolor}};"
           >
-            <a href="{{ university ~ '/' ~ university ~ '.html' }}"
-              >{{ university }}</a
+            <a
+              href="{{ data.schoolabrv | lower ~ '/' ~ data.schoolabrv | lower ~ '-home.html' }}"
+            >
+              {{ university }}</a
             >
           </li>
           {% endfor %}
@@ -125,9 +128,9 @@
             <nav class="home_random_stats">
               <ul>
                 <!-- keep in mind the entire li is clickable here -->
-                <li><a href="aboutpage.html">About</a></li>
-                <li id="randompagebutton">
-                  <a id="randomlink" href="">Random School</a>
+                <li><a href="about.html">About</a></li>
+                <li id="randomunibutton">
+                  <a id="randomunibutton" href="">Random University</a>
                 </li>
                 <li><a href="degreeviewstats.html">Stats</a></li>
               </ul>
@@ -152,9 +155,9 @@
       <div class="undermainsite">
         <h3>Statistics at a glance</h3>
         <div class="quickstats">
-          <h4>{{universitycount}} Schools</h4>
-          <h4>{{total_file_count}} Files</h4>
-          <h4>Data on {{totalcourses}} courses</h4>
+          <h4>{{universitycount}} Universities</h4>
+          <h4>{{excelfilecount}} Excel Files</h4>
+          <h4>{{totalcourses}} courses on the site</h4>
         </div>
         <button id="statslink">DegreeView Stats</button>
       </div>

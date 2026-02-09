@@ -177,8 +177,8 @@ class createUniversity:
             "site_favicon":"https://storage.googleapis.com/degreeview/degreeviewimages/site_favicon.png"
         }
         
-        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/degreeviewfooter.html','r') as footerfile:
-            self.footer=footerfile.read()
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/dvfooter.html','r') as footerfile:
+            self.footertemplate=footerfile.read()
         with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/headlinks.html','r') as headfile:
             # we we actually do use this
             self.headlinks=headfile.read()
@@ -488,7 +488,7 @@ class createUniversity:
                 "site_favicon": self.images.get("site_favicon"),
                 "departmentlist_ul_element": make_departmentlist_ul(),
                 "linkicon": self.images.get("linkicon"),
-                "footer": self.footer
+                "footer": self.footertemplate
             }
 
               
@@ -935,7 +935,7 @@ class createUniversity:
                     "homepage":f'../../{os.path.basename(self.homepage)}',
                     
                     "courserows":courserows,
-                    "footer": self.footer,
+                    "footer": self.footertemplate,
                     "statsdict":statsdict,
                     "excelul":excel_ul,
 

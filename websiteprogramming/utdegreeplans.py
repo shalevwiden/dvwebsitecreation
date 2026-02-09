@@ -69,7 +69,7 @@ class createWebsite:
         with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/headlinks.html','r') as headfile:
             self.headlinks=headfile.read()
 
-        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/footerwithouttooltip.html','r') as footerfile:
+        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/html_components/footerwexcel.html','r') as footerfile:
             self.footer=footerfile.read()
 
         with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/headtag.html','r') as headtag:

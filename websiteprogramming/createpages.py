@@ -52,6 +52,25 @@ class createPages:
         BASE_DIR = Path(__file__).resolve().parent
         print(f'BASE_DIR {BASE_DIR}')
         self.universityuldatapath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "universityuldata.json"
+        self.footertemplatepath=BASE_DIR.parent / "sourcefiles" / "html_components" / "dvfooter.html"
+
+        with open(self.footertemplatepath) as footerfile:
+            self.footertemplate=footerfile.read()
+
+        aboutpath = "about.html"
+        indexpath = "index.html"
+        exceltemplatespath = "exceltemplates.html"
+        statspath = "degreeviewstats.html"
+
+        footerdata = {
+            "aboutpath": aboutpath,
+            "indexpath": indexpath,
+            "exceltemplatespath": exceltemplatespath,
+            "statspath": statspath,
+        }
+
+        footerrendered=self.footertemplate.render(footerdata)
+
 
 
 
@@ -68,6 +87,7 @@ class createPages:
         self.web=True
 
         self.totalcourses=0
+        self.excelfilecount=0
 
         # just update this manuallyfor now lmao
         self.universitycount=5
@@ -255,7 +275,9 @@ class createPages:
                 ,"https://storage.googleapis.com/txstate",
 
                 # so I can probably make a function to finish this path for whereever I actually host the website
-                os.path.join(self.websitepath,'txstate'),schoolabrv="TX_State")
+
+                # ok the website path is different than the school abrv
+                os.path.join(self.websitepath,'tx_state'),schoolabrv="TX_State")
                 
             
                 # instead of calling all of the functions 
@@ -331,7 +353,7 @@ class createPages:
 
                 web_methods()
             stanford()
-        # california()
+        california()
 
     
     def create_main_statspage(self):
@@ -343,6 +365,8 @@ class createPages:
         '''
 
         totalcourses=0
+
+        excelfilecount=0
         BASE_DIR = Path(__file__).resolve().parent
         print(f'BASE_DIR {BASE_DIR}')
         base_path = BASE_DIR.parent / "degreeview_expansion"
@@ -358,6 +382,17 @@ class createPages:
                 if os.path.isdir(assets_path): 
                     print("Found assets folder:", assets_path,'\n')
 
+                    # getting the excel file count now
+                    for root, dirs, files in os.walk(assets_path):
+                                    for file in files:
+                                        # Excel files: .xlsx or .xls
+                                        # Exclude temp files starting with $
+                                        if (
+                                            (file.endswith(".xlsx") or file.endswith(".xls"))
+                                            and not file.startswith("$")
+                                        ):
+                                            excelfilecount += 1
+
                     universitywidefolder=os.path.join(base_path,folder,'assets','universitywidefolder')
 
                     unistatsjson=os.path.join(universitywidefolder,'universitystatsjson.json')
@@ -370,11 +405,19 @@ class createPages:
 
         print(f'Total courses: {totalcourses}')
         self.totalcourses = f"{totalcourses:,}"
+        self.excelfilecount=f"{excelfilecount:,}"
+
+        
+
+
+
 
         template_data={
             "universities":self.universitycount,
             "totalcourses":self.totalcourses,
                        "biggestdepartments":[],
+                       "excelfilecount": self.excelfilecount,
+                       "footer":self.footerrendered
                        }
         
         mainstatspath=os.path.join(self.websitepath,'degreeviewstats.html')
@@ -404,6 +447,7 @@ class createPages:
             "universitycount":self.universitycount,
             "totalcourses": self.totalcourses,
                        "biggestdepartments":[],
+                       "excelfilecount": self.excelfilecount
                        }
         
         mainindexrendered=self.indextemplate.render(template_data)
@@ -444,7 +488,7 @@ def main():
 
     createpagesobj=createPages()
 
-    # createpagesobj.schoolcontainingfunc()
+    createpagesobj.schoolcontainingfunc()
     createpagesobj.create_main_statspage()
     createpagesobj.createindex()
     createpagesobj.createabout()
