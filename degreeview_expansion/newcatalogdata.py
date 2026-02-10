@@ -156,6 +156,19 @@ class catalogData(createUniversity):
                 if not os.path.exists(departmentfolderpath):
                     os.mkdir(departmentfolderpath)
                         # now get the SQL stuff right, then just copy paste. 
+
+                databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
+
+                # start fresh
+
+                if os.path.exists(databasepath):
+                    # os.remove(databasepath)
+                    print(f'The database for {departmentname} already exists skipping')
+                    continue
+                # hyphens and commas not allowed in tablename
+
+                tablename=self.get_tablename()
+
                 def database_logic():
                 # its a little different from the database name, use underscore instead of hyphen
                     '''
@@ -164,16 +177,7 @@ class catalogData(createUniversity):
 
                     
 
-                    databasepath=os.path.join(departmentfolderpath,f'{departmentnamecleaned}-database.db')
-
-                    # start fresh
-
-                    if os.path.exists(databasepath):
-                        os.remove(databasepath)
-                    # hyphens and commas not allowed in tablename
-
-                    tablename=self.get_tablename()
-
+                    
                     def maketable():
                         '''This creates the table for course data in the db'''
 
@@ -743,7 +747,7 @@ class catalogData(createUniversity):
                     # stop further processing cause the table is full
                     print('no data to put in an excel file, skipping')
                     continue
-                                
+
                 def getdatabasedata():
                     '''
                     These are all the column names: coursename, coursecode, coursehours, classification

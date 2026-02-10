@@ -944,9 +944,9 @@ class createUniversity:
                         [f"{self.schoolabrv.replace('_',' ')}",uni_theme]
                     ]
 
-                    return excel_ul
+                    return excel_ul, missing_excel
                 
-                excel_ul=make_excel_ul()
+                excel_ul, missing_excel = make_excel_ul()
 
                 courserows=make_course_rows()
 

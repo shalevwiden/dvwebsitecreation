@@ -110,6 +110,7 @@ class createPages:
         I think here I can do defaults like _ if _ else _
         Just put the defaults at the top of this function like placeholder='default'
         '''
+        # website folder has to match schoolabrv
         return {"schoolfolder":schoolfolder,
     "universityname": universityname,
     "cloudbucketpath": cloudbucketpath,
@@ -375,21 +376,21 @@ class createPages:
                     "degreeview_expansion/ucberkeley",
                      "University of California Berkeley"
                     ,"https://storage.googleapis.com/ucberkeley",
-                    os.path.join(self.websitepath,'ucberkeley'),
+                    os.path.join(self.websitepath,'uc_berkeley'),
                     "UC_Berkeley")
                 
                 def data_methods():
                     ucberkeleycatalogobj=catalogData(**ucberkeley_specs)
                     print(f'Configs folder: {ucberkeleycatalogobj.configsfolder}')
                     
-                    ucberkeleycatalogobj.upload_to_database()
-                    ucberkeleycatalogobj.upload_stragglers_todb()
+                    # ucberkeleycatalogobj.upload_to_database()
+                    # ucberkeleycatalogobj.upload_stragglers_todb()
                     
                     ucberkeleycatalogobj.makestatsjson()
                     # ucberkeleycatalogobj.make_excel_files()
-                  # ucberkeleycatalogobj.create_univeristy_files()
-                    # ucberkeleycatalogobj.make_sorteddepartment_json()
-                    # ucberkeleycatalogobj.make_university_statsjson()
+                    ucberkeleycatalogobj.create_univeristy_files()
+                    ucberkeleycatalogobj.make_sorteddepartment_json()
+                    ucberkeleycatalogobj.make_university_statsjson()
 
                 data_methods()
                 def web_methods():
