@@ -1354,7 +1354,7 @@ def main():
                 "degreeview_expansion/utcourses",
                 "The University of Texas at Austin"
                 ,"https://storage.googleapis.com/utcourses",
-                "/Users/shalevwiden/Downloads/Projects/testsite/ut",
+                "/Users/shalevwiden/Downloads/Projects/degreeviewwebsite/ut",
                 "UT"]
     
     catalogobj=catalogData(*ut_specs)
