@@ -47,7 +47,7 @@ from degreeview_expansion.newcatalogdata import catalogData
 class createPages:
     def __init__(self):
         # havent used this yet
-        self.websitepath='/Users/shalevwiden/Downloads/Projects/testsite'
+        self.websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewwebsite'
 
         BASE_DIR = Path(__file__).resolve().parent
         print(f'BASE_DIR {BASE_DIR}')
@@ -184,7 +184,7 @@ class createPages:
                     def unpacktheasset_into_createSchoolpages(theasset):
                         for schooldict in theasset[0:]:
                             print(schooldict[list(schooldict)[0]])
-                            utdegreeplans=createWebsite(schooldata=schooldict,websitepath='/Users/shalevwiden/Downloads/Projects/testsite/ut/degreeplans')
+                            utdegreeplans=createWebsite(schooldata=schooldict,websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewwebsite/ut/degreeplans')
                             
                             utdegreeplans.createschoolpages()
                             utdegreeplans.create_degree_pages()

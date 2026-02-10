@@ -327,3 +327,17 @@ dvfooter.html is the footer that should be used everywhere.
 It can possibly refer to an excel templates page for all the schools ngl.
 
 Also footer has to actually be a template in which the level it goes up to is passed in.
+
+### Feb 9, 2026
+
+Can we launch today gahhh...
+
+Probalby this week.
+
+Ok plan:
+Make a subdomain. So make original.degreeview.com for the original degree plans.
+
+Ok so added subdomain nice
+
+For the original dv we gonna keep this...
+/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utaustin-site
