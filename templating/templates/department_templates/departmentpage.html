@@ -79,7 +79,18 @@
       <div class="mainsite">
         <!-- left content has all the file references -->
         <div class="leftcontent">
-          <div class="filescontainer" id="excelcontainer">
+          <div
+            class="filescontainer"
+            id="excelcontainer"
+            {%
+            if
+            missing_excel
+            %}style="display: none;"
+            {%
+            endif
+            %}
+          >
+            >
             <div class="filesname">
               <h3>Excel (.xlsx) Files</h3>
               <span class="material-symbols-outlined"> view_module </span>

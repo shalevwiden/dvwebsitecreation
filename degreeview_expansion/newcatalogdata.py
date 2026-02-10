@@ -719,6 +719,31 @@ class catalogData(createUniversity):
 
                 # hyphens and commas not allowed in tablename
                 tablename=self.get_tablename()
+
+                def check_if_empty(tablename, db_path):
+
+                        # Connect to the database
+                        conn = sqlite3.connect(db_path)
+                        cursor = conn.cursor()
+
+                        # Check if the table has any rows
+                        cursor.execute(f"SELECT COUNT(*) FROM {tablename}")
+                        count = cursor.fetchone()[0]
+
+                        conn.close()
+
+                        if count > 0:
+                            return False
+                        else:
+                            # just for readability
+                            return True
+                    # Usage
+                empty = check_if_empty(tablename, databasepath)
+                if empty:
+                    # stop further processing cause the table is full
+                    print('no data to put in an excel file, skipping')
+                    continue
+                                
                 def getdatabasedata():
                     '''
                     These are all the column names: coursename, coursecode, coursehours, classification

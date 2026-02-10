@@ -367,7 +367,50 @@ class createPages:
                 if self.web:
 
                     web_methods()
+            def ucberkeley():
+                 
+                #  we'll do bucket stuff later
+
+                ucberkeley_specs=self.buildspecs(
+                    "degreeview_expansion/ucberkeley",
+                     "University of California Berkeley"
+                    ,"https://storage.googleapis.com/ucberkeley",
+                    os.path.join(self.websitepath,'ucberkeley'),
+                    "UC_Berkeley")
+                
+                def data_methods():
+                    ucberkeleycatalogobj=catalogData(**ucberkeley_specs)
+                    print(f'Configs folder: {ucberkeleycatalogobj.configsfolder}')
+                    
+                    ucberkeleycatalogobj.upload_to_database()
+                    ucberkeleycatalogobj.upload_stragglers_todb()
+                    
+                    ucberkeleycatalogobj.makestatsjson()
+                    # ucberkeleycatalogobj.make_excel_files()
+                  # ucberkeleycatalogobj.create_univeristy_files()
+                    # ucberkeleycatalogobj.make_sorteddepartment_json()
+                    # ucberkeleycatalogobj.make_university_statsjson()
+
+                data_methods()
+                def web_methods():
+                    ucberkeleyobj=createUniversity(**ucberkeley_specs)
+
+                    # ucberkeleyobj.createletterpages()
+
+                    # ucberkeleyobj.upload_department_files()
+                    ucberkeleyobj.create_department_pages()
+                    ucberkeleyobj.create_departmentpagelinks_json()
+
+                    ucberkeleyobj.createstatspage()
+                    ucberkeleyobj.create_sorteddepartments_page()
+                    ucberkeleyobj.create_uni_homepage()
+                    
+                if self.web:
+
+                    web_methods()
+            ucberkeley()
             stanford()
+
         california()
 
     

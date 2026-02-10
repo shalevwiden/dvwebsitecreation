@@ -65,6 +65,7 @@ class createUniversity:
 
 
         if not os.path.exists(self.universitywidefolder):
+            # exist ok also creates the asset folder and the school folder
             os.makedirs(self.universitywidefolder, exist_ok=True)
 
         # just keep the variable names the same as the filenames
@@ -525,7 +526,7 @@ class createUniversity:
             
             def makefullhtmlcode():
 
-                print(f'Starting letter {startingletter}')
+                # print(f'Starting letter {startingletter}')
                 letterwebsitefolder=os.path.join(self.deparmentsfolder,startingletter)
                 
                 letterwebsitepage=f'{startingletter}-departments.html'
@@ -913,16 +914,19 @@ class createUniversity:
                     
 
                     excellist=get_degree_assetcloudpaths_lists(departmentfolder=departmentfolderpath,departmentnamecleaned=departmentnamecleaned)[1]
-                    uni_theme = 'uniexcelplaceholder'
+
+                    missing_excel = False
 
                     if excellist:
                         originaltheme_excel = find_theme(excellist, "original-theme")
                         uni_theme= find_theme(excellist, f"{self.schoolabrv.lower()}-theme")
 
-                        if uni_theme is None:
-                            uni_theme='uniexcelplaceholder'
+                        if uni_theme is None or originaltheme_excel is None:
+                            missing_excel=True
                     else:
-                        originaltheme_excel="placeholder, some schools dont have excel files generated yet."
+                        originaltheme_excel="somethings_missing"
+                        uni_theme = 'uniexcelplaceholder'
+
                     
                     # make a custom college excel theme
                     # only two of em, original and college one.
@@ -994,10 +998,12 @@ class createUniversity:
                     "courserows":courserows,
                     "footer": rendered_footer,
                     "statsdict":statsdict,
+                    "missing_excel":missing_excel,
                     "excelul":excel_ul,
 
                     
                     "scripts":scripts,
+
                     
                 }
                 startingletter=startingletter.lower()
@@ -1005,7 +1011,7 @@ class createUniversity:
                 def makefullhtmlcode():
                     # have to run createschoolpages() first so self.websiteschool folder works
 
-                    print(f'Starting letter {startingletter}')
+                    # print(f'Starting letter {startingletter}')
                     # departments folder passed in
                     letterwebsitefolder=os.path.join(self.deparmentsfolder,startingletter)
 
@@ -1051,11 +1057,8 @@ class createUniversity:
                 departmentnamehalf,
                 departmentcode,
                     ) = self.get_departmentnames(departmentname)
-            
-            
-        
-            
-                print(f'Department: {departmentname}')
+                
+                # print(f'Department: {departmentname}')
             
 
 
