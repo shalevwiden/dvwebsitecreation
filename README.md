@@ -351,3 +351,10 @@ And use it to hide some stuff on original degreeview.
 ### Feb 11
 
 Well the update is live thats nice
+
+Ok so unilinks.json...
+
+I think I should have one central function that deals with the specs for each uni, which then generates data for the universityul and for the unilinks.json
+
+That way everything is consistent.
+Use some kinda dictionary maybe

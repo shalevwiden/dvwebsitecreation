@@ -554,7 +554,13 @@ class createPages:
         with open(aboutpath,'w') as about:
             about.write(aboutrendered)
 
-        
+    def create_unilinks(self):
+        '''
+        this function needs to create unilinks.json
+
+        Unilinks.json is what supports the random university button.
+        '''
+        pass
 
 def main():
     # print(os.getcwd())
