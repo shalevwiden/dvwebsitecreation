@@ -55,7 +55,7 @@ class createPages:
 
         self.imagesjsonpath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "images.json"
         self.footertemplatepath=BASE_DIR.parent / "sourcefiles" / "html_components" / "dvfooter.html"
-        self.headtagpath=BASE_DIR.parent / "googleanalytics_tags" / "headtag.html"
+        self.headtagpath=BASE_DIR.parent / "sourcefiles" / "googleanalytics_tags" / "headtag.html"
 
 
 

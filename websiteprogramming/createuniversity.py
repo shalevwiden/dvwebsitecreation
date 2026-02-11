@@ -178,7 +178,7 @@ class createUniversity:
         print(f'BASE_DIR {BASE_DIR}')
         self.imagesjsonpath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "images.json"
 
-        self.headtagpath=BASE_DIR.parent / "googleanalytics_tags" / "headtag.html"
+        self.headtagpath=BASE_DIR.parent / 'sourcefiles' / "googleanalytics_tags" / "headtag.html"
 
 
         with open(self.imagesjsonpath) as imagejson:
