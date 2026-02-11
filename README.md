@@ -347,3 +347,7 @@ For the original dv we gonna keep this...
 Now I have the idea to use Javascript to hide the content of department pages that couldnt be scraped
 
 And use it to hide some stuff on original degreeview.
+
+### Feb 11
+
+Well the update is live thats nice
