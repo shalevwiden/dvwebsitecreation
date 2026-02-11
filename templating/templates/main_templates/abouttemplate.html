@@ -86,7 +86,7 @@
           <nav class="homeandabout">
             <ul>
               <li><a href="index.html">Home</a></li>
-              <li><a href="ut-stats.html">Stats</a></li>
+              <li><a href="degreeviewstats.html">Stats</a></li>
             </ul>
           </nav>
         </div>
@@ -99,6 +99,38 @@
       -->
       <div class="mainsite">
         <div class="aboutbox">
+          <h3 class="aboutbox-header">What is this website</h3>
+
+          <div class="about-paragraph">
+            <p>
+              DegreeView is a website that basically does data analysis on
+              college course catalogs and then displays all the courses in
+              tables and excel files.
+
+              <br /><br />
+              What was the idea? I noticed it was pretty replicatable to web
+              scrape course catalogs at many universities. And we as college
+              students spend a lot of time looking at courses and at catalogs.
+              So I built this as simply a website people can go to interact with
+              their college course catalogs in a new way. Theres statistics and
+              table animations for example. If youre here and reading this much
+              appreciated though.
+              <br />
+              I wanted to improve programming skills and build a project so I
+              built this website.
+              <br />Lowkey do have to build something better one day but...
+              <br />I have this and I can try to expand it as far as it can go
+              before something breaks. lol
+            </p>
+            <br />
+          </div>
+          <p id="disclaimer">
+            Disclaimer: DegreeView is not affiliated with any universities
+          </p>
+        </div>
+        <div class="aboutbox">
+          <h3 class="aboutbox-header">Technicals</h3>
+
           <div class="about-paragraph">
             <p>
               DegreeView is a website that provides and displays data
@@ -118,25 +150,35 @@
             </p>
             <br />
           </div>
-          <p id="disclaimer">
-            Disclaimer: DegreeView is not affiliated with the University of
-            Texas at Austin or any other university.
-          </p>
         </div>
-        <div class="substackcontainer">
+        <div id="socialplatforms">
           <p>
-            There is a substack DegreeView page where updates, new features, and
-            possible expansions will be posted.
+            There is an X DegreeView account where updates, new features, and
+            behind the scenes programming stuff may be posted.
             <br />
             <br />
-            <a href="https://substack.com/@degreeview"> Substack Page Link</a>.
+            So right now this is a DegreeView account, but this account will
+            likely be an account where I display all my programming projects. Or
+            make it some kind of statistics themed account.
+            <br />Either way, your follow will not be in vain after this project
+            is wraps. <a href="https://x.com/DegreeViewsite"> X page link</a>.
             <br />
           </p>
+          <a
+            class="social-icon"
+            href="https://x.com/DegreeViewsite"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+
           <a
             href="https://substack.com/@degreeview"
             title="Follow the Substack"
             target="_blank"
             id="substacklink"
+            style="display: none"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -151,7 +193,7 @@
           ></a>
         </div>
 
-        <div class="platformscontainer" style="display: none">
+        <div class="platformscontainer">
           <div class="platformsbox">
             <p>Built by Shalev Widen</p>
             <div class="icons">
@@ -192,6 +234,5 @@
       </div>
       {{footer}}
     </div>
-    <script src="utaustin-site/javascript_files/headingcolorchange.js"></script>
   </body>
 </html>

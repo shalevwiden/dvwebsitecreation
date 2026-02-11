@@ -341,3 +341,9 @@ Ok so added subdomain nice
 
 For the original dv we gonna keep this...
 /Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utaustin-site
+
+### Feb 10, 2026
+
+Now I have the idea to use Javascript to hide the content of department pages that couldnt be scraped
+
+And use it to hide some stuff on original degreeview.

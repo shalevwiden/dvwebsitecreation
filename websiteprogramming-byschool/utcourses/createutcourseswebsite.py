@@ -831,32 +831,8 @@ class createUniversity:
                         ]
 
                         return excelul
-                        
-                        
-
-                        
-                    
-              
-                       
-
-
-                      
-
-
-                    
-
-            
-    
-
-                    
-
-
-
-
-
-
-
-                
+        
+                         
                 def make_undermainsite_code():
 
 
@@ -869,10 +845,7 @@ class createUniversity:
                     departmentnamehalf=displaydepartmentname[-1].strip()
                     displaydepartmentname=f'({code}) - {departmentnamehalf}'
                     
-                
-                
 
-                
                 
                 def makebodyhtmlcode():
                   
@@ -1054,7 +1027,7 @@ class createUniversity:
 def runcreateUniversity():
     websiteobject=createUniversity()
     websiteobject.create_department_pages()
-    websiteobject.createletterpages()
+    # websiteobject.createletterpages()
 
     
 

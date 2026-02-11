@@ -80,7 +80,7 @@
           <nav class="homeandabout">
             <ul>
               <li><a href="index.html">Home</a></li>
-              <li><a href="aboutpage.html">About</a></li>
+              <li><a href="about.html">About</a></li>
             </ul>
           </nav>
         </div>
@@ -92,71 +92,43 @@
       no left or right sections jere.
       -->
       <div class="mainsite">
-        <div class="statscontainer">
-          <div class="statsbox">
-            <div class="statscontent"><p>4.691</p></div>
-            <div class="statstitle">Average classes per semester</div>
-          </div>
-          <div class="statsbox">
-            <div class="statscontent"><p>47.13%</p></div>
-            <div class="statstitle">
-              Average % of Major Classified Hours / <br />Total Hours
+        <div class="stats-wrapper">
+          <!-- Hero Stats -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number">{{ universities }}</div>
+              <div class="stat-label">Universities Indexed</div>
             </div>
-          </div>
-          <div class="statsbox">
-            <div class="statscontent"><p>27</p></div>
-            <div class="statstitle">
-              Degree Plans with more than 8 semesters
+
+            <div class="stat-card">
+              <div class="stat-number">{{ totalcourses }}</div>
+              <div class="stat-label">Total Courses Tracked</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-number">{{ excelfilecount }}</div>
+              <div class="stat-label">Excel Files Processed</div>
             </div>
           </div>
 
-          <div class="statsbox" id="longestnamebox">
-            <div class="statscontent">
-              <p>Architecture-Architectural Engineering (BArch-BSArchE)</p>
-            </div>
-            <div class="statstitle">Longest Degree Program Name</div>
-          </div>
-          <div class="statsbox" id="shortestnamebox">
-            <div class="statscontent"><p>Dance (BFA)</p></div>
-            <div class="statstitle">Shortest Degree Program Name</div>
-          </div>
-          <div class="statsbox" id="longestcoursebox">
-            <div class="statscontent">
-              Introduction to Speech and Language Disorders Assessment and
-              Treatment in Children
-            </div>
-            <div class="statstitle">
-              Longest Coursename<sup>1, </sup><sup>2</sup><br /><span
-                style="margin-top: 6px; display: inline-block"
-                class="char"
-                >82 chars</span
-              >
+          <!-- Biggest Departments Section -->
+          {% if biggestdepartments %}
+          <div class="departments-section">
+            <h2 class="section-title">Largest Departments</h2>
+
+            <div class="departments-grid">
+              {% for dept in biggestdepartments %}
+              <div class="department-card">
+                <div class="dept-name">{{ dept.name }}</div>
+                <div class="dept-count">{{ dept.count }} Courses</div>
+              </div>
+              {% endfor %}
             </div>
           </div>
-          <div class="statsbox" id="shortestcoursebox">
-            <div class="statscontent">Statics</div>
-            <div class="statstitle">
-              Shortest Coursename <sup>1, </sup><sup>2</sup><br /><span
-                style="margin-top: 6px; display: inline-block"
-                class="char"
-                >7 chars</span
-              >
-            </div>
-          </div>
-        </div>
-        <div class="footnotes">
-          <div class="rightfootnotes">
-            <p>
-              1. Only includes courses on the suggested arrangement of courses
-              pages. Doesn't include the entire course catalog.
-            </p>
-            <p>
-              2.Refers to specific coursename. For example "track" is not
-              included as it is not a full coursename.
-            </p>
-          </div>
+          {% endif %}
         </div>
       </div>
+
       <!-- put something here later -->
       <div class="undermainsite">
         <!-- this can be empty and like 20 px tall just to take up space, and be used for something in the future

@@ -37,8 +37,6 @@
     <!-- main stylesheet -->
     <link rel="stylesheet" href="../static/css/dv_main.css" />
 
-    <!-- animation stylesheet -->
-    <link rel="stylesheet" href="cssfiles/animations.css" />
     <!-- Barlow Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -83,7 +81,7 @@
               This is a big data analysis project with the topic being course
               catalogs at universities.
             </p>
-            <button class="cta"><a href="#universityul">See Schools</a></button>
+            <a href="#universityul"><button class="cta">See Schools</button></a>
           </div>
           <div class="righthero">
             <img src="{{towericon}}" alt="towericon" id="towericon" />
@@ -127,8 +125,10 @@
           <h3 id="sidebartitle">Sidebar</h3>
           <p>
             See stats for universities, progress posts + behind the scenes, and
-            updates for DegreeView on X.
-            <a href="">go to socials box</a>
+            updates for DegreeView on <i class="fa-brands fa-x-twitter"></i>.
+            <br /><br />
+
+            <a href="about.html#socialplatforms"> Go to social platforms box</a>
           </p>
           <div class="middlenav">
             <nav class="home_random_stats">
@@ -160,15 +160,15 @@
       <div class="undermainsite">
         <div class="borderdiv"></div>
 
-        <h3>Statistics at a glance</h3>
+        <h3 class="quickstatsheader">Statistics at a glance</h3>
         <div class="quickstats">
           <h4>{{universitycount}} Universities</h4>
           <h4>{{excelfilecount}} Excel Files</h4>
           <h4>{{totalcourses}} courses on the site</h4>
         </div>
-        <button id="statslink">
-          <a href="degreeviewstats.html">DegreeView Stats</a>
-        </button>
+        <a href="degreeviewstats.html" id="statslink"
+          ><button>DegreeView Stats</button>
+        </a>
       </div>
       <!-- footer now -->
       {{footer}}
