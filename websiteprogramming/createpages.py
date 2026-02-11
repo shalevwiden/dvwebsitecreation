@@ -55,10 +55,15 @@ class createPages:
 
         self.imagesjsonpath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "images.json"
         self.footertemplatepath=BASE_DIR.parent / "sourcefiles" / "html_components" / "dvfooter.html"
+        self.headtagpath=BASE_DIR.parent / "googleanalytics_tags" / "headtag.html"
+
 
 
         with open(self.imagesjsonpath) as imagejson:
             self.images = json.load(imagejson)
+        
+        with open(self.headtagpath) as headtag:
+            self.headtag=headtag.read()
 
 
        
@@ -472,6 +477,8 @@ class createPages:
 
 
         template_data={
+            "headtag": self.headtag,
+
             "universities":self.universitycount,
             "totalcourses":self.totalcourses,
                        "biggestdepartments":[],
@@ -502,6 +509,7 @@ class createPages:
 
 
         template_data={
+            "headtag": self.headtag,
             "universityuldata":universityuldata,
             "universitycount":self.universitycount,
             "totalcourses": self.totalcourses,
@@ -534,6 +542,7 @@ class createPages:
 
 
         template_data={
+            "headtag": self.headtag,
             "footer":self.rendered_footer
           
                        }

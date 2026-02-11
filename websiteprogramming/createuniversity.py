@@ -178,6 +178,8 @@ class createUniversity:
         print(f'BASE_DIR {BASE_DIR}')
         self.imagesjsonpath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "images.json"
 
+        self.headtagpath=BASE_DIR.parent / "googleanalytics_tags" / "headtag.html"
+
 
         with open(self.imagesjsonpath) as imagejson:
             self.images = json.load(imagejson)
@@ -192,7 +194,7 @@ class createUniversity:
 
 
         self.outputspath='/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/templating/outputs'
-        with open('/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/googleanalytics_tags/headtag.html','r') as headtag:
+        with open(self.headtagpath) as headtag:
             self.headtag=headtag.read()
 
         

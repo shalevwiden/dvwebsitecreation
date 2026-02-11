@@ -21,19 +21,8 @@
       type="image/png"
     />
     <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
 
-      gtag("config", "G-S06MYR1FV6");
-    </script>
+    {{headtag}}
     <title>About DegreeView</title>
 
     <!-- main stylesheet -->
@@ -161,7 +150,9 @@
             likely be an account where I display all my programming projects. Or
             make it some kind of statistics themed account.
             <br />Either way, your follow will not be in vain after this project
-            is wraps. <a href="https://x.com/DegreeViewsite"> X page link</a>.
+            is wraps. <br /><br /><a href="https://x.com/DegreeViewsite">
+              X page link</a
+            >.
             <br />
           </p>
           <a
@@ -193,7 +184,7 @@
           ></a>
         </div>
 
-        <div class="platformscontainer">
+        <div class="platformscontainer" style="display: none">
           <div class="platformsbox">
             <p>Built by Shalev Widen</p>
             <div class="icons">
