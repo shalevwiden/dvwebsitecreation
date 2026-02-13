@@ -429,6 +429,7 @@ class createPages:
         '''
 
         totalcourses=0
+        totaldepartments=0
 
         excelfilecount=0
         BASE_DIR = Path(__file__).resolve().parent
@@ -448,14 +449,14 @@ class createPages:
 
                     # getting the excel file count now
                     for root, dirs, files in os.walk(assets_path):
-                                    for file in files:
-                                        # Excel files: .xlsx or .xls
-                                        # Exclude temp files starting with $
-                                        if (
-                                            (file.endswith(".xlsx") or file.endswith(".xls"))
-                                            and not file.startswith("$")
-                                        ):
-                                            excelfilecount += 1
+                        for file in files:
+                            # Excel files: .xlsx or .xls
+                            # Exclude temp files starting with $
+                            if (
+                                (file.endswith(".xlsx") or file.endswith(".xls"))
+                                and not file.startswith("$")
+                            ):
+                                excelfilecount += 1
 
                     universitywidefolder=os.path.join(base_path,folder,'assets','universitywidefolder')
 
@@ -464,10 +465,14 @@ class createPages:
                     with open(unistatsjson) as statsjson:
                         universitystatsdict=json.load(statsjson)
                         coursecount=universitystatsdict.get('coursecount')
+                        departmentcount=universitystatsdict.get('departmentcount')
                         totalcourses+=coursecount
+                        totaldepartments+=departmentcount
                     # next open the sorted departments, get the top dept, and compare those
 
         print(f'Total courses: {totalcourses}')
+        print(f'Total departments: {totaldepartments}')
+
         self.totalcourses = f"{totalcourses:,}"
         self.excelfilecount=f"{excelfilecount:,}"
 
@@ -481,6 +486,8 @@ class createPages:
 
             "universities":self.universitycount,
             "totalcourses":self.totalcourses,
+            "totaldepartments":totaldepartments,
+
                        "biggestdepartments":[],
                        "excelfilecount": self.excelfilecount,
                        "footer":self.rendered_footer

@@ -358,3 +358,9 @@ I think I should have one central function that deals with the specs for each un
 
 That way everything is consistent.
 Use some kinda dictionary maybe
+
+### Feb 12
+
+I need to put the schools course catalog into json so it can be put on the homepage
+Like this is rice:
+https://ga.rice.edu/programs-study/courses/
