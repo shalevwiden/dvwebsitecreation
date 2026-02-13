@@ -174,8 +174,8 @@ class createPages:
                     '''these two functions are actually not called for UT because UT is special
                     UT is the original DV'''
 
-                    # utobj.createstatspage()
-                    # utobj.create_uni_homepage()
+                    utobj.createstatspage()
+                    utobj.create_uni_homepage()
                     # this one is tho I think...
                     '''
                     Now UT degree plans stuff

@@ -38,6 +38,13 @@ class createWebsite:
                 # this is the assets folder
 
         # update this later or make it a relative path. 
+        '''
+        
+        THIS IS IMPORTANT
+        
+        
+        THE PATH BELOW CONTAINS THE ASSETS NOT THE WEBSITE
+        '''
         self.degreeviewfolderpath='/Users/shalevwiden/Downloads/Projects/originaldegreeview'
 
         self.schooldata=schooldata
@@ -1590,6 +1597,7 @@ def get_all_schools(theasset):
 def unpacktheasset_into_createSchoolpages(theasset):
     for schooldict in theasset[0:]:
         print(schooldict[list(schooldict)[0]])
+        # website path sets where all the files will go
         websiteobject=createWebsite(schooldata=schooldict,websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewdeployed/utaustin-site')
         print(f'starting for {websiteobject.schoolname}\n\n\n')
         
@@ -1600,4 +1608,5 @@ def unpacktheasset_into_createSchoolpages(theasset):
         
 if __name__=="__main__":
 
+    
     unpacktheasset_into_createSchoolpages(theasset=theasset)

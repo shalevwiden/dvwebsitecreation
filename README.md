@@ -370,3 +370,5 @@ https://ga.rice.edu/programs-study/courses/
 Added this like everywhere today
 
 `python template_data.update(self.images) `
+
+To update original DegreeView which is now at original.degreeviewsite.com, I need to run utdegreeplans.py
