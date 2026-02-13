@@ -44,7 +44,6 @@ class createUniversity:
     def __init__(self,schoolfolder, universityname, cloudbucketpath,websitefolder,schoolabrv):
         
         '''
-        
         website folder is where the website files like html will be created
 
         I should NOT include departments in it because in this class Im creating many university wide files
@@ -522,6 +521,9 @@ class createUniversity:
                 "linkicon": self.images.get("linkicon"),
                 "footer": rendered_footer,
             }
+
+            letterpagedata.update(self.images)
+
 
               
             startingletter=startingletter.lower()
@@ -1008,6 +1010,8 @@ class createUniversity:
 
                     
                 }
+
+                departmentpagedata.update(self.images)
                 startingletter=startingletter.lower()
 
                 def makefullhtmlcode():
@@ -1112,9 +1116,9 @@ class createUniversity:
 
         }
 
-        
-        
         template_data.update(universitystatsdict)
+        template_data.update(self.images)
+
         # Jinja must take name=value pairs
         statspage_rendered=self.statspage_template.render(template_data)
 
@@ -1164,6 +1168,8 @@ class createUniversity:
         "footer": rendered_footer,
 
         }
+        template_data.update(self.images)
+
         # Jinja must take name=value pairs
         sorteddepartments_page_rendered=self.sorted_departments_template.render(template_data)
 
@@ -1254,6 +1260,10 @@ class createUniversity:
         "footer": rendered_footer,
 
         }
+
+        # includes all image paths
+        template_data.update(self.images)
+
 
         scripts=f'''
         <script src="../static/js/headingcolorchange.js"></script>

@@ -487,12 +487,13 @@ class createPages:
             "universities":self.universitycount,
             "totalcourses":self.totalcourses,
             "totaldepartments":totaldepartments,
+            "biggestdepartments":[],
+            "excelfilecount": self.excelfilecount,
+            "footer":self.rendered_footer
+                }
 
-                       "biggestdepartments":[],
-                       "excelfilecount": self.excelfilecount,
-                       "footer":self.rendered_footer
-                       }
-        
+        template_data.update(self.images)
+
         mainstatspath=os.path.join(self.websitepath,'degreeviewstats.html')
 
         mainstatspagerendered=self.mainstatstemplate.render(template_data)
@@ -553,6 +554,8 @@ class createPages:
             "footer":self.rendered_footer
           
                        }
+        template_data.update(self.images)
+
         
         aboutrendered=self.abouttemplate.render(template_data)
 

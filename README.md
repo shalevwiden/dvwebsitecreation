@@ -364,3 +364,9 @@ Use some kinda dictionary maybe
 I need to put the schools course catalog into json so it can be put on the homepage
 Like this is rice:
 https://ga.rice.edu/programs-study/courses/
+
+### Feb 13
+
+Added this like everywhere today
+
+`python template_data.update(self.images) `
