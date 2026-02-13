@@ -171,33 +171,42 @@ class createPages:
                     # instead of calling all of the functions 
                     # utobj.createletterpages()
 
-                    '''these two functions are actually not called for UT because UT is special
-                    UT is the original DV'''
+                    '''
+                    These two functions are actually not called for UT because UT is special
+                    UT is the original DV
+                    
+                    Update FEb 13: Nah UT is standardized now they are called lol
+                    '''
 
                     utobj.createstatspage()
                     utobj.create_uni_homepage()
                     # this one is tho I think...
                     '''
                     Now UT degree plans stuff
+
+                    This actually shouldn't really be done
                     '''
-                                        
-                    BASE_DIR = Path(__file__).resolve().parent
-                    asset_path = BASE_DIR / "json" / "theasset.json"
+                    
+                    def original_ut_stuff():
+                        BASE_DIR = Path(__file__).resolve().parent
+                        asset_path = BASE_DIR / "json" / "theasset.json"
 
-                    with open(asset_path) as assetjson:
-                        theasset = json.load(assetjson)
+                        with open(asset_path) as assetjson:
+                            theasset = json.load(assetjson)
 
-                    def unpacktheasset_into_createSchoolpages(theasset):
-                        for schooldict in theasset[0:]:
-                            print(schooldict[list(schooldict)[0]])
-                            utdegreeplans=createWebsite(schooldata=schooldict,websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewwebsite/ut/degreeplans')
-                            
-                            utdegreeplans.createschoolpages()
-                            utdegreeplans.create_degree_pages()
-                            utdegreeplans.create_renderedcsv_pages()
-                            
+                        def unpacktheasset_into_createSchoolpages(theasset):
+                            for schooldict in theasset[0:]:
+                                print(schooldict[list(schooldict)[0]])
+                                utdegreeplans=createWebsite(schooldata=schooldict,websitepath='/Users/shalevwiden/Downloads/Projects/degreeviewwebsite/ut/degreeplans')
+                                
+                                utdegreeplans.createschoolpages()
+                                utdegreeplans.create_degree_pages()
+                                utdegreeplans.create_renderedcsv_pages()
+                                
 
-                    unpacktheasset_into_createSchoolpages(theasset=theasset)
+                        unpacktheasset_into_createSchoolpages(theasset=theasset)
+
+                    # original_ut_stuff()
                     
                 if self.web:
                     web_methods()
