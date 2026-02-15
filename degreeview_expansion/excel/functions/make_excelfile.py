@@ -143,6 +143,10 @@ def make_excelfile(departmentname,universityname,
             # we shouldnt actually need to do this because it already does this with the database
             # print(f'Row in Excel\n {row}')
             coursename,coursecode,coursehours,upperlowerstatus=row
+
+            # make it a string to be sure
+            coursename=str(coursename)
+            coursehours=str(coursehours)
             coursename=coursename.replace('SECOND','').replace('THIRD','')
 
             excelobject.append([coursename,coursecode,coursehours,upperlowerstatus])
