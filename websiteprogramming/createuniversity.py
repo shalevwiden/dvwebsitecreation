@@ -624,7 +624,10 @@ class createUniversity:
                     # this should return the email used for google cloud. Its a service email tho
 
                     # yeah the project is the same as the bucket name. In the future change this, as the bucketname is what user sees
-                    bucket = client.bucket('utcourses')
+                    # ngl the bucket path should always be degreeviewsite
+                    # that is the universal bucket
+
+                    bucket = client.bucket(self.cloudbucketpath)
                     # bucket list
 
 
@@ -690,7 +693,8 @@ class createUniversity:
 
                     # mmds currently not needing to be uplaoded.
                     
-                    currentonlyupload=['redtheme','cursivetheme']
+                    # these are generated on line 815 and 816 in newcatalogdata.py
+                    currentonlyupload=['original-theme',f'{self.schoolabrv}-theme']
                     limited_excel_list = [
                         file for file in excellist 
                         if any(substring in file for substring in currentonlyupload)
@@ -1281,19 +1285,11 @@ class createUniversity:
             fullpage.write(homepage_rendered)
 
 # -------------END of class -----------------------
-
-    
-
-
 # architecure_testing()
   
-        
-
+    
 # storage te
      
-
-
-
 # deprecated
 
 def main():

@@ -1,7 +1,10 @@
 ### Degreeview utcourses CORS:
 
 This is the command to update the cors
+for original DegreeView
 
-gcloud storage buckets update gs://utcourses --cors-file=/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/CORS/ut-courses/cors.json
+gcloud storage buckets update gs://degreeview-ut --cors-file=/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/CORS/cors.json
 
-To set CORs on more stuff:
+CORS on new DegreeView
+
+gcloud storage buckets update gs://degreeviewsite --cors-file=/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/CORS/newcors.json

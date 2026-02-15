@@ -175,7 +175,7 @@ class createPages:
                     These two functions are actually not called for UT because UT is special
                     UT is the original DV
                     
-                    Update FEb 13: Nah UT is standardized now they are called lol
+                    Update Feb 13: Nah UT is standardized now they are called lol
                     '''
 
                     utobj.createstatspage()
