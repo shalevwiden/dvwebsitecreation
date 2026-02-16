@@ -54,6 +54,8 @@ class createPages:
         self.universityuldatapath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "universityuldata.json"
 
         self.imagesjsonpath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "images.json"
+        self.excelimagesjsonpath= BASE_DIR.parent / 'websiteprogramming' / "json"/ "excelimages.json"
+
         self.footertemplatepath=BASE_DIR.parent / "sourcefiles" / "html_components" / "dvfooter.html"
         self.headtagpath=BASE_DIR.parent / "sourcefiles" / "googleanalytics_tags" / "headtag.html"
 
@@ -61,6 +63,10 @@ class createPages:
 
         with open(self.imagesjsonpath) as imagejson:
             self.images = json.load(imagejson)
+
+        with open(self.excelimagesjsonpath) as excelimagejson:
+            self.excelimages = json.load(excelimagejson)
+        
         
         with open(self.headtagpath) as headtag:
             self.headtag=headtag.read()
@@ -77,6 +83,8 @@ class createPages:
         self.indextemplate = env.get_template("main_templates/indextemplate.html")
         self.mainstatstemplate=env.get_template("main_templates/mainstatspage.html")
         self.abouttemplate=env.get_template("main_templates/abouttemplate.html")
+        self.exceltemplate_template=env.get_template("main_templates/exceltemplates-template.html")
+
 
         
         self.footertemplate=env.get_template('components/dvfooter.html')
@@ -98,7 +106,7 @@ class createPages:
 
         # use these when making big changes
 
-        self.data=False
+        self.data=True
         self.web=True
 
         self.totalcourses=0
@@ -108,7 +116,7 @@ class createPages:
         self.universitycount=5
         
 
-    def buildspecs(self,schoolfolder,universityname,cloudbucketpath,websitefolder, schoolabrv):
+    def buildspecs(self,schoolfolder,universityname,websitefolder, schoolabrv):
 
         '''
         change this to change the arguments that are passed into a class
@@ -118,7 +126,6 @@ class createPages:
         # website folder has to match schoolabrv
         return {"schoolfolder":schoolfolder,
     "universityname": universityname,
-    "cloudbucketpath": cloudbucketpath,
     "websitefolder": websitefolder,
     "schoolabrv":schoolabrv,}
 
@@ -139,8 +146,7 @@ class createPages:
                 # I need need to standardize the location of all of this stuff
                 ut_specs=self.buildspecs(
                     "degreeview_expansion/utcourses",
-                    "The University of Texas at Austin"
-                    ,"https://storage.googleapis.com/utcourses",
+                    "The University of Texas at Austin",
                     os.path.join(self.websitepath,'ut'),
                     "UT")
             
@@ -150,13 +156,18 @@ class createPages:
                     print(f'Configs folder: {utcatalogobj.configsfolder}')
                     
                     utcatalogobj.makestatsjson()
+
+
                     # utcatalogobj.make_excel_files()
                     utcatalogobj.create_univeristy_files()
                     utcatalogobj.make_sorteddepartment_json()
                     utcatalogobj.make_university_statsjson()
 
+                    # utcatalogobj.upload_department_files()
+
                 if self.data:    
-                    data_methods()
+                    print('making data for UT')
+                    # data_methods()
 
                 def web_methods():
                     utobj=createUniversity(**ut_specs)
@@ -215,8 +226,7 @@ class createPages:
                 # update all of this with rice data
                 rice_specs=self.buildspecs(
                     "degreeview_expansion/rice",
-                    "Rice University"
-                    ,"https://storage.googleapis.com/ricecourses",
+                    "Rice University",
 
                     # so I can probably make a function to finish this path for whereever I actually host the website
                     os.path.join(self.websitepath,'rice'),schoolabrv="Rice")
@@ -232,7 +242,10 @@ class createPages:
                     ricecatalogobj.create_univeristy_files()
                     ricecatalogobj.make_sorteddepartment_json()
                     ricecatalogobj.make_university_statsjson()
+                    # ricecatalogobj.upload_department_files()
+
                 if self.data:   
+                    print(f'Doing data for rice if self.data true lol')
                     data_methods()
 
                 def web_methods():
@@ -299,8 +312,7 @@ class createPages:
                 # update all of this with rice data
                 txstate_specs=self.buildspecs(
                 "degreeview_expansion/tx_state",
-                "Texas State University"
-                ,"https://storage.googleapis.com/txstate",
+                "Texas State University",
 
                 # so I can probably make a function to finish this path for whereever I actually host the website
 
@@ -349,7 +361,7 @@ class createPages:
                 stanford_specs=self.buildspecs(
                     "degreeview_expansion/stanford",
                     "Stanford University"
-                    ,"https://storage.googleapis.com/stanford",
+                    ,
                     os.path.join(self.websitepath,'stanford'),
                     "Stanford")
                 
@@ -366,6 +378,7 @@ class createPages:
                     # stanfordcatalogobj.make_university_statsjson()
 
                 data_methods()
+
                 def web_methods():
                     stanfordobj=createUniversity(**stanford_specs)
 
@@ -389,7 +402,7 @@ class createPages:
                 ucberkeley_specs=self.buildspecs(
                     "degreeview_expansion/ucberkeley",
                      "University of California Berkeley"
-                    ,"https://storage.googleapis.com/ucberkeley",
+                    ,
                     os.path.join(self.websitepath,'uc_berkeley'),
                     "UC_Berkeley")
                 
@@ -407,6 +420,7 @@ class createPages:
                     ucberkeleycatalogobj.make_university_statsjson()
 
                 data_methods()
+
                 def web_methods():
                     ucberkeleyobj=createUniversity(**ucberkeley_specs)
 
@@ -421,8 +435,9 @@ class createPages:
                     ucberkeleyobj.create_uni_homepage()
                     
                 if self.web:
-
                     web_methods()
+
+
             ucberkeley()
             stanford()
 
@@ -463,7 +478,7 @@ class createPages:
                             # Exclude temp files starting with $
                             if (
                                 (file.endswith(".xlsx") or file.endswith(".xls"))
-                                and not file.startswith("$")
+                                and not file.startswith("$") and "original" in file
                             ):
                                 excelfilecount += 1
 
@@ -479,9 +494,35 @@ class createPages:
                         totaldepartments+=departmentcount
                     # next open the sorted departments, get the top dept, and compare those
 
+        def get_excel_file_in_bucket_count():
+            '''
+            
+            This uses a command to get the Excel file count but it takes forever so probably not the move
+
+            '''
+
+            result = subprocess.run(
+            ["gsutil", "ls", "-r","gs://degreeviewsite"],
+            capture_output=True,
+            text=True,
+            shell=False
+            )
+
+            if result.returncode != 0:
+                print("Error:", result.stderr)
+                return 0
+
+            file_count = len(result.stdout.strip().splitlines())
+            return file_count
+        
+        
         print(f'Total courses: {totalcourses}')
         print(f'Total departments: {totaldepartments}')
 
+        # do this to call an operation on the bucket
+        # excelfilecount=get_excel_file_in_bucket_count()
+
+        excelfilecount*=2
         self.totalcourses = f"{totalcourses:,}"
         self.excelfilecount=f"{excelfilecount:,}"
 
@@ -573,6 +614,37 @@ class createPages:
         with open(aboutpath,'w') as about:
             about.write(aboutrendered)
 
+    def create_exceltemplates_template(self):
+        '''
+        Creates the aboutpage
+        '''
+        # the key is what will be dislayed on the index, as in the school name the user will read.
+        '''
+        Technicalities to be aware of here:
+        The box color will actually be set in scss.
+        This is because with different colors I'll also have to adjust the TEXT color of the box.
+        Therefore doing it in scss is the best approach
+        '''
+
+
+
+        template_data={
+            "headtag": self.headtag,
+            "footer":self.rendered_footer
+          
+                       }
+        template_data.update(self.images)
+        template_data.update(self.excelimages)
+
+
+        
+        etrendered=self.exceltemplate_template.render(template_data)
+
+        etpath=os.path.join(self.websitepath,'exceltemplates.html')
+
+        with open(etpath,'w') as etfile:
+            etfile.write(etrendered)
+
     def create_unilinks(self):
         '''
         this function needs to create unilinks.json
@@ -590,6 +662,7 @@ def main():
     createpagesobj.create_main_statspage()
     createpagesobj.createindex()
     createpagesobj.createabout()
+    createpagesobj.create_exceltemplates_template()
 
 if __name__=="__main__":
     main()

@@ -372,3 +372,26 @@ Added this like everywhere today
 `python template_data.update(self.images) `
 
 To update original DegreeView which is now at original.degreeviewsite.com, I need to run utdegreeplans.py
+
+### Feb 15, 2026
+
+These lines in make_excel_files() in newcatalogdata.py
+deal with the hex code hastags in json
+
+```python
+ configjson=json.load(configjson)
+                        for key, value in configjson.items():
+                            if isinstance(value, str) and '#' in value:
+                                configjson[key] = value.replace('#', '')
+
+```
+
+I'm trying to understand how the uploading works again.
+In the actual upload function, I split to get the last, the real file name, so the actual path of it doesn't matter.
+
+Came up with a good way to track how many Excel files there are.
+For each university, there's the original theme and that university's theme.
+
+This means I just need to loop through the files on my local system, count how many original ones there are. It'd be unreliable to count how many university ones there are because the name of the file is the university abbreviation.
+
+I just need to count how many original little ones there are, then multiply by two.

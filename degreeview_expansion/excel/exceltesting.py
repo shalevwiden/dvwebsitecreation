@@ -62,7 +62,7 @@ class exceltesting():
         
 
         base_dir = Path(__file__).resolve().parent  # folder of the script
-        self.savepath = base_dir / 'testing' / self.universityname
+        self.savepath = base_dir / 'testing' / self.universityname.lower().replace(' ','_')
         self.savepath.mkdir(parents=True, exist_ok=True)  # pathlib version
 
 
@@ -124,8 +124,15 @@ def main():
         print(f'Finished path: {finishedpath}')
         return finishedpath
 
-    utexceltesting=exceltesting('UT Austin',finish_config_path('utcourses/uniexcelconfig.json'))
-    utexceltesting.make_themed_file()
+ 
+
+    utexceltesting2=exceltesting('UT Austin',finish_config_path('excel/testing/ut_austin/testconfig.json'))
+    utexceltesting2.make_themed_file()
+
+    rice=exceltesting('rice',finish_config_path('excel/testing/rice/testconfig.json'))
+    rice.make_themed_file()
+
+    
    
 
 if __name__ == "__main__":

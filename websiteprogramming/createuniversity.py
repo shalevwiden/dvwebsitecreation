@@ -41,7 +41,7 @@ I need to add
 
 '''
 class createUniversity:
-    def __init__(self,schoolfolder, universityname, cloudbucketpath,websitefolder,schoolabrv):
+    def __init__(self,schoolfolder, universityname,websitefolder,schoolabrv):
         
         '''
         website folder is where the website files like html will be created
@@ -97,9 +97,10 @@ class createUniversity:
 
         
 
-        # path like 'https://storage.googleapis.com/utcourses'
-        # the bucket should be the schoolabrv
-        self.cloudbucketpath=cloudbucketpath
+
+
+        # OVERRIDE lmao
+        self.cloudbucketpath='degreeviewsite'
 
         self.schoolfolder = schoolfolder
 
@@ -555,6 +556,8 @@ class createUniversity:
 
 
         '''
+        print(f'Beginning department file upload\n\n')
+
 
         for startingletter in self.alphabetizeddict:
 
@@ -608,9 +611,12 @@ class createUniversity:
                     # these lists have the full paths since they'll be used to upload stuff. 
                     return [csvlist,excellist,pdflist,mmdlist]
 
-                
+                excellist=get_asset_lists(departmentfolder=departmentfolderpath)[1]
+
+                # print(f'Excel list:\n{excellist}\n')
+
                 def upload_to_googlecloud(source_file_name,departmentnamecleaned):
-                    print(f'Beginning upload for {source_file_name}')
+                    print(f'Beginning upload for {source_file_name}\n')
 
                     # how to manually change credentials...
 
@@ -633,32 +639,36 @@ class createUniversity:
 
                     #This is what will be in the url and what the name of the object will be in google cloud storage
 
-                    cleaned_object_name=source_file_name.split('/')[-1]        
+                    cleaned_object_name=source_file_name.split('/')[-1]    
+                    prefix=f'{self.schoolabrv.lower().replace(' ','_')}/{departmentnamecleaned}'    
 
 
                     # make it so each file has the type. 
                     # define upload blob here
                 
                     if os.path.splitext(source_file_name)[1]=='.csv':
-                        uploadblob =f'{departmentnamecleaned}/csvs/{cleaned_object_name}'
+                        uploadfile =f'{prefix}/csvs/{cleaned_object_name}'
                         uploadblob=bucket.blob(uploadblob)
                     elif os.path.splitext(source_file_name)[1]=='.xlsx':
-                        uploadblob =f'{departmentnamecleaned}/excel-files/{cleaned_object_name}'
+                        uploadblob =f'{prefix}/excel-files/{cleaned_object_name}'
                         uploadblob=bucket.blob(uploadblob)
 
 
                     elif os.path.splitext(source_file_name)[1]=='.pdf':
-                        uploadblob =f'{departmentnamecleaned}/pdfs/{cleaned_object_name}'
+                        uploadfile =f'{prefix}/pdfs/{cleaned_object_name}'
                         uploadblob=bucket.blob(uploadblob)
 
                     elif os.path.splitext(source_file_name)[1]=='.mmd':
-                        uploadblob =f'{departmentnamecleaned}/mmds/{cleaned_object_name}'
+                        uploadfile =f'{prefix}/mmds/{cleaned_object_name}'
                         uploadblob=bucket.blob(uploadblob)
 
 
                     else:
-                        uploadblob = cleaned_object_name
-                        uploadblob=bucket.blob(uploadblob)
+                        '''
+                        do not make it a blob in case of .ds_store
+                        '''
+                        uploadfile = cleaned_object_name
+                        # uploadblob=bucket.blob(uploadblob)
 
                     # add a check to not do it many times
                     
@@ -666,7 +676,11 @@ class createUniversity:
                     if not uploadblob.exists():
                         uploadblob.upload_from_filename(source_file_name)
 
-                        uploadblob.make_public()  # Makes it publicly accessible
+                        '''
+                        dont need make public since using Uniform Bucket Level Access (UBLA)
+                        '''
+                        # uploadblob.make_public()  
+                        # Makes it publicly accessible
                         # can also use blob.make_private()
                     # else:
                         # print(f'{uploadblob.name} already exits, didnt upload\n')
@@ -689,12 +703,13 @@ class createUniversity:
                     excellist=get_asset_lists(departmentfolder=departmentfolderpath)[1]
                     pdflist=get_asset_lists(departmentfolder=departmentfolderpath)[2]
 
-                    coursescsv=[csv for csv in csvlist if "courses" in csv][0]
+                    # uncomment this if I made the csv
+                    # coursescsv=[csv for csv in csvlist if "courses" in csv][0]
 
                     # mmds currently not needing to be uplaoded.
                     
                     # these are generated on line 815 and 816 in newcatalogdata.py
-                    currentonlyupload=['original-theme',f'{self.schoolabrv}-theme']
+                    currentonlyupload=['original-theme',f'{self.schoolabrv.lower()}-theme']
                     limited_excel_list = [
                         file for file in excellist 
                         if any(substring in file for substring in currentonlyupload)
@@ -858,7 +873,9 @@ class createUniversity:
                     mmd_path_list=[]
                     # os.walk recursively travels everything
 
-                    prefix=f'{departmentnamecleaned}'
+                    prefix=f'{self.schoolabrv.lower().replace(' ','_')}/{departmentnamecleaned}'
+
+                    cloudurl=f'https://storage.googleapis.com/{self.cloudbucketpath}'
                     for root, dirs, files in os.walk(departmentfolder): 
                         for file in files:
                             # we neewd the fullpath in the list since thats the way it can be uploaded to google cloud.
@@ -866,25 +883,25 @@ class createUniversity:
 
                             if os.path.splitext(file)[1]=='.csv':
                                 objectname_incloud=f'{prefix}/csvs/{file}'
-                                googlecloudpath=f'{self.cloudbucketpath}/{objectname_incloud}'
+                                googlecloudpath=f'{cloudurl}/{objectname_incloud}'
 
                                 csv_path_list.append(googlecloudpath)
                                 # removes those dollar sign excel files. 
                             elif os.path.splitext(file)[1]=='.xlsx' and not file.startswith(("~$", "$")):
 
                                 objectname_incloud=f'{prefix}/excel-files/{file}'
-                                googlecloudpath=f'{self.cloudbucketpath}/{objectname_incloud}'                            
+                                googlecloudpath=f'{cloudurl}/{objectname_incloud}'                            
                                 excel_path_list.append(googlecloudpath)
                             elif os.path.splitext(file)[1]=='.pdf':
                             
                                 objectname_incloud=f'{prefix}/pdfs/{file}'
-                                googlecloudpath=f'{self.cloudbucketpath}/{objectname_incloud}'                            
+                                googlecloudpath=f'{cloudurl}/{objectname_incloud}'                            
                             
                                 pdf_path_list.append(googlecloudpath)
                             elif os.path.splitext(file)[1]=='.mmd':
                             
                                 objectname_incloud=f'{prefix}/mmds/{file}'
-                                googlecloudpath=f'{self.cloudbucketpath}/{objectname_incloud}'                            
+                                googlecloudpath=f'{cloudurl}/{objectname_incloud}'                            
                                 mmd_path_list.append(googlecloudpath)
 
                     return [csv_path_list,excel_path_list,pdf_path_list,mmd_path_list]
@@ -1089,7 +1106,7 @@ class createUniversity:
         with open(self.universitystatsjson,'r') as statsjson:
             universitystatsdict=json.load(statsjson)
 
-        print(f'universitystatsdict: {universitystatsdict}')
+        # print(f'universitystatsdict: {universitystatsdict}')
 
         def make_rendered_footer():
             height = "../../../"

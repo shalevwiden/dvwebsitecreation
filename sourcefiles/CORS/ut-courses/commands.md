@@ -6,5 +6,3 @@ for original DegreeView
 gcloud storage buckets update gs://degreeview-ut --cors-file=/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/CORS/cors.json
 
 CORS on new DegreeView
-
-gcloud storage buckets update gs://degreeviewsite --cors-file=/Users/shalevwiden/Downloads/Projects/dvwebsitecreation/sourcefiles/CORS/newcors.json

@@ -52,8 +52,8 @@ import importlib
 
 
 class catalogData(createUniversity):
-    def __init__(self, schoolfolder, universityname, cloudbucketpath, websitefolder, schoolabrv):
-        super().__init__(schoolfolder, universityname, cloudbucketpath, websitefolder, schoolabrv)
+    def __init__(self, schoolfolder, universityname, websitefolder, schoolabrv):
+        super().__init__(schoolfolder, universityname, websitefolder, schoolabrv)
         # child specific methods
         
         self.catalogfile = None
