@@ -1,1 +1,5 @@
-{ "unicolor": "#501214" }
+{
+  "unicolor": "#501214",
+  "hourstitle": "Credit Hours",
+  "homepagelink": "https://mycatalog.txstate.edu/courses/"
+}
