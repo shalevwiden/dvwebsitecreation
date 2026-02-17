@@ -3,5 +3,9 @@
   "Rice": { "schoolabrv": "rice", "boxcolor": "#2153b8ff" },
   "Stanford": { "schoolabrv": "Stanford", "boxcolor": "#8C1515" },
   "Texas State": { "schoolabrv": "tx_state", "boxcolor": "#501214" },
-  "UC Berkeley": { "schoolabrv": "UC_Berkeley", "boxcolor": "#002676" }
+  "UC Berkeley": { "schoolabrv": "UC_Berkeley", "boxcolor": "#002676" },
+  "UC Santa Barbara": {
+    "schoolabrv": "ucsb",
+    "boxcolor": "#FEBC11"
+  }
 }

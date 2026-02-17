@@ -91,9 +91,9 @@ class createUniversity:
         self.schoolabrv = schoolabrv
 
         frontendfolder=os.path.join(schoolfolder,'frontend')
-        unicolorjson=os.path.join(frontendfolder,'unicolor.json')
-        with open(unicolorjson,'r') as colorjson:
-            self.unicolor=json.load(colorjson).get('unicolor')
+        unidetailsjson=os.path.join(frontendfolder,'unidetails.json')
+        with open(unidetailsjson,'r') as colorjson:
+            self.unidetails=json.load(colorjson).get('unicolor')
 
         
 
@@ -1019,7 +1019,7 @@ class createUniversity:
                     "startingletter":startingletter,
                     "letterpagereferencepath":letterpagereferencepath,
                     "homepage":f'../../{os.path.basename(self.homepage)}',
-                    
+                    "hourstitle": self.hourstitle if self.hourstitle else "Course Hours",
                     "courserows":courserows,
                     "footer": rendered_footer,
                     "statsdict":statsdict,

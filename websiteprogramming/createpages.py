@@ -326,7 +326,7 @@ class createPages:
                     txstatecatalogobj=catalogData(**txstate_specs)
                     # txstatecatalogobj.upload_to_database()
                     txstatecatalogobj.makestatsjson()
-                    txstatecatalogobj.make_excel_files()
+                    # txstatecatalogobj.make_excel_files()
                     txstatecatalogobj.create_univeristy_files()
                     txstatecatalogobj.make_sorteddepartment_json()
                     txstatecatalogobj.make_university_statsjson()
@@ -439,7 +439,51 @@ class createPages:
 
 
             ucberkeley()
-            stanford()
+            def ucsb():
+                 
+                #  we'll do bucket stuff later
+
+                ucberkeley_specs=self.buildspecs(
+                    "degreeview_expansion/ucsb",
+                     "University of California Santa Barbara",
+                    os.path.join(self.websitepath,'ucsb'),
+                    "ucsb")
+                
+                def data_methods():
+                    ucberkeleycatalogobj=catalogData(**ucberkeley_specs)
+                    print(f'Configs folder: {ucberkeleycatalogobj.configsfolder}')
+                    
+                    # ucberkeleycatalogobj.upload_to_database()
+                    # ucberkeleycatalogobj.upload_stragglers_todb()
+                    
+                    ucberkeleycatalogobj.makestatsjson()
+                    # ucberkeleycatalogobj.make_excel_files()
+                    ucberkeleycatalogobj.create_univeristy_files()
+                    ucberkeleycatalogobj.make_sorteddepartment_json()
+                    ucberkeleycatalogobj.make_university_statsjson()
+
+                data_methods()
+
+                def web_methods():
+                    ucberkeleyobj=createUniversity(**ucberkeley_specs)
+
+                    # ucberkeleyobj.createletterpages()
+
+                    # ucberkeleyobj.upload_department_files()
+                    ucberkeleyobj.create_department_pages()
+                    ucberkeleyobj.create_departmentpagelinks_json()
+
+                    ucberkeleyobj.createstatspage()
+                    ucberkeleyobj.create_sorteddepartments_page()
+                    ucberkeleyobj.create_uni_homepage()
+                    
+                if self.web:
+                    web_methods()
+
+
+            # ucberkeley()
+            # stanford()
+            ucsb()
 
         california()
 
