@@ -36,24 +36,26 @@ def scrapecourses(departmenturl):
     courseblocks = coursescontainer.select('div.courseblock')
 
     for block in courseblocks:
-        title=block.select_one('p.courseblocktitle')
+        line = block.select_one('div.cols.noindent')
+
+        spans=line.select('span')
+        coursecode=spans[0].get_text(strip=True).replace('\xa0', ' ').split('-')[0].strip()
        
 
-        coursecode = title.get_text(strip=True).replace('\xa0', ' ').split('.')[0]
+        coursename = spans[1].get_text(strip=True).replace('\xa0', ' ').strip()
 
-        coursenameparts = title.get_text(strip=True).replace('\xa0', ' ').split('.')
-        coursename = '.'.join(coursenameparts[1:]).strip().rstrip('.')
+        coursehours=spans[2].get_text(strip=True).replace('\xa0', ' ').replace('(', '').replace(')', '').split(' ')[0].strip()
+
+
         # Determine course level from the number
         
-        def get_coursehours():
-            hours=block.select_one('span.credits').get_text().strip()
-            if hours:
-                coursehours=int(hours[0])
-            
-            return coursehours
+        
 
 
         def get_status(coursecode):
+            '''
+            TX state and Cornell were the same nice lmao
+            '''
             identifynumber=coursecode.split(' ')[-1][0]
             if identifynumber:
                 identifynumber=int(identifynumber)
@@ -69,7 +71,7 @@ def scrapecourses(departmenturl):
             # override here
             return status
         
-        coursehours=get_coursehours()
+      
         status=get_status(coursecode=coursecode)
 
         # Handle repeated course names

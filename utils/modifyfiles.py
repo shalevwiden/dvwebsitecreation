@@ -33,9 +33,18 @@ def rename_files(root_folder, old_name, old_ext, new_name, new_ext=None):
 
             path.rename(new_file)
             print(f"Renamed: {path} → {new_file}")
+
+
+BASE_DIR = Path(__file__).resolve().parent
+print(f'BASE_DIR {BASE_DIR}')
+        
+dvexpansionfolder= BASE_DIR.parent / 'degreeview_expansion'
+
+print(dvexpansionfolder)
+print(dvexpansionfolder.exists())
 rename_files(
-    root_folder="my_folder",
-    old_name="report",
-    old_ext=".txt",
-    new_name="final_report"
+    root_folder=dvexpansionfolder,
+    old_name="unicolor",
+    old_ext=".json",
+    new_name="unidetails"
 )

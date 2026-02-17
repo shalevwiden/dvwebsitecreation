@@ -113,7 +113,7 @@ class createPages:
         self.excelfilecount=0
 
         # just update this manuallyfor now lmao
-        self.universitycount=5
+        self.universitycount=7
         
 
     def buildspecs(self,schoolfolder,universityname,websitefolder, schoolabrv):
@@ -348,11 +348,11 @@ class createPages:
                 if self.web:
 
                     web_methods()
+            
             ut()
             rice()
             txstate()
             
-        texas()
         def california():
             def stanford():
                  
@@ -438,54 +438,99 @@ class createPages:
                     web_methods()
 
 
-            ucberkeley()
             def ucsb():
                  
                 #  we'll do bucket stuff later
 
-                ucberkeley_specs=self.buildspecs(
+                ucsb_specs=self.buildspecs(
                     "degreeview_expansion/ucsb",
                      "University of California Santa Barbara",
                     os.path.join(self.websitepath,'ucsb'),
                     "ucsb")
                 
                 def data_methods():
-                    ucberkeleycatalogobj=catalogData(**ucberkeley_specs)
-                    print(f'Configs folder: {ucberkeleycatalogobj.configsfolder}')
+                    ucsbcatalogobj=catalogData(**ucsb_specs)
+                    print(f'Configs folder: {ucsbcatalogobj.configsfolder}')
                     
-                    # ucberkeleycatalogobj.upload_to_database()
-                    # ucberkeleycatalogobj.upload_stragglers_todb()
+                    # ucsbcatalogobj.upload_to_database()
+                    # ucsbcatalogobj.upload_stragglers_todb()
                     
-                    ucberkeleycatalogobj.makestatsjson()
-                    # ucberkeleycatalogobj.make_excel_files()
-                    ucberkeleycatalogobj.create_univeristy_files()
-                    ucberkeleycatalogobj.make_sorteddepartment_json()
-                    ucberkeleycatalogobj.make_university_statsjson()
+                    ucsbcatalogobj.makestatsjson()
+                    # ucsbcatalogobj.make_excel_files()
+                    ucsbcatalogobj.create_univeristy_files()
+                    ucsbcatalogobj.make_sorteddepartment_json()
+                    ucsbcatalogobj.make_university_statsjson()
 
                 data_methods()
 
                 def web_methods():
-                    ucberkeleyobj=createUniversity(**ucberkeley_specs)
+                    ucsbobj=createUniversity(**ucsb_specs)
 
-                    # ucberkeleyobj.createletterpages()
+                    # ucsbobj.createletterpages()
 
-                    # ucberkeleyobj.upload_department_files()
-                    ucberkeleyobj.create_department_pages()
-                    ucberkeleyobj.create_departmentpagelinks_json()
+                    # ucsbobj.upload_department_files()
+                    ucsbobj.create_department_pages()
+                    ucsbobj.create_departmentpagelinks_json()
 
-                    ucberkeleyobj.createstatspage()
-                    ucberkeleyobj.create_sorteddepartments_page()
-                    ucberkeleyobj.create_uni_homepage()
+                    ucsbobj.createstatspage()
+                    ucsbobj.create_sorteddepartments_page()
+                    ucsbobj.create_uni_homepage()
                     
                 if self.web:
                     web_methods()
 
 
-            # ucberkeley()
-            # stanford()
+            ucberkeley()
+            stanford()
             ucsb()
 
+
+        def newyork():
+            def cornell():
+                 
+                #  we'll do bucket stuff later
+
+                cornell_specs=self.buildspecs(
+                    "degreeview_expansion/cornell",
+                     "Cornell University",
+                    os.path.join(self.websitepath,'cornell'),
+                    "cornell")
+                
+                def data_methods():
+                    cornellcatalogobj=catalogData(**cornell_specs)
+                    print(f'Configs folder: {cornellcatalogobj.configsfolder}')
+                    
+                    # cornellcatalogobj.upload_to_database()
+                    # cornellcatalogobj.upload_stragglers_todb()
+                    
+                    cornellcatalogobj.makestatsjson()
+                    # cornellcatalogobj.make_excel_files()
+                    cornellcatalogobj.create_univeristy_files()
+                    cornellcatalogobj.make_sorteddepartment_json()
+                    cornellcatalogobj.make_university_statsjson()
+
+                data_methods()
+
+                def web_methods():
+                    cornellobj=createUniversity(**cornell_specs)
+
+                    # cornellobj.createletterpages()
+
+                    # cornellobj.upload_department_files()
+                    cornellobj.create_department_pages()
+                    cornellobj.create_departmentpagelinks_json()
+
+                    cornellobj.createstatspage()
+                    cornellobj.create_sorteddepartments_page()
+                    cornellobj.create_uni_homepage()
+                    
+                if self.web:
+                    web_methods()
+            cornell()
+        
+        texas()
         california()
+        newyork()
 
     
     def create_main_statspage(self):

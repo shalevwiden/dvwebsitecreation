@@ -7,5 +7,9 @@
   "UC Santa Barbara": {
     "schoolabrv": "ucsb",
     "boxcolor": "#FEBC11"
+  },
+  "Cornell University": {
+    "schoolabrv": "Cornell",
+    "boxcolor": "#B31B1B"
   }
 }

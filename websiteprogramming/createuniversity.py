@@ -92,8 +92,8 @@ class createUniversity:
 
         frontendfolder=os.path.join(schoolfolder,'frontend')
         unidetailsjson=os.path.join(frontendfolder,'unidetails.json')
-        with open(unidetailsjson,'r') as colorjson:
-            self.unidetails=json.load(colorjson).get('unicolor')
+        with open(unidetailsjson,'r') as detailjson:
+            self.detailjson=json.load(detailjson)
 
         
 
@@ -1009,7 +1009,7 @@ class createUniversity:
                     "schoolabrv":self.schoolabrv.replace('_',' '),
                                             
                     "headlinks": self.headlinks,
-                    "unicolor":self.unicolor,
+                    "unicolor":self.detailjson.get('unicolor'),
                     "headtag": self.headtag,
                     "departmentnamehalf": departmentnamehalf,
                     "sitefavicon": self.images.get("site_favicon"),
@@ -1019,7 +1019,7 @@ class createUniversity:
                     "startingletter":startingletter,
                     "letterpagereferencepath":letterpagereferencepath,
                     "homepage":f'../../{os.path.basename(self.homepage)}',
-                    "hourstitle": self.hourstitle if self.hourstitle else "Course Hours",
+                    "hourstitle": self.detailjson.get('hourstitle') if self.detailjson.get('hourstitle') else "Course Hours",
                     "courserows":courserows,
                     "footer": rendered_footer,
                     "statsdict":statsdict,
@@ -1276,6 +1276,7 @@ class createUniversity:
         template_data={
         "schoolabrv":self.schoolabrv.replace('_',' '),
         "universityname":self.universityname,
+        "homepagelink":self.detailjson.get("homepagelink"),
         "departmentlinks_dict":departmentlinks_dict,
         "statslink":f'{self.schoolabrv.lower()}stats.html',
         "footer": rendered_footer,

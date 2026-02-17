@@ -41,7 +41,32 @@ class DepartmentName:
         departmentname=departmentname.replace('_','/')
         # the splitpoint is important, for UT its a "-"
         
-        departmentnamehalf,code=departmentname.split('(')
+        def split_department(text):
+            text = text.strip()
+
+            before, sep, after = text.rpartition('(')
+
+            if sep == '':
+                # No parentheses found
+                return text, None
+
+            departmentnamehalf = before.strip()
+            code = after.rstrip(')').strip()
+
+            return departmentnamehalf, code
+        departmentnamehalf,code=split_department(departmentname)
+        def my_solution():
+            # i tried
+            parts=departmentname.split('(')
+
+            if len(parts)==2:
+
+                departmentnamehalf,code=parts
+            else:
+                departmentnamehalf,code='('.join(parts[0:-1]),parts[-1]
+
+        
+        # Get rid of the parentheses
         code=''.join(c for c in code if c.isalpha() or c.isspace())
         departmentnamehalf=departmentnamehalf.strip()
 
@@ -55,7 +80,20 @@ class DepartmentName:
         departmentname=departmentname.replace('_','/')
         # the splitpoint is important, for UT its a "-"
         
-        departmentnamehalf,code=departmentname.split('(')
+        def split_department(text):
+            text = text.strip()
+
+            before, sep, after = text.rpartition('(')
+
+            if sep == '':
+                # No parentheses found
+                return text, None
+
+            departmentnamehalf = before.strip()
+            code = after.rstrip(')').strip()
+
+            return departmentnamehalf, code
+        departmentnamehalf,code=split_department(departmentname)
         code=''.join(c for c in code if c.isalpha() or c.isspace())
         departmentnamehalf=departmentnamehalf.strip()
 
@@ -68,7 +106,20 @@ class DepartmentName:
         departmentname=departmentname.replace('_','/')
         # the splitpoint is important, for UT its a "-"
         
-        departmentnamehalf,code=departmentname.split('(')
+        def split_department(text):
+                    text = text.strip()
+
+                    before, sep, after = text.rpartition('(')
+
+                    if sep == '':
+                        # No parentheses found
+                        return text, None
+
+                    departmentnamehalf = before.strip()
+                    code = after.rstrip(')').strip()
+
+                    return departmentnamehalf, code
+        departmentnamehalf,code=split_department(departmentname)        
         code=''.join(c for c in code if c.isalpha() or c.isspace())
 
         # so in this case I put display department name in parenthesis
