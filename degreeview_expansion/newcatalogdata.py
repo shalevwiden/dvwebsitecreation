@@ -149,6 +149,8 @@ class catalogData(createUniversity):
                 departmentnamehalf,
                 departmentcode,
                 ) = self.get_departmentnames(departmentname)
+                print(f'Starting for {departmentname}\n')
+
 
                 departmentfolderpath=os.path.join(letterfolder,departmentname)
 

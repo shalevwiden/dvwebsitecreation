@@ -330,15 +330,7 @@ class createWebsite:
 
      <!-- favicon icon -->
             <link rel="icon" href="{self.images.get('site_favicon')}" type="image/png" />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
-    <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
-
-  gtag('config', 'G-S06MYR1FV6');
-</script>
+    \
 
     <title>{self.schoolname} Page - DegreeView</title>
 
@@ -827,15 +819,8 @@ class createWebsite:
 
          <!-- favicon icon -->
             <link rel="icon" href="{self.images.get('site_favicon')}" type="image/png" />
-         <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
-    <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
-
-  gtag('config', 'G-S06MYR1FV6');
-</script>
+  
+  
 
         <title>{displaydegreename_nobr} Page - DegreeView</title>
 
@@ -1259,14 +1244,7 @@ class createWebsite:
          <!-- favicon icon -->
             <link rel="icon" href="{self.images.get('site_favicon')}" type="image/png" />
          <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S06MYR1FV6"></script>
-    <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
-
-  gtag('config', 'G-S06MYR1FV6');
-</script>
+   
         <title>{displaydegreename_nobr} Rendered CSV Page - DegreeView</title>
 
         <!-- main stylesheet -->

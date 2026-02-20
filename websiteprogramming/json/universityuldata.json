@@ -1,8 +1,8 @@
 {
   "UT Austin": { "schoolabrv": "ut", "boxcolor": "#bf5700" },
-  "Rice": { "schoolabrv": "rice", "boxcolor": "#2153b8ff" },
-  "Stanford": { "schoolabrv": "Stanford", "boxcolor": "#8C1515" },
-  "Texas State": { "schoolabrv": "tx_state", "boxcolor": "#501214" },
+  "Rice University": { "schoolabrv": "rice", "boxcolor": "#2153b8ff" },
+  "Stanford University": { "schoolabrv": "Stanford", "boxcolor": "#8C1515" },
+  "Texas State University": { "schoolabrv": "tx_state", "boxcolor": "#501214" },
   "UC Berkeley": { "schoolabrv": "UC_Berkeley", "boxcolor": "#002676" },
   "UC Santa Barbara": {
     "schoolabrv": "ucsb",
@@ -11,5 +11,9 @@
   "Cornell University": {
     "schoolabrv": "Cornell",
     "boxcolor": "#B31B1B"
+  },
+  "Brown University": {
+    "schoolabrv": "Brown",
+    "boxcolor": "#4E3629"
   }
 }

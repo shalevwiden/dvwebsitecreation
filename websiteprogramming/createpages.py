@@ -494,7 +494,7 @@ class createPages:
                     "degreeview_expansion/cornell",
                      "Cornell University",
                     os.path.join(self.websitepath,'cornell'),
-                    "cornell")
+                    "Cornell")
                 
                 def data_methods():
                     cornellcatalogobj=catalogData(**cornell_specs)
@@ -527,10 +527,53 @@ class createPages:
                 if self.web:
                     web_methods()
             cornell()
+        def rhodeisland():
+            def brown():
+                 
+                #  we'll do bucket stuff later
+
+                brown_specs=self.buildspecs(
+                    "degreeview_expansion/brown",
+                     "Brown University",
+                    os.path.join(self.websitepath,'brown'),
+                    "Brown")
+                
+                def data_methods():
+                    browncatalogobj=catalogData(**brown_specs)
+                    print(f'Configs folder: {browncatalogobj.configsfolder}')
+                    
+                    # browncatalogobj.upload_to_database()
+                    # browncatalogobj.upload_stragglers_todb()
+                    
+                    browncatalogobj.makestatsjson()
+                    # browncatalogobj.make_excel_files()
+                    browncatalogobj.create_univeristy_files()
+                    browncatalogobj.make_sorteddepartment_json()
+                    browncatalogobj.make_university_statsjson()
+
+                data_methods()
+
+                def web_methods():
+                    brownobj=createUniversity(**brown_specs)
+
+                    # brownobj.createletterpages()
+
+                    # brownobj.upload_department_files()
+                    brownobj.create_department_pages()
+                    brownobj.create_departmentpagelinks_json()
+
+                    brownobj.createstatspage()
+                    brownobj.create_sorteddepartments_page()
+                    brownobj.create_uni_homepage()
+                    
+                if self.web:
+                    web_methods()
+            brown()
         
-        texas()
-        california()
+        # texas()
+        # california()
         newyork()
+        rhodeisland()
 
     
     def create_main_statspage(self):
