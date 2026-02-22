@@ -9,6 +9,10 @@ import json
 import csv
 from pathlib import Path
 import re
+import certifi
+
+os.environ["SSL_CERT_FILE"] = certifi.where()
+
 
 
 # good to check everythings working with the venv:
@@ -32,13 +36,13 @@ def scrapecourses(departmenturl):
 
     for block in courseblocks:
         title=block.select_one('h2')
-        print(title)
+        # print(title)
 
         # description=block.select_one('p.courseblockdesc')
        
 
         coursecode =block.select_one('div.course_id').get_text(strip=True).replace('\xa0', ' ').split('.')[0]
-        print(coursecode)
+        # print(coursecode)
 
         coursename = title.get_text(strip=True).replace('\xa0', ' ')
         

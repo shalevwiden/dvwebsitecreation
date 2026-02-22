@@ -15,5 +15,9 @@
   "Brown University": {
     "schoolabrv": "Brown",
     "boxcolor": "#4E3629"
+  },
+  "Princeton": {
+    "schoolabrv": "Princeton",
+    "boxcolor": "#E77500"
   }
 }

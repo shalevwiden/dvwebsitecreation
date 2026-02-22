@@ -404,3 +404,5 @@ Tried very hard and failed to have each universities methods be called in their 
 
 Paths are way too confusing.
 In my next project Ill try to make the paths organized, this one is cooked.
+
+Added Princeton, that one was hard. Certificate error kept coming up.

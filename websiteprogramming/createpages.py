@@ -587,8 +587,8 @@ class createPages:
                     princetoncatalogobj=catalogData(**princeton_specs)
                     print(f'Configs folder: {princetoncatalogobj.configsfolder}')
                     
-                    princetoncatalogobj.upload_to_database()
-                    princetoncatalogobj.upload_stragglers_todb()
+                    # princetoncatalogobj.upload_to_database()
+                    # princetoncatalogobj.upload_stragglers_todb()
                     
                     princetoncatalogobj.makestatsjson()
                     # princetoncatalogobj.make_excel_files()
