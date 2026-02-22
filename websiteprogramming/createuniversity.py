@@ -54,6 +54,10 @@ class createUniversity:
         '''
 
         # where assets like excel files and csvs are
+        # schoolfolder = str(Path(schoolfolder).resolve())
+        # schoolfolder = str(Path(__file__).resolve().parents[1] / schoolfolder)  # degreeview_expansion folder
+
+
         self.asset_folder_path=os.path.join(schoolfolder,'assets')
 
 
@@ -120,6 +124,11 @@ class createUniversity:
                 self.alphabetizeddict[startingletter][departmentname]=departmenturl
             else:
                 self.alphabetizeddict[startingletter][departmentname]=departmenturl
+        
+        # sort it to make everything in order
+        self.alphabetizeddict = dict(sorted(self.alphabetizeddict.items()))
+        
+
 
         # this one is fixed 
         # this should work. If not I need to find a mystery
@@ -151,8 +160,9 @@ class createUniversity:
         # this json contains a list of all departmentpage names to be able to do random page functionality
         self.departmentpagelinks=os.path.join(self.websitefolder,f"departmentpagelinks.json")
 
-
-        env = Environment(loader=FileSystemLoader("templating/templates"))
+        BASE_DIR = Path(__file__).resolve().parents[1]  # folder of createuniversity.py
+        templates_path = BASE_DIR / "templating" / "templates"
+        env = Environment(loader=FileSystemLoader(str(templates_path)))
 
         # define all the templates to be used
         self.lettertemplate = env.get_template("letterpage.html")
@@ -1026,10 +1036,7 @@ class createUniversity:
                     "missing_excel":missing_excel,
                     "excelul":excel_ul,
 
-                    
                     "scripts":scripts,
-
-                    
                 }
 
                 departmentpagedata.update(self.images)
@@ -1316,14 +1323,15 @@ def main():
     ut_specs=[
                     "degreeview_expansion/utcourses",
                     "The University of Texas at Austin"
-                    ,"https://storage.googleapis.com/utcourses",
+                    ,
                     "/Users/shalevwiden/Downloads/Projects/degreeviewwebsite/ut",
                     "UT"]
     websiteobject=createUniversity(*ut_specs)
     print(f'School folder :\n {websiteobject.schoolfolder}')
+    print(f'Alphabetically sorted :\n {websiteobject.alphabetizeddict}')
     # print(websiteobject.alphabetizeddict)
     # websiteobject.createstatspage()
-    websiteobject.create_uni_homepage()
+    # websiteobject.create_uni_homepage()
 
     # websiteobject.create_department_pages()
     # websiteobject.createletterpages()

@@ -77,7 +77,9 @@ class createPages:
 
 
 
-        env = Environment(loader=FileSystemLoader("templating/templates"))
+        BASE_DIR = Path(__file__).resolve().parents[1]  # folder of createuniversity.py
+        templates_path = BASE_DIR / "templating" / "templates"
+        env = Environment(loader=FileSystemLoader(str(templates_path)))
 
         # define all the templates to be used
         self.indextemplate = env.get_template("main_templates/indextemplate.html")
@@ -570,10 +572,54 @@ class createPages:
                     web_methods()
             brown()
         
+        def new_jersey():
+            def princeton():
+                 
+                #  we'll do bucket stuff later
+
+                princeton_specs=self.buildspecs(
+                    "degreeview_expansion/princeton",
+                     "princeton University",
+                    os.path.join(self.websitepath,'princeton'),
+                    "Princeton")
+                
+                def data_methods():
+                    princetoncatalogobj=catalogData(**princeton_specs)
+                    print(f'Configs folder: {princetoncatalogobj.configsfolder}')
+                    
+                    princetoncatalogobj.upload_to_database()
+                    princetoncatalogobj.upload_stragglers_todb()
+                    
+                    princetoncatalogobj.makestatsjson()
+                    # princetoncatalogobj.make_excel_files()
+                    princetoncatalogobj.create_univeristy_files()
+                    princetoncatalogobj.make_sorteddepartment_json()
+                    princetoncatalogobj.make_university_statsjson()
+
+                data_methods()
+
+                def web_methods():
+                    princetonobj=createUniversity(**princeton_specs)
+
+                    # princetonobj.createletterpages()
+
+                    # princetonobj.upload_department_files()
+                    princetonobj.create_department_pages()
+                    princetonobj.create_departmentpagelinks_json()
+
+                    princetonobj.createstatspage()
+                    princetonobj.create_sorteddepartments_page()
+                    princetonobj.create_uni_homepage()
+                    
+                if self.web:
+                    web_methods()
+            princeton()
+
         # texas()
         # california()
-        newyork()
-        rhodeisland()
+        # newyork()
+        # rhodeisland()
+        new_jersey()
 
     
     def create_main_statspage(self):

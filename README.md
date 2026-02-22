@@ -395,3 +395,12 @@ For each university, there's the original theme and that university's theme.
 This means I just need to loop through the files on my local system, count how many original ones there are. It'd be unreliable to count how many university ones there are because the name of the file is the university abbreviation.
 
 I just need to count how many original little ones there are, then multiply by two.
+
+### Feb 22
+
+8 universities succesfully on site.
+
+Tried very hard and failed to have each universities methods be called in their own file
+
+Paths are way too confusing.
+In my next project Ill try to make the paths organized, this one is cooked.
