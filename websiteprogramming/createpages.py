@@ -115,7 +115,7 @@ class createPages:
         self.excelfilecount=0
 
         # just update this manuallyfor now lmao
-        self.universitycount=7
+        self.universitycount=9
         
 
     def buildspecs(self,schoolfolder,universityname,websitefolder, schoolabrv):
