@@ -406,3 +406,12 @@ Paths are way too confusing.
 In my next project Ill try to make the paths organized, this one is cooked.
 
 Added Princeton, that one was hard. Certificate error kept coming up.
+
+### March 4
+
+Added Northwestern University.
+
+now at 10 schools
+In the sorted departments JSON, I'm using the original department name.
+
+So it's going to be based, kind of, differently for each uni?

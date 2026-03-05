@@ -1,5 +1,8 @@
 {
-  "UT Austin": { "schoolabrv": "ut", "boxcolor": "#bf5700" },
+  "The University of Texas at Austin": {
+    "schoolabrv": "ut",
+    "boxcolor": "#bf5700"
+  },
   "Rice University": { "schoolabrv": "rice", "boxcolor": "#2153b8ff" },
   "Stanford University": { "schoolabrv": "Stanford", "boxcolor": "#8C1515" },
   "Texas State University": { "schoolabrv": "tx_state", "boxcolor": "#501214" },
@@ -16,8 +19,12 @@
     "schoolabrv": "Brown",
     "boxcolor": "#4E3629"
   },
-  "Princeton": {
+  "Princeton University": {
     "schoolabrv": "Princeton",
     "boxcolor": "#E77500"
+  },
+  "Northwestern University": {
+    "schoolabrv": "Northwestern",
+    "boxcolor": "#4E2A84"
   }
 }

@@ -1186,6 +1186,8 @@ class catalogData(createUniversity):
 
                     return len(courselist)
                 coursecount = get_department_coursecount()
+
+                # putting the raw department name hmmm
                 departmentsize_dict[departmentname]=coursecount
         
         # sort them with biggest first (descending)

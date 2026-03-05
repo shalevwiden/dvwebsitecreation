@@ -115,7 +115,7 @@ class createPages:
         self.excelfilecount=0
 
         # just update this manuallyfor now lmao
-        self.universitycount=9
+        self.universitycount=10
         
 
     def buildspecs(self,schoolfolder,universityname,websitefolder, schoolabrv):
@@ -615,11 +615,54 @@ class createPages:
                     web_methods()
             princeton()
 
+        def illinois():
+            def northwestern():
+                 
+                #  we'll do bucket stuff later
+
+                northwestern_specs=self.buildspecs(
+                    "degreeview_expansion/northwestern",
+                     "Northwestern University",
+                    os.path.join(self.websitepath,'northwestern'),
+                    "Northwestern")
+                
+                def data_methods():
+                    northwesterncatalogobj=catalogData(**northwestern_specs)
+                    print(f'Configs folder: {northwesterncatalogobj.configsfolder}')
+                    
+                    northwesterncatalogobj.upload_to_database()
+                    northwesterncatalogobj.upload_stragglers_todb()
+                    
+                    northwesterncatalogobj.makestatsjson()
+                    # northwesterncatalogobj.make_excel_files()
+                    northwesterncatalogobj.create_univeristy_files()
+                    northwesterncatalogobj.make_sorteddepartment_json()
+                    northwesterncatalogobj.make_university_statsjson()
+
+                data_methods()
+
+                def web_methods():
+                    northwesternobj=createUniversity(**northwestern_specs)
+
+                    # northwesternobj.createletterpages()
+
+                    # northwesternobj.upload_department_files()
+                    northwesternobj.create_department_pages()
+                    northwesternobj.create_departmentpagelinks_json()
+
+                    northwesternobj.createstatspage()
+                    northwesternobj.create_sorteddepartments_page()
+                    northwesternobj.create_uni_homepage()
+                    
+                if self.web:
+                    web_methods()
+            northwestern()
         # texas()
         # california()
         # newyork()
         # rhodeisland()
-        new_jersey()
+        # new_jersey()
+        illinois()
 
     
     def create_main_statspage(self):
