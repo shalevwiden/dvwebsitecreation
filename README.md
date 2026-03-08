@@ -415,3 +415,12 @@ now at 10 schools
 In the sorted departments JSON, I'm using the original department name.
 
 So it's going to be based, kind of, differently for each uni?
+
+### March 8
+
+There are lowkey a ton of errors in this readme I need to fix lol.
+I also need to made a JS file that will account for missing data on department pages.
+Its already started in the degreeviewwebsite folder.
+
+This project is scrappy lol.
+But if it works it works.

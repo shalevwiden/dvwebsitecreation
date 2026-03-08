@@ -155,8 +155,6 @@ def make_excelfile(departmentname,universityname,
                 # for UT only
                 coursehours=coursehours.split(',')[-1]
 
-            
-
         # write an empty line at the end
     
     writecoursedata()
