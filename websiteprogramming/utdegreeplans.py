@@ -972,6 +972,7 @@ class createWebsite:
                         # now all the csvs.
                         "majorcoursescsv":majorcoursescsv,
                         "semesterlayoutcsv":semesterlayoutcsv,
+                        "renderedcsvurl":renderedcsvurl,
 
                         "linksvg":self.images.get("linkicon")
 
