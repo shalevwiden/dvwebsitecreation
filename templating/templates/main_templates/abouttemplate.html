@@ -85,28 +85,37 @@
       -->
       <div class="mainsite">
         <div class="aboutbox">
-          <h3 class="aboutbox-header">What is this website</h3>
+          <h3 class="aboutbox-header">Overview</h3>
 
           <div class="about-paragraph">
             <p>
-              DegreeView is a website that basically does data analysis on
-              college course catalogs and then displays all the courses in
-              tables and excel files.
+              DegreeView analyzes college course catalogs and presents them in a
+              more structured, interactive way. Courses, degree plans, and
+              program data are organized into tables, visualizations, and
+              downloadable files.
 
               <br /><br />
-              What was the idea? I noticed it was pretty replicatable to web
-              scrape course catalogs at many universities. And we as college
-              students spend a lot of time looking at courses and at catalogs.
-              So I built this as simply a website people can go to interact with
-              their college course catalogs in a new way. Theres statistics and
-              table animations for example. If youre here and reading this much
-              appreciated though.
+
+              The idea started with a simple observation: college students spend
+              a lot of time navigating course catalogs. My idea was to present
+              them in a new way. Its not a tool thats a replacement for
+              anything, just something that hopefully makes engaging with the
+              courses at a schools catalog a little bit more interesting.
               <br />
-              I wanted to improve programming skills and build a project so I
-              built this website.
-              <br />Lowkey do have to build something better one day but...
-              <br />I have this and I can try to expand it as far as it can go
-              before something breaks. lol
+              Its a new way to browse and interact with courses.
+
+              <br /><br />
+
+              The first version focused on visualizing degree plans at UT
+              Austin. Focusing on degree plans is much more difficult and
+              comprehensive. After shifting to course catalogs, DegreeView
+              expanded into a system designed to support multiple universities
+              and scale across different catalogs.
+
+              <br /><br />
+
+              This project was also built as a way to improve programming skills
+              and explore how far a data-driven platform like this can go.
             </p>
             <br />
           </div>
@@ -119,20 +128,20 @@
 
           <div class="about-paragraph">
             <p>
-              DegreeView is a website that provides and displays data
-              visualizations and data on degree programs and courses. All data
-              is sourced directly from university catalog pages.
+              This project consists of a lot of data analysis and data
+              engineering. All data is sourced directly from university catalog
+              pages.
 
               <br /><br />
-              DegreeView uses OpenPyXL for creating stylized and formatted Excel
-              files and mermaid.js for creating flowchart graphs. The following
-              python libraries are also used: BeautifulSoup and Requests (for
-              web scraping), csv, google-cloud (for automating uploading to
-              Google Cloud Storage), and ReportLab, Pillow, PyPDF2, and cairoSVG
-              for pdf generation. <br />
-              SQlite3 is used to pipeline data into .db databases, and perform
-              queries to derive descriptive statistics featured on the
-              <a href="ut-stats.html#csvheading">stats page </a>.
+              The backend is built in Python using libraries such as
+              BeautifulSoup and Requests for web scraping, SQLite3 for data
+              storage and retrieval, and OpenPyXL for generating formatted Excel
+              files. Mermaid.js is used for creating flowchart graphs for degree
+              plans. <br />
+              In addition the following are also utilized: Jinja, google-cloud
+              (for automating uploading to Google Cloud Storage), ReportLab,
+              Pillow, PyPDF2, and cairoSVG (png and pdf generation).
+              <br />
             </p>
             <br />
           </div>
@@ -141,24 +150,7 @@
           <p>
             There is an X DegreeView account where updates, new features, and
             behind the scenes programming stuff may be posted.
-            <br />
-            <br />
-            So right now this is a DegreeView account, but this account will
-            likely be an account where I display all my programming projects. Or
-            make it some kind of statistics themed account.
-            <br />Either way, your follow will not be in vain after this project
-            is wraps. <br /><br />
-            DegreeView does not have "accounts" and "users" per say as its more
-            of a simple website but if you think this project is interesting
-            give the X (or
-            <a
-              href="https://substack.com/@degreeview"
-              title="Follow the Substack"
-              target="_blank"
-              id="substacklink"
-              rel="noopener noreferrer"
-              >Substack</a
-            >) account a follow and that will signify a user🙏🤷‍♂️📊 <br /><br />
+
             <a
               href="https://x.com/DegreeViewsite"
               title="DegreeView on X"
@@ -199,7 +191,7 @@
           ></a>
         </div>
 
-        <div class="platformscontainer" style="display: none">
+        <div class="platformscontainer">
           <div class="platformsbox">
             <p>Built by Shalev Widen</p>
             <div class="icons">
@@ -211,6 +203,7 @@
                 title="the linkedin"
                 ><i class="fab fa-linkedin"></i
               ></a>
+              <!-- still hidden -->
               <a
                 href="https://swervinaround.substack.com/"
                 title="Follow the Substack"

@@ -424,3 +424,11 @@ Its already started in the degreeviewwebsite folder.
 
 This project is scrappy lol.
 But if it works it works.
+
+### May 6
+
+I could still add Duke rq.
+
+Updated index a little.
+
+Remember the random uni button works from unilinks.json
